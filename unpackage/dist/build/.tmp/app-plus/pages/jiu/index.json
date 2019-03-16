@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "9.9包邮",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true,
+  "bounce": "none",
+  "pullToRefresh": {
+    "style": "circle",
+    "color": "#FD575C",
+    "offset": "50px"
+  },
+  "titleNView": false
+}

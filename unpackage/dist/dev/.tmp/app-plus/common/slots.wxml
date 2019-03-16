@@ -1,0 +1,5 @@
+<import src="/components/cmd-icon/cmd-icon.vue.wxml" />
+<import src="/components/newslist/newslist.vue.wxml" />
+<import src="/components/uni-media-list/uni-media-list.vue.wxml" />
+<import src="/components/uni-load-more/uni-load-more.vue.wxml" />
+

@@ -1,0 +1,62 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/jiu/index",
+    "pages/cate/index",
+    "pages/like/index",
+    "pages/member/index",
+    "pages/detail/goodsinfo",
+    "pages/search/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "中纸网",
+    "navigationBarBackgroundColor": "#2F85FC",
+    "backgroundColor": "#FFFFFF"
+  },
+  "usingComponents": {},
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#FD575C",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/img/footer/home.png",
+        "selectedIconPath": "static/img/footer/home-act.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/jiu/index",
+        "iconPath": "static/img/footer/jiu.png",
+        "selectedIconPath": "static/img/footer/jiu-act.png",
+        "text": "专题"
+      },
+      {
+        "pagePath": "pages/cate/index",
+        "iconPath": "static/img/footer/cate.png",
+        "selectedIconPath": "static/img/footer/cate-act.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/like/index",
+        "iconPath": "static/img/footer/like.png",
+        "selectedIconPath": "static/img/footer/like-act.png",
+        "text": "收藏"
+      },
+      {
+        "pagePath": "pages/member/index",
+        "iconPath": "static/img/footer/my.png",
+        "selectedIconPath": "static/img/footer/my-act.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "splashscreen": {
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
+  },
+  "appname": "news"
+}

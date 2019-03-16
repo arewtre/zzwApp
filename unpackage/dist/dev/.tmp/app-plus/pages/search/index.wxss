@@ -1,0 +1,163 @@
+
+.swiper {
+	height: 100%;
+}
+.help-tips {
+	font-size: 13px;
+	color: #999;
+	line-height: 26px;
+	padding: 0 0 0 30px;
+	margin: 0;
+	width: 80%;
+	text-align: left;
+}
+.help-tips.color999 {
+	color: #999999;
+}
+.search-default {
+	text-align: center;
+	height: 200px;
+	margin: auto;
+}
+.search-default image {
+	display: block;
+	margin: auto;
+	width: 80%;
+}
+.search-cat {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	padding-top: 130px;
+	width: 100%;
+	height: 100%;
+	padding-bottom: 11px;
+	background-color: #fff;
+}
+.search-cat .search-cat-tit {
+	position: relative;
+	width: 150px;
+	height: 10px;
+	margin: 13px 3% 20px;
+}
+.search-cat .search-cat-tit .up-menu {
+	display: block;
+	height: 20px;
+	line-height: 20px;
+	font-size: 0.9em;
+	color: #999;
+}
+.src-content {
+	margin: 20px 0 30px;
+	width: 97%;
+}
+.main-src .src-item {
+	float: left;
+	border-radius: 22px;
+	padding: 0 10px;
+	height: 23px;
+	line-height: 23px;
+	background-color: #f6f6f6;
+	margin: 10px;
+	position: relative;
+	font-size: 13px;
+	color: #333;
+}
+.main-title {
+	height: 130px;
+}
+.main-title {
+	background: -o-linear-gradient(left, #fa4dbe 0, #fbaa58 100%);
+	background: -webkit-gradient(linear, right top, left top, color-stop(0, #fa4dbe), to(#fbaa58));
+	background: -o-linear-gradient(right, #fa4dbe 0, #fbaa58 100%);
+	background: linear-gradient(to left, #fa4dbe 0, #fbaa58 100%);
+	border-bottom-color: transparent;
+	padding: 8px 10px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 120;
+	display: block;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.search-pop .search-tab {
+	margin: 5px 0 10px;
+	color: #fff;
+	font-size: 15px;
+	text-align: center;
+	
+	padding-top: var(--status-bar-height);
+	
+}
+.search-pop .search-tab .my-sub-src {
+	margin: 0 auto 0 20px;
+	display: inline-block;
+	color: #fff;
+	line-height: 30px;
+	margin-bottom: 10px !important;
+}
+.search-pop .search-tab .my-sub-src:nth-child(1) {
+	margin-left: 0px !important;
+}
+.main-title .search-tab .cur {
+	opacity: 1;
+	border-bottom: 1px solid #fff;
+}
+.main-title .search-tab .close-src {
+	position: absolute;
+	left: 20px;
+	display: block;
+	float: left;
+	color: #ffffff;
+	margin-top: 15px;
+}
+.main-title .search-tab .close-src .iconfont {
+	font-size: 20px;
+}
+.main-title .search {
+	background-color: #fff;
+	border-radius: 20px;
+	width: 76%;
+	margin-left: 12%;
+	position: relative;
+	padding: 0 9px;
+	height: 32px;
+	line-height: 32px;
+	font-size: 13px;
+	margin-top: 10px;
+}
+.search_submit {
+	width: 25%;
+	height: 32px;
+	background: #ffb925;
+	color: #fff;
+	float: right;
+	margin-top: -32px;
+	position: relative;
+	border-radius: 15px;
+	margin-right: -20px;
+	z-index: 30;
+}
+.main-title .search ._input {
+	border: none;
+	outline: 0;
+	height: 32px;
+	font-size: 13px;
+	line-height: 30px;
+	background: #fff;
+	color: #666;
+	border-radius: 5px;
+	padding: 0 0 0 5px;
+	text-align: left;
+}
+.main-title .search ._input.search_area {
+	background-color: transparent;
+	position: relative;
+	z-index: 99;
+	width: 80%;
+	color: #333;
+	font-size: 12px;
+}
+

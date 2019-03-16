@@ -21,16 +21,15 @@
 <script>
 	import uniMediaList from '@/components/uni-media-list/uni-media-list.vue';
 	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
-	import cmdIcon from "@/components/cmd-icon/cmd-icon.vue";
-// 	import {
-// 		friendlyDate
-// 	} from '@/common/util.js';
-var friendlyDate = require('../../common/util.js').friendlyDate;
+
+	import {
+		friendlyDate
+	} from '@/common/util.js';
+  
 	export default {
 		components: {
 			uniMediaList,
-			uniLoadMore,
-			cmdIcon
+			uniLoadMore
 		},
 		data() {
 			return {
@@ -44,54 +43,28 @@ var friendlyDate = require('../../common/util.js').friendlyDate;
 				refreshText: '下拉可以刷新',
 				newsList: [],
 				tabIndex: 0,
-				moduleid:"",
 				tabBars: [],
-				page:1
+				moduleid:"",
 			}
 		},
 		onLoad: function(event) {
 			this.moduleid = event.moduleid;
 			this.loadNavList();
-			console.log(this.tabBars);			
 			// 初始化列表信息
-// 			this.tabBars.forEach((tabBar) => {
-// 				console.log(tabBar);
-// 				this.newsList.push({
-// 					data: [],
-// 					requestParams: {
-// 						columnId: tabBar.catid,
-// 						minId: 0,
-// 						pageSize: 10,
-// 						column: 'itemid,catid,title,author,catname,username,addtime,hits,thumb'
-// 					},
-// 					loadingText: '加载中...'
-// 				});
-// 			});
-			console.log(this.newsList);
-			
 		},
 		methods: {
 			getList(action = 1) {  
 				let activeTab = this.newsList[this.tabIndex];
 				if (action === 1) {
-					activeTab.minId = 0;
 					activeTab.page = 0;
 				}				
-				this.$Request.post(this.$api.home.newsmoduledata,{moduleid:this.moduleid,cateid:activeTab.cateid,minId:activeTab.minId,page:activeTab.page}).then(res => {				
-					console.log(res.data);
+				this.$Request.post(this.$api.home.newsmoduledata,{moduleid:this.moduleid,cateid:activeTab.cateid,minId:activeTab.minId,page:activeTab.page,forom:"H5"}).then(res => {				
 					if (res.code == "0000") {
 						const data = res.data.map((news) => {
-							if(news.itemid%2 == 0)
-						   {
-							  var article_type = 2;
-						   }else{
-							  var article_type = 1;
-						   }
 							return {
 								id: news.itemid,
-								article_type: article_type,
+								article_type: 1,
 								datetime: friendlyDate(news.addtime),
-								//datetime:dateUtils.format(news.addtime),
 								title: news.title,
 								image_url: news.thumb,
 								source: news.editor,
@@ -109,15 +82,14 @@ var friendlyDate = require('../../common/util.js').friendlyDate;
 								activeTab.data.push(news);
 							});
 						}
-						activeTab.minId = data[data.length - 1].id;
 						activeTab.page = activeTab.page+1;
-
+			
 					}
 				})	
 				
 			},
 			loadNavList: function(Refresh) {				
-				this.$Request.post(this.$api.home.newscatedata,{moduleid:this.moduleid}).then(res => {
+				this.$Request.post(this.$api.home.newscatedata,{moduleid:this.moduleid,forom:"H5"}).then(res => {
 					if (res.code == "0000") {
 						this.tabBars = res.data;
 						uni.setNavigationBarTitle({
@@ -128,7 +100,6 @@ var friendlyDate = require('../../common/util.js').friendlyDate;
 								data: [],
 								cateid: tabBar.catid,
 								page: 0,
-								minId:0,
 								pageSize: 10,
 								loadingText: '加载中...'
 							});
@@ -165,61 +136,19 @@ var friendlyDate = require('../../common/util.js').friendlyDate;
 					this.isClickChange = false;
 					return;
 				}
-				let tabBar = await this.getElSize('tab-bar');
-				let tabBarScrollLeft = tabBar.scrollLeft;
-				let width = 0;
-			
-				for (let i = 0; i < index; i++) {
-					let result = await this.getElSize(this.tabBars[i].ref);
-					width += result.width;
-				}
-				let winWidth = uni.getSystemInfoSync().windowWidth,
-					nowElement = await this.getElSize(this.tabBars[index].ref),
-					nowWidth = nowElement.width;
-				if (width + nowWidth - tabBarScrollLeft > winWidth) {
-					this.scrollLeft = width + nowWidth - winWidth;
-				}
-				if (width < tabBarScrollLeft) {
-					this.scrollLeft = width;
-				}
 				this.isClickChange = false;
 				this.tabIndex = index;
-			
+
 				// 首次切换后加载数据
 				const activeTab = this.newsList[this.tabIndex];
 				if (activeTab.data.length === 0) {
 					this.getList();
 				}
 			},
-// 			getNodeSize(node) {
-// 				return new Promise((resolve, reject) => {
-// 					dom.getComponentRect(node, (result) => {
-// 						resolve(result.size);
-// 					});
-// 				});
-// 			},
-// 			onRefresh(event) {
-// 				this.refreshText = '正在刷新...';
-// 				this.refreshing = true;
-// 				this.getList();
-// 			},
-			getElSize(id) { //得到元素的size
-				return new Promise((res, rej) => {
-					uni.createSelectorQuery().select('#' + id).fields({
-						size: true,
-						scrollOffset: true
-					}, (data) => {
-						res(data);
-					}).exec();
-				});
-			},
 			async tapTab(index) { //点击tab-bar
 				if (this.tabIndex === index) {
 					return false;
 				} else {
-					let tabBar = await this.getElSize('tab-bar'),
-						tabBarScrollLeft = tabBar.scrollLeft; //点击的时候记录并设置scrollLeft
-					this.scrollLeft = tabBarScrollLeft;
 					this.isClickChange = true;
 					this.tabIndex = index;
 					// 首次切换后加载数据
@@ -263,8 +192,7 @@ var friendlyDate = require('../../common/util.js').friendlyDate;
 
 	.swiper-tab-list {
 		font-size: 30upx;
-		/* width: 150upx; */
-		padding:0 25upx;
+		width: 150upx;
 		display: inline-block;
 		text-align: center;
 		color: #555;
@@ -283,5 +211,4 @@ var friendlyDate = require('../../common/util.js').friendlyDate;
 	.uni-tab-bar-loading {
 		padding: 20upx 0;
 	}
-	
 </style>

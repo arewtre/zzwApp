@@ -17,7 +17,11 @@
     "email": "",
     "url": ""
   },
-  "permissions": {},
+  "permissions": {
+    "UniNView": {
+      "description": "UniNView原生渲染"
+    }
+  },
   "plus": {
     "useragent": {
       "value": "uni-app appservice",
@@ -92,6 +96,7 @@
         }
       }
     },
+    "arguments": "{\"name\":\"\",\"path\":\"\",\"query\":\"\",\"id\":0}",
     "allowsInlineMediaPlayback": true,
     "safearea": {
       "background": "#ffffff",

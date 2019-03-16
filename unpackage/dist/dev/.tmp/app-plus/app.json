@@ -6,7 +6,6 @@
     "pages/ucenter/ucenter",
     "pages/detail/detail",
     "pages/search/index",
-    "pages/news/index",
     "pages/specia/detail"
   ],
   "subPackages": [],
@@ -54,6 +53,15 @@
         "text": "我的"
       }
     ]
+  },
+  "nvue": {
+    "pages": {
+      "pages/news/index.html": {
+        "window": {
+          "navigationBarTitleText": "文章列表"
+        }
+      }
+    }
   },
   "splashscreen": {
     "alwaysShowBeforeRender": true,

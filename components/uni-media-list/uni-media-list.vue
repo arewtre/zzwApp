@@ -13,11 +13,10 @@
                 </view>
                 <view class="media-foot">
                     <view class="media-info">
-						<cmd-icon type="star" size="15" color="#aaa"></cmd-icon><text class="info-text">{{data.catname}}</text>
-                        <cmd-icon type="user" size="15" color="#aaa"></cmd-icon><text class="info-text">{{data.source}}</text>
-                        <cmd-icon type="eye" size="15" color="#aaa"></cmd-icon><text class="info-text">{{data.comment_count}}次浏览</text>
-                        <cmd-icon type="clock" size="15" color="#aaa"></cmd-icon><text class="info-text">{{data.datetime}}</text>
-						
+						<text class="info-text">{{data.catname}}</text>
+                        <text class="info-text">{{data.source}}</text>
+                        <text class="info-text">{{data.comment_count}}次浏览</text>
+                        <text class="info-text">{{data.datetime}}</text>	
                     </view>
                     <view class="max-close-view" @click.stop="close">
                         <view class="close-view"><text class="close">×</text></view>

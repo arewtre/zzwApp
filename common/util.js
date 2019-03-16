@@ -4,8 +4,8 @@ function friendlyDate(timestamp) {
 		'month': '%n% 月前',
 		'day': '%n% 天前',
 		'hour': '%n% 小时前',
-		'minute': '%n% 分钟前',
-		'second': '%n% 刚刚',
+		'minute': '%n% 分钟前', 
+		'second': '刚刚',
 	};
 
 	var now = Date.now();

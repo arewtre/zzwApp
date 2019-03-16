@@ -2,7 +2,7 @@
 	<view class="uni-tab-bar">
 		<scroll-view id="tab-bar" class="uni-swiper-tab" scroll-x :scroll-left="scrollLeft">
 			<view v-for="(tab, index) in tabBars" :key="tab.ref" :class="['swiper-tab-list',tabIndex==index ? 'active' : '']"
-			 :id="tab.ref" :data-current="index" @click="tapTab(index)">{{tab.catname}}</view>
+			 :id="tab.ref" :data-current="index" @click="tapTab(index)">{{tab.name}}</view>
 		</scroll-view>
 		<swiper :current="tabIndex" class="swiper-box" duration="300" @change="changeTab">
 			<swiper-item v-for="(tabItem, tabIndex) in newsList" :key="tabIndex">
@@ -43,97 +43,89 @@
 				refreshText: '下拉可以刷新',
 				newsList: [],
 				tabIndex: 0,
-				moduleid:"",
-				tabBars: [],
-				page:1
+				tabBars: [{
+					name: '最新',
+					id: 0,
+					ref: 'new'
+				}, {
+					name: '大公司',
+					id: 23,
+					ref: 'company'
+				}, {
+					name: '内容',
+					id: 223,
+					ref: 'content'
+				}, {
+					name: '消费',
+					id: 221,
+					ref: 'xiaofei'
+				}, {
+					name: '娱乐',
+					id: 225,
+					ref: 'yule'
+				}, {
+					name: '区块链',
+					id: 208,
+					ref: 'qukuailian'
+				}, ]
 			}
 		},
-		onLoad: function(event) {
-			this.moduleid = event.moduleid;
-			this.loadNavList();
-			console.log(this.tabBars);			
+		onLoad: function() {
 			// 初始化列表信息
-// 			this.tabBars.forEach((tabBar) => {
-// 				console.log(tabBar);
-// 				this.newsList.push({
-// 					data: [],
-// 					requestParams: {
-// 						columnId: tabBar.catid,
-// 						minId: 0,
-// 						pageSize: 10,
-// 						column: 'itemid,catid,title,author,catname,username,addtime,hits,thumb'
-// 					},
-// 					loadingText: '加载中...'
-// 				});
-// 			});
-			console.log(this.newsList);
-			
+			this.tabBars.forEach((tabBar) => {
+				this.newsList.push({
+					data: [],
+					requestParams: {
+						columnId: tabBar.id,
+						minId: 0,
+						pageSize: 10,
+						column: 'id,post_id,title,author_name,cover,published_at,comments_count'
+					},
+					loadingText: '加载中...'
+				});
+			});
+			this.getList();
 		},
 		methods: {
-			getList(action = 1) {  
+			getList(action = 1) {
 				let activeTab = this.newsList[this.tabIndex];
+				activeTab.requestParams.time = new Date().getTime() + '';
 				if (action === 1) {
-					activeTab.minId = 0;
-					activeTab.page = 0;
-				}				
-				this.$Request.post(this.$api.home.newsmoduledata,{moduleid:this.moduleid,cateid:activeTab.cateid,minId:activeTab.minId,page:activeTab.page}).then(res => {				
-					if (res.code == "0000") {
-						const data = res.data.map((news) => {
-							return {
-								id: news.itemid,
-								article_type: 1,
-								datetime: friendlyDate(new Date(news.addtime.replace(/\-/g, '/'))),
-								title: news.title,
-								image_url: news.thumb,
-								source: news.editor,
-								comment_count: news.hits,
-								post_id: news.catid,
-								catname: news.catname
-							};
-						});
-						console.log(data);
-						if (action === 1) {
-							activeTab.data = data;
-							this.refreshing = false;
-						} else {
-							data.forEach((news) => {
-								activeTab.data.push(news);
+					activeTab.requestParams.minId = 0;
+				}
+				uni.request({
+					url: 'https://unidemo.dcloud.net.cn/api/news',
+					data: activeTab.requestParams,
+					success: (result) => {
+						if (result.statusCode == 200) {
+							const data = result.data.map((news) => {
+								return {
+									id: news.id,
+									article_type: 1,
+									datetime: friendlyDate(new Date(news.published_at.replace(/\-/g, '/')).getTime()),
+									title: news.title,
+									image_url: news.cover,
+									source: news.author_name,
+									comment_count: news.comments_count,
+									post_id: news.post_id
+								};
 							});
+							if (action === 1) {
+								activeTab.data = data;
+								this.refreshing = false;
+							} else {
+								data.forEach((news) => {
+									activeTab.data.push(news);
+								});
+							}
+							activeTab.requestParams.minId = data[data.length - 1].id;
 						}
-						activeTab.minId = data[data.length - 1].id;
-						activeTab.page = activeTab.page+1;
-
 					}
-				})	
-				
+				});
 			},
-			loadNavList: function(Refresh) {				
-				this.$Request.post(this.$api.home.newscatedata,{moduleid:this.moduleid}).then(res => {
-					if (res.code == "0000") {
-						this.tabBars = res.data;
-						uni.setNavigationBarTitle({
-							title: res.data[0].name
-						});
-						this.tabBars.forEach((tabBar) => {
-							this.newsList.push({
-								data: [],
-								cateid: tabBar.catid,
-								page: 0,
-								minId:0,
-								pageSize: 10,
-								loadingText: '加载中...'
-							});
-						});
-						console.log(this.newsList);
-						this.getList();
-					}
-				})	
-			},
-			goDetail(e) {
-				console.log();
+			goDetail(detail) {
 				uni.navigateTo({
-					// url: '/pages/detail/detail?query=' + encodeURIComponent(JSON.stringify(detail))
-					url: '/pages/detail/detail?catid=' + e.post_id +'&itemid='+e.id
+					url: '/pages/detail/detail?query=' + encodeURIComponent(JSON.stringify(detail))
 				});
 			},
 			dislike(tabIndex, newsIndex) {
@@ -159,7 +151,7 @@
 				let tabBar = await this.getElSize('tab-bar');
 				let tabBarScrollLeft = tabBar.scrollLeft;
 				let width = 0;
-			
+
 				for (let i = 0; i < index; i++) {
 					let result = await this.getElSize(this.tabBars[i].ref);
 					width += result.width;
@@ -174,8 +166,8 @@
 					this.scrollLeft = width;
 				}
 				this.isClickChange = false;
-				this.tabIndex = index; 
-			
+				this.tabIndex = index;
+
 				// 首次切换后加载数据
 				const activeTab = this.newsList[this.tabIndex];
 				if (activeTab.data.length === 0) {
@@ -254,14 +246,13 @@
 
 	.swiper-tab-list {
 		font-size: 30upx;
-		/* width: 150upx; */
-		padding:0 25upx;
+		width: 150upx;
 		display: inline-block;
 		text-align: center;
 		color: #555;
 	}
 
-	.uni-tab-bar .active { 
+	.uni-tab-bar .active {
 		color: #007AFF;
 	}
 

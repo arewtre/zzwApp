@@ -165,12 +165,12 @@
 			},
 			zhuantilist: function(Refresh) {
 				var indexzhuantidatalist = this.$SysCache.get("app_index_zhuantidatalist");
-				console.log(indexzhuantidatalist);
+				//console.log(indexzhuantidatalist);
 				if(indexzhuantidatalist && Refresh == undefined ){
 					this.zhuantidatalist  = indexzhuantidatalist;
 				}else{
 					this.$Request.post(this.$api.home.sydata,{moduleid:21,catid:14,pagesize:4,thumb:1}).then(res => {
-						console.log(res.data);
+						//console.log(res.data);
 						if (res.code == "0000") {
 							this.zhuantidatalist = res.data;
 							this.$SysCache.put("app_index_zhuantidatalist",res.data,300);
@@ -249,7 +249,7 @@
 			},
 			getSydata:function(moduleid,catid,pagesize){
 				this.$Request.post(this.$api.home.sydata,{moduleid:moduleid,catid:catid,pagesize:pagesize}).then(res => {
-					console.log(res.data);
+					//console.log(res.data);
 					if (res.code == "0000") {
 						return res.data;
 					}
@@ -257,22 +257,25 @@
 				})
 			},
 			gpToDetail(e) {
-				console.log(e);
+				//console.log(e);
 			    uni.navigateTo({
 					url: '/pages/detail/detail?catid=' + e.catid +'&itemid='+e.itemid,
 			    })
 			},
 			gpToNews(e) {
-				console.log(e);
+				//console.log(e);
+				uni.setStorageSync('newsmoduleid',  e.moduleid);
 			    uni.navigateTo({
 					url: '/pages/news/index?moduleid=' + e.moduleid,
 			    })
 			},
 			goToSpecia(e) {
-				console.log(e);
+				//console.log(e);
 			    uni.navigateTo({
 					url: '/pages/specia/detail?urlSpecia=' + e.linkurl,
+					//url:e.linkurl,
 			    })
+				
 			},
 		},
 		onReady:function(){

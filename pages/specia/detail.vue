@@ -1,6 +1,6 @@
 <template>
     <view>
-        <web-view :webview-styles="webviewStyles" src="https://uniapp.dcloud.io/static/web-view.html"></web-view>
+        <web-view :webview-styles="webviewStyles" src="http://www.chinapaper.net/zt/fushi/"></web-view>
     </view>
 </template>
 
@@ -18,6 +18,7 @@
         },
 		onLoad: function(event) {
 			this.ssrc=event.urlSpecia;
+			console.log(event.urlSpecia);
 		}
 			
     }

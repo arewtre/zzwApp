@@ -56,6 +56,7 @@ module.exports = {
 					"content-type": header
 				},
 				success: function(result) {
+					console.log(result);
 					succ.call(self, result.data) 
 				},
 				fail: function(e) {

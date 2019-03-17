@@ -78,7 +78,8 @@
 					"titleNView": {
 						"type": "transparent",
 						"buttons": [{
-							"type": "menu"
+							//"type": "menu"
+							"type": "share"
 						}]
 					}
 

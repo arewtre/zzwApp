@@ -1,11 +1,11 @@
 <template>
 	<view>
 		<view class="banner" v-if="content.thumb">
-			<image class="banner-img" :src="content.thumb"></image>
+			<image class="banner-img" :src="content.thumb" model="aspectFill"></image>
 			<view class="banner-title">{{content.title}}</view>
 		</view>
 		<view :class="['article-meta',content.thumb==''?'article-meta-top':'']">
-			<cmd-icon type="user" size="15" color="#aaa"></cmd-icon><text class="article-author">{{content.author}}</text>
+			<cmd-icon type="user" size="15" color="#aaa"></cmd-icon><text class="article-author">{{content.editor}}</text>
 			<text class="article-text">发表于</text>
 			<cmd-icon type="clock" size="15" color="#aaa"></cmd-icon><text class="article-time">{{content.addtimes}}</text>
 		</view>
@@ -38,7 +38,7 @@
 		},
 		onLoad(event) {
 			// 目前在某些平台参数会被主动 decode，暂时这样处理。
-			console.log(event);
+			//console.log(event);
 			this.catid = event.catid;
 			this.itemid = event.itemid;
 // 			try {
@@ -47,26 +47,88 @@
 // 				this.banner = JSON.parse(event.query);
 // 			}
 			this.getDetail();
-			uni.setNavigationBarTitle({
-				title: this.content.title
-			});
+			
 		},
+		onNavigationBarButtonTap:function(e){
+				console.log(e);
+				var content = this.content;
+		if(e.index==0){
+// 			uni.showModal({
+// 				title: '提示',
+// 				content: '这是一个模态弹窗',
+// 				success: function (res) {
+// 					if (res.confirm) {
+// 						console.log('用户点击确定');
+// 					} else if (res.cancel) {
+// 						console.log('用户点击取消');
+// 					}
+// 				}
+// 			});
+			uni.showActionSheet({
+				itemList: ['分享到朋友圈', '分享给朋友', '复制链接地址'],
+				success: function (res) {
+					//console.log('选中了第' + (res.tapIndex + 1) + '个按钮');
+					var content = this.content;
+					if(res.tapIndex==0){
+						uni.share({
+							provider: "weixin",
+							scene: "WXSenceTimeline",
+							type: 0,
+							href: content.linkurl,
+							title: content.title,
+							summary: content.introduce,
+							imageUrl: content.thumb?content.thumb:"http://www.chinapaper.net/logo.jpg",
+							success: function (res) {
+								console.log("success:" + JSON.stringify(res));
+							},
+							fail: function (err) {
+								console.log("fail:" + JSON.stringify(err));
+							}
+						});
+					}else if(res.tapIndex==1){
+						
+						uni.share({
+							provider: "weixin",
+							scene: "WXSceneSession",
+							type: 0,
+							href: this.content.linkurl,
+							title: this.content.title,
+							summary: this.content.introduce,
+							imageUrl: this.content.thumb,
+							success: function (res) {
+								console.log("success:" + JSON.stringify(res));
+							},
+							fail: function (err) {
+								console.log("fail:" + JSON.stringify(err));
+							}
+						});
+					}
+				},
+				fail: function (res) {
+					console.log(res.errMsg);
+				}
+			});	
+		}
+	},
 		methods: {
 			getDetail() {
-			var newsdetail = this.$SysCache.get("app_newsdetail"+this.itemid);
-				if(newsdetail){
-					this.content = newsdetail;
-				}else{
+// 			var newsdetail = this.$SysCache.get("app_newsdetail"+this.itemid);
+// 				if(newsdetail){
+// 					this.content = newsdetail;
+// 				}else{
 					this.$Request.post(this.$api.home.newsdata,{catid:this.catid,itemid:this.itemid}).then(res => {
 						console.log(res.data);
 						if (res.code == "0000") {
 							this.content = res.data;
-							this.$SysCache.put("app_newsdetail"+this.itemid,res.data,86400);
+							uni.setNavigationBarTitle({
+								title: this.content.title
+							});
+							//this.$SysCache.put("app_newsdetail"+this.itemid,res.data,86400);
 						}else {
 							this.content = FAIL_CONTENT;
 						}
 					})	
-				}
+				// }
 			}
 		}
 	}

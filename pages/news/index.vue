@@ -50,7 +50,11 @@
 		},
 		onLoad: function(event) {
 			this.moduleid = event.moduleid;
-			this.keywords = event.keywords;
+			//this.keywords = event.keywords;
+			//console.log(event);
+			if(event.keywords!= undefined){
+				this.keywords = decodeURIComponent(event.keywords);
+			}
 			this.loadNavList();
 			// 初始化列表信息
 		},
@@ -60,7 +64,8 @@
 				if (action === 1) {
 					activeTab.page = 0;
 				}				
-				this.$Request.post(this.$api.home.newsmoduledata,{moduleid:this.moduleid,cateid:activeTab.cateid,minId:activeTab.minId,page:activeTab.page,forom:"H5"}).then(res => {				
+				this.$Request.post(this.$api.home.newsmoduledata,{keywords:this.keywords,moduleid:this.moduleid,cateid:activeTab.cateid,minId:activeTab.minId,page:activeTab.page,forom:"H5"}).then(res => {				
+					console.log(res);
 					if (res.code == "0000") {
 						const data = res.data.map((news) => {
 							return {
@@ -85,13 +90,19 @@
 							});
 						}
 						activeTab.page = activeTab.page+1;
+						console.log(data.length);
+						if(data.length<10){
+							console.log(data.length);
+							activeTab.loadingText="noMore"
+						}
+						console.log(activeTab);
 			
 					}
 				})	
 				
 			},
 			loadNavList: function(Refresh) {				
-				this.$Request.post(this.$api.home.newscatedata,{moduleid:this.moduleid,forom:"H5"}).then(res => {
+				this.$Request.post(this.$api.home.newscatedata,{moduleid:this.moduleid}).then(res => {
 					if (res.code == "0000") {
 						this.tabBars = res.data;
 						uni.setNavigationBarTitle({
@@ -106,7 +117,7 @@
 								loadingText: '加载中...'
 							});
 						});
-						console.log(this.newsList);
+						//console.log(this.newsList);
 						this.getList();
 					}
 				})	

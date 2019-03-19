@@ -22,7 +22,7 @@
 					<view class="keyword-img" @tap="setkeyword(row)">
 						<image src="../../static/search/back.png"></image>
 					</view>
-				</view>
+				</view> 
 			</scroll-view>
 			<scroll-view class="keyword-box" v-show="!isShowKeywordList" scroll-y>
 				<view class="keyword-block" v-if="oldKeywordList.length>0">
@@ -44,7 +44,7 @@
 						</view>
 					</view>
 					<view class="keyword" v-if="forbid==''">
-						<view v-for="(item,key) in hotKeywordList" @tap="doSearch(item)" :key="key">{{item.keyword}}</view>
+						<view v-for="(item,key) in hotKeywordList" @tap="doSearch(item.keyword)" :key="key">{{item.keyword}}</view>
 					</view>
 					<view class="hide-hot-tis" v-else>
 						<view>当前搜热门搜索已隐藏</view>
@@ -53,11 +53,14 @@
 			</scroll-view>
 		</view>
 	</view>
+	
 </template>
 
 <script>
 	//引用mSearch组件，如不需要删除即可
 	import mSearch from '@/components/mehaotian-search-revision/mehaotian-search-revision.vue';
+	import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue";
+	import uniDrawer from "@/components/uni-drawer/uni-drawer.vue"
 	export default {
 		data() {
 			return {
@@ -68,6 +71,8 @@
 				keywordList: [],
 				forbid: '',
 				isShowKeywordList: false,
+				isShow:false,
+				moduleid:21
 			}
 		},
 		onLoad() {
@@ -85,20 +90,31 @@
 				]
 			);
 		},
-		onHide:function(option){
-			this.global.ntitlebar.close();
-		},
+// 		onHide:function(option){
+// 			this.global.ntitlebar.close();
+// 		},
 		components: {
 			//引用mSearch组件，如不需要删除即可
-			mSearch
+			mSearch,
+			uniNavBar,
+			uniDrawer
 		},
 		onNavigationBarButtonTap:function(e){
 			//console.log(e);
 			if(e.index==0){
+				this.isShow = true;
+			}
+			if(e.index==1){
 				uni.switchTab({
-					url: '/pages/blog/blog',
+					url: '/pages/index/index'
 				})
 			}
+		},
+		onNavigationBarSearchInputConfirmed:function(e){
+			
+		},
+		onNavigationBarSearchInputChanged:function(e){
+			
 		},
 		props:{
             titleText:{
@@ -219,8 +235,10 @@
 				key = key ? key : this.keyword ? this.keyword : this.defaultKeyword;
 				this.keyword = key;
 				this.saveKeyword(key); //保存为历史 
-				uni.reLaunch({
-					url: '/pages/news/index?keywords=' + key +'moduleid='+moduleid,
+				uni.navigateTo({
+					//url: '/pages/news/index?keywords=' + key +'&moduleid='+this.moduleid,
+					url:'/pages/news/index?keywords=' + encodeURIComponent(key) +'&moduleid='+this.moduleid,
+					
 				})
 // 				uni.showToast({ 
 // 					title: key,
@@ -233,7 +251,7 @@
 				
 				//#endif
 				//#ifdef H5 
-				window.location.href = 'taobao://s.taobao.com/search?q=' + key
+				// window.location.href = 'taobao://s.taobao.com/search?q=' + key
 				//#endif
 			},
 			//保存关键字到历史记录
@@ -273,12 +291,33 @@
 </script>
 <style>
 	.top-view{width: 100%;position: fixed;top: 0;}
-	.search-box {width:95%;background-color:rgb(242,242,242);padding:7.5px 2.5%;display:flex;justify-content:space-between;}
+	.search-box {
+		width:95%;
+		padding:7.5px 2.5%;
+		display:flex;
+		justify-content:space-between;
+		
+		position: fixed;
+		z-index: 160;
+		border-bottom: solid 1px #ddd;
+		/* background: linear-gradient(to left, #FA4DBE 0, #FBAA58 100%); */
+		background:#fc2c5d;
+		/* background: rgba(255,255,255,.9); */
+		border-bottom-color: transparent;
+		-webkit-transition: all .4s ease 0s;
+		transform-origin: center;
+		/* #ifdef APP-PLUS */
+		padding-top: var(--status-bar-height);
+		/* #endif */
+	}
 	.search-box .input-box {width:85%;flex-shrink:1;display:flex;justify-content:center;align-items:center;}
 	.search-box .search-btn {width:15%;margin:0 0 0 2%;display:flex;justify-content:center;align-items:center;flex-shrink:0;font-size:14px;color:#fff;background:linear-gradient(to right,#fd4a5f,#f00);border-radius:30px;}
 	.search-box .input-box>input {width:100%;height:30px;font-size:16px;border:0;border-radius:30px;-webkit-appearance:none;-moz-appearance:none;appearance:none;padding:0 3%;margin:0;background-color:#ffffff;}
 	.placeholder-class {color:#9e9e9e;}
-	.search-keyword {width:100%;background-color:rgb(242,242,242);}
+	.search-keyword {
+		width:100%;background-color:rgb(242,242,242);
+		padding-top:150upx;		
+	}
 	.keyword-list-box {height:calc(100vh - 55px);padding-top:5px;border-radius:10px 10px 0 0;background-color:#fff;}
 	.keyword-entry-tap {background-color:#eee;}
 	.keyword-entry {width:94%;height:40px;margin:0 3%;font-size:15px;color:#333;display:flex;justify-content:space-between;align-items:center;border-bottom:solid 1px #e7e7e7;}

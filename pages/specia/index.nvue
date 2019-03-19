@@ -55,22 +55,21 @@
 		},
 		created() {
 			// 初始化列表信息
-			setTimeout(() => {
-                uni.getStorage({
-                    key:'newsmoduleid',
-                    success: (res) => {
-					   this.loadNavList(res.data);
-                    }
-                })
-            },200)
-			
+// 			setTimeout(() => {
+//                 uni.getStorage({
+//                     key:'newsmoduleid',
+//                     success: (res) => {
+// 					   this.loadNavList(res.data);
+//                     }
+//                 })
+//             },200)
+			this.loadNavList();
 		},
 		methods: {
-			loadNavList: function(moduledid) {
-				this.moduleid = moduledid;
+			loadNavList: function() {
 				uni.request({
 					url: 'http://47.100.48.1/api/member/getData.php?ac=newscatedata',
-					data: {moduleid:moduledid,isSpecia:1},
+					data: {isSpecia:1},
 					method:"POST",
 					success: (res) => {
 						var result = res.data;
@@ -101,7 +100,7 @@
 				}
 				uni.request({
 					url: 'http://47.100.48.1/api/member/getData.php?ac=newsmoduledata',
-					data: {moduleid:this.moduleid,cateid:activeTab.cateid,page:activeTab.page,isSpecia:1},
+					data: {cateid:activeTab.cateid,page:activeTab.page,isSpecia:1},
 					method:"POST",
 					success: (res) => {
 						var result = res.data;

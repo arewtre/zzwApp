@@ -24,7 +24,7 @@ export default {
 		return {
 			nineNavTab:[
 				{id:"1",name:"男装"},
-				{id:"1",name:"女装"},
+				{id:"1",name:"女装"}, 
 				{id:"1",name:"母婴"},
 				{id:"1",name:"鞋包"},
 				{id:"1",name:"数码配件"},

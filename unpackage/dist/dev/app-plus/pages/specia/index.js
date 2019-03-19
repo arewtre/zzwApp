@@ -1813,47 +1813,46 @@ var _default =
     uniTabs: _uniTabs.default,
     uniMediaList: _uniMediaList.default },
 
-  created: function created() {var _this = this;
+  created: function created() {
     // 初始化列表信息
-    setTimeout(function () {
-      uni.getStorage({
-        key: 'newsmoduleid',
-        success: function success(res) {
-          _this.loadNavList(res.data);
-        } });
-
-    }, 200);
-
+    // 			setTimeout(() => {
+    //                 uni.getStorage({
+    //                     key:'newsmoduleid',
+    //                     success: (res) => {
+    // 					   this.loadNavList(res.data);
+    //                     }
+    //                 })
+    //             },200)
+    this.loadNavList();
   },
   methods: {
-    loadNavList: function loadNavList(moduledid) {var _this2 = this;
-      this.moduleid = moduledid;
+    loadNavList: function loadNavList() {var _this = this;
       uni.request({
         url: 'http://47.100.48.1/api/member/getData.php?ac=newscatedata',
-        data: { moduleid: moduledid, isSpecia: 1 },
+        data: { isSpecia: 1 },
         method: "POST",
         success: function success(res) {
           var result = res.data;
           if (result.code == "0000") {
-            _this2.tabBars = result.data;
+            _this.tabBars = result.data;
             uni.setNavigationBarTitle({
               title: result.data[0].name });
 
-            _this2.tabBars.forEach(function (tabBar) {
-              _this2.newsList.push({
+            _this.tabBars.forEach(function (tabBar) {
+              _this.newsList.push({
                 data: [],
                 cateid: tabBar.catid,
                 page: 0,
                 loadingText: '加载中...' });
 
             });
-            console.log(_this2.newsList);
-            _this2.getList(_this2.moduleid);
+            console.log(_this.newsList);
+            _this.getList(_this.moduleid);
           }
         } });
 
     },
-    getList: function getList() {var _this3 = this;var action = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+    getList: function getList() {var _this2 = this;var action = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       var activeTab = this.newsList[this.tabIndex];
       //activeTab.requestParams.time = new Date().getTime() + '';
       if (action === 1) {
@@ -1861,7 +1860,7 @@ var _default =
       }
       uni.request({
         url: 'http://47.100.48.1/api/member/getData.php?ac=newsmoduledata',
-        data: { moduleid: this.moduleid, cateid: activeTab.cateid, page: activeTab.page, isSpecia: 1 },
+        data: { cateid: activeTab.cateid, page: activeTab.page, isSpecia: 1 },
         method: "POST",
         success: function success(res) {
           var result = res.data;
@@ -1883,7 +1882,7 @@ var _default =
 
             if (action === 1) {
               activeTab.data = data;
-              _this3.refreshing = false;
+              _this2.refreshing = false;
             } else {
               data.forEach(function (news) {
                 activeTab.data.push(news);
@@ -1891,7 +1890,7 @@ var _default =
             }
             activeTab.page = activeTab.page + 1;
             if (data.length < 10) {
-              _this3.newsList.loadingText = '没有更多数据了';
+              _this2.newsList.loadingText = '没有更多数据了';
             }
           }
         } });
@@ -1903,12 +1902,12 @@ var _default =
         url: '/pages/detail/detail?catid=' + e.post_id + '&itemid=' + e.id });
 
     },
-    dislike: function dislike(tabIndex, newsIndex) {var _this4 = this;
+    dislike: function dislike(tabIndex, newsIndex) {var _this3 = this;
       uni.showModal({
         content: '不感兴趣？',
         success: function success(res) {
           if (res.confirm) {
-            _this4.newsList[tabIndex].data.splice(newsIndex, 1);
+            _this3.newsList[tabIndex].data.splice(newsIndex, 1);
           }
         } });
 

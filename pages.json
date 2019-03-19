@@ -89,8 +89,30 @@
 		{
 			"path": "pages/search/index",
 			"style": {
+				"backgroundColor": "#f5f6f8",
 				"navigationBarTitleText": "搜索",
-				"navigationBarTextStyle": "white",
+				"navigationBarTextStyle": "white",  
+// 				"titleNView": {
+// 					"searchInput": {
+// 						"borderRadius": "10px",
+// 						"placeholder": "请输入关键字搜索",
+// 						"placeholderColor": "#fff"
+// 					},
+// 					"buttons": [{
+// 							"text": "资讯",
+// 							"float": "left",
+// 							"select":true,
+// 							"fontSize": "14px",
+// 							"width":"auto"
+// 						},
+// 						{
+// 							"text": "取消",
+// 							"fontSize": "14px",
+// 							"width":"auto"
+// 							// "type":"close"
+// 						}
+// 					]
+// 				}
 				"app-plus": {
 					"titleNView": false,
 					"bounce": "none"
@@ -120,7 +142,8 @@
 						"searchInput": {
 							"borderRadius": "10px",
 							"placeholder": "请输入关键字搜索",
-							"placeholderColor": "#fff"
+							"placeholderColor": "#fff",
+							"font-size":"13px"
 						},
 						"buttons": [{
 								"text": "",
@@ -132,8 +155,6 @@
 						]
 					}
 				},
-				
-				
 				"navigationStyle": "custom"
 			}
 		},
@@ -141,18 +162,27 @@
 			"path": "pages/specia/index",
 			"style": {
 				"navigationBarTitleText": "专题",
-				"navigationBarTextStyle": "white"//,
-// 				"app-plus": {
-// 					"bounce": "none",
-// 					"scrollIndicator": "none",
-// 					"titleNView": {
-// 						"type": "transparent",
-// 						"buttons": [{
-// 							"type": "menu"
-// 						}]
-// 					}
-// 		
-// 				}
+				// "navigationBarTextStyle": "white", 
+ 				"app-plus": {
+					"bounce": "none",
+					"titleNView": { 
+						"searchInput": {
+							"borderRadius": "10px",
+							"placeholder": "请输入关键字搜索",
+							"placeholderColor": "#fff",
+							"font-size":"13px"
+						},
+						"buttons": [{
+								"text": "",
+								"float": "left"
+							},
+							{
+								"type": "menu"
+							}
+						]
+					}
+				}
+				
 			}
 		},
 		{
@@ -207,6 +237,32 @@
 			"path" : "pages/reg-pwd/reg-pwd",
 			"style" : {
 				"navigationBarTitleText": "注册"
+			}
+		},
+		{
+			"path": "pages/company/index",
+			"style": {
+				"navigationBarTitleText": "公司列表",
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"searchInput": {
+							"borderRadius": "10px",
+							"placeholder": "请输入关键字搜索",
+							"placeholderColor": "#fff",
+							"font-size":"13px"
+						},
+						"buttons": [{
+								"text": "",
+								"float": "left"
+							},
+							{
+								"type": "menu"
+							}
+						]
+					}
+				},
+				"navigationStyle": "custom"
 			}
 		}
 	],

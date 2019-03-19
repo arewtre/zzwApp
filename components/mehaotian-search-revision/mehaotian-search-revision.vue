@@ -1,5 +1,6 @@
 <template>
 	<view class="serach">
+		<view class="titleft">资讯<uni-icon type="arrowdown" size="24"></uni-icon></view>
 		<view class="content" :style="{'border-radius':radius+'px'}">
 			<!-- HM修改 增加进入输入状态的点击范围 -->
 			<view class="content-box" :class="{'centers':mode === 2}" @click="getFocus">
@@ -10,9 +11,13 @@
 				<!-- HM修改 @click换成@click.stop阻止冒泡 -->
 				<text v-if="isDelShow" class="icon icon-del"  @click.stop="clear">&#xe644;</text>
 			</view>
-			<view v-show="(active&&show&&button === 'inside')||(isDelShow && button === 'inside')" class="serachBtn" @click="search">
-				搜索
-			</view>
+			
+		</view>
+		<view v-show="(active&&show&&button === 'inside')||(isDelShow && button === 'inside')" class="serachBtn" @click="search">
+			搜索
+		</view>
+		<view v-show="!isDelShow" class="back serachBtn" @click="back">
+			取消
 		</view>
 		<view  v-if="button === 'outside'" class="button" :class="{'active':show||active}" @click="search">
 			<view class="button-item">{{!show?searchName:'搜索'}}</view>
@@ -21,6 +26,7 @@
 </template>
 
 <script>
+import uniIcon from "@/components/uni-icon/uni-icon.vue"
 export default {
 	props: {
 		mode: {
@@ -49,6 +55,7 @@ export default {
 			default: 60
 		}
 	},
+	components: {uniIcon},
 	data() {
 		return {
 			active: false,
@@ -72,11 +79,17 @@ export default {
 			}
 		},
 		focus() {
-			this.active = true;
+			// this.active = true;
 			//HM修改 增加获取焦点判断
 			if (this.inputVal) {
 				this.isDelShow = true;
 			}
+		},
+		back(){
+			uni.switchTab({
+				url: '/pages/index/index'
+			})
+			
 		},
 		blur() {
 			this.isFocus = false;
@@ -131,6 +144,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+	.titleft{
+		height: 60upx;
+		line-height:60upx;
+		color:#fff;
+		width:20%;
+		text-align:center;
+	}
+	.serachBtn {
+		height: 100%;
+		flex-shrink: 0;
+		padding: 0 30upx;
+		//HM修改 按钮背景色
+		//background:linear-gradient(to right,#fd4a5f,#fd4a5f);
+		background: #fc2c5d;
+		line-height: 60upx;
+		color: #fff;
+		//border-left: 1px #ccc solid; //HM修改 去掉边框
+		transition: all 0.3s;
+	}
+	.serachBtn2 {
+		height: 100%;
+		flex-shrink: 0;
+		padding: 0 30upx;
+		//HM修改 按钮背景色
+		// background:linear-gradient(to right,#fd4a5f,#fd4a5f);
+		background: #fc2c5d;
+		line-height: 60upx;
+		color: #fff;
+		//border-left: 1px #ccc solid; //HM修改 去掉边框
+		transition: all 0.3s;
+	}
 .serach {
 	display: flex;
 	width: 100%;
@@ -140,7 +184,7 @@ export default {
 	.content {
 		display: flex;
 		align-items: center;
-		width: 100%;
+		width: 65%;
 		height: 60upx;
 		//border: 1px #ccc solid; //HM修改 去掉边框
 		background: #fff;
@@ -179,18 +223,7 @@ export default {
 				}
 			}
 		}
-		.serachBtn {
-			height: 100%;
-			flex-shrink: 0;
-			padding: 0 30upx;
-			//HM修改 按钮背景色
-			background:linear-gradient(to right,#fd4a5f,#fd4a5f);
-			//background: $uni-color-success;
-			line-height: 60upx;
-			color: #fff;
-			//border-left: 1px #ccc solid; //HM修改 去掉边框
-			transition: all 0.3s;
-		}
+		
 	}
 	.button {
 		display: flex;

@@ -52,7 +52,7 @@
 				scrollintoid:'',
 				// 主分类
 				maintitels:[],
-				// 子项目
+				// 子项目 
 				subitems:[],
 				data:[]
 			}
@@ -109,7 +109,7 @@
 				})
 			},
 			getCate:function(){
-				this.$Request.post(this.$api.home.getcate,{moduleid:this.moduleid,isSpecia:1,}).then(res => {
+				this.$Request.post(this.$api.home.getcate,{}).then(res => {
 					if (res.code == "0000") {
 						
 						this.data = res.data;

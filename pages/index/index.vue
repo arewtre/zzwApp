@@ -257,9 +257,15 @@
 			gpToNews(e) {
 				//console.log(e);
 				uni.setStorageSync('newsmoduleid',  e.moduleid);
-			    uni.navigateTo({
-					url: '/pages/news/index?moduleid=' + e.moduleid,
-			    })
+				if(e.moduleid==4){
+					uni.navigateTo({
+						url: '/pages/company/index?moduleid=' + e.moduleid,
+					})
+				}else{
+					uni.navigateTo({
+						url: '/pages/news/index?moduleid=' + e.moduleid,
+					})
+				}
 			},
 			goToSpecia(e) {
 				//console.log(e);

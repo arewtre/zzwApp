@@ -10,7 +10,7 @@ module.exports = {
 		newsmoduledata:"newsmoduledata", // 文章模块数据
 		newscatedata:"newscatedata", // 文章分类数据
 		getsearchdata:"getSearchData",//获取热门搜索
-		getcate:"getCate"//获取热门搜索
+		getcate:"getcate"//获取热门搜索
 	},
 	common:{
 		couponlist:"index/couponlist", // 公共加载商品

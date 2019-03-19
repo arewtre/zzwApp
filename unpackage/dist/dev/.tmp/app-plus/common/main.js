@@ -126,7 +126,7 @@ eval(" //const ROOTPATH = \"https://wx.diudanke.com/\";\n\nvar ROOTPATH = 'http:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval(" /**\r\n               * API接口配置文件\r\n               */\nmodule.exports = {\n  home: {\n    banner: \"getBanner\", // 首页banner \n    navlist: \"getCategory\", // 首页导航\n    sydata: \"getSyData\", // 获取数据\n    newsdata: \"newsdata\", // 文章详情数据\n    newsmoduledata: \"newsmoduledata\", // 文章模块数据\n    newscatedata: \"newscatedata\", // 文章分类数据\n    getsearchdata: \"getSearchData\", //获取热门搜索\n    getcate: \"getCate\" //获取热门搜索\n  },\n  common: {\n    couponlist: \"index/couponlist\", // 公共加载商品\n    config: \"config/getinfo\", // 获取服务端配置\n    update: \"config/update\" // 检测更新 \n  },\n  user: {\n    checkLogin: \"checkLogin\" //登录\n  },\n  goods: {\n    iteminfo: \"items/goodsinfo\" // 商品详情 加载 \n  } };\n\n//# sourceURL=uni-app:///common/httpApi.js?c333");
+eval(" /**\r\n               * API接口配置文件\r\n               */\nmodule.exports = {\n  home: {\n    banner: \"getBanner\", // 首页banner \n    navlist: \"getCategory\", // 首页导航\n    sydata: \"getSyData\", // 获取数据\n    newsdata: \"newsdata\", // 文章详情数据\n    newsmoduledata: \"newsmoduledata\", // 文章模块数据\n    newscatedata: \"newscatedata\", // 文章分类数据\n    getsearchdata: \"getSearchData\", //获取热门搜索\n    getcate: \"getcate\" //获取热门搜索\n  },\n  common: {\n    couponlist: \"index/couponlist\", // 公共加载商品\n    config: \"config/getinfo\", // 获取服务端配置\n    update: \"config/update\" // 检测更新 \n  },\n  user: {\n    checkLogin: \"checkLogin\" //登录\n  },\n  goods: {\n    iteminfo: \"items/goodsinfo\" // 商品详情 加载 \n  } };\n\n//# sourceURL=uni-app:///common/httpApi.js?c333");
 
 /***/ }),
 

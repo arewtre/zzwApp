@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/cate/index",
     "pages/like/index",
     "pages/ucenter/ucenter",
     "pages/detail/detail",
@@ -63,12 +62,51 @@
       "pages/specia/index.html": {
         "window": {
           "navigationBarTitleText": "专题",
-          "navigationBarTextStyle": "white"
+          "bounce": "none",
+          "titleNView": {
+            "searchInput": {
+              "borderRadius": "10px",
+              "placeholder": "请输入关键字搜索",
+              "placeholderColor": "#fff"
+            },
+            "buttons": [
+              {
+                "text": "",
+                "float": "left"
+              },
+              {
+                "type": "menu"
+              }
+            ]
+          }
         }
       },
       "pages/news/index.html": {
         "window": {
           "navigationBarTitleText": "文章列表",
+          "navigationStyle": "custom",
+          "bounce": "none",
+          "titleNView": {
+            "searchInput": {
+              "borderRadius": "10px",
+              "placeholder": "请输入关键字搜索",
+              "placeholderColor": "#fff"
+            },
+            "buttons": [
+              {
+                "text": "",
+                "float": "left"
+              },
+              {
+                "type": "menu"
+              }
+            ]
+          }
+        }
+      },
+      "pages/cate/index.html": {
+        "window": {
+          "navigationBarTitleText": "分类",
           "navigationStyle": "custom",
           "bounce": "none",
           "titleNView": {

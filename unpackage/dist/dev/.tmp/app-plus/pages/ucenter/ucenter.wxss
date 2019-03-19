@@ -15,6 +15,21 @@ view {
 page {
 	background-color: #f8f8f8;
 }
+.submit {
+	margin-top: 30px;
+	margin-left: 20px;
+	margin-right: 20px;
+	color: white;
+	background-color: rgba(252, 44, 93, 1.0) !important;
+	-webkit-tap-highlight-color: rgba(252, 44, 93, 1.0);
+}
+.submit :active {
+	color: #B6B6B6;
+	background-color: rgba(252, 44, 93, 0.8);
+}
+.logout{
+	padding-bottom: 40rpx;
+}
 .center {
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
@@ -25,12 +40,11 @@ page {
 .logo {
 	width: 750rpx;
 	height: 240rpx;
-	padding: 20rpx;
+	padding: 30rpx 20rpx 20rpx 20rpx;
 	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;
-	background: -webkit-gradient(linear, right top, left top, color-stop(0, #FA4DBE), to(#FBAA58));
-	background: -o-linear-gradient(right, #FA4DBE 0, #FBAA58 100%);
-	background: linear-gradient(to left, #FA4DBE 0, #FBAA58 100%);
+	/* background: linear-gradient(to left, #FA4DBE 0, #FBAA58 100%); */
+	background:#fc2c5d;
 	-webkit-box-orient: horizontal;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: row;

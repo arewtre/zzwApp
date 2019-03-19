@@ -216,7 +216,7 @@
 	}
 
 	.active {
-		color: #007AFF;
+		color: #fc2c5d;
 	}
 
 	.loadmore {

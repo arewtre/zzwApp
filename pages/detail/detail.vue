@@ -116,6 +116,9 @@
 // 				if(newsdetail){
 // 					this.content = newsdetail;
 // 				}else{
+					uni.showLoading({
+						title: '加载中'
+					});
 					this.$Request.post(this.$api.home.newsdata,{catid:this.catid,itemid:this.itemid}).then(res => {
 						console.log(res.data);
 						if (res.code == "0000") {
@@ -123,6 +126,7 @@
 							uni.setNavigationBarTitle({
 								title: this.content.title
 							});
+							 uni.hideLoading();
 							//this.$SysCache.put("app_newsdetail"+this.itemid,res.data,86400);
 						}else {
 							this.content = FAIL_CONTENT;

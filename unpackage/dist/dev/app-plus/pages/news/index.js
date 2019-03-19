@@ -83,7 +83,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "F:\\uniapp\\zzwApp\\pages\\news\\index.nvue?entry");
+/******/ 	return __webpack_require__(__webpack_require__.s = "F:\\helloUniapp\\news\\pages\\news\\index.nvue?entry");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1501,10 +1501,10 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\uniapp\\zzwApp\\components\\uni-media-list\\uni-media-list.nvue":
-/*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/uniapp/zzwApp/components/uni-media-list/uni-media-list.nvue ***!
-  \*****************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\uni-media-list\\uni-media-list.nvue":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/uni-media-list/uni-media-list.nvue ***!
+  \********************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1570,10 +1570,10 @@ var _default2 =
 
 /***/ }),
 
-/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\uniapp\\zzwApp\\components\\uni-tab-bar\\uni-tab-bar.nvue":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/uniapp/zzwApp/components/uni-tab-bar/uni-tab-bar.nvue ***!
-  \***********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\uni-tab-bar\\uni-tab-bar.nvue":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/uni-tab-bar/uni-tab-bar.nvue ***!
+  \**************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1631,10 +1631,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\uniapp\\zzwApp\\components\\uni-tab-content\\uni-tab-content.nvue":
-/*!*******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/uniapp/zzwApp/components/uni-tab-content/uni-tab-content.nvue ***!
-  \*******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\uni-tab-content\\uni-tab-content.nvue":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/uni-tab-content/uni-tab-content.nvue ***!
+  \**********************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1655,16 +1655,16 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\uniapp\\zzwApp\\components\\uni-tabs\\uni-tabs.nvue":
-/*!*****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/uniapp/zzwApp/components/uni-tabs/uni-tabs.nvue ***!
-  \*****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\uni-tabs\\uni-tabs.nvue":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/uni-tabs/uni-tabs.nvue ***!
+  \********************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-var _uniTabContent = _interopRequireDefault(__webpack_require__(/*! ../uni-tab-content/uni-tab-content.nvue */ "F:\\uniapp\\zzwApp\\components\\uni-tab-content\\uni-tab-content.nvue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+var _uniTabContent = _interopRequireDefault(__webpack_require__(/*! ../uni-tab-content/uni-tab-content.nvue */ "F:\\helloUniapp\\news\\components\\uni-tab-content\\uni-tab-content.nvue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
   props: {
     index: {
@@ -1750,10 +1750,10 @@ var _uniTabContent = _interopRequireDefault(__webpack_require__(/*! ../uni-tab-c
 
 /***/ }),
 
-/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\uniapp\\zzwApp\\pages\\news\\index.nvue":
-/*!*****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/uniapp/zzwApp/pages/news/index.nvue ***!
-  \*****************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\pages\\news\\index.nvue":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/pages/news/index.nvue ***!
+  \********************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1785,12 +1785,12 @@ var _uniTabContent = _interopRequireDefault(__webpack_require__(/*! ../uni-tab-c
 
 
 
-var _uniTabContent = _interopRequireDefault(__webpack_require__(/*! @/components/uni-tab-content/uni-tab-content.nvue */ "F:\\uniapp\\zzwApp\\components\\uni-tab-content\\uni-tab-content.nvue"));
-var _uniTabBar = _interopRequireDefault(__webpack_require__(/*! @/components/uni-tab-bar/uni-tab-bar.nvue */ "F:\\uniapp\\zzwApp\\components\\uni-tab-bar\\uni-tab-bar.nvue"));
-var _uniTabs = _interopRequireDefault(__webpack_require__(/*! @/components/uni-tabs/uni-tabs.nvue */ "F:\\uniapp\\zzwApp\\components\\uni-tabs\\uni-tabs.nvue"));
-var _uniMediaList = _interopRequireDefault(__webpack_require__(/*! @/components/uni-media-list/uni-media-list.nvue */ "F:\\uniapp\\zzwApp\\components\\uni-media-list\\uni-media-list.nvue"));
+var _uniTabContent = _interopRequireDefault(__webpack_require__(/*! @/components/uni-tab-content/uni-tab-content.nvue */ "F:\\helloUniapp\\news\\components\\uni-tab-content\\uni-tab-content.nvue"));
+var _uniTabBar = _interopRequireDefault(__webpack_require__(/*! @/components/uni-tab-bar/uni-tab-bar.nvue */ "F:\\helloUniapp\\news\\components\\uni-tab-bar\\uni-tab-bar.nvue"));
+var _uniTabs = _interopRequireDefault(__webpack_require__(/*! @/components/uni-tabs/uni-tabs.nvue */ "F:\\helloUniapp\\news\\components\\uni-tabs\\uni-tabs.nvue"));
+var _uniMediaList = _interopRequireDefault(__webpack_require__(/*! @/components/uni-media-list/uni-media-list.nvue */ "F:\\helloUniapp\\news\\components\\uni-media-list\\uni-media-list.nvue"));
 
-var _util = __webpack_require__(/*! @/common/util.js */ "F:\\uniapp\\zzwApp\\common\\util.js");function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
+var _util = __webpack_require__(/*! @/common/util.js */ "F:\\helloUniapp\\news\\common\\util.js");function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
 
 
 
@@ -1959,61 +1959,10 @@ var _default =
 
 /***/ }),
 
-/***/ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-42ca2eac!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:\\uniapp\\zzwApp\\pages\\news\\index.nvue":
-/*!********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-42ca2eac!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:/uniapp/zzwApp/pages/news/index.nvue ***!
-  \********************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = {
-  "tab-bar-item": {
-    "width": "150",
-    "height": "100",
-    "flexDirection": "column",
-    "alignItems": "center",
-    "justifyContent": "center"
-  },
-  "tab-bar-title": {
-    "height": "100",
-    "lineHeight": "100",
-    "fontSize": "30",
-    "color": "#555555"
-  },
-  "active": {
-    "color": "#007AFF"
-  },
-  "loadmore": {
-    "height": "70",
-    "width": "750",
-    "flexDirection": "column",
-    "justifyContent": "center"
-  },
-  "loadmore-text": {
-    "fontSize": "30",
-    "textAlign": "center",
-    "color": "#999999"
-  },
-  "refresh": {
-    "width": "750",
-    "height": "70",
-    "flexDirection": "row",
-    "alignItems": "center",
-    "justifyContent": "center"
-  },
-  "refresh-text": {
-    "textAlign": "center",
-    "fontSize": "28",
-    "color": "#999999"
-  }
-}
-
-/***/ }),
-
-/***/ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-e01fd052!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:\\uniapp\\zzwApp\\components\\uni-media-list\\uni-media-list.nvue":
-/*!********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-e01fd052!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:/uniapp/zzwApp/components/uni-media-list/uni-media-list.nvue ***!
-  \********************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:\\helloUniapp\\news\\components\\uni-media-list\\uni-media-list.nvue":
+/*!***********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:/helloUniapp/news/components/uni-media-list/uni-media-list.nvue ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2123,10 +2072,124 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-42ca2eac!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\uniapp\\zzwApp\\pages\\news\\index.nvue":
-/*!**********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-42ca2eac!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/uniapp/zzwApp/pages/news/index.nvue ***!
-  \**********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-53ab7807!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:\\helloUniapp\\news\\pages\\news\\index.nvue":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-53ab7807!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:/helloUniapp/news/pages/news/index.nvue ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {
+  "tab-bar-item": {
+    "width": "150",
+    "height": "100",
+    "flexDirection": "column",
+    "alignItems": "center",
+    "justifyContent": "center"
+  },
+  "tab-bar-title": {
+    "height": "100",
+    "lineHeight": "100",
+    "fontSize": "30",
+    "color": "#555555"
+  },
+  "active": {
+    "color": "#fc2c5d"
+  },
+  "loadmore": {
+    "height": "70",
+    "width": "750",
+    "flexDirection": "column",
+    "justifyContent": "center"
+  },
+  "loadmore-text": {
+    "fontSize": "30",
+    "textAlign": "center",
+    "color": "#999999"
+  },
+  "refresh": {
+    "width": "750",
+    "height": "70",
+    "flexDirection": "row",
+    "alignItems": "center",
+    "justifyContent": "center"
+  },
+  "refresh-text": {
+    "textAlign": "center",
+    "fontSize": "28",
+    "color": "#999999"
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\uni-media-list\\uni-media-list.nvue":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/uni-media-list/uni-media-list.nvue ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('div', {
+    staticClass: ["list-cell"],
+    on: {
+      "click": _vm.bindClick
+    }
+  }, [(_vm.data.title) ? _c('div', {
+    staticClass: ["media-list"]
+  }, [_c('div', {
+    class: [_vm.isImgRight ? 'media-image-right' : '', _vm.isImgLeft ? 'media-image-left' : '']
+  }, [_c('text', {
+    class: ['media-title', _vm.isImgRight || _vm.isImgLeft ? 'media-title2' : '']
+  }, [_vm._v(_vm._s(_vm.data.title))]), (_vm.showImg) ? _c('div', {
+    class: ['image-section', _vm.isImgRight ? 'image-section-right' : '', _vm.isImgLeft ? 'image-section-left' : '']
+  }, [(_vm.data.image_url) ? _c('image', {
+    class: ['image-list1', _vm.isImgRight || _vm.isImgLeft ? 'image-list2' : ''],
+    attrs: {
+      "src": _vm.data.image_url
+    }
+  }) : _vm._e(), _vm._l((_vm.data.image_list), function(source, i) {
+    return (_vm.data.image_list) ? _c('image', {
+      key: i,
+      staticClass: ["image-list3"],
+      attrs: {
+        "src": source.url
+      }
+    }) : _vm._e()
+  })], 2) : _vm._e()]), _c('div', {
+    staticClass: ["media-foot"]
+  }, [_c('div', {
+    staticClass: ["media-info"]
+  }, [_c('text', {
+    staticClass: ["info-text"]
+  }, [_vm._v(_vm._s(_vm.data.catname))]), _c('text', {
+    staticClass: ["info-text"]
+  }, [_vm._v(_vm._s(_vm.data.source))]), _c('text', {
+    staticClass: ["info-text"]
+  }, [_vm._v(_vm._s(_vm.data.comment_count) + "次浏览")]), _c('text', {
+    staticClass: ["info-text"]
+  }, [_vm._v(_vm._s(_vm.data.datetime))])]), _c('div', {
+    staticClass: ["max-close-view"],
+    on: {
+      "click": _vm.close
+    }
+  }, [_vm._m(0)])])]) : _vm._e()])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: ["close-view"]
+  }, [_c('text', {
+    staticClass: ["close"]
+  }, [_vm._v("×")])])
+}]}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-53ab7807!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\pages\\news\\index.nvue":
+/*!*************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-53ab7807!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/pages/news/index.nvue ***!
+  \*************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2206,73 +2269,10 @@ module.exports.render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-e01fd052!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\uniapp\\zzwApp\\components\\uni-media-list\\uni-media-list.nvue":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-e01fd052!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/uniapp/zzwApp/components/uni-media-list/uni-media-list.nvue ***!
-  \**********************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', {
-    staticClass: ["list-cell"],
-    on: {
-      "click": _vm.bindClick
-    }
-  }, [(_vm.data.title) ? _c('div', {
-    staticClass: ["media-list"]
-  }, [_c('div', {
-    class: [_vm.isImgRight ? 'media-image-right' : '', _vm.isImgLeft ? 'media-image-left' : '']
-  }, [_c('text', {
-    class: ['media-title', _vm.isImgRight || _vm.isImgLeft ? 'media-title2' : '']
-  }, [_vm._v(_vm._s(_vm.data.title))]), (_vm.showImg) ? _c('div', {
-    class: ['image-section', _vm.isImgRight ? 'image-section-right' : '', _vm.isImgLeft ? 'image-section-left' : '']
-  }, [(_vm.data.image_url) ? _c('image', {
-    class: ['image-list1', _vm.isImgRight || _vm.isImgLeft ? 'image-list2' : ''],
-    attrs: {
-      "src": _vm.data.image_url
-    }
-  }) : _vm._e(), _vm._l((_vm.data.image_list), function(source, i) {
-    return (_vm.data.image_list) ? _c('image', {
-      key: i,
-      staticClass: ["image-list3"],
-      attrs: {
-        "src": source.url
-      }
-    }) : _vm._e()
-  })], 2) : _vm._e()]), _c('div', {
-    staticClass: ["media-foot"]
-  }, [_c('div', {
-    staticClass: ["media-info"]
-  }, [_c('text', {
-    staticClass: ["info-text"]
-  }, [_vm._v(_vm._s(_vm.data.catname))]), _c('text', {
-    staticClass: ["info-text"]
-  }, [_vm._v(_vm._s(_vm.data.source))]), _c('text', {
-    staticClass: ["info-text"]
-  }, [_vm._v(_vm._s(_vm.data.comment_count) + "次浏览")]), _c('text', {
-    staticClass: ["info-text"]
-  }, [_vm._v(_vm._s(_vm.data.datetime))])]), _c('div', {
-    staticClass: ["max-close-view"],
-    on: {
-      "click": _vm.close
-    }
-  }, [_vm._m(0)])])]) : _vm._e()])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: ["close-view"]
-  }, [_c('text', {
-    staticClass: ["close"]
-  }, [_vm._v("×")])])
-}]}
-module.exports.render._withStripped = true
-
-/***/ }),
-
-/***/ "F:\\uniapp\\zzwApp\\common\\util.js":
-/*!***************************************!*\
-  !*** F:/uniapp/zzwApp/common/util.js ***!
-  \***************************************/
+/***/ "F:\\helloUniapp\\news\\common\\util.js":
+/*!******************************************!*\
+  !*** F:/helloUniapp/news/common/util.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2330,10 +2330,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.friendlyDa
 
 /***/ }),
 
-/***/ "F:\\uniapp\\zzwApp\\components\\uni-media-list\\uni-media-list.nvue":
-/*!**********************************************************************!*\
-  !*** F:/uniapp/zzwApp/components/uni-media-list/uni-media-list.nvue ***!
-  \**********************************************************************/
+/***/ "F:\\helloUniapp\\news\\components\\uni-media-list\\uni-media-list.nvue":
+/*!*************************************************************************!*\
+  !*** F:/helloUniapp/news/components/uni-media-list/uni-media-list.nvue ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2341,14 +2341,14 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(/*! !./node_modules/weex-vue-loader/lib/style-loader!./node_modules/weex-vue-loader/lib/style-rewriter?id=data-v-e01fd052!./node_modules/weex-vue-loader/lib/selector?type=styles&index=0!./uni-media-list.nvue */ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-e01fd052!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:\\uniapp\\zzwApp\\components\\uni-media-list\\uni-media-list.nvue")
+__vue_styles__.push(__webpack_require__(/*! !./node_modules/weex-vue-loader/lib/style-loader!./node_modules/weex-vue-loader/lib/style-rewriter?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector?type=styles&index=0!./uni-media-list.nvue */ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:\\helloUniapp\\news\\components\\uni-media-list\\uni-media-list.nvue")
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./uni-media-list.nvue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\uniapp\\zzwApp\\components\\uni-media-list\\uni-media-list.nvue")
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./uni-media-list.nvue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\uni-media-list\\uni-media-list.nvue")
 
 /* template */
-var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-e01fd052!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./uni-media-list.nvue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-e01fd052!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\uniapp\\zzwApp\\components\\uni-media-list\\uni-media-list.nvue")
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./uni-media-list.nvue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\uni-media-list\\uni-media-list.nvue")
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -2360,10 +2360,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "F:\\uniapp\\zzwApp\\components\\uni-media-list\\uni-media-list.nvue"
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\uni-media-list\\uni-media-list.nvue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-e01fd052"
+__vue_options__._scopeId = "data-v-10f1c032"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -2379,10 +2379,10 @@ module.exports = __vue_exports__
 
 /***/ }),
 
-/***/ "F:\\uniapp\\zzwApp\\components\\uni-tab-bar\\uni-tab-bar.nvue":
-/*!****************************************************************!*\
-  !*** F:/uniapp/zzwApp/components/uni-tab-bar/uni-tab-bar.nvue ***!
-  \****************************************************************/
+/***/ "F:\\helloUniapp\\news\\components\\uni-tab-bar\\uni-tab-bar.nvue":
+/*!*******************************************************************!*\
+  !*** F:/helloUniapp/news/components/uni-tab-bar/uni-tab-bar.nvue ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2390,7 +2390,7 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* script */
-__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./uni-tab-bar.nvue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\uniapp\\zzwApp\\components\\uni-tab-bar\\uni-tab-bar.nvue")
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./uni-tab-bar.nvue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\uni-tab-bar\\uni-tab-bar.nvue")
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -2402,7 +2402,7 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "F:\\uniapp\\zzwApp\\components\\uni-tab-bar\\uni-tab-bar.nvue"
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\uni-tab-bar\\uni-tab-bar.nvue"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -2418,10 +2418,10 @@ module.exports = __vue_exports__
 
 /***/ }),
 
-/***/ "F:\\uniapp\\zzwApp\\components\\uni-tab-content\\uni-tab-content.nvue":
-/*!************************************************************************!*\
-  !*** F:/uniapp/zzwApp/components/uni-tab-content/uni-tab-content.nvue ***!
-  \************************************************************************/
+/***/ "F:\\helloUniapp\\news\\components\\uni-tab-content\\uni-tab-content.nvue":
+/*!***************************************************************************!*\
+  !*** F:/helloUniapp/news/components/uni-tab-content/uni-tab-content.nvue ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2429,7 +2429,7 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* script */
-__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./uni-tab-content.nvue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\uniapp\\zzwApp\\components\\uni-tab-content\\uni-tab-content.nvue")
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./uni-tab-content.nvue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\uni-tab-content\\uni-tab-content.nvue")
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -2441,7 +2441,7 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "F:\\uniapp\\zzwApp\\components\\uni-tab-content\\uni-tab-content.nvue"
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\uni-tab-content\\uni-tab-content.nvue"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -2457,10 +2457,10 @@ module.exports = __vue_exports__
 
 /***/ }),
 
-/***/ "F:\\uniapp\\zzwApp\\components\\uni-tabs\\uni-tabs.nvue":
-/*!**********************************************************!*\
-  !*** F:/uniapp/zzwApp/components/uni-tabs/uni-tabs.nvue ***!
-  \**********************************************************/
+/***/ "F:\\helloUniapp\\news\\components\\uni-tabs\\uni-tabs.nvue":
+/*!*************************************************************!*\
+  !*** F:/helloUniapp/news/components/uni-tabs/uni-tabs.nvue ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2468,7 +2468,7 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* script */
-__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./uni-tabs.nvue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\uniapp\\zzwApp\\components\\uni-tabs\\uni-tabs.nvue")
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./uni-tabs.nvue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\uni-tabs\\uni-tabs.nvue")
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -2480,7 +2480,7 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "F:\\uniapp\\zzwApp\\components\\uni-tabs\\uni-tabs.nvue"
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\uni-tabs\\uni-tabs.nvue"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -2496,10 +2496,10 @@ module.exports = __vue_exports__
 
 /***/ }),
 
-/***/ "F:\\uniapp\\zzwApp\\pages\\news\\index.nvue?entry":
-/*!****************************************************!*\
-  !*** F:/uniapp/zzwApp/pages/news/index.nvue?entry ***!
-  \****************************************************/
+/***/ "F:\\helloUniapp\\news\\pages\\news\\index.nvue?entry":
+/*!*******************************************************!*\
+  !*** F:/helloUniapp/news/pages/news/index.nvue?entry ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2507,14 +2507,14 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(/*! !./node_modules/weex-vue-loader/lib/style-loader!./node_modules/weex-vue-loader/lib/style-rewriter?id=data-v-42ca2eac!./node_modules/weex-vue-loader/lib/selector?type=styles&index=0!./index.nvue */ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-42ca2eac!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:\\uniapp\\zzwApp\\pages\\news\\index.nvue")
+__vue_styles__.push(__webpack_require__(/*! !./node_modules/weex-vue-loader/lib/style-loader!./node_modules/weex-vue-loader/lib/style-rewriter?id=data-v-53ab7807!./node_modules/weex-vue-loader/lib/selector?type=styles&index=0!./index.nvue */ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-53ab7807!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:\\helloUniapp\\news\\pages\\news\\index.nvue")
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./index.nvue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\uniapp\\zzwApp\\pages\\news\\index.nvue")
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./index.nvue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\pages\\news\\index.nvue")
 
 /* template */
-var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-42ca2eac!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./index.nvue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-42ca2eac!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\uniapp\\zzwApp\\pages\\news\\index.nvue")
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-53ab7807!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./index.nvue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-53ab7807!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\pages\\news\\index.nvue")
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -2526,10 +2526,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "F:\\uniapp\\zzwApp\\pages\\news\\index.nvue"
+__vue_options__.__file = "F:\\helloUniapp\\news\\pages\\news\\index.nvue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-42ca2eac"
+__vue_options__._scopeId = "data-v-53ab7807"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {

@@ -1,282 +1,296 @@
 <template>
-	<view class="s-page-wrapper">
-		<view class="search-pop">
-			<view class="main-title">
-				<view class="search-tab">
-					<view
-						class="my-sub-src"
-						@tap="switchTab(0)"
-						v-bind:class="[current == 0 ? 'cur' : '', '']"
-					>
-						搜券
+	<view class="content">
+		<view class="search-box">
+			<!-- mSearch组件 如果使用原样式，删除组件元素-->
+			<mSearch :mode="2" button="inside" :placeholder="defaultKeyword" @search="doSearch(false)" @input="inputChange" @confirm="doSearch(false)" v-model="keyword"></mSearch>
+			<!-- 原样式 如果使用原样式，恢复下方注销代码 -->
+			<!-- 			
+			<view class="input-box">
+				<input type="text" :placeholder="defaultKeyword" @input="inputChange" v-model="keyword" @confirm="doSearch(false)"
+				 placeholder-class="placeholder-class" confirm-type="search">
+			</view>
+			<view class="search-btn" @tap="doSearch(false)">搜索</view> 
+			-->
+			<!-- 原样式 end -->
+		</view>
+		<view class="search-keyword" @touchstart="blur">
+			<scroll-view class="keyword-list-box" v-show="isShowKeywordList" scroll-y>
+				<view class="keyword-entry" hover-class="keyword-entry-tap" v-for="row in keywordList" :key="row.keyword">
+					<view class="keyword-text" @tap="doSearch(row.keyword)">
+						<rich-text :nodes="row.htmlStr"></rich-text>
 					</view>
-					<view
-						class="my-sub-src"
-						@tap="switchTab(1)"
-						v-bind:class="[current == 1 ? 'cur' : '', '']"
-					>
-						搜全网
-					</view>
-					<view class="close-src" @tap="navigateBack">
-						<text class="iconfont icon-zuojiantou"></text>
-					</view>
-					<view class="search">
-						<input
-							type="text"
-							value=""
-							:placeholder="placeholder"
-							class="search_area"
-							@input="searchInput"
-						/>
-						<view class="search_submit" @tap="submitSearch">搜 索</view>
+					<view class="keyword-img" @tap="setkeyword(row)">
+						<image src="../../static/search/back.png"></image>
 					</view>
 				</view>
-			</view>
-		</view>
-		<view class="search-cat">
-			<swiper class="swiper" @change="swiperChange" :current="current">
-				<swiper-item>
-					<view class="search-cat-tit"><text class="up-menu">热门搜索</text></view>
-					<view class="src-content">
-						<view class="main-src">
-							<view
-								class="src-item "
-								v-for="(key, index) in keywordlist"
-								:key="index"
-							>
-								{{ key.value }}
-							</view>
+			</scroll-view>
+			<scroll-view class="keyword-box" v-show="!isShowKeywordList" scroll-y>
+				<view class="keyword-block" v-if="oldKeywordList.length>0">
+					<view class="keyword-list-header">
+						<view>历史搜索</view>
+						<view>
+							<image @tap="oldDelete" src="../../static/search/delete.png"></image>
 						</view>
 					</view>
-				</swiper-item>
-				<swiper-item>
-					<view class="search-default">
-						<image
-							src="../../static/img/goods/search-default.png"
-							mode="widthFix"
-							class="is-response"
-						></image>
-						<view class="help-tips has-mgtb-10 is-size-18">搜索方法：</view>
-						<view class="help-tips color999">
-							1、打开手机淘宝/天猫，长按拷贝商品标题
-						</view>
-						<view class="help-tips color999">2、将商品标题粘贴到搜索框中进行搜索</view>
-						<view class="help-tips color999 has-mgt-10">"搜全网"功能中的商品信息均来自于互联网</view>
-						<view class="help-tips color999">商品准确信息请与商品所属店铺经营者沟通确认</view>
+					<view class="keyword">
+						<view v-for="key in oldKeywordList" @tap="doSearch(key)" :key="key">{{key}}</view>
 					</view>
-				</swiper-item>
-			</swiper>
+				</view>
+				<view class="keyword-block">
+					<view class="keyword-list-header">
+						<view>热门搜索</view>
+						<view>
+							<image @tap="hotToggle" :src="'../../static/search/attention'+forbid+'.png'"></image>
+						</view>
+					</view>
+					<view class="keyword" v-if="forbid==''">
+						<view v-for="(item,key) in hotKeywordList" @tap="doSearch(item)" :key="key">{{item.keyword}}</view>
+					</view>
+					<view class="hide-hot-tis" v-else>
+						<view>当前搜热门搜索已隐藏</view>
+					</view>
+				</view>
+			</scroll-view>
 		</view>
 	</view>
 </template>
 
 <script>
-export default {
-	data() {
-		return {
-			placeholder: '开学比屯速食',
-			keywords: '',
-			keywordlist: [
-				{ value: '抽纸' },
-				{ value: '洗面奶' },
-				{ value: '洗衣液' },
-				{ value: '卫生巾' },
-				{ value: '短袜' },
-				{ value: '垃圾袋' },
-				{ value: '行李箱' },
-				{ value: '洗发水' }
-			],
-			current: 0
-		};
-	},
-	methods: {
-		navigateBack: function() {
-			uni.navigateBack();
+	//引用mSearch组件，如不需要删除即可
+	import mSearch from '@/components/mehaotian-search-revision/mehaotian-search-revision.vue';
+	export default {
+		data() {
+			return {
+				defaultKeyword: "请输入关键字",
+				keyword: "",
+				oldKeywordList: [],
+				hotKeywordList: [],
+				keywordList: [],
+				forbid: '',
+				isShowKeywordList: false,
+			}
 		},
-		searchInput: function(e) {
-			this.keywords = e.detail.value;
+		onLoad() {
+			//this.init();
+			this.loadDefaultKeyword();
+			this.loadOldKeyword();
+			this.loadHotKeyword();
 		},
-		submitSearch: function() {
-			console.log(this.keywords);
+		onShow:function(option){
+			var ntitlebar = new plus.nativeObj.View('test',
+				{top:'0px',left:'0px',height:'49px',width:'100%',backgroundColor:'#3A3A3A',statusbar:{background:'#333333'}},
+				[
+					{tag:'rect',id:'rect',color:'#FF0000',position:{top:'12px',left:'12px',width:'24px',height:'24px'}},
+					{tag:'font',id:'font',text:'原生控件',textStyles:{size:'18px'}}
+				]
+			);
 		},
-		swiperChange: function(e) {
-			var current = e.detail.current;
-			this.current = current;
+		onHide:function(option){
+			this.global.ntitlebar.close();
 		},
-		switchTab: function(current) {
-			this.current = current;
+		components: {
+			//引用mSearch组件，如不需要删除即可
+			mSearch
+		},
+		onNavigationBarButtonTap:function(e){
+			//console.log(e);
+			if(e.index==0){
+				uni.switchTab({
+					url: '/pages/blog/blog',
+				})
+			}
+		},
+		props:{
+            titleText:{
+                type:String,
+                default:""
+            },
+            statusColor:{
+                type:String,
+                default:"#8F8F94"
+            },
+            showLeftButton:{
+                type:Boolean,
+                default:true
+            },
+            showRightButton:{
+                type:Boolean,
+                default:false
+            }
+        },
+		methods: {
+			init() {
+				this.loadDefaultKeyword();
+				this.loadOldKeyword();
+				this.loadHotKeyword();
+
+			},
+			blur(){
+				uni.hideKeyboard()
+			},
+			//加载默认搜索关键字
+			loadDefaultKeyword() {
+				//定义默认搜索关键字，可以自己实现ajax请求数据再赋值,用户未输入时，以水印方式显示在输入框，直接不输入内容搜索会搜索默认关键字
+				this.defaultKeyword = "请输入关键字";
+			},
+			//加载历史搜索,自动读取本地Storage
+			loadOldKeyword() {
+				uni.getStorage({
+					key: 'OldKeys',
+					success: (res) => {
+						var OldKeys = JSON.parse(res.data);
+						this.oldKeywordList = OldKeys;
+					}
+				});
+			},
+			//加载热门搜索
+			loadHotKeyword() {
+				//定义热门搜索关键字，可以自己实现ajax请求数据再赋值
+				this.$Request.post(this.$api.home.getsearchdata,{}).then(res => {
+					console.log(res.data);
+					if (res.code == "0000") {
+						this.hotKeywordList = res.data;
+					}
+				})	
+				
+			}, 
+			//监听输入
+			inputChange(event) {
+				//兼容引入组件时传入参数情况
+				var keyword = event.detail?event.detail.value:event;
+				if (!keyword) {
+					this.keywordList = [];
+					this.isShowKeywordList = false;
+					return;
+				}
+				this.isShowKeywordList = true;
+				//以下示例截取淘宝的关键字，请替换成你的接口
+				uni.request({
+					url: 'https://suggest.taobao.com/sug?code=utf-8&q=' + keyword, //仅为示例
+					success: (res) => {
+						this.keywordList = this.drawCorrelativeKeyword(res.data.result, keyword);
+					}
+				});
+			},
+			//高亮关键字
+			drawCorrelativeKeyword(keywords, keyword) {
+				var len = keywords.length,
+					keywordArr = [];
+				for (var i = 0; i < len; i++) {
+					var row = keywords[i];
+					//定义高亮#9f9f9f
+					var html = row[0].replace(keyword, "<span style='color: #fd4a5f;'>" + keyword + "</span>");
+					html = '<div>' + html + '</div>';
+					var tmpObj = {
+						keyword: row[0],
+						htmlStr: html
+					};
+					keywordArr.push(tmpObj)
+				}
+				return keywordArr;
+			},
+			//顶置关键字
+			setkeyword(data) {
+				this.keyword = data.keyword;
+			},
+			//清除历史搜索
+			oldDelete() {
+				uni.showModal({
+					content: '确定清除历史搜索记录？',
+					success: (res) => {
+						if (res.confirm) {
+							//console.log('用户点击确定');
+							this.oldKeywordList = [];
+							uni.removeStorage({
+								key: 'OldKeys'
+							});
+						} else if (res.cancel) {
+							//console.log('用户点击取消');
+						}
+					}
+				});
+			},
+			//热门搜索开关
+			hotToggle() {
+				this.forbid = this.forbid ? '' : '_forbid';
+			},
+			//执行搜索
+			doSearch(key) {
+				key = key ? key : this.keyword ? this.keyword : this.defaultKeyword;
+				this.keyword = key;
+				this.saveKeyword(key); //保存为历史 
+				uni.reLaunch({
+					url: '/pages/news/index?keywords=' + key +'moduleid='+moduleid,
+				})
+// 				uni.showToast({ 
+// 					title: key,
+// 					icon: 'none',
+// 					duration: 2000
+// 				});
+				//以下是示例跳转淘宝搜索，可自己实现搜索逻辑
+				//#ifdef APP-PLUS
+				//plus.runtime.openURL(encodeURI('taobao://s.taobao.com/search?q=' + key));
+				
+				//#endif
+				//#ifdef H5 
+				window.location.href = 'taobao://s.taobao.com/search?q=' + key
+				//#endif
+			},
+			//保存关键字到历史记录
+			saveKeyword(keyword) {
+				uni.getStorage({
+					key: 'OldKeys',
+					success: (res) => {
+						//console.log(res.data);
+						var OldKeys = JSON.parse(res.data);
+						var findIndex = OldKeys.indexOf(keyword);
+						if (findIndex == -1) {
+							OldKeys.unshift(keyword);
+						} else {
+							OldKeys.splice(findIndex, 1);
+							OldKeys.unshift(keyword);
+						}
+						//最多10个纪录
+						OldKeys.length > 10 && OldKeys.pop();
+						uni.setStorage({
+							key: 'OldKeys',
+							data: JSON.stringify(OldKeys)
+						});
+						this.oldKeywordList = OldKeys; //更新历史搜索
+					},
+					fail: (e) => {
+						var OldKeys = [keyword];
+						uni.setStorage({
+							key: 'OldKeys',
+							data: JSON.stringify(OldKeys)
+						});
+						this.oldKeywordList = OldKeys; //更新历史搜索
+					}
+				});
+			}
 		}
 	}
-};
 </script>
-
 <style>
-.swiper {
-	height: 100%;
-}
-.help-tips {
-	font-size: 13px;
-	color: #999;
-	line-height: 26px;
-	padding: 0 0 0 30px;
-	margin: 0;
-	width: 80%;
-	text-align: left;
-}
-.help-tips.color999 {
-	color: #999999;
-}
-.search-default {
-	text-align: center;
-	height: 200px;
-	margin: auto;
-}
-.search-default image {
-	display: block;
-	margin: auto;
-	width: 80%;
-}
-.search-cat {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	padding-top: 130px;
-	width: 100%;
-	height: 100%;
-	padding-bottom: 11px;
-	background-color: #fff;
-}
-.search-cat .search-cat-tit {
-	position: relative;
-	width: 150px;
-	height: 10px;
-	margin: 13px 3% 20px;
-}
-.search-cat .search-cat-tit .up-menu {
-	display: block;
-	height: 20px;
-	line-height: 20px;
-	font-size: 0.9em;
-	color: #999;
-}
-.src-content {
-	margin: 20px 0 30px;
-	width: 97%;
-}
-.main-src .src-item {
-	float: left;
-	border-radius: 22px;
-	padding: 0 10px;
-	height: 23px;
-	line-height: 23px;
-	background-color: #f6f6f6;
-	margin: 10px;
-	position: relative;
-	font-size: 13px;
-	color: #333;
-}
-.main-title {
-	height: 130px;
-}
-.main-title {
-	background: -moz-linear-gradient(left, #fa4dbe 0, #fbaa58 100%);
-	background: -webkit-gradient(
-		linear,
-		left top,
-		left right,
-		color-stop(0, #fa4dbe),
-		color-stop(100%, #fbaa58)
-	);
-	background: -webkit-linear-gradient(left, #fa4dbe 0, #fbaa58 100%);
-	background: -o-linear-gradient(left, #fa4dbe 0, #fbaa58 100%);
-	background: -ms-linear-gradient(left, #fa4dbe 0, #fbaa58 100%);
-	background: linear-gradient(to left, #fa4dbe 0, #fbaa58 100%);
-	border-bottom-color: transparent;
-	padding: 8px 10px;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: 120;
-	display: block;
-	box-sizing: border-box;
-}
-.search-pop .search-tab {
-	margin: 5px 0 10px;
-	color: #fff;
-	font-size: 15px;
-	text-align: center;
-	/* #ifdef APP-PLUS */
-	padding-top: var(--status-bar-height);
-	/* #endif */
-}
-.search-pop .search-tab .my-sub-src {
-	margin: 0 auto 0 20px;
-	display: inline-block;
-	color: #fff;
-	line-height: 30px;
-	margin-bottom: 10px !important;
-}
-.search-pop .search-tab .my-sub-src:nth-child(1) {
-	margin-left: 0px !important;
-}
-.main-title .search-tab .cur {
-	opacity: 1;
-	border-bottom: 1px solid #fff;
-}
-.main-title .search-tab .close-src {
-	position: absolute;
-	left: 20px;
-	display: block;
-	float: left;
-	color: #ffffff;
-	margin-top: 15px;
-}
-.main-title .search-tab .close-src .iconfont {
-	font-size: 20px;
-}
-.main-title .search {
-	background-color: #fff;
-	border-radius: 20px;
-	width: 76%;
-	margin-left: 12%;
-	position: relative;
-	padding: 0 9px;
-	height: 32px;
-	line-height: 32px;
-	font-size: 13px;
-	margin-top: 10px;
-}
-.search_submit {
-	width: 25%;
-	height: 32px;
-	background: #ffb925;
-	color: #fff;
-	float: right;
-	margin-top: -32px;
-	position: relative;
-	border-radius: 15px;
-	margin-right: -20px;
-	z-index: 30;
-}
-.main-title .search input {
-	border: none;
-	outline: 0;
-	height: 32px;
-	font-size: 13px;
-	line-height: 30px;
-	background: #fff;
-	color: #666;
-	border-radius: 5px;
-	padding: 0 0 0 5px;
-	text-align: left;
-}
-.main-title .search input.search_area {
-	background-color: transparent;
-	position: relative;
-	z-index: 99;
-	width: 80%;
-	color: #333;
-	font-size: 12px;
-}
+	.top-view{width: 100%;position: fixed;top: 0;}
+	.search-box {width:95%;background-color:rgb(242,242,242);padding:7.5px 2.5%;display:flex;justify-content:space-between;}
+	.search-box .input-box {width:85%;flex-shrink:1;display:flex;justify-content:center;align-items:center;}
+	.search-box .search-btn {width:15%;margin:0 0 0 2%;display:flex;justify-content:center;align-items:center;flex-shrink:0;font-size:14px;color:#fff;background:linear-gradient(to right,#fd4a5f,#f00);border-radius:30px;}
+	.search-box .input-box>input {width:100%;height:30px;font-size:16px;border:0;border-radius:30px;-webkit-appearance:none;-moz-appearance:none;appearance:none;padding:0 3%;margin:0;background-color:#ffffff;}
+	.placeholder-class {color:#9e9e9e;}
+	.search-keyword {width:100%;background-color:rgb(242,242,242);}
+	.keyword-list-box {height:calc(100vh - 55px);padding-top:5px;border-radius:10px 10px 0 0;background-color:#fff;}
+	.keyword-entry-tap {background-color:#eee;}
+	.keyword-entry {width:94%;height:40px;margin:0 3%;font-size:15px;color:#333;display:flex;justify-content:space-between;align-items:center;border-bottom:solid 1px #e7e7e7;}
+	.keyword-entry image {width:30px;height:30px;}
+	.keyword-entry .keyword-text,.keyword-entry .keyword-img {height:40px;display:flex;align-items:center;}
+	.keyword-entry .keyword-text {width:90%;}
+	.keyword-entry .keyword-img {width:10%;justify-content:center;}
+	.keyword-box {height:calc(100vh - 55px);border-radius:10px 10px 0 0;background-color:#fff;}
+	.keyword-box .keyword-block {padding:5px 0;}
+	.keyword-box .keyword-block .keyword-list-header {width:94%;padding:5px 3%;font-size:13.5px;color:#333;display:flex;justify-content:space-between;}
+	.keyword-box .keyword-block .keyword-list-header image {width:20px;height:20px;}
+	.keyword-box .keyword-block .keyword {width:94%;padding:3px 3%;display:flex;flex-flow:wrap;justify-content:flex-start;}
+	.keyword-box .keyword-block .hide-hot-tis {display:flex;justify-content:center;font-size:14px;color:#6b6b6b;}
+	.keyword-box .keyword-block .keyword>view {display:flex;justify-content:center;align-items:center;border-radius:30px;padding:0 10px;margin:5px 10px 5px 0;height:30px;font-size:14px;background-color:rgb(242,242,242);color:#6b6b6b;}
 </style>

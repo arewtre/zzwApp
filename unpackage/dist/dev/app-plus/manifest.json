@@ -40,7 +40,7 @@
     "statusbar": {
       "immersed": "supportedDevice",
       "style": "light",
-      "background": "#2F85FC"
+      "background": "#fc2c5d"
     },
     "distribute": {
       "icons": {

@@ -10,11 +10,11 @@
     			<view class="title">{{item.title}}
 					<text class="title2">{{item.introduce}}</text>
 				</view>
-    			<view class="num s-row">
-    				<cmd-icon type="star" size="15" color="#aaa"></cmd-icon><text class="tmprice">{{item.catname}}</text>
-    				<cmd-icon type="eye" size="15" color="#aaa"></cmd-icon><text class="tmprice">{{item.hits}}</text>
-    				<cmd-icon type="user" size="15" color="#aaa"></cmd-icon><text class="tmprice">{{item.username}}</text>
-    				<cmd-icon type="clock" size="15" color="#aaa"></cmd-icon><text class="volume">{{item.addtime}}</text>
+    			<view class="num s-row">					
+    				<text class="tmprice">{{item.catname}}</text>
+					<text class="tmprice">{{item.username}}</text>
+    				<text class="tmprice">{{item.hits}}次浏览</text>
+    				<text class="volume">{{item.addtime}}</text>
     			</view>
     			
     		</view>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-	import cmdIcon from "@/components/cmd-icon/cmd-icon.vue";
+	// import cmdIcon from "@/components/cmd-icon/cmd-icon.vue";
     export default {
         props: {
             data: {
@@ -34,7 +34,7 @@
             }
         },
 		components: {
-			cmdIcon,
+			// cmdIcon,
 		},
         computed: {
             

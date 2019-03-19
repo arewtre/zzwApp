@@ -7,7 +7,8 @@
 	position: fixed;
 	z-index: 160;
 	border-bottom: solid 1px #ddd;
-	background: linear-gradient(to left, #FA4DBE 0, #FBAA58 100%);
+	/* background: linear-gradient(to left, #FA4DBE 0, #FBAA58 100%); */
+	background:#fc2c5d;
 	/* background: rgba(255,255,255,.9); */
 	border-bottom-color: transparent;
 	-webkit-transition: all .4s ease 0s;

@@ -4,7 +4,7 @@
 		<!-- 搜索板块 -->
 		<view class="index-header">
 			<view class="icon_header">
-				<view class="logo"><image src="/static/img/logo.jpg" mode="widthFix"></image></view>
+				<view class="logo"><image src="/static/img/logo.jpg" mode="widthFix" lazy-load="true"></image></view>
 				<view class="index-search" @tap="toSearchIndex">
 					<view class="icon_search">
 						<text class="iconfont icon-search"></text>
@@ -24,7 +24,7 @@
 				<swiper class="swiper-container" :autoplay="true" :interval="4000" :circular="true">
 					<block v-for="(item,index) in banner" :key="index">
 						<swiper-item class="swiper-wrapper swi"  @click="gpToDetail(item)">
-							<image :src="item.thumb" mode="widthFix"></image>
+							<image :src="item.thumb" mode="widthFix" lazy-load="true"></image>
 							{{item.title}}
 							<view class="tit">{{item.title}}</view>
 						</swiper-item>
@@ -49,7 +49,7 @@
 		<view class="home_ant_juhuasuan has-bg-white" v-if="zhuantidatalist.length > 0">
 			<view class="juhuasuan-tab s-row">
 				<text class="fl-jutext">热点专题</text>
-				<text class="fr-jutext">查看更多热点专题</text>
+				<text class="fr-jutext">更多热点</text>
 			</view>
 			<swiper class="imageContainer" previous-margin="60rpx" next-margin="60rpx" circular  autoplay>
 				<block v-for="(item,index) in zhuantidatalist" :key="index">
@@ -65,7 +65,7 @@
 		<view class="index-coupon has-bg-white has-pd-10">
 			<view class="coupon-tab s-row">
 				<text class="fl-jutext">热门资讯</text>
-				<text class="fr-jutext">更多热门资讯</text>
+				<text class="fr-jutext">更多热门</text>
 			</view>
 			<news-list :data="zixundatalist"></news-list>
 		</view>
@@ -75,7 +75,7 @@
 		<view class="index-coupon has-bg-white has-pd-10">
 			<view class="coupon-tab s-row">
 				<text class="fl-jutext">视点</text>
-				<text class="fr-jutext">更多视点资讯</text>
+				<text class="fr-jutext">更多视点</text>
 			</view>
 			<news-list :data="shidiantidatalist"></news-list>
 		</view>
@@ -229,23 +229,15 @@
 					icon: "none"
 				});
 			},
-			toGoodsInfo: function(itemid) {
-				uni.navigateTo({
-					url:"/pages/detail/goodsinfo?itemid="+itemid,
-				})
-			},
 			toSearchIndex:function(){
 				uni.navigateTo({
 					url:"/pages/search/index"
 				})
 			},
 			toZujiIndex:function(){
-				uni.showToast({
-					title: "去会员页面",
-					mask: false,
-					duration: 1500,
-					icon: "none"
-				});
+				uni.switchTab({
+					url:"/pages/ucenter/ucenter"
+				})
 			},
 			getSydata:function(moduleid,catid,pagesize){
 				this.$Request.post(this.$api.home.sydata,{moduleid:moduleid,catid:catid,pagesize:pagesize}).then(res => {
@@ -278,8 +270,13 @@
 				
 			},
 		},
+		onLoad:function(){
+			uni.showLoading({
+				title: '玩命加载中..'
+			});
+		},
 		onReady:function(){
-			this.loadCouponList();
+			uni.hideLoading();
 		},
 		onLoad: function(Refresh) {
 			this.loadBanner(Refresh);

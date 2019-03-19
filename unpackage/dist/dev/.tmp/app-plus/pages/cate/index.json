@@ -5,8 +5,8 @@
   "titleNView": {
     "searchInput": {
       "borderRadius": "10px",
-      "placeholder": "你好啊点击搜索啊",
-      "placeholderColor": "#FD575C"
+      "placeholder": "请输入关键字搜索",
+      "placeholderColor": "#fff"
     },
     "buttons": [
       {

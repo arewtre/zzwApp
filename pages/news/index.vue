@@ -45,10 +45,12 @@
 				tabIndex: 0,
 				tabBars: [],
 				moduleid:"",
+				keywords:""
 			}
 		},
 		onLoad: function(event) {
 			this.moduleid = event.moduleid;
+			this.keywords = event.keywords;
 			this.loadNavList();
 			// 初始化列表信息
 		},
@@ -199,7 +201,8 @@
 	}
 
 	.uni-tab-bar .active {
-		color: #007AFF;
+		color: #fc2c5d;
+		
 	}
 
 	.uni-tab-bar .swiper-box {

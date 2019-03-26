@@ -54,15 +54,7 @@
 			uniMediaList
 		},
 		created() {
-			// 初始化列表信息
-// 			setTimeout(() => {
-//                 uni.getStorage({
-//                     key:'newsmoduleid',
-//                     success: (res) => {
-// 					   this.loadNavList(res.data);
-//                     }
-//                 })
-//             },200)
+			
 			this.loadNavList();
 		},
 		methods: {
@@ -116,6 +108,7 @@
 									source: news.editor,
 									comment_count: news.hits,
 									post_id: news.catid,
+									linkurl: news.linkurl,
 									catname: news.catname
 								};
 							});
@@ -137,9 +130,16 @@
 				});
 			},
 			goDetail(e) {
+				uni.setStorage({
+					key: 'urlSpecia',
+					data: e.linkurl,
+					success: function () {
+						console.log('success');
+					}
+				});
 				uni.navigateTo({
 					//url: '/pages/detail/detail?query=' + encodeURIComponent(JSON.stringify(detail))
-					url: '/pages/detail/detail?catid=' + e.post_id +'&itemid='+e.id
+					url: '/pages/specia/detail?catid=' + e.post_id +'&itemid='+e.id
 				});
 			},
 			dislike(tabIndex, newsIndex) {

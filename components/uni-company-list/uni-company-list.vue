@@ -3,10 +3,13 @@
         <view class="list-cell" hover-class="uni-list-cell-hover" @click="bindClick">
             <view class="media-list" v-if="data.title">
                 <view :class="['media-image-left']">
-                    <text :class="['media-title','media-title2']">
-						<view class="tt">{{data.title}}</view>
+                    <view :class="['media-title','media-title2']">
+						<view class="media-info">
+							<text class="info-text t"><image v-if="data.vip>0"class="vip" :src="vip"></image></text>
+							<text class="info-text t tit">{{data.title}}</text>
+						</view>
 						<view class="tt2">主营: {{data.business}}</view>
-					</text>
+					</view>
 					
                     <view :class="['image-section','image-section-left']">
                         <image :class="['image-list1','image-list2']" 
@@ -70,8 +73,7 @@
 </script>
 
 <style>
-	.vip{width:26upx;height:26upx}
-	.tt2{font-size: 18upx;height:80upx;overflow:hidden;lines: 2;color: #999999;text-overflow: ellipsis;}
+	
     view {
         display: flex;
         flex-direction: column;
@@ -118,7 +120,7 @@
     }
 
     .media-title2 {
-       flex: 1;
+        flex: 1;
         margin-top: 6upx;
         line-height: 40upx;
     }
@@ -198,4 +200,13 @@
         color: #999999;
         font-size: 28upx;
     }
+	.vip{width:26upx;height:26upx}
+	.tt2{font-size: 18upx;height:80upx;overflow:hidden;lines: 2;color: #999999;text-overflow: ellipsis;}
+	.tit {
+	    lines: 2;
+	    text-overflow: ellipsis;
+	    font-size: 30upx;
+	    color: #555555;
+	}
+	.t{margin-right:4upx;}
 </style>

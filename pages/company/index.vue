@@ -50,8 +50,6 @@
 		},
 		onLoad: function(event) {
 			this.moduleid = event.moduleid;
-			//this.keywords = event.keywords;
-			//console.log(event);
 			if(event.keywords!= undefined){
 				this.keywords = decodeURIComponent(event.keywords);
 			}
@@ -65,7 +63,7 @@
 					activeTab.page = 0;
 				}				
 				this.$Request.post(this.$api.company.getCompanyList,{keywords:this.keywords,moduleid:this.moduleid,catid:activeTab.cateid,page:activeTab.page}).then(res => {				
-					console.log(res);
+					//console.log(res);
 					if (res.code == "0000") {
 						const data = res.data.map((news) => {
 							return {
@@ -79,7 +77,8 @@
 								business: news.business,
 								vip: news.vip,
 								validated:news.validated,
-								catid:news.catid
+								catid:news.catid,
+								username:news.username
 							};
 						});
 						//console.log(data);
@@ -92,12 +91,12 @@
 							});
 						}
 						activeTab.page = activeTab.page+1;
-						console.log(data.length);
+						//console.log(data.length);
 						if(data.length<10){
-							console.log(data.length);
+							//console.log(data.length);
 							activeTab.loadingText="noMore"
 						}
-						console.log(activeTab);
+						//console.log(activeTab);
 			
 					}
 				})	
@@ -125,10 +124,10 @@
 				})	
 			},
 			goDetail(e) {
-				console.log();
+				console.log(e);
 				uni.navigateTo({
 					// url: '/pages/detail/detail?query=' + encodeURIComponent(JSON.stringify(detail))
-					url: '/pages/company/detail?catid=' + e.catid +'&userid='+e.userid
+					url: '/pages/company/detail?username='+e.username
 				});
 			},
 			dislike(tabIndex, newsIndex) {

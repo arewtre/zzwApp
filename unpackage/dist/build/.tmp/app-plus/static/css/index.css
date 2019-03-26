@@ -8,7 +8,8 @@
 	z-index: 160;
 	border-bottom: solid 1px #ddd;
 	/* background: linear-gradient(to left, #FA4DBE 0, #FBAA58 100%); */
-	background: rgba(255,255,255,.9);
+	background:#fc2c5d;
+	/* background: rgba(255,255,255,.9); */
 	border-bottom-color: transparent;
 	-webkit-transition: all .4s ease 0s;
 	transform-origin: center;
@@ -20,7 +21,8 @@
 
 .index-content .index-header .icon_header {
 	width: 100%;
-	line-height: 50px;
+	height:92upx;
+	line-height: 92upx;
 	position: relative;
 }
 
@@ -34,9 +36,9 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	padding-top: 8px;
-	margin: 0 60px 0 220rpx;
-	padding-bottom: 6px;
+	padding-top: 16upx;
+	margin: 0 120rpx 0 220rpx;
+	padding-bottom: 16upx;
 }
 
 .index-content .index-header .icon_header .index-search .icon_search {
@@ -47,10 +49,10 @@
 	-o-border-radius: 40upx;
 	-ms-border-radius: 40upx;
 	height: 60upx;
-	line-height: 56upx;
+	line-height: 60upx;
 	font-size: 20upx;
 	color: #ccc;
-	border:1px solid #ccc;
+	/* border:1px solid #ccc; */
 	text-align: left;
 	text-indent: 32upx;
 	position: relative;
@@ -72,11 +74,11 @@
 
 .icon_header .icon_suji {
 	position: absolute;
-	top: -6rpx;
-	width: 90upx;
+	top: 0rpx;
+	height:92upx;
 	text-align: center;
-	right: 0;
-	color: #ccc;
+	right: 30upx;
+	color: #fff;
 }
 
 .icon_header .icon_suji .icon-zuji {
@@ -88,14 +90,23 @@
 	margin-top:15upx;
 }
 .index-content .index-banner {
-	padding-top: 50px;
+	padding-top: 92upx;
+	/* #ifdef APP-PLUS */
+	width: 380upx;
+	height:380upx;
+	/* #endif */
 	width: 100%;
 }
 uni-swiper{
-	height:370rpx;
+	height:370upx;
 }
+/* #ifdef APP-PLUS */
+.swiper,.swiper-container{
+	height:100%;
+}
+/* #endif */
 .index-content .index-banner swiper-item {
-	/* height: 800px; */
+	height: 380upx;
 }
 
 .index-content .index-banner .swiper .swiper-container image {
@@ -104,7 +115,7 @@ uni-swiper{
 }
 
 .index-content .index-navlist {
-	border-bottom: 10upx solid #f2f2f2
+	border-bottom: 10upx solid #f2f2f2;
 }
 
 .index-content .index-navlist image {
@@ -295,12 +306,12 @@ uni-swiper{
 .index-content .index-coupon .goods-list .coupon-page .content .title {
 	color: #333;
 	font-weight: 400;
-	font-size: 16px;
+	font-size: 30rpx;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 5;
 	-webkit-box-orient: vertical;
-	max-height: 64px;
+	/* max-height: 128rpx; */
 	margin-bottom: 0px;
 	overflow: hidden;
 }
@@ -409,146 +420,19 @@ uni-swiper{
 	padding-left: 5px;
 }
 
-
-.index-content .index-coupon .goods-list .coupon-page .contents .title {
-	color: #333;
-	font-weight: 400;
-	font-size: 16px;
-	text-overflow: ellipsis;
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	line-height: 16px;
-	margin-bottom: 10px;
-	overflow: hidden;
-}
-.index-content .index-coupon .goods-list .coupon-page .contents .title2 {
-	text-overflow: ellipsis;
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	color: #aaa;
-    line-height: 18px;
-	height:36px;
-    font-size: 13px;
-	overflow: hidden;
-}
 .index-content .index-coupon .goods-list .coupon-page .content .title2 {
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	color: #aaa;
-    line-height: 18px;
-	height:36px;
-    font-size: 13px;
+    line-height: 36rpx;
+	/* height:36px; */
+    font-size: 26rpx;
 	overflow: hidden;
-	margin-top:12rpx;
+	margin-top:10rpx; 
 }
 
-.index-content .index-coupon .goods-list .coupon-page .contents .num {
-	color: #aaa;
-	line-height: 20px;
-	font-size: 13px;
-	padding-top: 13px;
-}
-
-.index-content .index-coupon .goods-list .coupon-page .contents .num .tmprice {
-	padding-right: 10px;
-	margin-right: 10px;
-	position: relative;
-	z-index: 1;
-	zoom: 1;
-	display: inline-block;
-}
-
-.index-content .index-coupon .goods-list .coupon-page .contents .num .volume {
-	float: right;
-
-}
-
-.index-content .index-coupon .goods-list .coupon-page .contents .money {
-	height: 24px;
-	font-size: 18px;
-	margin-top: 5px;
-}
-
-.index-content .index-coupon .goods-list .coupon-page .contents .money .quan {
-	padding: 0;
-	position: relative;
-	z-index: 1;
-	zoom: 1;
-	top: 0;
-	overflow: hidden;
-	float: right;
-}
-
-.index-content .index-coupon .goods-list .coupon-page .contents .money .quan {
-	background: -moz-linear-gradient(left, #FF5E5E 0, #FF927C 100%);
-	background: -webkit-gradient(linear, left top, left right, color-stop(0, #FF5E5E), color-stop(100%, #FF927C));
-	background: -webkit-linear-gradient(left, #FF5E5E 0, #FF927C 100%);
-	background: -o-linear-gradient(left, #FF5E5E 0, #FF927C 100%);
-	background: -ms-linear-gradient(left, #FF5E5E 0, #FF927C 100%);
-	background: linear-gradient(to left, #FF5E5E 0, #FF927C 100%);
-	position: relative;
-	z-index: 1;
-	zoom: 1;
-	font-style: normal;
-	display: block;
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	-o-border-radius: 3px;
-	-ms-border-radius: 3px;
-	font-size: .785rem;
-	min-width: 3rem;
-	text-align: center;
-	padding: 1px 10px;
-	color: #fff;
-}
-
-.index-content .index-coupon .goods-list .coupon-page .contents .money .quan:before {
-	position: absolute;
-	z-index: 1;
-	zoom: 1;
-	top: 50%;
-	margin-top: -3px;
-	background: #fff;
-	display: block;
-	width: 5px;
-	height: 5px;
-	content: "";
-	border-radius: 10px;
-	border: 1px solid #fff;
-	left: auto;
-	right: -4px;
-}
-
-.index-content .index-coupon .goods-list .coupon-page .contents .money .quan:after {
-	position: absolute;
-	z-index: 1;
-	zoom: 1;
-	top: 50%;
-	margin-top: -3px;
-	background: #fff;
-	display: block;
-	width: 5px;
-	height: 5px;
-	content: "";
-	border-radius: 10px;
-	border: 1px solid #fff;
-	left: -4px;
-}
-
-.index-content .index-coupon .goods-list .coupon-page .contents .money .coupon-price {
-	color: #FC4D52;
-	font-size: 12px;
-}
-
-.index-content .index-coupon .goods-list .coupon-page .contents .money .coupon-price text {
-	font-size: 16px;
-	padding-left: 5px;
-}
 
 /*
 ** 商品详情

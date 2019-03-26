@@ -7,8 +7,7 @@
 				</div>
 			</uni-tab-bar>
 			<uni-tab-content>
-				<list class="list" v-for="(tabItem, tabIndex) in newsList" :key="tabIndex" @loadmore="loadMore(tabIndex)"
-				 loadmoreoffset="10">
+				<list class="list" v-for="(tabItem, tabIndex) in newsList" :key="tabIndex" @loadmore="loadMore(tabIndex)" loadmoreoffset="10">
 					<refresh class="refresh" @refresh="onRefresh" @pullingdown="onPullingDown" :display="refreshing ? 'show' : 'hide'">
 						<text class="refresh-text">{{refreshText}}</text>
 					</refresh>
@@ -28,7 +27,7 @@
 	import uniTabContent from '@/components/uni-tab-content/uni-tab-content.nvue';
 	import uniTabBar from '@/components/uni-tab-bar/uni-tab-bar.nvue';
 	import uniTabs from '@/components/uni-tabs/uni-tabs.nvue';
-	import uniMediaList from '@/components/uni-media-list/uni-media-list.nvue';
+	import uniMediaList from '@/components/uni-company-list/uni-company-list.nvue';
 
 	import {
 		friendlyDate
@@ -70,7 +69,7 @@
 				this.moduleid = moduledid;
 				uni.request({
 					url: 'http://47.100.48.1/api/member/getData.php?ac=newscatedata',
-					data: {moduleid:moduledid,forom:"app1"},
+					data: {moduleid:moduledid},
 					method:"POST",
 					success: (res) => {
 						var result = res.data;
@@ -100,24 +99,26 @@
 					activeTab.page = 0;
 				}
 				uni.request({
-					url: 'http://47.100.48.1/api/member/getData.php?ac=newsmoduledata',
+					url: 'http://47.100.48.1/api/member/company.php',
 					data: {moduleid:this.moduleid,cateid:activeTab.cateid,page:activeTab.page},
 					method:"POST",
 					success: (res) => {
+						//console.log(res);
 						var result = res.data;
 						if (result.code == "0000") {
-							
 							const data = result.data.map((news) => {
 								return {
-									id: news.itemid,
+									id: news.userid,
 									article_type: 1,
-									datetime: friendlyDate(news.addtime),
-									title: news.title,
+									title: news.company,
 									image_url: news.thumb,
-									source: news.editor,
-									comment_count: news.hits,
-									post_id: news.catid,
-									catname: news.catname
+									areaid: news.areaid,
+									mode: news.mode,
+									business: news.business,
+									vip: news.vip,
+									validated:news.validated,
+									catid:news.catid,
+									username:news.username
 								};
 							});
 							
@@ -139,8 +140,8 @@
 			},
 			goDetail(e) {
 				uni.navigateTo({
-					//url: '/pages/detail/detail?query=' + encodeURIComponent(JSON.stringify(detail))
-					url: '/pages/detail/detail?catid=' + e.post_id +'&itemid='+e.id
+					// url: '/pages/detail/detail?query=' + encodeURIComponent(JSON.stringify(detail))
+					url: '/pages/company/detail?username='+e.username
 				});
 			},
 			dislike(tabIndex, newsIndex) {

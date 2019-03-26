@@ -73,6 +73,7 @@
 								source: news.editor,
 								comment_count: news.hits,
 								post_id: news.catid,
+								linkurl: news.linkurl,
 								catname: news.catname
 							};
 						});
@@ -94,7 +95,7 @@
 			loadNavList: function(Refresh) {				
 				this.$Request.post(this.$api.home.newscatedata,{moduleid:this.moduleid,isSpecia:1}).then(res => {
 					if (res.code == "0000") {
-						console.log(res);
+						//console.log(res);
 						this.tabBars = res.data;
 						uni.setNavigationBarTitle({
 							title: res.data[0].name
@@ -114,10 +115,11 @@
 				})	
 			},
 			goDetail(e) {
-				console.log();
+				console.log(e);
+				uni.setStorageSync('urlSpecia',  e.linkurl);
 				uni.navigateTo({
 					// url: '/pages/detail/detail?query=' + encodeURIComponent(JSON.stringify(detail))
-					url: '/pages/detail/detail?catid=' + e.post_id +'&itemid='+e.id
+					url: '/pages/specia/detail?catid=' + e.post_id +'&itemid='+e.id
 				});
 			},
 			dislike(tabIndex, newsIndex) {

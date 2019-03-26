@@ -44,7 +44,8 @@
 				newsList: [],
 				tabIndex: 0,
 				tabBars: [],
-				moduleid:""
+				moduleid:"",
+				keywords:""
 			}
 		},
 		components: {
@@ -54,14 +55,37 @@
 			uniMediaList
 		},
 		created() {
+			
 			// 初始化列表信息
-			setTimeout(() => {
+			setTimeout(() => {	
+				
+// 				const globalEvent = weex.requireModule('globalEvent');
+// 							globalEvent.addEventListener("plusMessage", e => {
+							    // console.log(JSON.stringify(e.data));
+				//官方通信方式有BUG,此处改由缓存实现				
+								//uni.setStorageSync('mmdata',  e.data);
+				// 			    if (e.data.moduleid) { 
+				// 			        this.moduleid = e.data.moduleid;
+				// 					this.loadNavList(this.moduleid);
+				// 			    }
+				// 				if (e.data.keywords) {
+				// 				    this.keywords = e.data.keywords;
+				// 				}
+							// });
+				uni.getStorage({
+					key:'cateKeywords',
+					success: (res) => {
+					   this.keywords = res.data;
+					   console.log(JSON.stringify(res.data));
+					}
+				})
                 uni.getStorage({
                     key:'newsmoduleid',
                     success: (res) => {
 					   this.loadNavList(res.data);
                     }
                 })
+				
             },200)
 			
 		},
@@ -70,7 +94,7 @@
 				this.moduleid = moduledid;
 				uni.request({
 					url: 'http://47.100.48.1/api/member/getData.php?ac=newscatedata',
-					data: {moduleid:moduledid,forom:"app1"},
+					data: {moduleid:moduledid},
 					method:"POST",
 					success: (res) => {
 						var result = res.data;
@@ -87,7 +111,7 @@
 								loadingText: '加载中...'
 							});
 						});
-						console.log(this.newsList);
+						//console.log(this.newsList);
 						this.getList(this.moduleid);
 					}
 					}
@@ -101,13 +125,14 @@
 				}
 				uni.request({
 					url: 'http://47.100.48.1/api/member/getData.php?ac=newsmoduledata',
-					data: {moduleid:this.moduleid,cateid:activeTab.cateid,page:activeTab.page},
+					data: {keywords:this.keywords,moduleid:this.moduleid,cateid:activeTab.cateid,page:activeTab.page},
 					method:"POST",
 					success: (res) => {
 						var result = res.data;
-						if (result.code == "0000") {
-							
+						 
+						if (result.code == "0000") {							
 							const data = result.data.map((news) => {
+								console.log(JSON.stringify(news));
 								return {
 									id: news.itemid,
 									article_type: 1,
@@ -117,8 +142,10 @@
 									source: news.editor,
 									comment_count: news.hits,
 									post_id: news.catid,
-									catname: news.catname
+									catname: news.catname,
+									type:this.keywords!=""?1:0
 								};
+								
 							});
 							
 							if (action === 1) {
@@ -133,6 +160,12 @@
 							if(data.length<10){
 								this.newsList.loadingText  =  '没有更多数据了';								
 							}
+							uni.removeStorage({
+								key: 'cateKeywords',
+								success: function (res) {
+									//console.log('success');
+								}
+							});
 						}
 					}
 				});

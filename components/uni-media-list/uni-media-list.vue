@@ -3,7 +3,8 @@
         <view class="list-cell" hover-class="uni-list-cell-hover" @click="bindClick">
             <view class="media-list" v-if="data.title">
                 <view :class="[isImgRight?'media-image-right':'',isImgLeft?'media-image-left':'']">
-                    <text :class="['media-title',isImgRight||isImgLeft?'media-title2':'']">{{data.title}}</text>
+                    <!-- <text :class="['media-title',isImgRight||isImgLeft?'media-title2':'']">{{data.title}}</text> -->
+					<rich-text :nodes="data.title" :class="['media-title',isImgRight||isImgLeft?'media-title2':'']"></rich-text>
                     <view v-if="showImg" :class="['image-section',isImgRight?'image-section-right':'',isImgLeft?'image-section-left':'']">
                         <image :class="['image-list1',isImgRight||isImgLeft?'image-list2':'']" v-if="data.image_url"
                             :src="data.image_url"></image>
@@ -131,7 +132,7 @@
 
     .image-section-left {
         margin-top: 0upx;
-        margin-right: 10upx;
+        margin-right: 16upx;
         width: 225upx;
         height: 146upx;
     }

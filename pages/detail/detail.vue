@@ -11,6 +11,7 @@
 		</view>
 		<view class="article-content">
 			<rich-text :nodes="content.content"></rich-text>
+			<!-- <wxParse :content="content.content" @preview="preview" @navigate="navigate" /> -->
 		</view>
 	</view>
 </template>
@@ -18,6 +19,7 @@
 <script>
 	const FAIL_CONTENT = '<p>获取信息失败</p>';
 	import cmdIcon from "@/components/cmd-icon/cmd-icon.vue";
+	import wxParse from '@/components/wxParse/wxParse';
 	export default {
 		data() {
 			return {
@@ -29,6 +31,7 @@
 		},
 		components: { 
 			cmdIcon,
+			wxParse
 		},
 		onShareAppMessage() {
 			return {
@@ -120,7 +123,8 @@
 						title: '加载中'
 					});
 					this.$Request.post(this.$api.home.newsdata,{catid:this.catid,itemid:this.itemid}).then(res => {
-						console.log(res.data);
+						// console.log(res.data);
+						//console.log(JSON.stringify(res.data));
 						if (res.code == "0000") {
 							this.content = res.data;
 							uni.setNavigationBarTitle({
@@ -139,13 +143,22 @@
 </script>
 
 <style>
+	.wxParse{width:100%}
+	.wxParse uni-image{width:100% !important;}
+	.wxParse .img {
+		display: inline-block;
+		width: 0;
+		height: 0;
+		max-width: 100%;
+		overflow: hidden;
+	}
 	.banner {
 		height: 360upx;
 		overflow: hidden;
 		position: relative;
 		background-color: #ccc;
 	}
-	
+	/* .MsoNormalTable{width:750upx !important;} */
 	.banner-img {
 		width: 100%;
 	}
@@ -193,7 +206,7 @@
 		margin-bottom: 30upx;
 	}
 	
-	.article-content img{
+	div img{
 		width:100%;
 	}
 	.cmd-icon{

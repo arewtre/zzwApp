@@ -151,6 +151,9 @@ export default {
 		width:20%;
 		text-align:center;
 	}
+	.icon-serach{
+		margin-top:4upx;
+	}
 	.serachBtn {
 		height: 100%;
 		flex-shrink: 0;
@@ -178,6 +181,9 @@ export default {
 .serach {
 	display: flex;
 	width: 100%;
+	/* #ifdef APP-PLUS */
+	padding-top: 16upx;
+	/* #endif */
 	//border-bottom: 1px #f5f5f5 solid; //HM修改 去掉边框
 	box-sizing: border-box;
 	font-size: $uni-font-size-base;
@@ -211,7 +217,7 @@ export default {
 				max-width: 100%;
 				line-height: 60upx;
 				height: 60upx;
-				font-size:20upx;
+				font-size:24upx;
 				transition: all 0.2s linear;
 				&.center {
 					width: 200upx;

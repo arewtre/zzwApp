@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/like/index",
+    "pages/cate/index",
     "pages/ucenter/ucenter",
     "pages/detail/detail",
     "pages/search/index",
@@ -9,7 +9,10 @@
     "pages/login/login",
     "pages/find-pwd/find-pwd",
     "pages/reg/reg",
-    "pages/reg-pwd/reg-pwd"
+    "pages/reg-pwd/reg-pwd",
+    "pages/company/detail",
+    "pages/company/introduce",
+    "pages/company/news"
   ],
   "subPackages": [],
   "window": {
@@ -44,7 +47,7 @@
         "text": "分类"
       },
       {
-        "pagePath": "pages/like/index",
+        "pagePath": "pages/datas/index",
         "iconPath": "static/img/foot/data2.png",
         "selectedIconPath": "static/img/foot/data2-act.png",
         "text": "数据"
@@ -59,15 +62,41 @@
   },
   "nvue": {
     "pages": {
-      "pages/specia/index.html": {
+      "pages/company/index.html": {
         "window": {
-          "navigationBarTitleText": "专题",
+          "navigationBarTitleText": "公司列表",
+          "navigationStyle": "custom",
           "bounce": "none",
           "titleNView": {
             "searchInput": {
               "borderRadius": "10px",
               "placeholder": "请输入关键字搜索",
-              "placeholderColor": "#fff"
+              "placeholderColor": "#fff",
+              "font-size": "13px"
+            },
+            "buttons": [
+              {
+                "text": "",
+                "float": "left"
+              },
+              {
+                "type": "menu"
+              }
+            ]
+          }
+        }
+      },
+      "pages/specia/index.html": {
+        "window": {
+          "navigationBarTitleText": "专题",
+          "navigationBarTextStyle": "white",
+          "bounce": "none",
+          "titleNView": {
+            "searchInput": {
+              "borderRadius": "10px",
+              "placeholder": "请输入关键字搜索",
+              "placeholderColor": "#fff",
+              "font-size": "13px"
             },
             "buttons": [
               {
@@ -90,7 +119,8 @@
             "searchInput": {
               "borderRadius": "10px",
               "placeholder": "请输入关键字搜索",
-              "placeholderColor": "#fff"
+              "placeholderColor": "#fff",
+              "font-size": "13px"
             },
             "buttons": [
               {
@@ -104,27 +134,12 @@
           }
         }
       },
-      "pages/cate/index.html": {
+      "pages/datas/index.html": {
         "window": {
-          "navigationBarTitleText": "分类",
+          "navigationBarTitleText": "数据",
           "navigationStyle": "custom",
-          "bounce": "none",
-          "titleNView": {
-            "searchInput": {
-              "borderRadius": "10px",
-              "placeholder": "请输入关键字搜索",
-              "placeholderColor": "#fff"
-            },
-            "buttons": [
-              {
-                "text": "",
-                "float": "left"
-              },
-              {
-                "type": "menu"
-              }
-            ]
-          }
+          "titleNView": false,
+          "bounce": "none"
         }
       }
     }
@@ -133,5 +148,5 @@
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
-  "appname": "news"
+  "appname": "中纸资讯"
 }

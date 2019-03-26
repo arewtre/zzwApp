@@ -1,8 +1,24 @@
-<import src="/components/simple-pro/customModal.vue.wxml" />
+<import src="/components/uni-notice-bar/uni-notice-bar.vue.wxml" />
+<import src="/components/newslist/newslist.vue.wxml" />
 <import src="/components/cmd-icon/cmd-icon.vue.wxml" />
+<import src="/components/mehaotian-search-revision/mehaotian-search-revision.vue.wxml" />
+<import src="/components/wxParse/wxParse.vue.wxml" />
+<import src="/components/uni-icon/uni-icon.vue.wxml" />
+<import src="/components/uni-status-bar/uni-status-bar.vue.wxml" />
 <import src="/common/slots.wxml" />
-
-<template name="768c8e40-default-768c8e40-1"><view class="_view 768c8e40 buy-box-title">复制分享文案</view><view class="_view 768c8e40 buy-box-center"><view class="_view 768c8e40 code-cent"><view class="_div 768c8e40 cente-text"><view class="_div 768c8e40"><view class="_view 768c8e40 textarea">星火英语四级真题详解+标准预测试卷<view class="_br 768c8e40"></view>【原价】36.8元<view class="_br 768c8e40"></view>【券后】16.8元<view class="_br 768c8e40"></view>【复制此信息打开手机淘宝即可查看并下单】￥ECAybu9BU41￥<view class="_br 768c8e40"></view>【必买理由】分册定装，刷题方便，练习更轻松又高效，含10套真题+10套听力+5套预测+口语宝典+高频词汇卡等，独家app刷题好搭档，助你轻松过关【赠运费险】！</view></view></view><view class="_view 768c8e40 closeTips">点击非内容区域关闭弹窗~</view></view><view class="_view 768c8e40 buy-btn-copy {{[copyTklStatus ? 'active' : '', '']}}" bindtap="handleProxy" data-eventid="{{'768c8e40-10'}}" data-comkey="{{$k}}">{{copyTklStatus?"复制成功":"一键复制"}}</view></view></template>
-
-<template name="768c8e40-default-768c8e40-2"><view class="_view 768c8e40 buy-box-center"><view class="_view 768c8e40 code-cent" style="margin-top: 10px;"><view class="_div 768c8e40 cente-text" style="height: auto;"><view class="_div 768c8e40"><view class="_view 768c8e40 textarea" style="height: auto;">复制框内整段文字，打开【手淘APP】即可领券购买。￥ECAybu9BU41￥</view></view></view></view><view class="_view 768c8e40 buy-btn-copy {{[copyTklStatus ? 'active' : '', '']}}" bindtap="handleProxy" data-eventid="{{'768c8e40-12'}}" data-comkey="{{$k}}">{{copyTklStatus?"复制成功":"一键复制"}}</view></view></template>
+<import src="/components/wxParse/components/wxParseTemplate0.vue.wxml" />
+<import src="/components/wxParse/components/wxParseTemplate1.vue.wxml" />
+<import src="/components/wxParse/components/wxParseVideo.vue.wxml" />
+<import src="/components/wxParse/components/wxParseAudio.vue.wxml" />
+<import src="/components/wxParse/components/wxParseImg.vue.wxml" />
+<import src="/components/wxParse/components/wxParseTemplate2.vue.wxml" />
+<import src="/components/wxParse/components/wxParseTemplate3.vue.wxml" />
+<import src="/components/wxParse/components/wxParseTemplate4.vue.wxml" />
+<import src="/components/wxParse/components/wxParseTemplate5.vue.wxml" />
+<import src="/components/wxParse/components/wxParseTemplate6.vue.wxml" />
+<import src="/components/wxParse/components/wxParseTemplate7.vue.wxml" />
+<import src="/components/wxParse/components/wxParseTemplate8.vue.wxml" />
+<import src="/components/wxParse/components/wxParseTemplate9.vue.wxml" />
+<import src="/components/wxParse/components/wxParseTemplate10.vue.wxml" />
+<import src="/components/wxParse/components/wxParseTemplate11.vue.wxml" />
 

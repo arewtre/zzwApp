@@ -1,241 +1,220 @@
-<!-- glance 店铺分类 -->
-<template name="glance-ShopClassify">
-	<view class="glance-shop-classify">
-		<!-- 顶部显示搜索 -->
-		
-		<!-- 左侧列表占位 -->
-		<view class="glance-shop-classify-left" >
-			<!-- 左侧主分类列表 -->
-			<view v-for="(item,index) in maintitels" :key='index'>
-				<!-- 左侧分类项目 -->
-				<view class="glance-shop-classify-left-item" style="" @click="clickleftitem(maintitels[index],index)"  >
-				<view style="height: 15px;width: 3%;background-color: #ffffff;" :style="{'background-color':[activemaintitel == maintitels[index] ? '#f40':'#ffffff']}"></view>
-				<view style="text-align: center;line-height: 15px;width: 93%;font-size: 0.8rem; " :class="[activemaintitel == maintitels[index] ? 'glance-shop-classify-left-item-activetxt':'']"> {{ item }}</view>
+<template>
+	<view class="page-body" :style="'height:'+height+'px'">
+		<scroll-view class="nav-left" scroll-y :style="'height:'+height+'px'" :scroll-top="scrollLeftTop" scroll-with-animation>
+			<view class="nav-left-item" @click="categoryClickMain(index3)" :key="index3" :class="index3==categoryActive?'active':''"
+				v-for="(item3,index3) in classifyData">
+				{{item3.title}}
+			</view>
+		</scroll-view>
+		<scroll-view class="nav-right" scroll-y :scroll-top="scrollTop" @scroll="scroll" :style="'height:'+height+'px'" scroll-with-animation>
+			
+			<view v-for="(foods,index) in classifyData" :key="index" class="box">
+				<view class="nav-right-item3">{{foods.name}}</view>
+				<view :id="i==0?'first':''" :class="[!item.children?'nav-right-item2':'nav-right-item']" v-for="(item,i) in foods.children" :key="i" @click="cart(item.name)">
+					<!-- <image :src="item.icon" /> -->
+					<view v-if="!item.children" class="nav-right-item">{{item.catname}}</view>
+						<view class="nav-right-item2" v-for="(item2,i2) in item.children" :key="i2" @click="cart(item.name)">
+							<!-- <image :src="item.icon" /> -->
+							<view>{{item2.catname}}</view>
+						</view>
 				</view>
 			</view>
-		</view>
-		<!-- 右侧列表 -->
-		<view style="float: right; width: 80%;">
-			<!-- 左侧主分类列表 -->
-			<scroll-view scroll-y= "true" scroll-left="0" scroll-with-animation="true" :scroll-into-view = "scrollintoid" :style="{height: scrollheight + 'px','overflow-y':'auto'}" @scroll ="scroll">
-				<view :id="'scrollinto-' + idx" v-for="(des,idx) in data" :key='idx' >
-					<view v-for="(item,index) in des.subCategoryList" :key='index' v-if="item.moduleid == des.moduleid">
-						<view class="glance-shop-classify-right-item">
-							<!-- 右侧顶部广告图 -->
-							<!-- <image :src="item.bannerimgsrc" mode="scaleToFill" style="height: 120px;width: 100%;" :lazy-load="true" @click="clickitemhref(item.bannerimghref)"></image> -->
-							<!-- 右侧子分类标题 -->
-							<view class="glance-shop-classify-right-item-titel">{{ item.catname }}</view>
-							<!-- 右侧子分类项目图文 -->
-							<view class="glance-shop-classify-right-item-subitems">
-								<view v-for="(subitem,k) in item.children" :key='k' style="width:33.33%;">
-									<!-- <image :src="subitem.itemimgsrc" style="height: 100px; width:100%;" @click="clickitemhref(subitem.itemimghref)" :lazy-load="true"></image> -->
-									<view class="glance-shop-classify-right-item-subtitel">{{ subitem.catname }}</view>
-								</view>
-							</view>
-						</view>
-					</view>
-				</view>
-			</scroll-view>
-		</view>
+		</scroll-view>
 	</view>
 </template>
 
 <script>
+	//import classifyData from '../../common/classify.data.js';
 	export default {
 		data() {
 			return {
-				// 滚动区域高度
-				scrollheight:750,
-				// 活动的左侧主分类
-				activemaintitel:'',
-				// 滚动到区域内的指定元素
-				scrollintoid:'',
-				// 主分类
-				maintitels:[],
-				// 子项目 
-				subitems:[],
-				data:[]
+				categoryList: [],
+				subCategoryList: [],
+				height: 0,
+				categoryActive: 0,
+				scrollTop: 0,
+				scrollLeftTop: 0,
+				scrollHeight: 0,
+				name: "wkiwi",
+				classifyData:[],
+				arr:[0, 2190, 4380, 5119, 5257, 7380, 7853, 8013, 8508, 8646, 8773],
+				leftItemHeight: 0,//此处修改也要修改css
+				navLeftHeight:0,//左边nav的总高度
+				diff: 0,//左边nav的总高度与视口之差
 			}
 		},
-		onLoad:function(){
-			// 通过网络获取json格式数据 这里是示例数据：
+		onShow() {
+		},
+		onLoad: function () {
 			this.getCate();
-
-			// 获取设备屏幕高度 用于设置滚动条高度
-			// 项目中这里从全局变量获得
-			try {
-				const res = uni.getSystemInfoSync();
-				this.scrollheight = res.windowHeight
-			} catch (e) {
-				this.scrollheight = 750
-				// error
-			}
+			let _this = this
+			this.height = uni.getSystemInfoSync().windowHeight ;
+			this.navLeftHeight = this.leftItemHeight * this.classifyData.length;
+			this.diff =  this.navLeftHeight - this.height;
+			setTimeout(()=> {
+				let selectorQuery=uni.createSelectorQuery()
+				selectorQuery.selectAll('.box').boundingClientRect(function(rects) {
+					let arr = [0];
+					let top = 0;
+					rects.forEach(function(rect){
+	// 					rect.id      // 节点的ID
+	// 					rect.dataset // 节点的dataset
+	// 					rect.left    // 节点的左边界坐标
+	// 					rect.right   // 节点的右边界坐标
+	// 					rect.top     // 节点的上边界坐标
+	// 					rect.bottom  // 节点的下边界坐标
+	// 					rect.width   // 节点的宽度
+	// 					rect.height  // 节点的高度
+						top += rect.height;
+						arr.push(top)
+					  })
+					  console.log(arr)
+					  _this.arr = arr
+					}).exec()
+			},1000)
+			
 		},
-		methods:{
-			// 点击左侧主分类
-			clickleftitem(str,idx){
-				// 实现点击左侧项目 右侧滚动至指定分类
-				this.activemaintitel = str		
-				this.scrollintoid = 'scrollinto-' + idx
-				// console.log(this.scrollintoid)
-			},
-			// 滚动时处理主导航
-			scroll:function(e){
-				// 循环滚动区域内的元素项 判断top位置 设置主分类切换
-				for (let i = 0; i < this.maintitels.length; i++) {
-					let s = this.maintitels[i]
-// 					let t = uni.createSelectorQuery().select('#');
-// 					
-// 					t.fields({dataset:true, size: true, rect: true, scrollOffset: true }, data => {
-// 							console.log(JSON.stringify(data));
-// 						}).exec();
-
-					let g = uni.createSelectorQuery().select('#scrollinto-' + i);
-					g.boundingClientRect(data => {
-							let top
-							top = data.top
-							// 判断滚动区域内元素 top距离时 切换主分类
-							if (( 0 < top) && (top < this.scrollheight*0.2)){
-								// 设置主分类
-								this.activemaintitel = s
-							}
-						}).exec();
+		methods: {
+			scroll(e) {
+				let _this = this
+				if(this.timeoutId){
+					clearTimeout(this.timeoutId);
 				}
+				this.timeoutId = setTimeout(function(){ //节流
+					_this.scrollHeight = e.detail.scrollTop + _this.height/2;
+					for (let i = 0; i < _this.arr.length;i++) {
+						let height1 = _this.arr[i];
+						let height2 = _this.arr[i+1];
+						if (!height2 || (_this.scrollHeight >= height1 && _this.scrollHeight < height2)) {
+							_this.categoryActive = i;
+							(_this.diff>0) && (_this.scrollLeftTop = Math.round((_this.categoryActive * _this.diff)/(classifyData.length-1)));
+							return false;
+						}
+					}
+					_this.categoryActive = 0;
+					_this.timeoutId = undefined;
+				}, 10)
 			},
-			// 点击图片 跳转你要的页面
-			clickitemhref(imghref){
-				uni.showModal({
-					content:'点击了图片，内容：'+imghref,
+			categoryClickMain(index) {
+				this.categoryActive = index;
+				this.scrollTop = this.arr[index]
+			},
+			cart: function (text) {
+				uni.showToast({
+					title: text,
+					icon: "none",
 				})
 			},
-			getCate:function(){
-				this.$Request.post(this.$api.home.getcate,{}).then(res => {
-					if (res.code == "0000") {
-						
-						this.data = res.data;
-						// 第一个标题
-						var firsttitel = ''
-						this.data.forEach((item,index) => {
-							// 左侧主标题
-							if (this.maintitels.indexOf(item.title) <0) {
-								if (firsttitel == ''){
-									firsttitel = item.title
-								}
-								this.maintitels.push(item.title)
+			getCate:function(Refresh){
+// 				var catedata = this.$SysCache.get("app_cate_data");
+// 				console.log(catedata);
+// 				if(catedata && Refresh == undefined ){
+// 					this.classifyData  = catedata;
+// 				}else{
+					uni.request({
+						url: 'http://47.100.48.1/api/member/getData.php?ac=getcate',
+						data: {}, 
+						method:"POST", 
+						success: (result) => {
+							var res = result.data;
+							if (res.code == "0000") {
+								console.log( res.data);
+								this.classifyData = res.data;
+								//this.makedata();
+								//this.$SysCache.put("app_cate_data",res.data,86400);
 								
 							}
-							this.subitems[index] = item.subCategoryList;
-											
-							// 右侧子项目items 
-							let isexistsubitem = 0
-							let isexistitem = 0
-// 							for (let i = 0; i < this.subitems.length; i++) {
-// 								// 不存在未处理的 则添加
-// 								if (0 || this.subitems[i].mersubtitel == item.title + '-' + item.title){
-// 									// 如果存在 则标记
-// 									isexistsubitem = isexistsubitem + 1
-// 								} 
-// 								
-// 							}
-							// 不存在子项目对象数组时 添加
-// 							if (isexistsubitem == 0){
-// 								let subitem={'title':'','mersubtitel':'','subtitel':'','bannerimgsrc':'','bannerimghref':'','subitem':[]}
-// 								
-// 								// 右侧顶端banner
-// 								let isexist = 0
-// 								for (let i = 0; i < this.subitems.length; i++) {
-// 									// 不存在未处理的banner 则添加
-// 									if (0 || this.subitems[i].subtitel == item.title){
-// 										isexist = isexist + 1
-// 									} 
-// 								}
-// 								// console.log(isexist)
-// 								// 不存在广告图 则添加
-// 								if (isexist == 0){
-// 									subitem['bannerimgsrc'] = item.bannerimgsrc
-// 									subitem['bannerimghref'] = item.bannerimghref
-// 									// console.log(this.subbanners)
-// 								}
-// 								subitem['mersubtitel'] = item.title + '-' + item.title
-// 								subitem['maintitel'] = item.title
-// 								subitem['subtitel'] = item.title
-// 								subitem['subitem'] = []
-// 								this.subitems.push(subitem)
-// 								// console.log(this.subbanners)
-// 							}
-						
-							// 子项目对象项目 添加
-// 							let objitem={'itemimgsrc':'','itemtitel':'','itemimghref':''}
-// 							objitem['itemimgsrc'] = item.itemimgsrc
-// 							objitem['itemtitel'] = item.itemtitel
-// 							objitem['itemimghref'] = item.itemimghref
-// 							for (let i = 0; i < this.subitems.length; i++) {
-// 								if (this.subitems[i].mersubtitel == item.title + '-' + item.title){
-// 									this.subitems[i].subitem.push(objitem)
-// 								}
-// 							}
-						})
-						 
-						// 第一个活动得左侧标题
-						this.activemaintitel = firsttitel	
-						this.clickleftitem(firsttitel,0)
-						console.log(this.subitems)
-					}
-				})	
+						}	
+					})	
+				//}
 			}
+		},
+		components: {
 		}
 	}
 </script>
 
 <style>
-	.glance-shop-classify{
-	width: 100%;
-	background-color: #ffffff;
-	}
-	
-	.glance-shop-classify-left{
-		float: left;width: 20%;height: 100%; position:fixed;z-index: 100;border-right: #F5F5F5 1px solid;background-color: #ffffff;
-	}
-	
-	.glance-shop-classify-right{
-		float: left;width: 20%;height: 100%; position:fixed;z-index: 100;border-right: #F5F5F5 1px solid;background-color: #ffffff;
-	}
-	
-	.glance-shop-classify-left-item{
-		padding: 10px 0 15px 0; 
-		height: 15px; line-height: 15px;text-align: center; width: 100%; font-size: 0.8rem;display: flex;
-		display: -webkit-flex;
-		flex-flow: row nowrap;
-		align-items: center ;
-		justify-content: flex-start;
-	}
-	
-	.glance-shop-classify-right-item{
-		/* // width: 95%; */
-		padding-top: 10px;
-		margin-left: 10px;
-		margin-right: 10px;
+	.page-body {
 		display: flex;
-		display: -webkit-flex;
-		z-index: -1;
-		flex-flow: column nowrap;
-		align-items: flex-start ;
-		justify-content: flex-start;
+		background: #fff;
+		overflow: hidden;
 	}
-	
-	.glance-shop-classify-right-item-titel{
-		height: 25px;font-size: 0.8rem;text-align: left;border-bottom: solid 1px #F5F5F5;margin-bottom: 10px;margin-top: 10px;width: 100%;
+
+	.nav {
+		display: flex;
+		width: 100%;
 	}
-	
-	.glance-shop-classify-right-item-subitems{
-		display: flex; display: -webkit-flex ;flex-flow: row wrap;align-items: flex-start;justify-content: flex-start;width: 100%;
+
+	.nav-left {
+		width: 25%;
+		background: #fafafa;
 	}
-	
-	.glance-shop-classify-right-item-subtitel{
-		height: 20px;line-height: 20px; font-size: 0.7rem;text-align: center;margin-bottom: 10px;
+
+	.nav-left-item {
+		height: 90upx;
+		border-right: solid 1px #f1f1f1;
+		border-bottom: solid 1px #f1f1f1;
+		font-size: 30upx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
-	
-	/* // 单行文本样式 */
-	.glance-shop-classify-left-item-activeborder{background-color:  #f40;}
-	.glance-shop-classify-left-item-activetxt{-webkit-transform: scale(1.2);transform: scale(1.2);color: #f40;}
+
+	.nav-right {
+		width: 75%;
+	}
+	.box {
+		display: block;
+		overflow: hidden;
+		border-bottom: 20upx solid #f3f3f3;
+		padding:0 0 10upx 0;
+	}
+	.box:last-child {
+		border: none;
+	}
+	.nav-right-item2 {
+		width: 28%;
+		height: 130upx;
+		float: left;
+		text-align: left;
+		padding: 11upx;
+		font-size: 28upx;
+		background: #fff;
+	}
+	.nav-right-item {
+		width: 100%;
+		min-height: 130upx;
+		float: left;
+		text-align: left;
+		padding: 20upx;
+		font-size: 28upx;
+		background: #fff;
+	}
+	.nav-right-item3 {
+		width: 100%;
+		height: 80upx;
+		float: left;
+		text-align: left;
+		padding: 20upx;
+		padding-bottom:0;
+		font-size: 34upx;
+		background: #fff;
+	}
+
+	.nav-right-item image {
+		width: 150upx;
+		height: 150upx;
+	}
+
+	.active {
+		color: #FF80AB;
+		background: #fff;
+		border-right: 0;
+	}
+	::-webkit-scrollbar {/*取消小程序的默认导航条样式*/
+   width: 0;
+   height: 0;
+   color: transparent;
+}
 </style>

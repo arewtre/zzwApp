@@ -8,7 +8,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("Object.defineProperty(exports, \"__esModule\", { value: true });exports.default = void 0;var _default =\n\n\n\n\n\n\n{\n  data: function data() {\n    return {\n      webviewStyles: {\n        progress: {\n          color: '#FF3333' } },\n\n\n      ssrc: \"\" };\n\n  },\n  onLoad: function onLoad(event) {\n    this.ssrc = event.urlSpecia;\n    console.log(event.urlSpecia);\n  } };exports.default = _default;\n\n//# sourceURL=uni-app:///pages/specia/detail.vue?vue&type=script&lang=js&?694c");
+eval("/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, \"__esModule\", { value: true });exports.default = void 0;var _default =\n\n\n\n\n\n\n{\n  data: function data() {\n    return {\n      webviewStyles: {\n        progress: {\n          color: '#FF3333' } },\n\n\n      ssrc: \"\" };\n\n  },\n  onLoad: function onLoad(event) {var _this = this;\n    // 初始化列表信息\n    //setTimeout(() => {\n    uni.getStorage({\n      key: 'urlSpecia',\n      success: function success(res) {\n        _this.ssrc = res.data;\n        console.log(_this.ssrc);\n      } });\n\n    //},200)\n  } };exports.default = _default;\n/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-hbuilderx/packages/uni-app-plus/dist/index.js */ \"./node_modules/@dcloudio/vue-cli-plugin-hbuilderx/packages/uni-app-plus/dist/index.js\")[\"default\"]))\n\n//# sourceURL=uni-app:///pages/specia/detail.vue?vue&type=script&lang=js&?694c");
 
 /***/ }),
 
@@ -20,7 +20,7 @@ eval("Object.defineProperty(exports, \"__esModule\", { value: true });exports.de
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"view\",\n    [\n      _c(\"web-view\", {\n        attrs: {\n          \"webview-styles\": _vm.webviewStyles,\n          src: \"http://www.chinapaper.net/zt/fushi/\",\n          mpcomid: \"400966da-0\"\n        }\n      })\n    ],\n    1\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=F:/helloUniapp/news/pages/specia/detail.vue?vue&type=template&id=32d1f04f&");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"view\",\n    [\n      _c(\"web-view\", {\n        attrs: {\n          \"webview-styles\": _vm.webviewStyles,\n          src: _vm.ssrc,\n          mpcomid: \"400966da-0\"\n        }\n      })\n    ],\n    1\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=F:/helloUniapp/news/pages/specia/detail.vue?vue&type=template&id=32d1f04f&");
 
 /***/ }),
 

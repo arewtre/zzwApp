@@ -50,8 +50,6 @@
 		},
 		onLoad: function(event) {
 			this.moduleid = event.moduleid;
-			//this.keywords = event.keywords;
-			//console.log(event);
 			if(event.keywords!= undefined){
 				this.keywords = decodeURIComponent(event.keywords);
 			}
@@ -65,7 +63,7 @@
 					activeTab.page = 0;
 				}				
 				this.$Request.post(this.$api.home.newsmoduledata,{keywords:this.keywords,moduleid:this.moduleid,cateid:activeTab.cateid,minId:activeTab.minId,page:activeTab.page,forom:"H5"}).then(res => {				
-					console.log(res);
+					console.log(res.data);
 					if (res.code == "0000") {
 						const data = res.data.map((news) => {
 							return {
@@ -90,12 +88,12 @@
 							});
 						}
 						activeTab.page = activeTab.page+1;
-						console.log(data.length);
+						//console.log(data.length);
 						if(data.length<10){
 							console.log(data.length);
 							activeTab.loadingText="noMore"
 						}
-						console.log(activeTab);
+						//console.log(activeTab);
 			
 					}
 				})	

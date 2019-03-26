@@ -163,7 +163,7 @@
 			loadHotKeyword() {
 				//定义热门搜索关键字，可以自己实现ajax请求数据再赋值
 				this.$Request.post(this.$api.home.getsearchdata,{}).then(res => {
-					console.log(res.data);
+					//console.log(res.data);
 					if (res.code == "0000") {
 						this.hotKeywordList = res.data;
 					}
@@ -234,7 +234,17 @@
 			doSearch(key) {
 				key = key ? key : this.keyword ? this.keyword : this.defaultKeyword;
 				this.keyword = key;
+				uni.setStorageSync('cateKeywords',  key);
+				//uni.setStorageSync('newsmoduleid',  this.moduleid);
 				this.saveKeyword(key); //保存为历史 
+				uni.setStorageSync('newsmoduleid',  this.moduleid);
+// 				var pages = getCurrentPages();
+//                 var page = pages[pages.length - 1];
+//                 var currentWebview = page.$getAppWebview();
+//                 plus.webview.postMessageToUniNView({
+//                    keywords: encodeURIComponent(key)
+//                 }, currentWebview.id);
+				
 				uni.navigateTo({
 					//url: '/pages/news/index?keywords=' + key +'&moduleid='+this.moduleid,
 					url:'/pages/news/index?keywords=' + encodeURIComponent(key) +'&moduleid='+this.moduleid,
@@ -245,6 +255,8 @@
 // 					icon: 'none',
 // 					duration: 2000
 // 				});
+
+
 				//以下是示例跳转淘宝搜索，可自己实现搜索逻辑
 				//#ifdef APP-PLUS
 				//plus.runtime.openURL(encodeURI('taobao://s.taobao.com/search?q=' + key));
@@ -293,10 +305,9 @@
 	.top-view{width: 100%;position: fixed;top: 0;}
 	.search-box {
 		width:95%;
-		padding:7.5px 2.5%;
+		padding:16upx 2.5% 16upx 2.5%;
 		display:flex;
 		justify-content:space-between;
-		
 		position: fixed;
 		z-index: 160;
 		border-bottom: solid 1px #ddd;
@@ -310,7 +321,7 @@
 		padding-top: var(--status-bar-height);
 		/* #endif */
 	}
-	.search-box .input-box {width:85%;flex-shrink:1;display:flex;justify-content:center;align-items:center;}
+	.search-box .input-box {width:85%;font-size:25upx;flex-shrink:1;display:flex;justify-content:center;align-items:center;}
 	.search-box .search-btn {width:15%;margin:0 0 0 2%;display:flex;justify-content:center;align-items:center;flex-shrink:0;font-size:14px;color:#fff;background:linear-gradient(to right,#fd4a5f,#f00);border-radius:30px;}
 	.search-box .input-box>input {width:100%;height:30px;font-size:16px;border:0;border-radius:30px;-webkit-appearance:none;-moz-appearance:none;appearance:none;padding:0 3%;margin:0;background-color:#ffffff;}
 	.placeholder-class {color:#9e9e9e;}

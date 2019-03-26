@@ -1,9 +1,15 @@
 <template>
     <div>
         <div class="list-cell" @click="bindClick">
-            <div class="media-list" v-if="data.title">
+            <div class="media-list">
                 <div :class="[isImgRight?'media-image-right':'',isImgLeft?'media-image-left':'']">
-                    <text :class="['media-title',isImgRight||isImgLeft?'media-title2':'']">{{data.title}}</text>
+                    <text v-if="!data.type" :class="['media-title',isImgRight||isImgLeft?'media-title2':'']">{{data.title}}</text>
+					<!-- <rich-text v-if="data.type" :nodes="data.title" :class="['media-title',isImgRight||isImgLeft?'media-title2':'']"></rich-text> -->
+					
+					<!-- <span v-if="data.type" >{{data.title}}</span> -->
+					<div  v-if="data.type" :class="['media-title',isImgRight||isImgLeft?'media-title2':'']" v-html="data.title"></div>
+					<!-- <rich-text v-if="data.type"  :nodes="data.title"></rich-text> -->
+					<!-- <wxParse v-if="data.type" :content="data.title" @preview="preview" @navigate="navigate" /> -->
                     <div v-if="showImg" :class="['image-section',isImgRight?'image-section-right':'',isImgLeft?'image-section-left':'']">
                         <image :class="['image-list1',isImgRight||isImgLeft?'image-list2':'']" v-if="data.image_url"
                             :src="data.image_url"></image>
@@ -28,6 +34,7 @@
 </template>
 
 <script>
+	import wxParse from '@/components/wxParse/wxParse';
     export default {
         props: {
             data: {
@@ -48,6 +55,9 @@
                 return this.data.image_list || this.data.image_url
             }
         },
+		components: { 
+			wxParse
+		},
         methods: {
             close(e) {
                 this.$emit('close');
@@ -61,6 +71,11 @@
 </script>
 
 <style>
+	@import url("../../components/wxParse/wxParse.css");
+	.sou{
+		font-weight:600;
+		color:red;
+	}
     .list-cell {
         width: 750px;
         padding: 0 30px;
@@ -119,7 +134,7 @@
 
     .image-section-left {
         margin-top: 0px;
-        margin-right: 10px;
+        margin-right: 16upx;
         width: 225px;
         height: 146px;
     }
@@ -179,4 +194,11 @@
         color: #999999;
         font-size: 28px;
     }
+	.swiper-tab-list{
+		overflow:hiden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
+		
+	}
 </style>

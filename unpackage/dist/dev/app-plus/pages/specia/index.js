@@ -1509,64 +1509,78 @@ if (hadRuntime) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default2 =
-{
-  props: {
-    data: {
-      type: Object,
-      default: function _default(e) {
-        return {};
-      } } },
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
-  computed: {
-    isImgRight: function isImgRight() {
-      return this.data.article_type === 2;
-    },
-    isImgLeft: function isImgLeft() {
-      return this.data.article_type === 1;
-    },
-    showImg: function showImg() {
-      return this.data.image_list || this.data.image_url;
-    } },
 
-  methods: {
-    close: function close(e) {
-      this.$emit('close');
-      e.stopPropagation();
-    },
-    bindClick: function bindClick() {
-      this.$emit('click');
-    } } };exports.default = _default2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxParse = _interopRequireDefault(__webpack_require__(/*! @/components/wxParse/wxParse */ "F:\\helloUniapp\\news\\components\\wxParse\\wxParse.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default2 = { props: { data: { type: Object, default: function _default(e) {return {};} } }, computed: { isImgRight: function isImgRight() {return this.data.article_type === 2;}, isImgLeft: function isImgLeft() {return this.data.article_type === 1;}, showImg: function showImg() {return this.data.image_list || this.data.image_url;} }, components: { wxParse: _wxParse.default }, methods: { close: function close(e) {this.$emit('close');e.stopPropagation();}, bindClick: function bindClick() {this.$emit('click');} } };exports.default = _default2;
 
 /***/ }),
 
@@ -1750,6 +1764,2048 @@ var _uniTabContent = _interopRequireDefault(__webpack_require__(/*! ../uni-tab-c
 
 /***/ }),
 
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseAudio.vue ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default2 =
+{
+  name: 'wxParseAudio',
+  props: {
+    node: {
+      type: Object,
+      default: function _default() {
+        return {};
+      } } } };exports.default = _default2;
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseImg.vue ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default2 =
+{
+  name: 'wxParseImg',
+  data: function data() {
+    return {
+      newStyleStr: '',
+      preview: true };
+
+  },
+  props: {
+    node: {
+      type: Object,
+      default: function _default() {
+        return {};
+      } } },
+
+
+  methods: {
+    wxParseImgTap: function wxParseImgTap(e) {
+      if (!this.preview) return;var
+      src = e.target.dataset.src;
+      if (!src) return;
+      this.node.$host.preview(src, e);
+    },
+    // 图片视觉宽高计算函数区
+    wxParseImgLoad: function wxParseImgLoad(e) {var
+      src = e.target.dataset.src;
+      if (!src) return;var _e$mp$detail =
+      e.mp.detail,width = _e$mp$detail.width,height = _e$mp$detail.height;
+      var recal = this.wxAutoImageCal(width, height);var
+      imageheight = recal.imageheight,imageWidth = recal.imageWidth;var _this$node$attr =
+      this.node.attr,padding = _this$node$attr.padding,mode = _this$node$attr.mode;var
+      styleStr = this.node.styleStr;
+      var imageHeightStyle = mode === 'widthFix' ? '' : "height: ".concat(imageheight, "px;");
+      this.newStyleStr = "".concat(styleStr, "; ").concat(imageHeightStyle, "; width: ").concat(imageWidth, "px; padding: 0 ").concat(+padding, "px;");
+    },
+    // 计算视觉优先的图片宽高
+    wxAutoImageCal: function wxAutoImageCal(originalWidth, originalHeight) {
+      // 获取图片的原始长宽
+      var padding = this.node.attr.padding;
+      var windowWidth = this.node.$screen.width - 2 * padding;
+      var results = {};
+
+      if (originalWidth < 60 || originalHeight < 60) {var
+        src = this.node.attr.src;
+        this.node.$host.removeImageUrl(src);
+        this.preview = false;
+      }
+
+      // 判断按照那种方式进行缩放
+      if (originalWidth > windowWidth) {
+        // 在图片width大于手机屏幕width时候
+        results.imageWidth = windowWidth;
+        results.imageheight = windowWidth * (originalHeight / originalWidth);
+      } else {
+        // 否则展示原来的数据
+        results.imageWidth = originalWidth;
+        results.imageheight = originalHeight;
+      }
+
+      return results;
+    } } };exports.default = _default2;
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate0.vue":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate0.vue ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxParseTemplate = _interopRequireDefault(__webpack_require__(/*! ./wxParseTemplate1 */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate1.vue"));
+var _wxParseImg = _interopRequireDefault(__webpack_require__(/*! ./wxParseImg */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue"));
+var _wxParseVideo = _interopRequireDefault(__webpack_require__(/*! ./wxParseVideo */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue"));
+var _wxParseAudio = _interopRequireDefault(__webpack_require__(/*! ./wxParseAudio */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: 'wxParseTemplate0', props: { node: {} }, components: { wxParseTemplate: _wxParseTemplate.default, wxParseImg: _wxParseImg.default, wxParseVideo: _wxParseVideo.default, wxParseAudio: _wxParseAudio.default }, methods: { wxParseATap: function wxParseATap(e) {var href = e.target.dataset.href;if (!href) return;this.node.$host.navigate(href, e);} } };exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate1.vue":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate1.vue ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxParseTemplate = _interopRequireDefault(__webpack_require__(/*! ./wxParseTemplate2 */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate2.vue"));
+var _wxParseImg = _interopRequireDefault(__webpack_require__(/*! ./wxParseImg */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue"));
+var _wxParseVideo = _interopRequireDefault(__webpack_require__(/*! ./wxParseVideo */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue"));
+var _wxParseAudio = _interopRequireDefault(__webpack_require__(/*! ./wxParseAudio */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: 'wxParseTemplate1', props: { node: {} }, components: { wxParseTemplate: _wxParseTemplate.default, wxParseImg: _wxParseImg.default, wxParseVideo: _wxParseVideo.default, wxParseAudio: _wxParseAudio.default }, methods: { wxParseATap: function wxParseATap(e) {var href = e.target.dataset.href;if (!href) return;this.node.$host.navigate(href, e);} } };exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate10.vue":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate10.vue ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxParseTemplate = _interopRequireDefault(__webpack_require__(/*! ./wxParseTemplate11 */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate11.vue"));
+var _wxParseImg = _interopRequireDefault(__webpack_require__(/*! ./wxParseImg */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue"));
+var _wxParseVideo = _interopRequireDefault(__webpack_require__(/*! ./wxParseVideo */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue"));
+var _wxParseAudio = _interopRequireDefault(__webpack_require__(/*! ./wxParseAudio */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: 'wxParseTemplate10', props: { node: {} }, components: { wxParseTemplate: _wxParseTemplate.default, wxParseImg: _wxParseImg.default, wxParseVideo: _wxParseVideo.default, wxParseAudio: _wxParseAudio.default }, methods: { wxParseATap: function wxParseATap(e) {var href = e.target.dataset.href;if (!href) return;this.node.$host.navigate(href, e);} } };exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate11.vue":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate11.vue ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxParseImg = _interopRequireDefault(__webpack_require__(/*! ./wxParseImg */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue"));
+var _wxParseVideo = _interopRequireDefault(__webpack_require__(/*! ./wxParseVideo */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue"));
+var _wxParseAudio = _interopRequireDefault(__webpack_require__(/*! ./wxParseAudio */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: 'wxParseTemplate11', props: { node: {} }, components: { wxParseImg: _wxParseImg.default, wxParseVideo: _wxParseVideo.default, wxParseAudio: _wxParseAudio.default }, methods: { wxParseATap: function wxParseATap(e) {var href = e.target.dataset.href;if (!href) return;this.node.$host.navigate(href, e);} } };exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate2.vue":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate2.vue ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxParseTemplate = _interopRequireDefault(__webpack_require__(/*! ./wxParseTemplate3 */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate3.vue"));
+var _wxParseImg = _interopRequireDefault(__webpack_require__(/*! ./wxParseImg */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue"));
+var _wxParseVideo = _interopRequireDefault(__webpack_require__(/*! ./wxParseVideo */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue"));
+var _wxParseAudio = _interopRequireDefault(__webpack_require__(/*! ./wxParseAudio */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: 'wxParseTemplate2', props: { node: {} }, components: { wxParseTemplate: _wxParseTemplate.default, wxParseImg: _wxParseImg.default, wxParseVideo: _wxParseVideo.default, wxParseAudio: _wxParseAudio.default }, methods: { wxParseATap: function wxParseATap(e) {var href = e.target.dataset.href;if (!href) return;this.node.$host.navigate(href, e);} } };exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate3.vue":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate3.vue ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxParseTemplate = _interopRequireDefault(__webpack_require__(/*! ./wxParseTemplate4 */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate4.vue"));
+var _wxParseImg = _interopRequireDefault(__webpack_require__(/*! ./wxParseImg */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue"));
+var _wxParseVideo = _interopRequireDefault(__webpack_require__(/*! ./wxParseVideo */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue"));
+var _wxParseAudio = _interopRequireDefault(__webpack_require__(/*! ./wxParseAudio */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: 'wxParseTemplate3', props: { node: {} }, components: { wxParseTemplate: _wxParseTemplate.default, wxParseImg: _wxParseImg.default, wxParseVideo: _wxParseVideo.default, wxParseAudio: _wxParseAudio.default }, methods: { wxParseATap: function wxParseATap(e) {var href = e.target.dataset.href;if (!href) return;this.node.$host.navigate(href, e);} } };exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate4.vue":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate4.vue ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxParseTemplate = _interopRequireDefault(__webpack_require__(/*! ./wxParseTemplate5 */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate5.vue"));
+var _wxParseImg = _interopRequireDefault(__webpack_require__(/*! ./wxParseImg */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue"));
+var _wxParseVideo = _interopRequireDefault(__webpack_require__(/*! ./wxParseVideo */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue"));
+var _wxParseAudio = _interopRequireDefault(__webpack_require__(/*! ./wxParseAudio */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: 'wxParseTemplate4', props: { node: {} }, components: { wxParseTemplate: _wxParseTemplate.default, wxParseImg: _wxParseImg.default, wxParseVideo: _wxParseVideo.default, wxParseAudio: _wxParseAudio.default }, methods: { wxParseATap: function wxParseATap(e) {var href = e.target.dataset.href;if (!href) return;this.node.$host.navigate(href, e);} } };exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate5.vue":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate5.vue ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxParseTemplate = _interopRequireDefault(__webpack_require__(/*! ./wxParseTemplate6 */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate6.vue"));
+var _wxParseImg = _interopRequireDefault(__webpack_require__(/*! ./wxParseImg */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue"));
+var _wxParseVideo = _interopRequireDefault(__webpack_require__(/*! ./wxParseVideo */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue"));
+var _wxParseAudio = _interopRequireDefault(__webpack_require__(/*! ./wxParseAudio */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: 'wxParseTemplate5', props: { node: {} }, components: { wxParseTemplate: _wxParseTemplate.default, wxParseImg: _wxParseImg.default, wxParseVideo: _wxParseVideo.default, wxParseAudio: _wxParseAudio.default }, methods: { wxParseATap: function wxParseATap(e) {var href = e.target.dataset.href;if (!href) return;this.node.$host.navigate(href, e);} } };exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate6.vue":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate6.vue ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxParseTemplate = _interopRequireDefault(__webpack_require__(/*! ./wxParseTemplate7 */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate7.vue"));
+var _wxParseImg = _interopRequireDefault(__webpack_require__(/*! ./wxParseImg */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue"));
+var _wxParseVideo = _interopRequireDefault(__webpack_require__(/*! ./wxParseVideo */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue"));
+var _wxParseAudio = _interopRequireDefault(__webpack_require__(/*! ./wxParseAudio */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: 'wxParseTemplate6', props: { node: {} }, components: { wxParseTemplate: _wxParseTemplate.default, wxParseImg: _wxParseImg.default, wxParseVideo: _wxParseVideo.default, wxParseAudio: _wxParseAudio.default }, methods: { wxParseATap: function wxParseATap(e) {var href = e.target.dataset.href;if (!href) return;this.node.$host.navigate(href, e);} } };exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate7.vue":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate7.vue ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxParseTemplate = _interopRequireDefault(__webpack_require__(/*! ./wxParseTemplate8 */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate8.vue"));
+var _wxParseImg = _interopRequireDefault(__webpack_require__(/*! ./wxParseImg */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue"));
+var _wxParseVideo = _interopRequireDefault(__webpack_require__(/*! ./wxParseVideo */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue"));
+var _wxParseAudio = _interopRequireDefault(__webpack_require__(/*! ./wxParseAudio */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: 'wxParseTemplate7', props: { node: {} }, components: { wxParseTemplate: _wxParseTemplate.default, wxParseImg: _wxParseImg.default, wxParseVideo: _wxParseVideo.default, wxParseAudio: _wxParseAudio.default }, methods: { wxParseATap: function wxParseATap(e) {var href = e.target.dataset.href;if (!href) return;this.node.$host.navigate(href, e);} } };exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate8.vue":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate8.vue ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxParseTemplate = _interopRequireDefault(__webpack_require__(/*! ./wxParseTemplate9 */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate9.vue"));
+var _wxParseImg = _interopRequireDefault(__webpack_require__(/*! ./wxParseImg */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue"));
+var _wxParseVideo = _interopRequireDefault(__webpack_require__(/*! ./wxParseVideo */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue"));
+var _wxParseAudio = _interopRequireDefault(__webpack_require__(/*! ./wxParseAudio */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: 'wxParseTemplate8', props: { node: {} }, components: { wxParseTemplate: _wxParseTemplate.default, wxParseImg: _wxParseImg.default, wxParseVideo: _wxParseVideo.default, wxParseAudio: _wxParseAudio.default }, methods: { wxParseATap: function wxParseATap(e) {var href = e.target.dataset.href;if (!href) return;this.node.$host.navigate(href, e);} } };exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate9.vue":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate9.vue ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxParseTemplate = _interopRequireDefault(__webpack_require__(/*! ./wxParseTemplate10 */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate10.vue"));
+var _wxParseImg = _interopRequireDefault(__webpack_require__(/*! ./wxParseImg */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue"));
+var _wxParseVideo = _interopRequireDefault(__webpack_require__(/*! ./wxParseVideo */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue"));
+var _wxParseAudio = _interopRequireDefault(__webpack_require__(/*! ./wxParseAudio */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: 'wxParseTemplate9', props: { node: {} }, components: { wxParseTemplate: _wxParseTemplate.default, wxParseImg: _wxParseImg.default, wxParseVideo: _wxParseVideo.default, wxParseAudio: _wxParseAudio.default }, methods: { wxParseATap: function wxParseATap(e) {var href = e.target.dataset.href;if (!href) return;this.node.$host.navigate(href, e);} } };exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseVideo.vue ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+var _default =
+{
+  name: 'wxParseVideo',
+  props: {
+    node: {} } };exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\wxParse.vue":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/wxParse/wxParse.vue ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _html2json = _interopRequireDefault(__webpack_require__(/*! ./libs/html2json */ "F:\\helloUniapp\\news\\components\\wxParse\\libs\\html2json.js"));
+var _wxParseTemplate = _interopRequireDefault(__webpack_require__(/*! ./components/wxParseTemplate0 */ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate0.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default2 = { name: 'wxParse', props: { loading: { type: Boolean, default: false }, className: { type: String, default: '' }, content: { type: String, default: '' }, noData: {
+      type: String,
+      default: '<div style="color: red;">数据不能为空</div>' },
+
+    startHandler: {
+      type: Function,
+      default: function _default() {
+        return function (node) {
+          node.attr.class = null;
+          node.attr.style = null;
+        };
+      } },
+
+    endHandler: {
+      type: Function,
+      default: null },
+
+    charsHandler: {
+      type: Function,
+      default: null },
+
+    imageProp: {
+      type: Object,
+      default: function _default() {
+        return {
+          mode: 'aspectFit',
+          padding: 0,
+          lazyLoad: false,
+          domain: '' };
+
+      } } },
+
+
+  components: {
+    wxParseTemplate: _wxParseTemplate.default },
+
+  data: function data() {
+    return {
+      imageUrls: [] };
+
+  },
+  computed: {
+    nodes: function nodes() {var
+
+      content =
+
+
+
+
+
+      this.content,noData = this.noData,imageProp = this.imageProp,startHandler = this.startHandler,endHandler = this.endHandler,charsHandler = this.charsHandler;
+      var parseData = content || noData;
+      var customHandler = {
+        start: startHandler,
+        end: endHandler,
+        chars: charsHandler };
+
+      var results = (0, _html2json.default)(parseData, customHandler, imageProp, this);
+      this.imageUrls = results.imageUrls;
+      console.log(results);
+      return results.nodes;
+    } },
+
+  methods: {
+    navigate: function navigate(href, $event) {
+      this.$emit('navigate', href, $event);
+    },
+    preview: function preview(src, $event) {
+      if (!this.imageUrls.length) return;
+      wx.previewImage({
+        current: src,
+        urls: this.imageUrls });
+
+      this.$emit('preview', src, $event);
+    },
+    removeImageUrl: function removeImageUrl(src) {var
+      imageUrls = this.imageUrls;
+      imageUrls.splice(imageUrls.indexOf(src), 1);
+    } } };exports.default = _default2;
+
+/***/ }),
+
 /***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\pages\\specia\\index.nvue":
 /*!**********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/pages/specia/index.nvue ***!
@@ -1814,15 +3870,7 @@ var _default =
     uniMediaList: _uniMediaList.default },
 
   created: function created() {
-    // 初始化列表信息
-    // 			setTimeout(() => {
-    //                 uni.getStorage({
-    //                     key:'newsmoduleid',
-    //                     success: (res) => {
-    // 					   this.loadNavList(res.data);
-    //                     }
-    //                 })
-    //             },200)
+
     this.loadNavList();
   },
   methods: {
@@ -1876,6 +3924,7 @@ var _default =
                 source: news.editor,
                 comment_count: news.hits,
                 post_id: news.catid,
+                linkurl: news.linkurl,
                 catname: news.catname };
 
             });
@@ -1897,9 +3946,16 @@ var _default =
 
     },
     goDetail: function goDetail(e) {
+      uni.setStorage({
+        key: 'urlSpecia',
+        data: e.linkurl,
+        success: function success() {
+          console.log('success');
+        } });
+
       uni.navigateTo({
         //url: '/pages/detail/detail?query=' + encodeURIComponent(JSON.stringify(detail))
-        url: '/pages/detail/detail?catid=' + e.post_id + '&itemid=' + e.id });
+        url: '/pages/specia/detail?catid=' + e.post_id + '&itemid=' + e.id });
 
     },
     dislike: function dislike(tabIndex, newsIndex) {var _this3 = this;
@@ -1966,6 +4022,10 @@ var _default =
 /***/ (function(module, exports) {
 
 module.exports = {
+  "sou": {
+    "fontWeight": "600",
+    "color": "#FF0000"
+  },
   "list-cell": {
     "width": "750",
     "paddingTop": 0,
@@ -2016,7 +4076,7 @@ module.exports = {
   },
   "image-section-left": {
     "marginTop": "0",
-    "marginRight": "10",
+    "marginRight": 16,
     "width": "225",
     "height": "146"
   },
@@ -2066,6 +4126,11 @@ module.exports = {
     "textAlign": "center",
     "color": "#999999",
     "fontSize": "28"
+  },
+  "swiper-tab-list": {
+    "textOverflow": "ellipsis",
+    "display": "-webkit-box",
+    "WebkitLineClamp": 1
   }
 }
 
@@ -2135,13 +4200,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.bindClick
     }
-  }, [(_vm.data.title) ? _c('div', {
+  }, [_c('div', {
     staticClass: ["media-list"]
   }, [_c('div', {
     class: [_vm.isImgRight ? 'media-image-right' : '', _vm.isImgLeft ? 'media-image-left' : '']
-  }, [_c('text', {
+  }, [(!_vm.data.type) ? _c('text', {
     class: ['media-title', _vm.isImgRight || _vm.isImgLeft ? 'media-title2' : '']
-  }, [_vm._v(_vm._s(_vm.data.title))]), (_vm.showImg) ? _c('div', {
+  }, [_vm._v(_vm._s(_vm.data.title))]) : _vm._e(), (_vm.data.type) ? _c('div', {
+    directives: [{
+      name: "html",
+      rawName: "v-html",
+      value: (_vm.data.title),
+      expression: "data.title"
+    }],
+    class: ['media-title', _vm.isImgRight || _vm.isImgLeft ? 'media-title2' : '']
+  }) : _vm._e(), (_vm.showImg) ? _c('div', {
     class: ['image-section', _vm.isImgRight ? 'image-section-right' : '', _vm.isImgLeft ? 'image-section-left' : '']
   }, [(_vm.data.image_url) ? _c('image', {
     class: ['image-list1', _vm.isImgRight || _vm.isImgLeft ? 'image-list2' : ''],
@@ -2173,7 +4246,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.close
     }
-  }, [_vm._m(0)])])]) : _vm._e()])])
+  }, [_vm._m(0)])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["close-view"]
@@ -2181,6 +4254,874 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: ["close"]
   }, [_vm._v("×")])])
 }]}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-169c7db0!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-169c7db0!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseAudio.vue ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('audio', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr,
+    attrs: {
+      "id": _vm.node.attr.id,
+      "src": _vm.node.attr.src,
+      "loop": _vm.node.attr.loop,
+      "poster": _vm.node.attr.poster,
+      "name": _vm.node.attr.name,
+      "author": _vm.node.attr.author,
+      "controls": ""
+    }
+  })
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-37de114e!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate9.vue":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-37de114e!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate9.vue ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('view', [(_vm.node.node == 'element') ? _c('block', [(_vm.node.tag == 'button') ? _c('block', [_c('button', {
+    attrs: {
+      "type": "default",
+      "size": "mini"
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))], 1) : (_vm.node.tag == 'li') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'video') ? _c('block', [_c('wx-parse-video', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'audio') ? _c('block', [_c('wx-parse-audio', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'img') ? _c('block', [_c('wx-parse-img', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'a') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr,
+    attrs: {
+      "dataHref": _vm.node.attr.href
+    },
+    on: {
+      "click": _vm.wxParseATap
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'br') ? _c('block', [_c('text', [_vm._v("\\n")])]) : _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))])], 1) : (_vm.node.node == 'text') ? _c('block', [_vm._v(_vm._s(_vm.node.text))]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-37fa4050!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate8.vue":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-37fa4050!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate8.vue ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('view', [(_vm.node.node == 'element') ? _c('block', [(_vm.node.tag == 'button') ? _c('block', [_c('button', {
+    attrs: {
+      "type": "default",
+      "size": "mini"
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))], 1) : (_vm.node.tag == 'li') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'video') ? _c('block', [_c('wx-parse-video', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'audio') ? _c('block', [_c('wx-parse-audio', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'img') ? _c('block', [_c('wx-parse-img', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'a') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr,
+    attrs: {
+      "dataHref": _vm.node.attr.href
+    },
+    on: {
+      "click": _vm.wxParseATap
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'br') ? _c('block', [_c('text', [_vm._v("\\n")])]) : _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))])], 1) : (_vm.node.node == 'text') ? _c('block', [_vm._v(_vm._s(_vm.node.text))]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38166f52!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate7.vue":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38166f52!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate7.vue ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('view', [(_vm.node.node == 'element') ? _c('block', [(_vm.node.tag == 'button') ? _c('block', [_c('button', {
+    attrs: {
+      "type": "default",
+      "size": "mini"
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))], 1) : (_vm.node.tag == 'li') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'video') ? _c('block', [_c('wx-parse-video', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'audio') ? _c('block', [_c('wx-parse-audio', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'img') ? _c('block', [_c('wx-parse-img', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'a') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr,
+    attrs: {
+      "dataHref": _vm.node.attr.href
+    },
+    on: {
+      "click": _vm.wxParseATap
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'br') ? _c('block', [_c('text', [_vm._v("\\n")])]) : _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))])], 1) : (_vm.node.node == 'text') ? _c('block', [_vm._v(_vm._s(_vm.node.text))]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38329e54!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate6.vue":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38329e54!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate6.vue ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('view', [(_vm.node.node == 'element') ? _c('block', [(_vm.node.tag == 'button') ? _c('block', [_c('button', {
+    attrs: {
+      "type": "default",
+      "size": "mini"
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))], 1) : (_vm.node.tag == 'li') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'video') ? _c('block', [_c('wx-parse-video', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'audio') ? _c('block', [_c('wx-parse-audio', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'img') ? _c('block', [_c('wx-parse-img', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'a') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr,
+    attrs: {
+      "dataHref": _vm.node.attr.href
+    },
+    on: {
+      "click": _vm.wxParseATap
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'br') ? _c('block', [_c('text', [_vm._v("\\n")])]) : _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))])], 1) : (_vm.node.node == 'text') ? _c('block', [_vm._v(_vm._s(_vm.node.text))]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-384ecd56!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate5.vue":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-384ecd56!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate5.vue ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('view', [(_vm.node.node == 'element') ? _c('block', [(_vm.node.tag == 'button') ? _c('block', [_c('button', {
+    attrs: {
+      "type": "default",
+      "size": "mini"
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))], 1) : (_vm.node.tag == 'li') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'video') ? _c('block', [_c('wx-parse-video', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'audio') ? _c('block', [_c('wx-parse-audio', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'img') ? _c('block', [_c('wx-parse-img', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'a') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr,
+    attrs: {
+      "dataHref": _vm.node.attr.href
+    },
+    on: {
+      "click": _vm.wxParseATap
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'br') ? _c('block', [_c('text', [_vm._v("\\n")])]) : _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))])], 1) : (_vm.node.node == 'text') ? _c('block', [_vm._v(_vm._s(_vm.node.text))]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-386afc58!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate4.vue":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-386afc58!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate4.vue ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('view', [(_vm.node.node == 'element') ? _c('block', [(_vm.node.tag == 'button') ? _c('block', [_c('button', {
+    attrs: {
+      "type": "default",
+      "size": "mini"
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))], 1) : (_vm.node.tag == 'li') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'video') ? _c('block', [_c('wx-parse-video', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'audio') ? _c('block', [_c('wx-parse-audio', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'img') ? _c('block', [_c('wx-parse-img', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'a') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr,
+    attrs: {
+      "dataHref": _vm.node.attr.href
+    },
+    on: {
+      "click": _vm.wxParseATap
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'br') ? _c('block', [_c('text', [_vm._v("\\n")])]) : _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))])], 1) : (_vm.node.node == 'text') ? _c('block', [_vm._v(_vm._s(_vm.node.text))]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38872b5a!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate3.vue":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38872b5a!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate3.vue ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('view', [(_vm.node.node == 'element') ? _c('block', [(_vm.node.tag == 'button') ? _c('block', [_c('button', {
+    attrs: {
+      "type": "default",
+      "size": "mini"
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))], 1) : (_vm.node.tag == 'li') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'video') ? _c('block', [_c('wx-parse-video', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'audio') ? _c('block', [_c('wx-parse-audio', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'img') ? _c('block', [_c('wx-parse-img', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'a') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr,
+    attrs: {
+      "dataHref": _vm.node.attr.href
+    },
+    on: {
+      "click": _vm.wxParseATap
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'br') ? _c('block', [_c('text', [_vm._v("\\n")])]) : _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))])], 1) : (_vm.node.node == 'text') ? _c('block', [_vm._v(_vm._s(_vm.node.text))]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38a35a5c!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate2.vue":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38a35a5c!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate2.vue ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('view', [(_vm.node.node == 'element') ? _c('block', [(_vm.node.tag == 'button') ? _c('block', [_c('button', {
+    attrs: {
+      "type": "default",
+      "size": "mini"
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))], 1) : (_vm.node.tag == 'li') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'video') ? _c('block', [_c('wx-parse-video', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'audio') ? _c('block', [_c('wx-parse-audio', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'img') ? _c('block', [_c('wx-parse-img', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'a') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr,
+    attrs: {
+      "dataHref": _vm.node.attr.href
+    },
+    on: {
+      "click": _vm.wxParseATap
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'br') ? _c('block', [_c('text', [_vm._v("\\n")])]) : _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))])], 1) : (_vm.node.node == 'text') ? _c('block', [_vm._v(_vm._s(_vm.node.text))]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38bf895e!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate1.vue":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38bf895e!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate1.vue ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('view', [(_vm.node.node == 'element') ? _c('block', [(_vm.node.tag == 'button') ? _c('block', [_c('button', {
+    attrs: {
+      "type": "default",
+      "size": "mini"
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))], 1) : (_vm.node.tag == 'li') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'video') ? _c('block', [_c('wx-parse-video', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'audio') ? _c('block', [_c('wx-parse-audio', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'img') ? _c('block', [_c('wx-parse-img', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'a') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr,
+    attrs: {
+      "dataHref": _vm.node.attr.href
+    },
+    on: {
+      "click": _vm.wxParseATap
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'br') ? _c('block', [_c('text', [_vm._v("\\n")])]) : _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))])], 1) : (_vm.node.node == 'text') ? _c('block', [_vm._v(_vm._s(_vm.node.text))]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38dbb860!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate0.vue":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38dbb860!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate0.vue ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('view', [(_vm.node.node == 'element') ? _c('block', [(_vm.node.tag == 'button') ? _c('block', [_c('button', {
+    attrs: {
+      "type": "default",
+      "size": "mini"
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))], 1) : (_vm.node.tag == 'li') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'video') ? _c('block', [_c('wx-parse-video', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'audio') ? _c('block', [_c('wx-parse-audio', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'img') ? _c('block', [_c('wx-parse-img', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'a') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr,
+    attrs: {
+      "dataHref": _vm.node.attr.href
+    },
+    on: {
+      "click": _vm.wxParseATap
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'table') ? _c('block', [_c('view', {
+    staticClass: ["table"],
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'br') ? _c('block', [_c('text', [_vm._v("\\n")])]) : _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))])], 1) : (_vm.node.node == 'text') ? _c('block', [_vm._v(_vm._s(_vm.node.text))]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-5ad81bd5!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-5ad81bd5!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseVideo.vue ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, [_c('video', {
+    staticClass: ["video-video"],
+    class: _vm.node.classStr,
+    attrs: {
+      "src": _vm.node.attr.src
+    }
+  })])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-766f38c6!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-766f38c6!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseImg.vue ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('image', {
+    class: _vm.node.classStr,
+    style: _vm.newStyleStr || _vm.node.styleStr,
+    attrs: {
+      "mode": _vm.node.attr.mode,
+      "lazyLoad": _vm.node.attr.lazyLoad,
+      "dataSrc": _vm.node.attr.src,
+      "src": _vm.node.attr.src
+    },
+    on: {
+      "tap": _vm.wxParseImgTap,
+      "load": _vm.wxParseImgLoad
+    }
+  })
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 
 /***/ }),
@@ -2263,6 +5204,155 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: ["loadmore-text"]
     }, [_vm._v(_vm._s(tabItem.loadingText))])])], 2)
   }))], 1)], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-df1e7ea0!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate11.vue":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-df1e7ea0!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate11.vue ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('view', [(_vm.node.node == 'element') ? _c('block', [(_vm.node.tag == 'button') ? _c('block', [_c('button', {
+    attrs: {
+      "type": "default",
+      "size": "mini"
+    }
+  })], 1) : (_vm.node.tag == 'li') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, [_vm._v("\n\t\t\t\t" + _vm._s(_vm.node.text) + "\n\t\t\t")])]) : (_vm.node.tag == 'video') ? _c('block', [_c('wx-parse-video', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'audio') ? _c('block', [_c('wx-parse-audio', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'img') ? _c('block', [_c('wx-parse-img', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'a') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr,
+    attrs: {
+      "dataHref": _vm.node.attr.href
+    },
+    on: {
+      "click": _vm.wxParseATap
+    }
+  }, [_vm._v("\n\t\t\t\t" + _vm._s(_vm.node.text) + "\n\t\t\t")])]) : (_vm.node.tag == 'br') ? _c('block', [_c('text', [_vm._v("\\n")])]) : _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, [_vm._v("\n\t\t\t\t" + _vm._s(_vm.node.text) + "\n\t\t\t")])])], 1) : (_vm.node.node == 'text') ? _c('block', [_vm._v(_vm._s(_vm.node.text))]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-df3aada2!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate10.vue":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-df3aada2!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseTemplate10.vue ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('view', [(_vm.node.node == 'element') ? _c('block', [(_vm.node.tag == 'button') ? _c('block', [_c('button', {
+    attrs: {
+      "type": "default",
+      "size": "mini"
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))], 1) : (_vm.node.tag == 'li') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'video') ? _c('block', [_c('wx-parse-video', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'audio') ? _c('block', [_c('wx-parse-audio', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'img') ? _c('block', [_c('wx-parse-img', {
+    attrs: {
+      "node": _vm.node
+    }
+  })], 1) : (_vm.node.tag == 'a') ? _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr,
+    attrs: {
+      "dataHref": _vm.node.attr.href
+    },
+    on: {
+      "click": _vm.wxParseATap
+    }
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))]) : (_vm.node.tag == 'br') ? _c('block', [_c('text', [_vm._v("\\n")])]) : _c('block', [_c('view', {
+    class: _vm.node.classStr,
+    style: _vm.node.styleStr
+  }, _vm._l((_vm.node.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wx-parse-template', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  }))])], 1) : (_vm.node.node == 'text') ? _c('block', [_vm._v(_vm._s(_vm.node.text))]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-f2b01f50!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\wxParse.vue":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-f2b01f50!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/wxParse.vue ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return (!_vm.loading) ? _c('div', {
+    staticClass: ["wxParse"],
+    class: _vm.className
+  }, _vm._l((_vm.nodes), function(node, index) {
+    return _c('block', {
+      key: index
+    }, [_c('wxParseTemplate', {
+      attrs: {
+        "node": node
+      }
+    })], 1)
+  })) : _vm._e()
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 
@@ -2480,6 +5570,1355 @@ if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
 __vue_options__.__file = "F:\\helloUniapp\\news\\components\\uni-tabs\\uni-tabs.nvue"
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue":
+/*!**************************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/components/wxParseAudio.vue ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParseAudio.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-169c7db0!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParseAudio.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-169c7db0!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseAudio.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue":
+/*!************************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/components/wxParseImg.vue ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParseImg.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-766f38c6!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParseImg.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-766f38c6!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseImg.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate0.vue":
+/*!******************************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/components/wxParseTemplate0.vue ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParseTemplate0.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate0.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-38dbb860!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParseTemplate0.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38dbb860!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate0.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate0.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate1.vue":
+/*!******************************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/components/wxParseTemplate1.vue ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParseTemplate1.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate1.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-38bf895e!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParseTemplate1.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38bf895e!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate1.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate1.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate10.vue":
+/*!*******************************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/components/wxParseTemplate10.vue ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParseTemplate10.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate10.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-df3aada2!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParseTemplate10.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-df3aada2!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate10.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate10.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate11.vue":
+/*!*******************************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/components/wxParseTemplate11.vue ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParseTemplate11.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate11.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-df1e7ea0!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParseTemplate11.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-df1e7ea0!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate11.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate11.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate2.vue":
+/*!******************************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/components/wxParseTemplate2.vue ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParseTemplate2.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate2.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-38a35a5c!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParseTemplate2.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38a35a5c!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate2.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate2.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate3.vue":
+/*!******************************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/components/wxParseTemplate3.vue ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParseTemplate3.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate3.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-38872b5a!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParseTemplate3.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38872b5a!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate3.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate3.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate4.vue":
+/*!******************************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/components/wxParseTemplate4.vue ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParseTemplate4.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate4.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-386afc58!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParseTemplate4.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-386afc58!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate4.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate4.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate5.vue":
+/*!******************************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/components/wxParseTemplate5.vue ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParseTemplate5.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate5.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-384ecd56!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParseTemplate5.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-384ecd56!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate5.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate5.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate6.vue":
+/*!******************************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/components/wxParseTemplate6.vue ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParseTemplate6.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate6.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-38329e54!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParseTemplate6.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38329e54!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate6.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate6.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate7.vue":
+/*!******************************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/components/wxParseTemplate7.vue ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParseTemplate7.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate7.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-38166f52!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParseTemplate7.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-38166f52!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate7.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate7.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate8.vue":
+/*!******************************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/components/wxParseTemplate8.vue ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParseTemplate8.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate8.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-37fa4050!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParseTemplate8.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-37fa4050!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate8.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate8.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate9.vue":
+/*!******************************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/components/wxParseTemplate9.vue ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParseTemplate9.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate9.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-37de114e!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParseTemplate9.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-37de114e!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate9.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseTemplate9.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue":
+/*!**************************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/components/wxParseVideo.vue ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParseVideo.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-5ad81bd5!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParseVideo.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-5ad81bd5!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\libs\\html2json.js":
+/*!****************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/libs/html2json.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxDiscode = _interopRequireDefault(__webpack_require__(/*! ./wxDiscode */ "F:\\helloUniapp\\news\\components\\wxParse\\libs\\wxDiscode.js"));
+var _htmlparser = _interopRequireDefault(__webpack_require__(/*! ./htmlparser */ "F:\\helloUniapp\\news\\components\\wxParse\\libs\\htmlparser.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+                                                                                                                                                                 * html2Json 改造来自: https://github.com/Jxck/html2json
+                                                                                                                                                                 *
+                                                                                                                                                                 *
+                                                                                                                                                                 * author: Di (微信小程序开发工程师)
+                                                                                                                                                                 * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
+                                                                                                                                                                 *               垂直微信小程序开发交流社区
+                                                                                                                                                                 *
+                                                                                                                                                                 * github地址: https://github.com/icindy/wxParse
+                                                                                                                                                                 *
+                                                                                                                                                                 * for: 微信小程序富文本解析
+                                                                                                                                                                 * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
+                                                                                                                                                                 */function makeMap(str) {var obj = {};var items = str.split(',');for (var i = 0; i < items.length; i += 1) {obj[items[i]] = true;}return obj;} // Block Elements - HTML 5
+var block = makeMap('br,code,address,article,applet,aside,audio,blockquote,button,canvas,center,dd,del,dir,div,dl,dt,fieldset,figcaption,figure,footer,form,frameset,h1,h2,h3,h4,h5,h6,header,hgroup,hr,iframe,ins,isindex,li,map,menu,noframes,noscript,object,ol,output,p,pre,section,script,table,tbody,td,tfoot,th,thead,tr,ul,video'); // Inline Elements - HTML 5
+var inline = makeMap('a,abbr,acronym,applet,b,basefont,bdo,big,button,cite,del,dfn,em,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,span,strike,strong,sub,sup,textarea,tt,u,var');
+// Elements that you can, intentionally, leave open
+// (and which close themselves)
+var closeSelf = makeMap('colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr');
+
+function removeDOCTYPE(html) {
+  var isDocument = /<body.*>([^]*)<\/body>/.test(html);
+  return isDocument ? RegExp.$1 : html;
+}
+
+function trimHtml(html) {
+  return html.
+  replace(/<!--.*?-->/gi, '').
+  replace(/\/\*.*?\*\//gi, '').
+  replace(/[ ]+</gi, '<').
+  replace(/<script[^]*<\/script>/gi, '').
+  replace(/<style[^]*<\/style>/gi, '');
+}
+
+function getScreenInfo() {
+  var screen = {};
+  wx.getSystemInfo({
+    success: function success(res) {
+      screen.width = res.windowWidth;
+      screen.height = res.windowHeight;
+    } });
+
+  return screen;
+}
+
+function html2json(html, customHandler, imageProp, host) {
+  // 处理字符串
+  html = removeDOCTYPE(html);
+  html = trimHtml(html);
+  html = _wxDiscode.default.strDiscode(html);
+  // 生成node节点
+  var bufArray = [];
+  var results = {
+    nodes: [],
+    imageUrls: [] };
+
+
+  function Node(tag) {
+    this.node = 'element';
+    this.tag = tag;
+  }
+  Node.prototype.$screen = getScreenInfo();
+  Node.prototype.$host = host;
+
+  (0, _htmlparser.default)(html, {
+    start: function start(tag, attrs, unary) {
+      // node for this element
+      var node = new Node(tag);
+
+      if (bufArray.length !== 0) {
+        var parent = bufArray[0];
+        if (parent.nodes === undefined) {
+          parent.nodes = [];
+        }
+      }
+
+      if (block[tag]) {
+        node.tagType = 'block';
+      } else if (inline[tag]) {
+        node.tagType = 'inline';
+      } else if (closeSelf[tag]) {
+        node.tagType = 'closeSelf';
+      }
+
+      node.attr = attrs.reduce(function (pre, attr) {var
+        name = attr.name;var
+        value = attr.value;
+        if (name === 'class') {
+          node.classStr = value;
+        }
+        // has multi attibutes
+        // make it array of attribute
+        if (name === 'style') {
+          node.styleStr = value;
+        }
+        if (value.match(/ /)) {
+          value = value.split(' ');
+        }
+
+        // if attr already exists
+        // merge it
+        if (pre[name]) {
+          if (Array.isArray(pre[name])) {
+            // already array, push to last
+            pre[name].push(value);
+          } else {
+            // single value, make it array
+            pre[name] = [pre[name], value];
+          }
+        } else {
+          // not exist, put it
+          pre[name] = value;
+        }
+
+        return pre;
+      }, {});
+
+      // 优化样式相关属性
+      if (node.classStr) {
+        node.classStr += " ".concat(node.tag);
+      } else {
+        node.classStr = node.tag;
+      }
+      if (node.tagType === 'inline') {
+        node.classStr += ' inline';
+      }
+
+      // 对img添加额外数据
+      if (node.tag === 'img') {
+        var imgUrl = node.attr.src;
+        imgUrl = _wxDiscode.default.urlToHttpUrl(imgUrl, imageProp.domain);
+        Object.assign(node.attr, imageProp, {
+          src: imgUrl || '' });
+
+        if (imgUrl) {
+          results.imageUrls.push(imgUrl);
+        }
+      }
+
+      // 处理a标签属性
+      if (node.tag === 'a') {
+        node.attr.href = node.attr.href || '';
+      }
+
+      // 处理font标签样式属性
+      if (node.tag === 'font') {
+        var fontSize = [
+        'x-small',
+        'small',
+        'medium',
+        'large',
+        'x-large',
+        'xx-large',
+        '-webkit-xxx-large'];
+
+        var styleAttrs = {
+          color: 'color',
+          face: 'font-family',
+          size: 'font-size' };
+
+        if (!node.styleStr) node.styleStr = '';
+        Object.keys(styleAttrs).forEach(function (key) {
+          if (node.attr[key]) {
+            var value = key === 'size' ? fontSize[node.attr[key] - 1] : node.attr[key];
+            node.styleStr += "".concat(styleAttrs[key], ": ").concat(value, ";");
+          }
+        });
+      }
+
+      // 临时记录source资源
+      if (node.tag === 'source') {
+        results.source = node.attr.src;
+      }
+
+      if (customHandler.start) {
+        customHandler.start(node, results);
+      }
+
+      if (unary) {
+        // if this tag doesn't have end tag
+        // like <img src="hoge.png"/>
+        // add to parents
+        var _parent = bufArray[0] || results;
+        if (_parent.nodes === undefined) {
+          _parent.nodes = [];
+        }
+        _parent.nodes.push(node);
+      } else {
+        bufArray.unshift(node);
+      }
+    },
+    end: function end(tag) {
+      // merge into parent tag
+      var node = bufArray.shift();
+      if (node.tag !== tag) {
+        console.error('invalid state: mismatch end tag');
+      }
+
+      // 当有缓存source资源时于于video补上src资源
+      if (node.tag === 'video' && results.source) {
+        node.attr.src = results.source;
+        delete results.source;
+      }
+
+      if (customHandler.end) {
+        customHandler.end(node, results);
+      }
+
+      if (bufArray.length === 0) {
+        results.nodes.push(node);
+      } else {
+        var parent = bufArray[0];
+        if (!parent.nodes) {
+          parent.nodes = [];
+        }
+        parent.nodes.push(node);
+      }
+    },
+    chars: function chars(text) {
+      if (!text.trim()) return;
+
+      var node = {
+        node: 'text',
+        text: text };
+
+
+      if (customHandler.chars) {
+        customHandler.chars(node, results);
+      }
+
+      if (bufArray.length === 0) {
+        results.nodes.push(node);
+      } else {
+        var parent = bufArray[0];
+        if (parent.nodes === undefined) {
+          parent.nodes = [];
+        }
+        parent.nodes.push(node);
+      }
+    } });
+
+
+  return results;
+}var _default =
+
+html2json;exports.default = _default;
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\libs\\htmlparser.js":
+/*!*****************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/libs/htmlparser.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
+                                                                                                      *
+                                                                                                      * htmlParser改造自: https://github.com/blowsie/Pure-JavaScript-HTML5-Parser
+                                                                                                      *
+                                                                                                      * author: Di (微信小程序开发工程师)
+                                                                                                      * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
+                                                                                                      *               垂直微信小程序开发交流社区
+                                                                                                      *
+                                                                                                      * github地址: https://github.com/icindy/wxParse
+                                                                                                      *
+                                                                                                      * for: 微信小程序富文本解析
+                                                                                                      * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
+                                                                                                      */
+// Regular Expressions for parsing tags and attributes
+
+var startTag = /^<([-A-Za-z0-9_]+)((?:\s+[a-zA-Z0-9_:][-a-zA-Z0-9_:.]*(?:\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^>\s]+))?)*)\s*(\/?)>/;
+var endTag = /^<\/([-A-Za-z0-9_]+)[^>]*>/;
+var attr = /([a-zA-Z0-9_:][-a-zA-Z0-9_:.]*)(?:\s*=\s*(?:(?:"((?:\\.|[^"])*)")|(?:'((?:\\.|[^'])*)')|([^>\s]+)))?/g;
+
+function makeMap(str) {
+  var obj = {};
+  var items = str.split(',');
+  for (var i = 0; i < items.length; i += 1) {obj[items[i]] = true;}
+  return obj;
+}
+
+// Empty Elements - HTML 5
+var empty = makeMap('area,base,basefont,br,col,frame,hr,img,input,link,meta,param,embed,command,keygen,source,track,wbr');
+
+// Block Elements - HTML 5
+var block = makeMap('address,code,article,applet,aside,audio,blockquote,button,canvas,center,dd,del,dir,div,dl,dt,fieldset,figcaption,figure,footer,form,frameset,h1,h2,h3,h4,h5,h6,header,hgroup,hr,iframe,ins,isindex,li,map,menu,noframes,noscript,object,ol,output,p,pre,section,script,table,tbody,td,tfoot,th,thead,tr,ul,video');
+
+// Inline Elements - HTML 5
+var inline = makeMap('a,abbr,acronym,applet,b,basefont,bdo,big,br,button,cite,del,dfn,em,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,span,strike,strong,sub,sup,textarea,tt,u,var');
+
+// Elements that you can, intentionally, leave open
+// (and which close themselves)
+var closeSelf = makeMap('colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr');
+
+// Attributes that have their values filled in disabled="disabled"
+var fillAttrs = makeMap('checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected');
+
+function HTMLParser(html, handler) {
+  var index;
+  var chars;
+  var match;
+  var last = html;
+  var stack = [];
+
+  stack.last = function () {return stack[stack.length - 1];};
+
+  function parseEndTag(tag, tagName) {
+    // If no tag name is provided, clean shop
+    var pos;
+    if (!tagName) {
+      pos = 0;
+    } else {
+      // Find the closest opened tag of the same type
+      tagName = tagName.toLowerCase();
+      for (pos = stack.length - 1; pos >= 0; pos -= 1) {
+        if (stack[pos] === tagName) break;
+      }
+    }
+    if (pos >= 0) {
+      // Close all the open elements, up the stack
+      for (var i = stack.length - 1; i >= pos; i -= 1) {
+        if (handler.end) handler.end(stack[i]);
+      }
+
+      // Remove the open elements from the stack
+      stack.length = pos;
+    }
+  }
+
+  function parseStartTag(tag, tagName, rest, unary) {
+    tagName = tagName.toLowerCase();
+
+    if (block[tagName]) {
+      while (stack.last() && inline[stack.last()]) {
+        parseEndTag('', stack.last());
+      }
+    }
+
+    if (closeSelf[tagName] && stack.last() === tagName) {
+      parseEndTag('', tagName);
+    }
+
+    unary = empty[tagName] || !!unary;
+
+    if (!unary) stack.push(tagName);
+
+    if (handler.start) {
+      var attrs = [];
+
+      rest.replace(attr, function genAttr(matches, name) {
+        var value = arguments[2] || arguments[3] || arguments[4] || (fillAttrs[name] ? name : '');
+
+        attrs.push({
+          name: name,
+          value: value,
+          escaped: value.replace(/(^|[^\\])"/g, '$1\\"') // "
+        });
+      });
+
+      if (handler.start) {
+        handler.start(tagName, attrs, unary);
+      }
+    }
+  }
+
+  while (html) {
+    chars = true;
+
+    if (html.indexOf('</') === 0) {
+      match = html.match(endTag);
+
+      if (match) {
+        html = html.substring(match[0].length);
+        match[0].replace(endTag, parseEndTag);
+        chars = false;
+      }
+
+      // start tag
+    } else if (html.indexOf('<') === 0) {
+      match = html.match(startTag);
+
+      if (match) {
+        html = html.substring(match[0].length);
+        match[0].replace(startTag, parseStartTag);
+        chars = false;
+      }
+    }
+
+    if (chars) {
+      index = html.indexOf('<');
+      var text = '';
+      while (index === 0) {
+        text += '<';
+        html = html.substring(1);
+        index = html.indexOf('<');
+      }
+      text += index < 0 ? html : html.substring(0, index);
+      html = index < 0 ? '' : html.substring(index);
+
+      if (handler.chars) handler.chars(text);
+    }
+
+    if (html === last) throw new Error("Parse Error: ".concat(html));
+    last = html;
+  }
+
+  // Clean up any remaining tags
+  parseEndTag();
+}var _default =
+
+HTMLParser;exports.default = _default;
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\libs\\wxDiscode.js":
+/*!****************************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/libs/wxDiscode.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // HTML 支持的数学符号
+function strNumDiscode(str) {
+  str = str.replace(/&forall;/g, '∀');
+  str = str.replace(/&part;/g, '∂');
+  str = str.replace(/&exist;/g, '∃');
+  str = str.replace(/&empty;/g, '∅');
+  str = str.replace(/&nabla;/g, '∇');
+  str = str.replace(/&isin;/g, '∈');
+  str = str.replace(/&notin;/g, '∉');
+  str = str.replace(/&ni;/g, '∋');
+  str = str.replace(/&prod;/g, '∏');
+  str = str.replace(/&sum;/g, '∑');
+  str = str.replace(/&minus;/g, '−');
+  str = str.replace(/&lowast;/g, '∗');
+  str = str.replace(/&radic;/g, '√');
+  str = str.replace(/&prop;/g, '∝');
+  str = str.replace(/&infin;/g, '∞');
+  str = str.replace(/&ang;/g, '∠');
+  str = str.replace(/&and;/g, '∧');
+  str = str.replace(/&or;/g, '∨');
+  str = str.replace(/&cap;/g, '∩');
+  str = str.replace(/&cup;/g, '∪');
+  str = str.replace(/&int;/g, '∫');
+  str = str.replace(/&there4;/g, '∴');
+  str = str.replace(/&sim;/g, '∼');
+  str = str.replace(/&cong;/g, '≅');
+  str = str.replace(/&asymp;/g, '≈');
+  str = str.replace(/&ne;/g, '≠');
+  str = str.replace(/&le;/g, '≤');
+  str = str.replace(/&ge;/g, '≥');
+  str = str.replace(/&sub;/g, '⊂');
+  str = str.replace(/&sup;/g, '⊃');
+  str = str.replace(/&nsub;/g, '⊄');
+  str = str.replace(/&sube;/g, '⊆');
+  str = str.replace(/&supe;/g, '⊇');
+  str = str.replace(/&oplus;/g, '⊕');
+  str = str.replace(/&otimes;/g, '⊗');
+  str = str.replace(/&perp;/g, '⊥');
+  str = str.replace(/&sdot;/g, '⋅');
+  str = str.replace(/&plusmn;/g, "±");
+  str = str.replace(/&divide;/g, "÷");
+  return str;
+}
+
+// HTML 支持的希腊字母
+function strGreeceDiscode(str) {
+  str = str.replace(/&Alpha;/g, 'Α');
+  str = str.replace(/&Beta;/g, 'Β');
+  str = str.replace(/&Gamma;/g, 'Γ');
+  str = str.replace(/&Delta;/g, 'Δ');
+  str = str.replace(/&Epsilon;/g, 'Ε');
+  str = str.replace(/&Zeta;/g, 'Ζ');
+  str = str.replace(/&Eta;/g, 'Η');
+  str = str.replace(/&Theta;/g, 'Θ');
+  str = str.replace(/&Iota;/g, 'Ι');
+  str = str.replace(/&Kappa;/g, 'Κ');
+  str = str.replace(/&Lambda;/g, 'Λ');
+  str = str.replace(/&Mu;/g, 'Μ');
+  str = str.replace(/&Nu;/g, 'Ν');
+  str = str.replace(/&Xi;/g, 'Ν');
+  str = str.replace(/&Omicron;/g, 'Ο');
+  str = str.replace(/&Pi;/g, 'Π');
+  str = str.replace(/&Rho;/g, 'Ρ');
+  str = str.replace(/&Sigma;/g, 'Σ');
+  str = str.replace(/&Tau;/g, 'Τ');
+  str = str.replace(/&Upsilon;/g, 'Υ');
+  str = str.replace(/&Phi;/g, 'Φ');
+  str = str.replace(/&Chi;/g, 'Χ');
+  str = str.replace(/&Psi;/g, 'Ψ');
+  str = str.replace(/&Omega;/g, 'Ω');
+
+  str = str.replace(/&alpha;/g, 'α');
+  str = str.replace(/&beta;/g, 'β');
+  str = str.replace(/&gamma;/g, 'γ');
+  str = str.replace(/&delta;/g, 'δ');
+  str = str.replace(/&epsilon;/g, 'ε');
+  str = str.replace(/&zeta;/g, 'ζ');
+  str = str.replace(/&eta;/g, 'η');
+  str = str.replace(/&theta;/g, 'θ');
+  str = str.replace(/&iota;/g, 'ι');
+  str = str.replace(/&kappa;/g, 'κ');
+  str = str.replace(/&lambda;/g, 'λ');
+  str = str.replace(/&mu;/g, 'μ');
+  str = str.replace(/&nu;/g, 'ν');
+  str = str.replace(/&xi;/g, 'ξ');
+  str = str.replace(/&omicron;/g, 'ο');
+  str = str.replace(/&pi;/g, 'π');
+  str = str.replace(/&rho;/g, 'ρ');
+  str = str.replace(/&sigmaf;/g, 'ς');
+  str = str.replace(/&sigma;/g, 'σ');
+  str = str.replace(/&tau;/g, 'τ');
+  str = str.replace(/&upsilon;/g, 'υ');
+  str = str.replace(/&phi;/g, 'φ');
+  str = str.replace(/&chi;/g, 'χ');
+  str = str.replace(/&psi;/g, 'ψ');
+  str = str.replace(/&omega;/g, 'ω');
+  str = str.replace(/&thetasym;/g, 'ϑ');
+  str = str.replace(/&upsih;/g, 'ϒ');
+  str = str.replace(/&piv;/g, 'ϖ');
+  str = str.replace(/&middot;/g, '·');
+  return str;
+}
+
+function strcharacterDiscode(str) {
+  // 加入常用解析
+  str = str.replace(/&nbsp;/g, ' ');
+  str = str.replace(/&ensp;/g, ' ');
+  str = str.replace(/&emsp;/g, '　');
+  str = str.replace(/&quot;/g, "'");
+  str = str.replace(/&amp;/g, '&');
+  str = str.replace(/&lt;/g, '<');
+  str = str.replace(/&gt;/g, '>');
+  str = str.replace(/&#8226;/g, '•');
+
+  return str;
+}
+
+// HTML 支持的其他实体
+function strOtherDiscode(str) {
+  str = str.replace(/&OElig;/g, 'Œ');
+  str = str.replace(/&oelig;/g, 'œ');
+  str = str.replace(/&Scaron;/g, 'Š');
+  str = str.replace(/&scaron;/g, 'š');
+  str = str.replace(/&Yuml;/g, 'Ÿ');
+  str = str.replace(/&fnof;/g, 'ƒ');
+  str = str.replace(/&circ;/g, 'ˆ');
+  str = str.replace(/&tilde;/g, '˜');
+  str = str.replace(/&ensp;/g, '');
+  str = str.replace(/&emsp;/g, '');
+  str = str.replace(/&thinsp;/g, '');
+  str = str.replace(/&zwnj;/g, '');
+  str = str.replace(/&zwj;/g, '');
+  str = str.replace(/&lrm;/g, '');
+  str = str.replace(/&rlm;/g, '');
+  str = str.replace(/&ndash;/g, '–');
+  str = str.replace(/&mdash;/g, '—');
+  str = str.replace(/&lsquo;/g, '‘');
+  str = str.replace(/&rsquo;/g, '’');
+  str = str.replace(/&sbquo;/g, '‚');
+  str = str.replace(/&ldquo;/g, '“');
+  str = str.replace(/&rdquo;/g, '”');
+  str = str.replace(/&bdquo;/g, '„');
+  str = str.replace(/&dagger;/g, '†');
+  str = str.replace(/&Dagger;/g, '‡');
+  str = str.replace(/&bull;/g, '•');
+  str = str.replace(/&hellip;/g, '…');
+  str = str.replace(/&permil;/g, '‰');
+  str = str.replace(/&prime;/g, '′');
+  str = str.replace(/&Prime;/g, '″');
+  str = str.replace(/&lsaquo;/g, '‹');
+  str = str.replace(/&rsaquo;/g, '›');
+  str = str.replace(/&oline;/g, '‾');
+  str = str.replace(/&euro;/g, '€');
+  str = str.replace(/&trade;/g, '™');
+
+  str = str.replace(/&larr;/g, '←');
+  str = str.replace(/&uarr;/g, '↑');
+  str = str.replace(/&rarr;/g, '→');
+  str = str.replace(/&darr;/g, '↓');
+  str = str.replace(/&harr;/g, '↔');
+  str = str.replace(/&crarr;/g, '↵');
+  str = str.replace(/&lceil;/g, '⌈');
+  str = str.replace(/&rceil;/g, '⌉');
+
+  str = str.replace(/&lfloor;/g, '⌊');
+  str = str.replace(/&rfloor;/g, '⌋');
+  str = str.replace(/&loz;/g, '◊');
+  str = str.replace(/&spades;/g, '♠');
+  str = str.replace(/&clubs;/g, '♣');
+  str = str.replace(/&hearts;/g, '♥');
+
+  str = str.replace(/&diams;/g, '♦');
+  str = str.replace(/&#39;/g, "'");
+  return str;
+}
+
+function strDiscode(str) {
+  str = strNumDiscode(str);
+  str = strGreeceDiscode(str);
+  str = strcharacterDiscode(str);
+  str = strOtherDiscode(str);
+  return str;
+}
+
+function urlToHttpUrl(url, domain) {
+  if (/^\/\//.test(url)) {
+    return "https:".concat(url);
+  } else if (/^\//.test(url)) {
+    return "https://".concat(domain).concat(url);
+  }
+  return url;
+}var _default =
+
+{
+  strDiscode: strDiscode,
+  urlToHttpUrl: urlToHttpUrl };exports.default = _default;
+
+/***/ }),
+
+/***/ "F:\\helloUniapp\\news\\components\\wxParse\\wxParse.vue":
+/*!**********************************************************!*\
+  !*** F:/helloUniapp/news/components/wxParse/wxParse.vue ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* script */
+__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./wxParse.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\wxParse\\wxParse.vue")
+
+/* template */
+var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-f2b01f50!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./wxParse.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-f2b01f50!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\wxParse.vue")
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "F:\\helloUniapp\\news\\components\\wxParse\\wxParse.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {

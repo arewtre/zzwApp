@@ -1,6 +1,6 @@
 <template>
     <view>
-        <web-view :webview-styles="webviewStyles" src="http://www.chinapaper.net/zt/fushi/"></web-view>
+        <web-view :webview-styles="webviewStyles" :src="ssrc"></web-view>
     </view>
 </template>
 
@@ -16,9 +16,17 @@
 				ssrc:""
             }
         },
-		onLoad: function(event) {
-			this.ssrc=event.urlSpecia;
-			console.log(event.urlSpecia);
+		onLoad: function(event) { 
+			// 初始化列表信息
+			//setTimeout(() => {
+			    uni.getStorage({
+			        key:'urlSpecia',
+			        success: (res) => {
+					   this.ssrc=res.data;
+					   console.log( this.ssrc);
+			        }
+			    })
+			//},200)
 		}
 			
     }

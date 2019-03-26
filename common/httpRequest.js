@@ -33,7 +33,9 @@ module.exports = {
 				data: data,
 				method: "POST",
 				header: {
-					"content-type": header
+					"content-type": header,
+// 					"user":"zzw",
+// 					"pass" :"123456",
 				},
 				success: function(result) {
 					succ.call(self, result.data)  
@@ -53,7 +55,9 @@ module.exports = {
 				data: data,
 				method: "GET",
 				header: {
-					"content-type": header
+					"content-type": header,
+// 					"user"	:"zzw",
+// 					"pass" :"123456"
 				},
 				success: function(result) {
 					console.log(result);

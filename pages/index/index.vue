@@ -33,6 +33,12 @@
 			</view>
 		</view>
 		<!-- banner -->
+		
+		<uni-notice-bar 
+			show-icon="true" 
+			scrollable="true" single="true" 
+			:text="gonggaodatalist.title">
+		</uni-notice-bar>
 
 		<!-- 导航栏板块 -->
 		<view class="index-navlist s-grids has-bg-white has-pdtb-10" v-if="navlist.length > 0">
@@ -67,7 +73,10 @@
 				<text class="fl-jutext">热门资讯</text>
 				<text class="fr-jutext">更多热门</text>
 			</view>
-			<news-list :data="zixundatalist"></news-list>
+			<!-- <uniMediaList :data="zixundatalist"></uniMediaList> -->
+			<block v-for="(newsItem, newsIndex) in zixundatalist" :key="newsIndex">
+				<uni-index-list :data="newsItem" @close="dislike(tabIndex, newsIndex)" @click="goDetail(newsItem)"></uni-index-list>
+			</block>
 		</view>
 		<!-- 热门资讯 -->
 		
@@ -77,7 +86,10 @@
 				<text class="fl-jutext">视点</text>
 				<text class="fr-jutext">更多视点</text>
 			</view>
-			<news-list :data="shidiantidatalist"></news-list>
+			<block v-for="(newsItem, newsIndex) in shidiantidatalist" :key="newsIndex">
+				<uni-index-list :data="newsItem" @close="dislike(tabIndex, newsIndex)" @click="goDetail(newsItem)"></uni-index-list>
+			</block>
+			<!-- <news-list :data="shidiantidatalist"></news-list> -->
 		</view>
 		<!-- 视点 -->
 		
@@ -93,10 +105,17 @@
 <script>
 	// import cmdIcon from "@/components/cmd-icon/cmd-icon.vue";
 	import newsList from '@/components/newslist/newslist.vue';
+	import uniNoticeBar from "@/components/uni-notice-bar/uni-notice-bar.vue";
+	import uniIndexList from '@/components/uni-index-list/uni-index-list.vue';
+	import {
+		friendlyDate
+	} from '@/common/util.js';
 	export default {
 		components: {
 			// cmdIcon,
-			newsList
+			newsList,
+			uniNoticeBar,
+			uniIndexList
 		},
 		data() {
 			return {
@@ -106,6 +125,7 @@
 				zhuantidatalist:[],
 				shidiantidatalist:[],
 				couponlist: [],
+				gonggaodatalist: [],
 				page: 1,
 				loadingType: 0,
 				contentText: {
@@ -118,8 +138,8 @@
 		methods: {
 			loadBanner: function(Refresh) {
 				var indexBanner = this.$SysCache.get("app_index_banner");
-				//console.log(indexBanner);
-				if(indexBanner && Refresh == undefined ){
+				//console.log(JSON.stringify(indexBanner));
+				if(indexBanner && Refresh == undefined ){ 
 					this.banner  = indexBanner;
 				}else{
 					this.$Request.post(this.$api.home.banner).then(res => {
@@ -155,8 +175,21 @@
 					this.$Request.post(this.$api.home.sydata,{thumb:1}).then(res => {
 						//console.log(res.data);
 						if (res.code == "0000") {
-							this.zixundatalist =  res.data;
-							this.$SysCache.put("app_index_zixundatalist",res.data,300);
+							const datas = res.data.map((news) => {
+								return {
+									id: news.itemid,
+									article_type: 1,
+									datetime: friendlyDate(news.addtime),
+									title: news.title,
+									image_url: news.thumb,
+									source: news.editor,
+									comment_count: news.hits,
+									post_id: news.catid,
+									catname: news.catname
+								};
+							});
+							this.zixundatalist =  datas;
+							this.$SysCache.put("app_index_zixundatalist",datas,300);
 						}
 						 
 					})
@@ -180,15 +213,28 @@
 			},
 			shidianlist: function(Refresh) {
 				var indexshidiantidatalist = this.$SysCache.get("app_index_shidiantidatalist");
-				//console.log(indexBanner);
+				//console.log(indexshidiantidatalist);
 				if(indexshidiantidatalist && Refresh == undefined ){
 					this.shidiantidatalist  = indexshidiantidatalist;
 				}else{
 					this.$Request.post(this.$api.home.sydata,{moduleid:21,catid:12,pagesize:4}).then(res => {
-						//console.log(res.data);
+						console.log(res.data);
 						if (res.code == "0000") {
-							this.shidiantidatalist = res.data;
-							this.$SysCache.put("app_index_shidiantidatalist",res.data,300);
+							const datas = res.data.map((news) => {
+								return {
+									id: news.itemid,
+									article_type: 1,
+									datetime: friendlyDate(news.addtime),
+									title: news.title,
+									image_url: news.thumb,
+									source: news.editor,
+									comment_count: news.hits,
+									post_id: news.catid,
+									catname: news.catname
+								};
+							});
+							this.shidiantidatalist = datas;
+							this.$SysCache.put("app_index_shidiantidatalist",datas,300);
 						}
 						 
 					})	
@@ -229,6 +275,21 @@
 					icon: "none"
 				});
 			},
+			gonggaolist: function(Refresh) {
+				var indexgonggaodatalist = this.$SysCache.get("app_index_gonggaodatalist");
+				//console.log(indexgonggaodatalist);
+				if(indexgonggaodatalist && Refresh == undefined ){
+					this.gonggaodatalist  = indexgonggaodatalist;
+				}else{
+					this.$Request.post(this.$api.home.getgonggao,{moduleid:21}).then(res => {
+						console.log(res.data);
+						if (res.code == "0000") {
+							this.gonggaodatalist = res.data[0];
+							this.$SysCache.put("app_index_gonggaodatalist",res.data,300);
+						} 
+					})	
+				}
+			},
 			toSearchIndex:function(){
 				uni.navigateTo({
 					url:"/pages/search/index"
@@ -254,6 +315,13 @@
 					url: '/pages/detail/detail?catid=' + e.catid +'&itemid='+e.itemid,
 			    })
 			},
+			goDetail(e) {
+				console.log(e);
+				uni.navigateTo({
+					// url: '/pages/detail/detail?query=' + encodeURIComponent(JSON.stringify(detail))
+					url: '/pages/detail/detail?catid=' + e.post_id +'&itemid='+e.id
+				});
+			},
 			gpToNews(e) {
 				//console.log(e);
 				uni.setStorageSync('newsmoduleid',  e.moduleid);
@@ -269,27 +337,27 @@
 			},
 			goToSpecia(e) {
 				//console.log(e);
+				uni.setStorageSync('urlSpecia',  e.linkurl);
 			    uni.navigateTo({
-					url: '/pages/specia/detail?urlSpecia=' + e.linkurl,
+					url: '/pages/specia/detail',
 					//url:e.linkurl,
 			    })
 				
 			},
 		},
-		onLoad:function(){
-			uni.showLoading({
-				title: '玩命加载中..'
-			});
-		},
 		onReady:function(){
 			uni.hideLoading();
 		},
 		onLoad: function(Refresh) {
+			uni.showLoading({
+				title: '玩命加载中..'
+			});
 			this.loadBanner(Refresh);
 			this.loadNavList(Refresh);
 			this.zixunlist(Refresh);
 			this.zhuantilist(Refresh);
 			this.shidianlist(Refresh);
+			this.gonggaolist(Refresh);
 		},
 		onReachBottom: function() {
 			this.page = this.page + 1;
@@ -354,7 +422,7 @@
 	
 	.swiperitem {
 		/* height: 500rpx; */
-		height: 255upx;
+		height: 305upx;
 		padding: 0 20upx;
 		box-sizing: border-box;
 		position: relative;

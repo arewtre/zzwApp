@@ -46,9 +46,9 @@
 			}
 		},
 		{
-			"path": "pages/like/index",
+			"path": "pages/datas/index",
 			"style": {
-				"navigationBarTitleText": "收藏",
+				"navigationBarTitleText": "数据",
 				"app-plus": {
 					"titleNView": false,
 					"bounce": "none"
@@ -162,7 +162,7 @@
 			"path": "pages/specia/index",
 			"style": {
 				"navigationBarTitleText": "专题",
-				// "navigationBarTextStyle": "white", 
+				"navigationBarTextStyle": "white", 
  				"app-plus": {
 					"bounce": "none",
 					"titleNView": { 
@@ -189,19 +189,19 @@
 			"path": "pages/specia/detail",
 			"style": {
 				"navigationBarTitleText": "专题详情",
-				"navigationBarTextStyle": "white",
-				"app-plus": {
-					"bounce": "none",
-					"scrollIndicator": "none",
-					"titleNView": {
-						"type": "transparent",
-						"buttons": [{
-							"type": "menu"
-						}]
-					}
-
-				}
-			}
+				"navigationBarTextStyle": "white"//,
+// 				"app-plus": {
+// 					"bounce": "none",
+// 					"scrollIndicator": "none",
+// 					"titleNView": {
+// 						"type": "transparent",
+// 						"buttons": [{
+// 							"type": "menu"
+// 						}]
+// 					}
+// 
+// 				}
+			}  
 		},
 		{
 			"path" : "pages/login/login",
@@ -264,6 +264,70 @@
 				},
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/company/detail",
+			"style": {
+				"navigationBarTitleText": "公司详情",
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+								"text": "",
+								"float": "left"
+							},
+							{
+								"type": "menu"
+							}
+						]
+					}
+				}//,
+				//"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/company/introduce",
+			"style": {
+				"navigationBarTitleText": "公司介绍",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none",
+					"titleNView": {
+						"buttons": [{
+								"text": "",
+								"float": "left"
+							},
+							{
+								"type": "share"
+							}
+						]
+					}
+
+				}
+			}
+		},
+		{
+			"path": "pages/company/news",
+			"style": {
+				"navigationBarTitleText": "公司新闻",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none",
+					"titleNView": {
+						"buttons": [{
+								"text": "",
+								"float": "left"
+							},
+							{
+								"type": "share"
+							}
+						]
+					}
+
+				}
+			}
 		}
 	],
 	"tabBar": {
@@ -287,7 +351,7 @@
 			"selectedIconPath": "static/img/foot/cate-act.png",
 			"text": "分类"
 		}, {
-			"pagePath": "pages/like/index",
+			"pagePath": "pages/datas/index",
 			"iconPath": "static/img/foot/data2.png",
 			"selectedIconPath": "static/img/foot/data2-act.png",
 			"text": "数据"

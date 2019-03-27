@@ -60,7 +60,7 @@
 	//引用mSearch组件，如不需要删除即可
 	import mSearch from '@/components/mehaotian-search-revision/mehaotian-search-revision.vue';
 	import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue";
-	import uniDrawer from "@/components/uni-drawer/uni-drawer.vue"
+	import uniDrawer from "@/components/uni-drawer/uni-drawer.vue";
 	export default {
 		data() {
 			return {

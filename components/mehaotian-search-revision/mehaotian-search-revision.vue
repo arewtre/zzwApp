@@ -1,6 +1,6 @@
 <template>
 	<view class="serach">
-		<view class="titleft">资讯<uni-icon type="arrowdown" size="24"></uni-icon></view>
+		<view class="titleft" @click="chooseCate">资讯<uni-icon type="arrowdown" size="24"></uni-icon></view>
 		<view class="content" :style="{'border-radius':radius+'px'}">
 			<!-- HM修改 增加进入输入状态的点击范围 -->
 			<view class="content-box" :class="{'centers':mode === 2}" @click="getFocus">
@@ -22,16 +22,28 @@
 		<view  v-if="button === 'outside'" class="button" :class="{'active':show||active}" @click="search">
 			<view class="button-item">{{!show?searchName:'搜索'}}</view>
 		</view>
+		<mpvue-picker
+			:themeColor="themeColor"
+			ref="mpvuePicker"
+			:mode="mode"
+			:deepLength="deepLength"
+			:pickerValueDefault="pickerValueDefault"
+			@onConfirm="onConfirm"
+			@onCancel="onCancel"
+			:pickerValueArray="pickerValueArray"
+		></mpvue-picker>
 	</view>
+	
 </template>
 
 <script>
-import uniIcon from "@/components/uni-icon/uni-icon.vue"
+import uniIcon from "@/components/uni-icon/uni-icon.vue";
+import mpvuePicker from '@/components/mpvue-picker/mpvuePicker.vue';
 export default {
 	props: {
 		mode: {
 			value: Number,
-			default: 1
+			default: 1,
 		},
 		//HM修改 定义默认搜索关键词(水印文字)
 		placeholder:{
@@ -55,14 +67,44 @@ export default {
 			default: 60
 		}
 	},
-	components: {uniIcon},
+	onLoad() {
+		//this.init();
+		this.getcate();
+	},
+	components: {
+		uniIcon,
+		mpvuePicker
+	},
 	data() {
 		return {
 			active: false,
 			inputVal: '',
 			searchName: '取消',
 			isDelShow: false,
-			isFocus: false
+			isFocus: false,
+			pickerSingleArray: [
+				{
+					label: '中国',
+					value: 1
+				},
+				{
+					label: '俄罗斯',
+					value: 2
+				},
+				{
+					label: '美国',
+					value: 3
+				},
+				{
+					label: '日本',
+					value: 4
+				}
+			],
+			themeColor: '#007AFF',
+			mode: 'selector',
+			deepLength: 1,
+			pickerValueDefault: [0],
+			pickerValueArray: []
 		};
 	},
 	methods: {
@@ -85,7 +127,7 @@ export default {
 				this.isDelShow = true;
 			}
 		},
-		back(){
+		back(){ 
 			uni.switchTab({
 				url: '/pages/index/index'
 			})
@@ -123,6 +165,75 @@ export default {
 			}
 			console.log(this.inputVal); 
 			this.$emit('search', this.inputVal?this.inputVal:this.placeholder);
+		},
+		onCancel(e) {
+				console.log(e);
+		},
+		// 单列
+		showSinglePicker() {
+			this.pickerValueArray = this.navlist;
+			this.mode = 'selector';
+			this.deepLength = 1;
+			this.pickerValueDefault = [0];
+			this.$refs.mpvuePicker.show();
+		},
+		onConfirm(e) {
+			console.log(e.label);
+			this.setStyle(0, e.label);
+		},
+		/**
+		 * 修改导航栏buttons
+		 * index[number] 修改的buttons 下标索引，最右边索引为0
+		 * text[string] 需要修改的text 内容
+		 */
+		setStyle(index, text) {
+			let pages = getCurrentPages();
+			let page = pages[pages.length - 1];
+			if (text.length > 3) {
+				text = text.substr(0, 3) + '...';
+			}
+			// #ifdef APP-PLUS
+			let currentWebview = page.$getAppWebview();
+			let titleNView = currentWebview.getStyle().titleNView;
+			// 添加文字过长截取为3个字符，请根据自己业务需求更改
+			titleNView.buttons[0].text = text;
+			currentWebview.setStyle({
+				titleNView: titleNView
+			});
+			// #endif
+			// #ifdef H5
+			// h5 临时方案
+			document.getElementsByClassName('uni-btn-icon')[1].innerText = text;
+			// #endif
+		},
+		onBackPress() {
+			if (this.$refs.mpvuePicker.showPicker) {
+				this.$refs.mpvuePicker.pickerCancel();
+				return true;
+			}
+		},
+		onUnload() {
+			if (this.$refs.mpvuePicker.showPicker) {
+				this.$refs.mpvuePicker.pickerCancel();
+			}
+		},
+		chooseCate(e) {
+			this.showSinglePicker();
+		},
+		getcate(e){
+			var indexNav = this.$SysCache.get("app_index_navlist");
+			if(indexNav){
+				this.navlist = indexNav;
+			}else{
+				this.$Request.post(this.$api.home.navlist).then(res => {
+					//console.log(res.data);
+					if (res.code == "0000") {
+						this.navlist = res.data;
+						this.$SysCache.put("app_index_navlist",res.data,86400);
+					}
+				})	
+			}
+			console.log(this.navlist);
 		}
 	},
 	watch: {

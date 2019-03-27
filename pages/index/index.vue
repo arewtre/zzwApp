@@ -44,7 +44,7 @@
 		<view class="index-navlist s-grids has-bg-white has-pdtb-10" v-if="navlist.length > 0">
 			<view class="is-col-1-5 is-center" v-for="(nav,index) in navlist" :key="index" @tap="gpToNews(nav)">
 				<view class="has-pdtb-5">
-					<!-- <image :src="nav.image" mode="widthFix"></image> -->
+					<image src="../../static/img/company/home-contact.png" mode="widthFix"></image>
 					<view class="is-size-14">{{nav['title']}}</view>
 				</view>
 			</view>

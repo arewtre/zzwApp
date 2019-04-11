@@ -1,0 +1,16 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "资金流水",
+  "bounce": "none",
+  "titleNView": {
+    "buttons": [
+      {
+        "fontSrc": "/static/font/iconfont.ttf",
+        "text": "",
+        "fontSize": "20",
+        "color": "#FFFFFF",
+        "background": "rgba(0,0,0,0)"
+      }
+    ]
+  }
+}

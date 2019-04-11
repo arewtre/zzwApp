@@ -1,0 +1,18 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "公司新闻",
+  "navigationBarTextStyle": "white",
+  "bounce": "none",
+  "scrollIndicator": "none",
+  "titleNView": {
+    "buttons": [
+      {
+        "text": "",
+        "float": "left"
+      },
+      {
+        "type": "share"
+      }
+    ]
+  }
+}

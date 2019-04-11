@@ -1,0 +1,16 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "积分记录",
+  "bounce": "none",
+  "titleNView": {
+    "buttons": [
+      {
+        "fontSrc": "/static/font/iconfont.ttf",
+        "text": "",
+        "fontSize": "20",
+        "color": "#FFFFFF",
+        "background": "rgba(0,0,0,0)"
+      }
+    ]
+  }
+}

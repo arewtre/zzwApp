@@ -1,0 +1,9 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "信息管理",
+  "bounce": "none",
+  "titleNView": {
+    "type": "transparent",
+    "buttons": []
+  }
+}

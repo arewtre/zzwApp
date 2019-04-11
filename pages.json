@@ -95,6 +95,72 @@
 			}
 		},
 		{
+			"path": "pages/ucenter/record",
+			"style": {
+				"navigationBarTitleText": "资金流水",
+				// #ifdef MP
+				"navigationStyle": "custom",
+				// #endif
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						// "type": "transparent",
+						"buttons": [
+							{
+								"fontSrc": "/static/font/iconfont.ttf",
+								"text": "\ue633",
+								"fontSize": "20",
+								"color":"#FFFFFF",
+								"background": "rgba(0,0,0,0)"//,
+								// "redDot": true
+							}
+						]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/ucenter/point",
+			"style": {
+				"navigationBarTitleText": "积分记录",
+				// #ifdef MP
+				"navigationStyle": "custom",
+				// #endif
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						// "type": "transparent",
+						"buttons": [
+							{
+								"fontSrc": "/static/font/iconfont.ttf",
+								"text": "\ue633",
+								"fontSize": "20",
+								"color":"#FFFFFF",
+								"background": "rgba(0,0,0,0)"//,
+								// "redDot": true
+							}
+						]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/ucenter/info",
+			"style": {
+				"navigationBarTitleText": "信息管理",
+				// #ifdef MP
+				"navigationStyle": "custom",
+				// #endif
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"type": "transparent",
+						"buttons": [] 
+					}
+				}
+			}
+		},
+		{
 			"path": "pages/detail/detail",
 			"style": {
 				"navigationBarTitleText": "文章详情",

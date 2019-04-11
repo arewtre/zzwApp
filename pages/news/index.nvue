@@ -174,7 +174,7 @@
 							}
 							activeTab.page = activeTab.page+1;
 							if(data.length<10){
-								activeTab.loadingText="没有更多数据了";	 	 						
+								activeTab.loadingText="没有更多数据了!";	 	 						
 							}
 							uni.removeStorage({
 								key: 'cateKeywords',

@@ -1,9 +1,0 @@
-{
-  "usingComponents": {},
-  "backgroundColor": "#f5f6f8",
-  "navigationBarTitleText": "搜索",
-  "navigationBarTextStyle": "white",
-  "navigationStyle": "custom",
-  "titleNView": false,
-  "bounce": "none"
-}

@@ -1,6 +1,6 @@
 <template>
 	<view class="serach">
-		<view class="titleft" @click="chooseCate">资讯<uni-icon type="arrowdown" size="24"></uni-icon></view>
+		<view class="titleft" @click="chooseCate">{{defaultcate}}<text class="iconfont icon-xiajiantous"></text></view>
 		<view class="content" :style="{'border-radius':radius+'px'}">
 			<!-- HM修改 增加进入输入状态的点击范围 -->
 			<view class="content-box" :class="{'centers':mode === 2}" @click="getFocus">
@@ -25,7 +25,7 @@
 		<mpvue-picker
 			:themeColor="themeColor"
 			ref="mpvuePicker"
-			:mode="mode"
+			:mode="modes"
 			:deepLength="deepLength"
 			:pickerValueDefault="pickerValueDefault"
 			@onConfirm="onConfirm"
@@ -80,35 +80,48 @@ export default {
 			active: false,
 			inputVal: '',
 			searchName: '取消',
+			defaultcate:"资讯",
 			isDelShow: false,
 			isFocus: false,
-			pickerSingleArray: [
-				{
-					label: '中国',
-					value: 1
-				},
-				{
-					label: '俄罗斯',
-					value: 2
-				},
-				{
-					label: '美国',
-					value: 3
-				},
-				{
-					label: '日本',
-					value: 4
-				}
-			],
+			catid:21,
 			themeColor: '#007AFF',
-			mode: 'selector',
+			modes: '',
 			deepLength: 1,
-			pickerValueDefault: [0],
+			pickerValueDefault: [3],
 			pickerValueArray: []
 		};
 	},
 	methods: {
 		//HM修改 触发组件confirm事件
+		getcate(){			
+			this.moduleid = uni.getStorageSync('newsmoduleid');
+			var cateNav = this.$SysCache.get("app_cate_navlist");
+			if(cateNav){
+				this.pickerValueArray = cateNav;
+				this.pickerValueArray.forEach((cate) => {
+					if(cate.moduleid==this.moduleid ){
+						this.defaultcate = cate.title;
+					}
+				});
+			}else{
+				this.$Request.post(this.$api.home.navlist).then(res => {
+					if (res.code == "0000") {
+						this.pickerValueArray = res.data;
+						this.pickerValueArray.forEach((cate) => {
+							cate.label = cate.title;
+							cate.value = cate.moduleid; 
+							if(cate.moduleid==this.moduleid ){
+								this.defaultcate = cate.title;
+								console.log(JSON.stringify(this.defaultcate));
+							}
+						});
+						
+						this.$SysCache.put("app_cate_navlist",this.pickerValueArray,86400);
+					}
+				})	
+			}
+			// console.log(this.pickerValueArray);
+		},
 		triggerConfirm(){
 			this.$emit('confirm', false);
 		},
@@ -128,9 +141,12 @@ export default {
 			}
 		},
 		back(){ 
-			uni.switchTab({
-				url: '/pages/index/index'
-			})
+// 			uni.switchTab({
+// 				url: '/pages/index/index'
+// 			})
+			uni.navigateBack({
+				delta: 1
+			});
 			
 		},
 		blur() {
@@ -163,7 +179,7 @@ export default {
 					return;
 				}
 			}
-			console.log(this.inputVal); 
+			//console.log(this.inputVal); 
 			this.$emit('search', this.inputVal?this.inputVal:this.placeholder);
 		},
 		onCancel(e) {
@@ -171,15 +187,19 @@ export default {
 		},
 		// 单列
 		showSinglePicker() {
-			this.pickerValueArray = this.navlist;
-			this.mode = 'selector';
+			//this.pickerValueArray = this.navlist;
+			this.getcate();
+			this.modes = "selector";
 			this.deepLength = 1;
 			this.pickerValueDefault = [0];
 			this.$refs.mpvuePicker.show();
+			//console.log(this.pickerValueArray);
 		},
 		onConfirm(e) {
-			console.log(e.label);
-			this.setStyle(0, e.label);
+			//console.log(e);
+			this.defaultcate = e.label;
+			this.catid =  e.value[0];
+			uni.setStorageSync('newsmoduleid',  e.value[0]);
 		},
 		/**
 		 * 修改导航栏buttons
@@ -219,22 +239,9 @@ export default {
 		},
 		chooseCate(e) {
 			this.showSinglePicker();
+			
 		},
-		getcate(e){
-			var indexNav = this.$SysCache.get("app_index_navlist");
-			if(indexNav){
-				this.navlist = indexNav;
-			}else{
-				this.$Request.post(this.$api.home.navlist).then(res => {
-					//console.log(res.data);
-					if (res.code == "0000") {
-						this.navlist = res.data;
-						this.$SysCache.put("app_index_navlist",res.data,86400);
-					}
-				})	
-			}
-			console.log(this.navlist);
-		}
+		
 	},
 	watch: {
 		inputVal(newVal) {

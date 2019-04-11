@@ -1,0 +1,401 @@
+{
+	"pages": [{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "中纸网",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"pullToRefresh": {
+						"style": "circle",
+						"color": "#FD575C",
+						"offset": "60px"
+					}
+				},
+				"navigationStyle": "custom"
+			}
+		},
+		
+		{
+			"path": "pages/cate/index",
+			"style": {
+				"navigationBarTitleText": "分类",
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"searchInput": {
+							"borderRadius": "10px",
+							"placeholder": "请输入关键字搜索",
+							"placeholderColor": "#fff"
+						},
+						"buttons": [{
+								"text": "",
+								"float": "left"
+							},
+							{
+								"type": "menu"
+							}
+						]
+					}
+				},
+
+
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/datas/index",
+			"style": {
+				"navigationBarTitleText": "数据",
+				"app-plus": {
+					// "titleNView": false,
+					"bounce": "none"
+				}
+			}
+		},
+		{
+		    "path" : "pages/set/set",
+		    "style" : {
+		        "navigationBarTitleText" : "设置"
+		    }
+		},
+		{
+			"path": "pages/ucenter/ucenter",
+			"style": {
+				"navigationBarTitleText": "我的",
+				// #ifdef MP
+				"navigationStyle": "custom",
+				// #endif
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"type": "transparent",
+						"buttons": [
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue60f",
+								"fontSize": "24",
+								"color":"#303133", 
+								"width":"46px",
+								"background": "rgba(0,0,0,0)"
+							},
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue744",
+								"fontSize": "28",
+								"color":"#303133",
+								"background": "rgba(0,0,0,0)",
+								"redDot": true
+							}
+						]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": "文章详情",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none",
+					"titleNView": {
+						"type": "transparent",
+						"buttons": [{
+							"type": "menu"
+							//"type": "share"
+						}]
+					}
+
+				}
+			}
+		},
+		{
+			"path": "pages/search/index",
+			"style": {
+				"backgroundColor": "#f5f6f8",
+				"navigationBarTitleText": "搜索",
+				"navigationBarTextStyle": "white",  
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none"
+				},
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/news/index",
+			"style": {
+				"navigationBarTitleText": "文章列表",   
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": {
+						// "type": "transparent",
+						"titleColor": "#fff",
+						"backgroundColor": "#fc2c5d",
+						"buttons": [{
+								"text": "",
+								"float": "left"
+							},
+							{
+								"type": "menu"
+							}
+						],
+						"searchInput": {
+							"backgroundColor": "#fff", 
+							"borderRadius": "6px",
+							"placeholder": "请输入关键字查询",
+							"disabled": true
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/specia/index",
+			"style": {
+				"navigationBarTitleText": "专题",
+				"navigationBarTextStyle": "white", 
+ 				"app-plus": {
+					"bounce": "none",
+					"titleNView": { 
+						"searchInput": {
+							"borderRadius": "10px",
+							"placeholder": "请输入关键字搜索",
+							"placeholderColor": "#fff",
+							"font-size":"13px"
+						},
+						"buttons": [{
+								"text": "",
+								"float": "left"
+							},
+							{
+								"type": "menu"
+							}
+						]
+					}
+				}
+				
+			}
+		},
+		{
+			"path": "pages/specia/detail",
+			"style": {
+				"navigationBarTitleText": "专题详情",
+				"navigationBarTextStyle": "white"//,
+// 				"app-plus": {
+// 					"bounce": "none",
+// 					"scrollIndicator": "none",
+// 					"titleNView": {
+// 						"type": "transparent",
+// 						"buttons": [{
+// 							"type": "menu"
+// 						}]
+// 					}
+// 
+// 				}
+			}  
+		},
+		{
+			"path" : "pages/login/login",
+			"style" : {
+				"backgroundColor": "#f5f6f8",
+				"navigationBarTitleText": "登录",
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none",
+					"titleNView": {
+						"type": "transparent"//,
+// 						"buttons": [{
+// 							"type": "menu"
+// 						}]
+					}
+				
+				}
+			}
+		}
+		,{
+			"path" : "pages/find-pwd/find-pwd",
+			"style" : {
+				"navigationBarTitleText":"找回密码"
+			}
+		}
+		,{
+			"path" : "pages/reg/reg",
+			"style" : {
+				"navigationBarTitleText": "注册"
+			}
+		}
+		,{
+			"path" : "pages/reg-pwd/reg-pwd",
+			"style" : {
+				"navigationBarTitleText": "注册"
+			}
+		},
+		{
+			"path": "pages/company/index",
+			"style": {
+				"navigationBarTitleText": "公司列表",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"searchInput": {
+							"borderRadius": "10px",
+							"placeholder": "请输入关键字搜索",
+							"placeholderColor": "#fff",
+							"font-size":"13px"
+						},
+						"buttons": [{
+								"text": "",
+								"float": "left"
+							},
+							{
+								"type": "menu"
+							}
+						]
+					}
+				},
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/company/detail",
+			"style": {
+				"navigationBarTitleText": "公司详情",
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+								"text": "",
+								"float": "left"
+							},
+							{
+								"type": "menu"
+							}
+						]
+					}
+				}//,
+				//"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/company/introduce",
+			"style": {
+				"navigationBarTitleText": "公司介绍",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none",
+					"titleNView": {
+						"buttons": [{
+								"text": "",
+								"float": "left"
+							},
+							{
+								"type": "share"
+							}
+						]
+					}
+
+				}
+			}
+		},
+		{
+			"path": "pages/company/news",
+			"style": {
+				"navigationBarTitleText": "公司新闻",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none",
+					"titleNView": {
+						"buttons": [{
+								"text": "",
+								"float": "left"
+							},
+							{
+								"type": "share"
+							}
+						]
+					}
+
+				}
+			}
+		},
+		{
+			"path": "pages/detail/goodsinfo",
+			"style": {
+				"navigationBarTitleText": "商品详情",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none",
+					"titleNView": {
+						"buttons": [{
+								"text": "",
+								"float": "left"
+							},
+							{
+								"type": "share"
+							}
+						] 
+					}
+
+				}
+			}
+		}
+	],
+	"tabBar": {
+		"color": "#666666",
+		"selectedColor": "#FD575C",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/img/foot/home.png",
+			"selectedIconPath": "static/img/foot/home-act.png",
+			"text": "首页"
+		}, {
+			"pagePath": "pages/specia/index",
+			"iconPath": "static/img/foot/zhuanti.png",
+			"selectedIconPath": "static/img/foot/zhuanti-act.png",
+			"text": "专题"
+		}, {
+			"pagePath": "pages/cate/index",
+			"iconPath": "static/img/foot/cate.png",
+			"selectedIconPath": "static/img/foot/cate-act.png",
+			"text": "分类"
+		}, {
+			"pagePath": "pages/datas/index",
+			"iconPath": "static/img/foot/data2.png",
+			"selectedIconPath": "static/img/foot/data2-act.png",
+			"text": "数据"
+		}, {
+			"pagePath": "pages/ucenter/ucenter",
+			"iconPath": "static/img/foot/my.png",
+			"selectedIconPath": "static/img/foot/my-act.png",
+			"text": "我的"
+		}]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "中纸网",
+		"navigationBarBackgroundColor": "#fc2c5d",
+		//"navigationBarBackgroundColor": "#DC0000",
+		"backgroundColor": "#FFFFFF"
+	},
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "", //模式名称
+				"path": "", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			}
+		]
+	}
+}

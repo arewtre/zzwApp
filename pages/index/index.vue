@@ -12,7 +12,7 @@
 					</view>
 				</view>
 				<view class="icon_suji" @tap="toZujiIndex">
-					<text class="iconfont icon-wode"></text> 
+					<text class="iconfont icon-profile"></text> 
 				</view>
 			</view>
 		</view>
@@ -34,17 +34,27 @@
 		</view>
 		<!-- banner -->
 		
-		<uni-notice-bar 
+		<!-- <uni-notice-bar 
 			show-icon="true" 
 			scrollable="true" single="true" 
 			:text="gonggaodatalist.title">
-		</uni-notice-bar>
+		</uni-notice-bar> -->
+		<view class="uni-swiper-msg">
+			<view class="uni-swiper-msg-icon">
+				<image src="/static/img/toutiao.png" mode="widthFix"></image>
+			</view>
+			<swiper vertical="true"  autoplay="true" circular="true" interval="5000">
+				<swiper-item v-for="(item, index) in gonggaodatalist" :key="index"  @click="gpToDetail(item)">
+					<navigator>{{item.title}}</navigator>
+				</swiper-item>
+			</swiper>
+		</view>
 
 		<!-- 导航栏板块 -->
 		<view class="index-navlist s-grids has-bg-white has-pdtb-10" v-if="navlist.length > 0">
 			<view class="is-col-1-5 is-center" v-for="(nav,index) in navlist" :key="index" @tap="gpToNews(nav)">
 				<view class="has-pdtb-5">
-					<image src="../../static/img/company/home-contact.png" mode="widthFix"></image>
+					<image :src="nav.thumb" mode="widthFix"></image>
 					<view class="is-size-14">{{nav['title']}}</view>
 				</view>
 			</view>
@@ -218,7 +228,7 @@
 					this.shidiantidatalist  = indexshidiantidatalist;
 				}else{
 					this.$Request.post(this.$api.home.sydata,{moduleid:21,catid:12,pagesize:4}).then(res => {
-						console.log(res.data);
+						// console.log(res.data);
 						if (res.code == "0000") {
 							const datas = res.data.map((news) => {
 								return {
@@ -282,9 +292,10 @@
 					this.gonggaodatalist  = indexgonggaodatalist;
 				}else{
 					this.$Request.post(this.$api.home.getgonggao,{moduleid:21}).then(res => {
-						console.log(res.data);
+						// console.log(res.data);
 						if (res.code == "0000") {
-							this.gonggaodatalist = res.data[0];
+							// this.gonggaodatalist = res.data[0];
+							this.gonggaodatalist = res.data;
 							this.$SysCache.put("app_index_gonggaodatalist",res.data,300);
 						} 
 					})	
@@ -292,12 +303,12 @@
 			},
 			toSearchIndex:function(){
 				uni.navigateTo({
-					url:"/pages/search/index"
+					url:"/pages/search/index",
 				})
 			},
 			toZujiIndex:function(){
 				uni.switchTab({
-					url:"/pages/ucenter/ucenter"
+					url:"/pages/ucenter/ucenter",
 				})
 			},
 			getSydata:function(moduleid,catid,pagesize){
@@ -379,10 +390,13 @@
 <style>
 	
 	@import "../../static/css/index.css";
+	@import "../../static/css/uni.css";
+	.icon-profile{
+		font-size:44upx
+	}
 	.logo image{
 		width:180rpx;
 		height:72rpx; 
-		
 		display:flex;
 		position:absolute;
 		left:18rpx;
@@ -399,7 +413,7 @@
 		position:absolute;
 		height:48rpx;
 		line-height:48rpx;
-		width:710rpx;
+		width:750rpx;
 		bottom:0;
 		left:0;
 		text-align:center;
@@ -497,5 +511,20 @@
 	}
 	.zhankai .iconfont{
 		margin-left: 10upx;
+	}
+	
+	/* 公告 */
+	.uni-swiper-msg{
+		width: 90%;
+		padding-left:20upx;
+		padding-right:20upx;
+	}
+	.has-pdtb-10 {
+		padding-left:4upx;
+		padding-right:4upx;
+	}
+	.has-pd-10{
+		padding-left:26upx !important;
+		padding-right:26upx !important;
 	}
 </style>

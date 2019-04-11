@@ -36,7 +36,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	padding-top: 16upx;
+	padding-top: 18upx;
 	margin: 0 120rpx 0 220rpx;
 	padding-bottom: 16upx;
 }
@@ -74,9 +74,9 @@
 
 .icon_header .icon_suji {
 	position: absolute;
-	top: 0rpx;
+	top: 8upx;
 	height:92upx;
-	text-align: center;
+	text-align: center; 
 	right: 30upx;
 	color: #fff;
 }
@@ -92,13 +92,17 @@
 .index-content .index-banner {
 	padding-top: 92upx;
 	/* #ifdef APP-PLUS */
-	width: 380upx;
-	height:380upx;
+	width: 480upx;
+	height:480upx;
 	/* #endif */
 	width: 100%;
 }
 uni-swiper{
+	
 	height:370upx;
+	/* #ifdef APP-PLUS */
+	height:480upx;
+	/* #endif */
 }
 /* #ifdef APP-PLUS */
 .swiper,.swiper-container{
@@ -106,7 +110,11 @@ uni-swiper{
 }
 /* #endif */
 .index-content .index-banner swiper-item {
-	height: 380upx;
+	height: 480upx;
+	/* #ifdef APP-PLUS */
+	height:380upx;
+	/* #endif */
+	
 }
 
 .index-content .index-banner .swiper .swiper-container image {
@@ -124,7 +132,7 @@ uni-swiper{
 }
 
 .index-content .home_ant_juhuasuan {
-	padding: 0px 10px;
+	padding: 0px 26upx;
 	border-bottom: 10upx solid #f2f2f2
 }
 
@@ -543,6 +551,39 @@ uni-swiper{
 	display: block;
 }
 
+.scroll_top {
+	background: rgba(51, 51, 51, .8);
+	width: 35px;
+	height: 35px;
+	border-radius: 35px;
+	-moz-border-radius: 35px;
+	-webkit-border-radius: 35px;
+	-o-border-radius: 35px;
+	-ms-border-radius: 35px;
+	text-align: center;
+	line-height: 35px;
+	color: #fff;
+	position: fixed;
+	z-index: 1;
+	zoom: 1;
+	right: 20px;
+	bottom: 25px;
+	opacity: 0;
+	-webkit-transform: translateY(100px) translateX(0);
+	transform: translateY(100px) translateX(0);
+	transition: all .4s ease 0s;
+	-o-transition: all .4s ease 0s;
+	-moz-transition: all .4s ease 0s;
+	-webkit-transition: all .4s ease 0s;
+	transform-origin: center;
+}
+
+.scroll_top.active {
+	opacity: 1;
+	-webkit-transform: translateY(-25px) translateX(0);
+	transform: translateY(-25px) translateX(0);
+}
+
 .index-goods .goods_quan .row {
 	display: block;
 	position: absolute;
@@ -598,39 +639,6 @@ uni-swiper{
 .hr10 {
 	background: #F5F5F5;
 	height: 10upx;
-}
-
-.scroll_top {
-	background: rgba(51, 51, 51, .8);
-	width: 35px;
-	height: 35px;
-	border-radius: 35px;
-	-moz-border-radius: 35px;
-	-webkit-border-radius: 35px;
-	-o-border-radius: 35px;
-	-ms-border-radius: 35px;
-	text-align: center;
-	line-height: 35px;
-	color: #fff;
-	position: fixed;
-	z-index: 1;
-	zoom: 1;
-	right: 20px;
-	bottom: 25px;
-	opacity: 0;
-	-webkit-transform: translateY(100px) translateX(0);
-	transform: translateY(100px) translateX(0);
-	transition: all .4s ease 0s;
-	-o-transition: all .4s ease 0s;
-	-moz-transition: all .4s ease 0s;
-	-webkit-transition: all .4s ease 0s;
-	transform-origin: center;
-}
-
-.scroll_top.active {
-	opacity: 1;
-	-webkit-transform: translateY(-25px) translateX(0);
-	transform: translateY(-25px) translateX(0);
 }
 
 .index-goods .goods_shop {}
@@ -1059,9 +1067,6 @@ uni-swiper{
 	overflow: hidden;
 }
 
-/*
-	9.9包邮
-*/
 .jiu-page .main-title {
 	background: -moz-linear-gradient(left, #FA4DBE 0, #FBAA58 100%);
 	background: -webkit-gradient(linear, left top, left right, color-stop(0, #FA4DBE), color-stop(100%, #FBAA58));

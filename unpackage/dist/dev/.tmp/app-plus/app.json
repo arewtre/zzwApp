@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/cate/index",
+    "pages/set/set",
     "pages/ucenter/ucenter",
     "pages/detail/detail",
     "pages/search/index",
@@ -12,7 +13,8 @@
     "pages/reg-pwd/reg-pwd",
     "pages/company/detail",
     "pages/company/introduce",
-    "pages/company/news"
+    "pages/company/news",
+    "pages/detail/goodsinfo"
   ],
   "subPackages": [],
   "window": {
@@ -64,7 +66,9 @@
     "pages": {
       "pages/company/index.html": {
         "window": {
+          "usingComponents": {},
           "navigationBarTitleText": "公司列表",
+          "enablePullDownRefresh": true,
           "navigationStyle": "custom",
           "bounce": "none",
           "titleNView": {
@@ -88,6 +92,7 @@
       },
       "pages/specia/index.html": {
         "window": {
+          "usingComponents": {},
           "navigationBarTitleText": "专题",
           "navigationBarTextStyle": "white",
           "bounce": "none",
@@ -112,23 +117,18 @@
       },
       "pages/news/index.html": {
         "window": {
+          "usingComponents": {},
           "navigationBarTitleText": "文章列表",
-          "navigationStyle": "custom",
-          "bounce": "none",
+          "navigationBarTextStyle": "white",
           "titleNView": {
-            "searchInput": {
-              "borderRadius": "10px",
-              "placeholder": "请输入关键字搜索",
-              "placeholderColor": "#fff",
-              "font-size": "13px"
-            },
+            "titleColor": "#fff",
+            "backgroundColor": "#fc2c5d",
             "buttons": [
               {
-                "text": "",
-                "float": "left"
-              },
-              {
-                "type": "menu"
+                "text": "",
+                "fontSrc": "/static/font/iconfont.ttf",
+                "fontSize": "20px",
+                "float": "right"
               }
             ]
           }
@@ -136,9 +136,8 @@
       },
       "pages/datas/index.html": {
         "window": {
+          "usingComponents": {},
           "navigationBarTitleText": "数据",
-          "navigationStyle": "custom",
-          "titleNView": false,
           "bounce": "none"
         }
       }
@@ -148,5 +147,6 @@
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
-  "appname": "中纸资讯"
+  "appname": "中纸网",
+  "compilerVersion": "1.8.2"
 }

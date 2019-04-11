@@ -11,7 +11,9 @@ module.exports = {
 		newscatedata:"getData.php?ac=newscatedata", // 文章分类数据
 		getsearchdata:"getData.php?ac=getSearchData",//获取热门搜索
 		getcate:"getData.php?ac=getcate",//获取热门搜索
-		getgonggao:"getData.php?ac=getgonggao"//获取热门搜索
+		getgonggao:"getData.php?ac=getgonggao",//获取热门搜索
+		getComment:"getData.php?ac=getComment",//获取评论数据
+		addComment:"getData.php?ac=addComment",//评论
 	},
 	common:{
 		couponlist:"index/couponlist", // 公共加载商品
@@ -22,7 +24,7 @@ module.exports = {
 		checkLogin:"getData.php?ac=checkLogin"//登录
 	},
 	company:{
-		getCompanyList:"company.php"
+		getCompanyList:"company.php"//获取公司数据
 	},
 	goods:{
 		iteminfo:"items/goodsinfo", // 商品详情 加载 

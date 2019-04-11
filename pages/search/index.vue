@@ -75,8 +75,13 @@
 				moduleid:21
 			}
 		},
-		onLoad() {
+		onLoad(event) {
+			//console.log(JSON.stringify(event));
+			if(event.moduleid){
+				this.moduleid = event.moduleid;
+			}
 			//this.init();
+			uni.setStorageSync('newsmoduleid',  this.moduleid);
 			this.loadDefaultKeyword();
 			this.loadOldKeyword();
 			this.loadHotKeyword();
@@ -89,6 +94,7 @@
 					{tag:'font',id:'font',text:'原生控件',textStyles:{size:'18px'}}
 				]
 			);
+			
 		},
 // 		onHide:function(option){
 // 			this.global.ntitlebar.close();
@@ -237,25 +243,26 @@
 				uni.setStorageSync('cateKeywords',  key);
 				//uni.setStorageSync('newsmoduleid',  this.moduleid);
 				this.saveKeyword(key); //保存为历史 
-				uni.setStorageSync('newsmoduleid',  this.moduleid);
-// 				var pages = getCurrentPages();
-//                 var page = pages[pages.length - 1];
-//                 var currentWebview = page.$getAppWebview();
-//                 plus.webview.postMessageToUniNView({
-//                    keywords: encodeURIComponent(key)
-//                 }, currentWebview.id);
-				
-				uni.navigateTo({
-					//url: '/pages/news/index?keywords=' + key +'&moduleid='+this.moduleid,
-					url:'/pages/news/index?keywords=' + encodeURIComponent(key) +'&moduleid='+this.moduleid,
-					
-				})
+				if(!uni.getStorageSync('newsmoduleid')){
+					uni.setStorageSync('newsmoduleid',  this.moduleid);
+				}
+				if(uni.getStorageSync('newsmoduleid') == 4){
+					uni.navigateTo({
+						//url: '/pages/news/index?keywords=' + key +'&moduleid='+this.moduleid,
+						url:'/pages/company/index?keywords=' + encodeURIComponent(key) +'&moduleid='+uni.getStorageSync('newsmoduleid'),
+						
+					})
+				}else{
+					uni.navigateTo({
+						//url: '/pages/news/index?keywords=' + key +'&moduleid='+this.moduleid,
+						url:'/pages/news/index?keywords=' + encodeURIComponent(key) +'&moduleid='+uni.getStorageSync('newsmoduleid'),
+					})
+				}
 // 				uni.showToast({ 
 // 					title: key,
 // 					icon: 'none',
 // 					duration: 2000
 // 				});
-
 
 				//以下是示例跳转淘宝搜索，可自己实现搜索逻辑
 				//#ifdef APP-PLUS
@@ -304,7 +311,7 @@
 <style>
 	.top-view{width: 100%;position: fixed;top: 0;}
 	.search-box {
-		width:95%;
+		width:100%;
 		padding:16upx 2.5% 16upx 2.5%;
 		display:flex;
 		justify-content:space-between;

@@ -17,6 +17,7 @@
 					</cell>
 					<cell class="loadmore">
 						<text class="loadmore-text">{{tabItem.loadingText}}</text>
+						<!-- <uni-load-more :status="tabItem.loadingText" :contentText="loadingText"></uni-load-more> -->
 					</cell>
 				</list>
 			</uni-tab-content> 
@@ -34,7 +35,7 @@
 		friendlyDate
 	} from '@/common/util.js'; 
 
-	//const dom = weex.requireModule('dom');
+	const dom = weex.requireModule('dom');
 
 	export default {
 		data() {
@@ -45,7 +46,8 @@
 				tabIndex: 0,
 				tabBars: [],
 				moduleid:"",
-				keywords:""
+				keywords:"",
+				name:""
 			}
 		},
 		components: {
@@ -55,6 +57,15 @@
 			uniMediaList
 		},
 		created() {
+			uni.onNavigationBarButtonTap((e) =>{
+				// console.log(JSON.stringify(e)); 
+				if(e.index==0){
+					 uni.navigateTo({
+						url:"/pages/search/index?moduleid="+this.moduleid
+					})
+				}
+			})
+			
 			
 			// 初始化列表信息
 			setTimeout(() => {	
@@ -82,10 +93,10 @@
                 uni.getStorage({
                     key:'newsmoduleid',
                     success: (res) => {
+						this.moduleid = res.data;
 					   this.loadNavList(res.data);
                     }
                 })
-				
             },200)
 			
 		},
@@ -98,18 +109,22 @@
 					method:"POST",
 					success: (res) => {
 						var result = res.data;
+						// console.log(JSON.stringify(result));
 					if (result.code == "0000") {
 						this.tabBars = result.data;
+						this.name = this.tabBars[1].name;
+						// console.log(JSON.stringify(this.name));
 						uni.setNavigationBarTitle({
-							title: result.data[0].name
+							title: this.name
 						});
 						this.tabBars.forEach((tabBar) => {
 							this.newsList.push({
 								data: [],
 								cateid: tabBar.catid,
 								page: 0,
-								loadingText: '加载中...'
+								loadingText: '加载中...',
 							});
+							tabBar.id = tabBar.catid;
 						});
 						//console.log(this.newsList);
 						this.getList(this.moduleid);
@@ -123,31 +138,32 @@
 				if (action === 1) {
 					activeTab.page = 0;
 				}
+				//console.log(JSON.stringify(activeTab.page));
 				uni.request({
 					url: 'http://47.100.48.1/api/member/getData.php?ac=newsmoduledata',
 					data: {keywords:this.keywords,moduleid:this.moduleid,cateid:activeTab.cateid,page:activeTab.page},
 					method:"POST",
 					success: (res) => {
 						var result = res.data;
-						 
 						if (result.code == "0000") {							
 							const data = result.data.map((news) => {
-								console.log(JSON.stringify(news));
 								return {
 									id: news.itemid,
 									article_type: 1,
 									datetime: friendlyDate(news.addtime),
 									title: news.title,
+									titles: news.titles,
 									image_url: news.thumb,
 									source: news.editor,
 									comment_count: news.hits,
 									post_id: news.catid,
 									catname: news.catname,
+									istoday: news.istoday,
 									type:this.keywords!=""?1:0
 								};
 								
 							});
-							
+							// console.log(JSON.stringify(data)); 
 							if (action === 1) {
 								activeTab.data = data;
 								this.refreshing = false;
@@ -158,7 +174,7 @@
 							}
 							activeTab.page = activeTab.page+1;
 							if(data.length<10){
-								this.newsList.loadingText  =  '没有更多数据了';								
+								activeTab.loadingText="没有更多数据了";	 	 						
 							}
 							uni.removeStorage({
 								key: 'cateKeywords',
@@ -192,27 +208,27 @@
 			async changeTab(event) {
 				this.tabIndex = event.index;
 				const activeNode = this.$refs[this.tabBars[event.index].id + event.index][0];
-// 				let nodeSize = await this.getNodeSize(activeNode);
-// 				if (nodeSize.left + nodeSize.width > 750) {
-// 					let index = event.index - 4;
-// 					let targetNode = this.$refs[this.tabBars[index].id + index][0];
-// 					dom.scrollToElement(targetNode, {});
-// 				} else if (nodeSize.left < 0) {
-// 					dom.scrollToElement(activeNode, {});
-// 				}
+				let nodeSize = await this.getNodeSize(activeNode);
+				if (nodeSize.left + nodeSize.width > 750) {
+					let index = event.index - 4;
+					let targetNode = this.$refs[this.tabBars[index].id + index][0];
+					dom.scrollToElement(targetNode, {});
+				} else if (nodeSize.left < 0) {
+					dom.scrollToElement(activeNode, {});
+				}
 				// 首次切换后加载数据
 				const activeTab = this.newsList[this.tabIndex];
 				if (activeTab.data.length === 0) {
 					this.getList();
 				}
 			},
-// 			getNodeSize(node) {
-// 				return new Promise((resolve, reject) => {
-// 					dom.getComponentRect(node, (result) => {
-// 						resolve(result.size);
-// 					});
-// 				});
-// 			},
+			getNodeSize(node) {
+				return new Promise((resolve, reject) => {
+					dom.getComponentRect(node, (result) => {
+						resolve(result.size);
+					});
+				});
+			},
 			onRefresh(event) {
 				this.refreshText = '正在刷新...';
 				this.refreshing = true;
@@ -225,7 +241,7 @@
 				if (Math.abs(event.pullingDistance) > Math.abs(event.viewHeight)) {
 					this.refreshText = "释放立即刷新";
 				} else {
-					this.refreshText = "下拉可以刷新"; 
+					this.refreshText = "下拉可以刷新";
 				}
 			}
 		}

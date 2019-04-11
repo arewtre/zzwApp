@@ -304,7 +304,7 @@ export default {
 				// 淘口令购买
 				this.copyTklStatus = false;
 				this.$refs.simpleModalTklBuy.show({
-					showConfirmButton:false,
+					showConfirmButton:false,  
 				}); 
 			}
 		},

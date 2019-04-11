@@ -10,7 +10,7 @@
             <picker-view indicator-style="height: 40px;" class="mpvue-picker-view" :value="pickerValue" @change="pickerChange" v-if="mode==='selector' && pickerValueSingleArray.length > 0">
                 <block>
                     <picker-view-column>
-                        <view class="picker-item" v-for="(item,index) in pickerValueSingleArray" :key="index">{{item.name}}</view>
+                        <view class="picker-item" v-for="(item,index) in pickerValueSingleArray" :key="index">{{item.label}}</view>
                     </picker-view-column>
                 </block>
             </picker-view>

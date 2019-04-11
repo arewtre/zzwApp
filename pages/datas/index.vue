@@ -75,7 +75,7 @@
 								source: news.editor,
 								comment_count: news.hits,
 								post_id: news.catid,
-								catname: news.titles
+								catname: news.catname
 							};
 						});
 						//console.log(data);

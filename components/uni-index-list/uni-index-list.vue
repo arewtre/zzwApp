@@ -1,8 +1,8 @@
 <template>
-    <view>
-        <view class="list-cell" hover-class="uni-list-cell-hover" @click="bindClick">
-            <view class="media-list" v-if="data.title">
-                <view :class="[isImgRight?'media-image-right':'',isImgLeft?'media-image-left':'']">
+    <view class="con">
+        <view class="con list-cell" hover-class="uni-list-cell-hover" @click="bindClick">
+            <view class="con media-list" v-if="data.title">
+                <view :class="[isImgRight?'con media-image-right':'',isImgLeft?'con media-image-left':'']">
                     <!-- <text :class="['media-title',isImgRight||isImgLeft?'media-title2':'']">{{data.title}}</text> -->
 					<rich-text :nodes="data.title" :class="['media-title',isImgRight||isImgLeft?'media-title2':'']"></rich-text>
                     <view v-if="showImg" :class="['image-section',isImgRight?'image-section-right':'',isImgLeft?'image-section-left':'']">
@@ -12,7 +12,7 @@
                             :key="i" />
                     </view>
                 </view>
-                <view class="media-foot">
+                <view class="media-foot con">
                     <view class="media-info">
 						<text class="info-text">{{data.catname}}</text>
                         <text class="info-text">{{data.source}}</text>
@@ -66,7 +66,7 @@
 </script>
 
 <style>
-    view {
+    .con{
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
@@ -75,8 +75,8 @@
 		margin-top:10upx
 	}
     .list-cell {
-        width: 750upx;
-        padding: 0 30upx 0 0 ;
+        /* width: 750upx;
+        padding: 0 30upx 0 0 ; */
     }
 
     .uni-list-cell-hover {
@@ -159,7 +159,7 @@
     .info-text {
         margin-right: 20upx;
         color: #999999;
-        font-size: 18upx;
+        font-size: 24upx;
     }
 
     .media-foot {

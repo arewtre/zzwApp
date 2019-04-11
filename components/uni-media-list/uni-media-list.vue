@@ -17,11 +17,11 @@
 						<text class="info-text">{{data.catname}}</text>
                         <text class="info-text">{{data.source}}</text>
                         <text class="info-text">{{data.comment_count}}次浏览</text>
-                        <text class="info-text">{{data.datetime}}</text>	
+                        <text :class="[data.istoday==1?'info-textt':'info-text']">{{data.datetime}}</text>	
                     </view>
-                    <view class="max-close-view" @click.stop="close">
+                    <!-- <view class="max-close-view" @click.stop="close">
                         <view class="close-view"><text class="close">×</text></view>
-                    </view>
+                    </view> -->
                 </view>
             </view>
         </view>
@@ -161,7 +161,11 @@
         color: #999999;
         font-size: 18upx;
     }
-
+	.info-textt{
+		margin-right: 20upx;
+		color: rgb(252, 44, 93);
+		font-size: 18upx;
+	}
     .media-foot {
         margin-top: 20upx;
         flex-direction: row;

@@ -104,6 +104,8 @@
 									article_type: 1,
 									datetime: friendlyDate(news.addtime),
 									title: news.title,
+									titles: news.titles,
+									istoday: news.istoday,
 									image_url: news.thumb,
 									source: news.editor,
 									comment_count: news.hits,

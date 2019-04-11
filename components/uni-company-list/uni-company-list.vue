@@ -6,7 +6,8 @@
                     <view :class="['media-title','media-title2']">
 						<view class="media-info">
 							<text class="info-text t"><image v-if="data.vip>0"class="vip" :src="vip"></image></text>
-							<text class="info-text t tit">{{data.title}}</text>
+							<!-- <text class="info-text t tit">{{data.title}}</text> -->
+							<rich-text :nodes="data.title" class="info-text t tit"></rich-text>
 						</view>
 						<view class="tt2">主营: {{data.business}}</view>
 					</view>

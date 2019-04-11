@@ -1,5 +1,5 @@
 {
-    "name" : "中纸资讯",
+    "name" : "中纸网",
     "appid" : "__UNI__7B045F9",
     "description" : "中国纸业网资讯平台",
     "versionName" : "1.0.0",
@@ -9,7 +9,8 @@
         /* 5+App特有相关 */
         "modules" : {
             "Share" : {},
-            "Payment" : {}
+            "Payment" : {},
+            "Push" : {}
         },
         /* 模块配置 */
         "distribute" : {
@@ -48,12 +49,20 @@
             "ios" : {},
             /* ios打包配置 */
             "sdkConfigs" : {
-                "push" : {},
+                "push" : {
+                    "igexin" : {
+                        "appid" : "vtYiqS62HR8xhYVwS7rADA",
+                        "appkey" : "vEYZyS9oJU8PHazZlSQ227",
+                        "appsecret" : "ISEeb8dzMLAUw9eRmtYNF2"
+                    }
+                },
                 "payment" : {
                     "alipay" : {
-                        "scheme" : ""
-                    }
-                }
+                        "scheme" : "chinapaperchinapaper"
+                    },
+                    "appleiap" : {}
+                },
+                "maps" : {}
             },
             "icons" : {
                 "ios" : {
@@ -96,11 +105,11 @@
                 },
                 "ios" : {
                     "iphone" : {
-                        "iphonex" : "F:/Desktop/iosX.png",
-                        "retina55" : "F:/Desktop/ios6P.png"
+                        "iphonex" : "static/qdt/iosX.png",
+                        "retina55" : "static/qdt/ios6P.png"
                     },
                     "ipad" : {
-                        "portrait7" : "F:/Desktop/timg480.png"
+                        "portrait7" : "static/qdt/timg480.png"
                     }
                 }
             }

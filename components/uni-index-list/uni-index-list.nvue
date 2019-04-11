@@ -77,8 +77,8 @@
 		color:red;
 	}
     .list-cell {
-        width: 750px;
-        padding: 0 30upx 0 0 ;
+        /* width: 750px;
+        padding: 0 30upx 0 0 ; */
     }
 
     .list-cell:active {

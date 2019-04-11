@@ -1,262 +1,377 @@
-<template>
-	<view class="center">
-		<view class="logo" @click="goLogin" :hover-class="!login ? 'logo-hover' : ''">
-			<image class="logo-img" :src="login ? uerInfo.avatarUrl :avatarUrl"></image>
-			<view class="logo-title">
-				<text class="uer-name">Hi，{{login ? uerInfo.username : '您未登录'}}</text>
-				<text class="go-login navigat-arrow" v-if="!login">&#xe65e;</text>
+<template>  
+    <view class="container">  
+		
+		<view class="user-section">
+			<image class="bg" src="/static/user-bg.jpg"></image>
+			<view class="user-info-box">
+				<view class="portrait-box">
+					<image class="portrait" :src="userInfo.avatarUrl || '/static/missing-face.png'"></image>
+				</view>
+				<view class="info-box">
+					<text class="username">{{hasLogin?userInfo.username:'游客'}}</text>
+				</view>
+			</view>
+			<view class="vip-card-box">
+				<image class="card-bg" src="/static/vip-card-bg.png" mode=""></image>
+				<view class="b-btn">
+					立即开通
+				</view>
+				<view class="tit">
+					<text class="yticon icon-iLinkapp-"></text>
+					{{hasLogin?userInfo.group.groupname:'中纸网会员'}}
+				</view>
+				<text class="e-m">{{hasLogin?"会员等级: "+userInfo.group.vip:'加入中纸网会员福利多多'}}</text>
+				<text class="e-b">开通会员开发无bug 一测就上线</text>
 			</view>
 		</view>
-		<view class="center-list">
-			<view class="center-list-item border-bottom" @click="goTo()">
-				<text class="list-icon">&#xe60f;</text>
-				<text class="list-text">账号管理</text>
-				<text class="navigat-arrow">&#xe65e;</text>
+		
+		<view 
+			class="cover-container"
+			:style="[{
+				transform: coverTransform,
+				transition: coverTransition
+			}]"
+			@touchstart="coverTouchstart"
+			@touchmove="coverTouchmove"
+			@touchend="coverTouchend"
+		>
+			<image class="arc" src="/static/arc.png"></image>
+			
+			<view class="tj-sction">
+				<view class="tj-item">
+					<text class="num">{{hasLogin?userInfo.money:0}}</text>
+					<text>余额</text>
+				</view>
+				<view class="tj-item">
+					<text class="num">{{hasLogin?userInfo.deposit:0}}</text>
+					<text>保证金</text>
+				</view>
+				<view class="tj-item">
+					<text class="num">{{hasLogin?userInfo.credit:0}}</text>
+					<text>积分</text>
+				</view>
 			</view>
-			<view class="center-list-item" @click="goTo()">
-				<text class="list-icon">&#xe639;</text>
-				<text class="list-text">新消息通知</text>
-				<text class="navigat-arrow">&#xe65e;</text>
+			<!-- 订单 -->
+			<view class="order-section">
+				<view class="order-item" @click="navTo('/')" hover-class="common-hover"  :hover-stay-time="50">
+					<text class="yticon icon-shouye"></text>
+					<text>全部订单</text>
+				</view>
+				<view class="order-item" @click="navTo('/')"  hover-class="common-hover" :hover-stay-time="50">
+					<text class="yticon icon-daifukuan"></text>
+					<text>待付款</text>
+				</view>
+				<view class="order-item" @click="navTo('/')" hover-class="common-hover"  :hover-stay-time="50">
+					<text class="yticon icon-yishouhuo"></text>
+					<text>待收货</text>
+				</view>
+				<view class="order-item" @click="navTo('/')" hover-class="common-hover"  :hover-stay-time="50">
+					<text class="yticon icon-shouhoutuikuan"></text>
+					<text>退款/售后</text>
+				</view>
+			</view>
+			<!-- 浏览历史 -->
+			<view class="history-section icon">
+				<view class="sec-header">
+					<text class="yticon icon-lishijilu"></text>
+					<text>浏览历史</text>
+				</view>
+				<scroll-view scroll-x class="h-list">
+					<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553105186633&di=c121a29beece4e14269948d990f9e720&imgtype=0&src=http%3A%2F%2Fimg004.hc360.cn%2Fm8%2FM04%2FDE%2FDE%2FwKhQplZ-QteEBvsbAAAAADUkobU751.jpg" mode="aspectFill"></image>
+					<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553105231218&di=09534b9833b5243296630e6d5b728eff&imgtype=0&src=http%3A%2F%2Fimg002.hc360.cn%2Fm1%2FM05%2FD1%2FAC%2FwKhQcFQ3iN2EQTo8AAAAAHQU6_8355.jpg" mode="aspectFill"></image>
+					<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553105320890&di=c743386be51f2c4c0fd4b75754d14f3c&imgtype=0&src=http%3A%2F%2Fimg007.hc360.cn%2Fhb%2FMTQ1OTg4ODY0MDA3Ny05OTQ4ODY1NDQ%3D.jpg" mode="aspectFill"></image>
+					<image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2691146630,2165926318&fm=26&gp=0.jpg" mode="aspectFill"></image>
+					<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553105443324&di=8141bf13f3f208c61524d67f9bb83942&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01ac9a5548d29b0000019ae98e6d98.jpg" mode="aspectFill"></image>
+					<image src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=191678693,2701202375&fm=26&gp=0.jpg" mode="aspectFill"></image>
+				</scroll-view>
+				<list-cell icon="icon-iconfontweixin" iconColor="#e07472" title="我的钱包" tips="您的会员还有3天过期"></list-cell>
+				<list-cell icon="icon-dizhi" iconColor="#5fcda2" title="地址管理"></list-cell>
+				<list-cell icon="icon-share" iconColor="#9789f7" title="分享" tips="邀请好友赢10万大礼"></list-cell>
+				<list-cell icon="icon-pinglun-copy" iconColor="#ee883b" title="晒单" tips="晒单抢红包"></list-cell>
+				<list-cell icon="icon-shoucang_xuanzhongzhuangtai" iconColor="#54b4ef" title="我的收藏"></list-cell>
+				<list-cell icon="icon-shezhi1" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
 			</view>
 		</view>
-		<view class="center-list" @click="goTo()">
-			<view class="center-list-item border-bottom">
-				<text class="list-icon">&#xe60b;</text>
-				<text class="list-text">帮助与反馈</text>
-				<text class="navigat-arrow">&#xe65e;</text>
-			</view>
-			<view class="center-list-item" @click="goTo()">
-				<text class="list-icon">&#xe65f;</text>
-				<text class="list-text">服务条款及隐私</text>
-				<text class="navigat-arrow">&#xe65e;</text>
-			</view>
-		</view>
-		<view class="center-list">
-			<view class="center-list-item" @click="goTo()">
-				<text class="list-icon">&#xe614;</text>
-				<text class="list-text">关于应用</text>
-				<text class="navigat-arrow">&#xe65e;</text>
-			</view>
-			<view class="center-list-item" @click="clearHc()">
-				<text class="list-icon">&#xe614;</text>
-				<text class="list-text">清除缓存</text>
-				<text class="navigat-arrow">&#xe65e;</text>
-			</view>
-		</view>
-		<view class="center-list logout" v-if="login">
-				<button class="submit" type="primary" @tap="loginOut">退出登录</button>
-		</view>
-	</view>
-</template>
-
-<script>
-	import service from '../../common/service.js';
-	export default {
-		data() {
+			
+		
+    </view>  
+</template>  
+<script>  
+	import listCell from '@/components/mix-list-cell';
+    import {  
+        mapState 
+    } from 'vuex';  
+	let startY = 0, moveY = 0, pageAtTop = true;
+    export default {
+		components: {
+			listCell
+		},
+		data(){
 			return {
-				login: false,
+				coverTransform: 'translateY(0px)',
+				coverTransition: '0s',
+				moving: false,
 				avatarUrl: '/static/logo.png',
-				uerInfo: {}
 			}
 		},
-		onLoad: function() {
-			this.getUsers();
+		onLoad(){
+
 		},
-		onShow: function(){
-			this.getUsers();
+		onShow(){
+
 		},
-		methods: {
-			goLogin() {
-				if (!this.login) {
-					console.log('点击前往登录');
-					uni.navigateTo({
-						// url: '/pages/detail/detail?query=' + encodeURIComponent(JSON.stringify(detail))
-						url: '/pages/login/login'
-					});
+		// #ifndef MP
+		onNavigationBarButtonTap(e) {
+			const index = e.index;
+			if (index === 0) {
+				this.navTo('/pages/set/set');
+			}
+		},
+		// #endif
+        computed: {
+			 ...mapState(['hasLogin','userInfo'])
+			
+		},
+        methods: {
+// 			getUsers(){
+// 				var user = service.getUsers();
+// 				if(user!=""){
+// 					console.log(user);			    
+// 					this.userInfo = user;
+// 					this.login = true;
+// 				}else{
+// 					this.login = false;
+// 				}
+// 			},
+
+			/**
+			 * 统一跳转接口,拦截未登录路由
+			 * navigator标签现在默认没有转场动画，所以用view
+			 */
+			navTo(url){
+				if(!this.hasLogin){
+					url = '/pages/login/login';
+				}
+				uni.navigateTo({  
+					url
+				})  
+			}, 
+			/**
+			 *  会员卡下拉和回弹
+			 *  1.关闭bounce避免ios端下拉冲突
+			 *  2.由于touchmove事件的缺陷（以前做小程序就遇到，比如20跳到40，h5反而好很多），下拉的时候会有掉帧的感觉
+			 *    transition设置0.1秒延迟，让css来过渡这段空窗期
+			 *  3.回弹效果可修改曲线值来调整效果，推荐一个好用的bezier生成工具 http://cubic-bezier.com/
+			 */
+			coverTouchstart(e){
+				if(pageAtTop === false){
+					return;
+				}
+				this.coverTransition = 'transform .1s linear';
+				startY = e.touches[0].clientY;
+			},
+			coverTouchmove(e){
+				moveY = e.touches[0].clientY;
+				let moveDistance = moveY - startY;
+				if(moveDistance < 0){
+					this.moving = false;
+					return;
+				}
+				this.moving = true;
+				if(moveDistance >= 80 && moveDistance < 100){
+					moveDistance = 80;
+				}
+		
+				if(moveDistance > 0 && moveDistance <= 80){
+					this.coverTransform = `translateY(${moveDistance}px)`;
 				}
 			},
-			loginOut () {
-				var res = service.logOut();
-				if(res){
-					uni.showToast({
-						icon: 'success',
-						title: '退出成功!'
-					});
-					this.getUsers();
+			coverTouchend(){
+				if(this.moving === false){
+					return;
 				}
-			},
-			getUsers(){
-				var user = service.getUsers();
-				if(user!=""){
-					console.log(user);			    
-					this.uerInfo = user;
-					this.login = true;
-				}else{
-					this.login = false;
-				}
-			},
-			goTo(){
-				uni.showToast({
-					icon: 'none',
-					title: '功能开发中!'
-				});
-			},
-			clearHc(){
-				try {
-					uni.clearStorageSync();
-					uni.showToast({
-						icon: 'success',
-						title: '清除成功!'
-					});
-					this.getUsers();
-				} catch (e) {
-					// error
-					uni.showToast({
-						icon: 'none',
-						title: '清除失败请重试!'
-					});
-				}
+				this.moving = false;
+				this.coverTransition = 'transform 0.3s cubic-bezier(.21,1.93,.53,.64)';
+				this.coverTransform = 'translateY(0px)';
+			}
+        }  
+    }  
+</script>  
+<style lang='scss'>
+	%flex-center {
+	 display:flex;
+	 flex-direction: column;
+	 justify-content: center;
+	 align-items: center;
+	}
+	%section {
+	  display:flex;
+	  justify-content: space-around;
+	  align-content: center;
+	  background: #fff;
+	  border-radius: 10upx;
+	}
+
+	.user-section{
+		height: 520upx;
+		padding: 100upx 30upx 0;
+		position:relative;
+		.bg{
+			position:absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			filter: blur(1px);
+			opacity: .7;
+		}
+	}
+	.user-info-box{
+		height: 180upx;
+		display:flex;
+		align-items:center;
+		position:relative;
+		z-index: 1;
+		.portrait{
+			width: 130upx;
+			height: 130upx;
+			border:5upx solid #fff;
+			border-radius: 50%;
+		}
+		.username{
+			font-size: $font-lg + 6upx;
+			color: $font-color-dark;
+			margin-left: 20upx;
+		}
+	}
+
+	.vip-card-box{
+		display:flex;
+		flex-direction: column;
+		color: #f7d680;
+		height: 240upx;
+		background: linear-gradient(left, rgba(0,0,0,.7), rgba(0,0,0,.8));
+		border-radius: 16upx 16upx 0 0;
+		overflow: hidden;
+		position: relative;
+		padding: 20upx 24upx;
+		.card-bg{
+			position:absolute;
+			top: 20upx;
+			right: 0;
+			width: 380upx;
+			height: 260upx;
+		}
+		.b-btn{
+			position: absolute;
+			right: 20upx;
+			top: 16upx;
+			width: 132upx;
+			height: 40upx;
+			text-align: center;
+			line-height: 40upx;
+			font-size: 22upx;
+			color: #36343c;
+			border-radius: 20px;
+			background: linear-gradient(left, #f9e6af, #ffd465);
+			z-index: 1;
+		}
+		.tit{
+			font-size: $font-base+2upx;
+			color: #f7d680;
+			margin-bottom: 28upx;
+			.yticon{
+				color: #f6e5a3;
+				margin-right: 16upx;
+			}
+		}
+		.e-b{
+			font-size: $font-sm;
+			color: #d8cba9;
+			margin-top: 10upx;
+		}
+	}
+	.cover-container{
+		background: $page-color-base;
+		margin-top: -150upx;
+		padding: 0 30upx;
+		position:relative;
+		background: #f5f5f5;
+		padding-bottom: 20upx;
+		.arc{
+			position:absolute;
+			left: 0;
+			top: -34upx;
+			width: 100%;
+			height: 36upx;
+		}
+	}
+	.tj-sction{
+		@extend %section;
+		.tj-item{
+			@extend %flex-center;
+			flex-direction: column;
+			height: 140upx;
+			font-size: $font-sm;
+			color: #75787d;
+		}
+		.num{
+			font-size: $font-lg;
+			color: $font-color-dark;
+			margin-bottom: 8upx;
+		}
+	}
+	.order-section{
+		@extend %section;
+		padding: 28upx 0;
+		margin-top: 20upx;
+		.order-item{
+			@extend %flex-center;
+			width: 120upx;
+			height: 120upx;
+			border-radius: 10upx;
+			font-size: $font-sm;
+			color: $font-color-dark;
+		}
+		.yticon{
+			font-size: 48upx;
+			margin-bottom: 18upx;
+			color: #fa436a;
+		}
+		.icon-shouhoutuikuan{
+			font-size:44upx;
+		}
+	}
+	.history-section{
+		padding: 30upx 0 0;
+		margin-top: 20upx;
+		background: #fff;
+		border-radius:10upx;
+		.sec-header{
+			display:flex;
+			align-items: center;
+			font-size: $font-base;
+			color: $font-color-dark;
+			line-height: 40upx;
+			margin-left: 30upx;
+			.yticon{
+				font-size: 44upx;
+				color: #5eba8f;
+				margin-right: 16upx;
+				line-height: 40upx;
+			}
+		}
+		.h-list{
+			white-space: nowrap;
+			padding: 30upx 30upx 0;
+			image{
+				display:inline-block;
+				width: 160upx;
+				height: 160upx;
+				margin-right: 20upx;
+				border-radius: 10upx;
 			}
 		}
 	}
-</script>
-
-<style>
-	@font-face {
-		font-family: texticons;
-		font-weight: normal;
-		font-style: normal;
-		src: url('https://at.alicdn.com/t/font_984210_5cs13ndgqsn.ttf') format('truetype');
-	}
-
-	page,
-	view {
-		display: flex;
-	}
-
-	page {
-		background-color: #f8f8f8;
-	}
-	.submit {
-		margin-top: 30px;
-		margin-left: 20px;
-		margin-right: 20px;
-		color: white;
-		background-color: rgba(252, 44, 93, 1.0) !important;
-		-webkit-tap-highlight-color: rgba(252, 44, 93, 1.0);
-	}
 	
-	
-	.submit :active {
-		color: #B6B6B6;
-		background-color: rgba(252, 44, 93, 0.8);
-	}
-	.logout{
-		padding-bottom: 40upx;
-		
-	}
-	.center {
-		flex-direction: column;
-	}
-
-	.logo {
-		width: 750upx;
-		height: 240upx;
-		padding: 30upx 20upx 20upx 20upx;
-		box-sizing: border-box;
-		/* background: linear-gradient(to left, #FA4DBE 0, #FBAA58 100%); */
-		background:#fc2c5d;
-		flex-direction: row;
-		align-items: center;
-	}
-
-	.logo-hover {
-		opacity: 0.8;
-	}
-
-	.logo-img {
-		width: 150upx;
-		height: 150upx;
-		border-radius: 150upx;
-	}
-
-	.logo-title {
-		height: 150upx;
-		flex: 1;
-		align-items: center;
-		justify-content: space-between;
-		flex-direction: row;
-		margin-left: 20upx;
-	}
-
-	.uer-name {
-		height: 60upx;
-		line-height: 60upx;
-		font-size: 38upx;
-		color: #FFFFFF;
-	}
-
-	.go-login.navigat-arrow {
-		font-size: 38upx;
-		color: #FFFFFF;
-	}
-
-	.login-title {
-		height: 150upx;
-		align-items: self-start;
-		justify-content: center;
-		flex-direction: column;
-		margin-left: 20upx;
-	}
-
-	.center-list {
-		background-color: #FFFFFF;
-		margin-top: 20upx;
-		width: 750upx;
-		flex-direction: column;
-	}
-
-	.center-list-item {
-		height: 90upx;
-		width: 750upx;
-		box-sizing: border-box;
-		flex-direction: row;
-		padding: 0upx 20upx;
-	}
-
-	.border-bottom {
-		border-bottom-width: 1upx;
-		border-color: #c8c7cc;
-		border-bottom-style: solid;
-	}
-
-	.list-icon {
-		width: 40upx;
-		height: 90upx;
-		line-height: 90upx;
-		font-size: 34upx;
-		color: #2F85FC;
-		text-align: center;
-		font-family: texticons;
-		margin-right: 20upx;
-	}
-
-	.list-text {
-		height: 90upx;
-		line-height: 90upx;
-		font-size: 34upx;
-		color: #555;
-		flex: 1;
-		text-align: left;
-	}
-
-	.navigat-arrow {
-		height: 90upx;
-		width: 40upx;
-		line-height: 90upx;
-		font-size: 34upx;
-		color: #555;
-		text-align: right;
-		font-family: texticons;
-	}
 </style>

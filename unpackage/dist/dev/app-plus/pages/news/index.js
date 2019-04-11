@@ -1545,6 +1545,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
 var _wxParse = _interopRequireDefault(__webpack_require__(/*! @/components/wxParse/wxParse */ "F:\\helloUniapp\\news\\components\\wxParse\\wxParse.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -1580,7 +1587,16 @@ var _wxParse = _interopRequireDefault(__webpack_require__(/*! @/components/wxPar
 //
 //
 //
-var _default2 = { props: { data: { type: Object, default: function _default(e) {return {};} } }, computed: { isImgRight: function isImgRight() {return this.data.article_type === 2;}, isImgLeft: function isImgLeft() {return this.data.article_type === 1;}, showImg: function showImg() {return this.data.image_list || this.data.image_url;} }, components: { wxParse: _wxParse.default }, methods: { close: function close(e) {this.$emit('close');e.stopPropagation();}, bindClick: function bindClick() {this.$emit('click');} } };exports.default = _default2;
+//
+//
+//
+//
+//
+//
+//
+var _default2 = { props: { data: { type: Object, default: function _default(e) {return {};} } }, computed: { isImgRight: function isImgRight() {return this.data.article_type === 2;}, isImgLeft: function isImgLeft() {return this.data.article_type === 1;}, showImg: function showImg() {return this.data.image_list || this.data.image_url;} }, components: { wxParse: _wxParse.default }, methods: { close: function close(e) {this.$emit('close');e.stopPropagation();}, bindClick: function bindClick() {this.$emit('click');}, preview: function preview(src, e) {// do something
+    }, navigate: function navigate(href, e) {// do something
+    } } };exports.default = _default2;
 
 /***/ }),
 
@@ -3841,6 +3857,7 @@ var _default2 = { name: 'wxParse', props: { loading: { type: Boolean, default: f
 
 
 
+
 var _uniTabContent = _interopRequireDefault(__webpack_require__(/*! @/components/uni-tab-content/uni-tab-content.nvue */ "F:\\helloUniapp\\news\\components\\uni-tab-content\\uni-tab-content.nvue"));
 var _uniTabBar = _interopRequireDefault(__webpack_require__(/*! @/components/uni-tab-bar/uni-tab-bar.nvue */ "F:\\helloUniapp\\news\\components\\uni-tab-bar\\uni-tab-bar.nvue"));
 var _uniTabs = _interopRequireDefault(__webpack_require__(/*! @/components/uni-tabs/uni-tabs.nvue */ "F:\\helloUniapp\\news\\components\\uni-tabs\\uni-tabs.nvue"));
@@ -3850,8 +3867,8 @@ var _util = __webpack_require__(/*! @/common/util.js */ "F:\\helloUniapp\\news\\
 
 
 
-//const dom = weex.requireModule('dom');
-var _default =
+var dom = weex.requireModule('dom');var _default =
+
 {
   data: function data() {
     return {
@@ -3861,7 +3878,8 @@ var _default =
       tabIndex: 0,
       tabBars: [],
       moduleid: "",
-      keywords: "" };
+      keywords: "",
+      name: "" };
 
   },
   components: {
@@ -3871,6 +3889,15 @@ var _default =
     uniMediaList: _uniMediaList.default },
 
   created: function created() {var _this = this;
+    uni.onNavigationBarButtonTap(function (e) {
+      // console.log(JSON.stringify(e)); 
+      if (e.index == 0) {
+        uni.navigateTo({
+          url: "/pages/search/index?moduleid=" + _this.moduleid });
+
+      }
+    });
+
 
     // 初始化列表信息
     setTimeout(function () {
@@ -3898,9 +3925,9 @@ var _default =
       uni.getStorage({
         key: 'newsmoduleid',
         success: function success(res) {
+          _this.moduleid = res.data;
           _this.loadNavList(res.data);
         } });
-
 
     }, 200);
 
@@ -3914,10 +3941,13 @@ var _default =
         method: "POST",
         success: function success(res) {
           var result = res.data;
+          // console.log(JSON.stringify(result));
           if (result.code == "0000") {
             _this2.tabBars = result.data;
+            _this2.name = _this2.tabBars[1].name;
+            // console.log(JSON.stringify(this.name));
             uni.setNavigationBarTitle({
-              title: result.data[0].name });
+              title: _this2.name });
 
             _this2.tabBars.forEach(function (tabBar) {
               _this2.newsList.push({
@@ -3926,6 +3956,7 @@ var _default =
                 page: 0,
                 loadingText: '加载中...' });
 
+              tabBar.id = tabBar.catid;
             });
             //console.log(this.newsList);
             _this2.getList(_this2.moduleid);
@@ -3939,31 +3970,32 @@ var _default =
       if (action === 1) {
         activeTab.page = 0;
       }
+      //console.log(JSON.stringify(activeTab.page));
       uni.request({
         url: 'http://47.100.48.1/api/member/getData.php?ac=newsmoduledata',
         data: { keywords: this.keywords, moduleid: this.moduleid, cateid: activeTab.cateid, page: activeTab.page },
         method: "POST",
         success: function success(res) {
           var result = res.data;
-
           if (result.code == "0000") {
             var data = result.data.map(function (news) {
-              console.log(JSON.stringify(news));
               return {
                 id: news.itemid,
                 article_type: 1,
                 datetime: (0, _util.friendlyDate)(news.addtime),
                 title: news.title,
+                titles: news.titles,
                 image_url: news.thumb,
                 source: news.editor,
                 comment_count: news.hits,
                 post_id: news.catid,
                 catname: news.catname,
+                istoday: news.istoday,
                 type: _this3.keywords != "" ? 1 : 0 };
 
 
             });
-
+            // console.log(JSON.stringify(data)); 
             if (action === 1) {
               activeTab.data = data;
               _this3.refreshing = false;
@@ -3974,7 +4006,7 @@ var _default =
             }
             activeTab.page = activeTab.page + 1;
             if (data.length < 10) {
-              _this3.newsList.loadingText = '没有更多数据了';
+              activeTab.loadingText = "没有更多数据了";
             }
             uni.removeStorage({
               key: 'cateKeywords',
@@ -4005,30 +4037,30 @@ var _default =
     loadMore: function loadMore() {
       this.getList(2);
     },
-    changeTab: function () {var _changeTab = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(event) {var activeNode, activeTab;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+    changeTab: function () {var _changeTab = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(event) {var activeNode, nodeSize, index, targetNode, activeTab;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
                 this.tabIndex = event.index;
-                activeNode = this.$refs[this.tabBars[event.index].id + event.index][0];
-                // 				let nodeSize = await this.getNodeSize(activeNode);
-                // 				if (nodeSize.left + nodeSize.width > 750) {
-                // 					let index = event.index - 4;
-                // 					let targetNode = this.$refs[this.tabBars[index].id + index][0];
-                // 					dom.scrollToElement(targetNode, {});
-                // 				} else if (nodeSize.left < 0) {
-                // 					dom.scrollToElement(activeNode, {});
-                // 				}
+                activeNode = this.$refs[this.tabBars[event.index].id + event.index][0];_context.next = 4;return (
+                  this.getNodeSize(activeNode));case 4:nodeSize = _context.sent;
+                if (nodeSize.left + nodeSize.width > 750) {
+                  index = event.index - 4;
+                  targetNode = this.$refs[this.tabBars[index].id + index][0];
+                  dom.scrollToElement(targetNode, {});
+                } else if (nodeSize.left < 0) {
+                  dom.scrollToElement(activeNode, {});
+                }
                 // 首次切换后加载数据
                 activeTab = this.newsList[this.tabIndex];
                 if (activeTab.data.length === 0) {
                   this.getList();
-                }case 4:case "end":return _context.stop();}}}, _callee, this);}));function changeTab(_x) {return _changeTab.apply(this, arguments);}return changeTab;}(),
+                }case 8:case "end":return _context.stop();}}}, _callee, this);}));function changeTab(_x) {return _changeTab.apply(this, arguments);}return changeTab;}(),
 
-    // 			getNodeSize(node) {
-    // 				return new Promise((resolve, reject) => {
-    // 					dom.getComponentRect(node, (result) => {
-    // 						resolve(result.size);
-    // 					});
-    // 				});
-    // 			},
+    getNodeSize: function getNodeSize(node) {
+      return new Promise(function (resolve, reject) {
+        dom.getComponentRect(node, function (result) {
+          resolve(result.size);
+        });
+      });
+    },
     onRefresh: function onRefresh(event) {
       this.refreshText = '正在刷新...';
       this.refreshing = true;
@@ -4048,9 +4080,9 @@ var _default =
 
 /***/ }),
 
-/***/ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:\\helloUniapp\\news\\components\\uni-media-list\\uni-media-list.nvue":
+/***/ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=1!F:\\helloUniapp\\news\\components\\uni-media-list\\uni-media-list.nvue":
 /*!***********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:/helloUniapp/news/components/uni-media-list/uni-media-list.nvue ***!
+  !*** ./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=1!F:/helloUniapp/news/components/uni-media-list/uni-media-list.nvue ***!
   \***********************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -4134,6 +4166,11 @@ module.exports = {
     "color": "#999999",
     "fontSize": "24"
   },
+  "info-textt": {
+    "marginRight": 20,
+    "color": "rgb(252,44,93)",
+    "fontSize": 24
+  },
   "media-foot": {
     "marginTop": "20",
     "flexDirection": "row",
@@ -4165,6 +4202,25 @@ module.exports = {
     "textOverflow": "ellipsis",
     "display": "-webkit-box",
     "WebkitLineClamp": 1
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-10f1c032!F:\\helloUniapp\\news\\components\\wxParse\\wxParse.css":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-10f1c032!F:/helloUniapp/news/components/wxParse/wxParse.css ***!
+  \*************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {
+  "wxParse": {
+    "width": 100,
+    "fontFamily": "Helvetica, sans-serif",
+    "fontSize": 30,
+    "color": "#666666",
+    "lineHeight": 1.8
   }
 }
 
@@ -4238,17 +4294,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: ["media-list"]
   }, [_c('div', {
     class: [_vm.isImgRight ? 'media-image-right' : '', _vm.isImgLeft ? 'media-image-left' : '']
-  }, [(!_vm.data.type) ? _c('text', {
+  }, [_c('richtext', {
     class: ['media-title', _vm.isImgRight || _vm.isImgLeft ? 'media-title2' : '']
-  }, [_vm._v(_vm._s(_vm.data.title))]) : _vm._e(), (_vm.data.type) ? _c('div', {
-    directives: [{
-      name: "html",
-      rawName: "v-html",
-      value: (_vm.data.title),
-      expression: "data.title"
-    }],
-    class: ['media-title', _vm.isImgRight || _vm.isImgLeft ? 'media-title2' : '']
-  }) : _vm._e(), (_vm.showImg) ? _c('div', {
+  }, [_vm._v("\n\t\t\t\t\t\t" + _vm._s(_vm.data.titles) + "\n\t\t\t\t\t\t  ")]), (_vm.showImg) ? _c('div', {
     class: ['image-section', _vm.isImgRight ? 'image-section-right' : '', _vm.isImgLeft ? 'image-section-left' : '']
   }, [(_vm.data.image_url) ? _c('image', {
     class: ['image-list1', _vm.isImgRight || _vm.isImgLeft ? 'image-list2' : ''],
@@ -4263,7 +4311,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "src": source.url
       }
     }) : _vm._e()
-  })], 2) : _vm._e()]), _c('div', {
+  })], 2) : _vm._e()], 1), _c('div', {
     staticClass: ["media-foot"]
   }, [_c('div', {
     staticClass: ["media-info"]
@@ -4274,20 +4322,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.data.source))]), _c('text', {
     staticClass: ["info-text"]
   }, [_vm._v(_vm._s(_vm.data.comment_count) + "次浏览")]), _c('text', {
-    staticClass: ["info-text"]
-  }, [_vm._v(_vm._s(_vm.data.datetime))])]), _c('div', {
-    staticClass: ["max-close-view"],
-    on: {
-      "click": _vm.close
-    }
-  }, [_vm._m(0)])])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: ["close-view"]
-  }, [_c('text', {
-    staticClass: ["close"]
-  }, [_vm._v("×")])])
-}]}
+    class: [_vm.data.istoday == 1 ? 'info-textt' : 'info-text']
+  }, [_vm._v(_vm._s(_vm.data.datetime))])])])])])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 
 /***/ }),
@@ -5464,7 +5501,9 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(/*! !./node_modules/weex-vue-loader/lib/style-loader!./node_modules/weex-vue-loader/lib/style-rewriter?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector?type=styles&index=0!./uni-media-list.nvue */ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:\\helloUniapp\\news\\components\\uni-media-list\\uni-media-list.nvue")
+__vue_styles__.push(__webpack_require__(/*! !./node_modules/weex-vue-loader/lib/style-loader!./node_modules/weex-vue-loader/lib/style-rewriter?id=data-v-10f1c032!@/components/wxParse/wxParse.css */ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-10f1c032!F:\\helloUniapp\\news\\components\\wxParse\\wxParse.css")
+)
+__vue_styles__.push(__webpack_require__(/*! !./node_modules/weex-vue-loader/lib/style-loader!./node_modules/weex-vue-loader/lib/style-rewriter?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector?type=styles&index=1!./uni-media-list.nvue */ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-10f1c032!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=1!F:\\helloUniapp\\news\\components\\uni-media-list\\uni-media-list.nvue")
 )
 
 /* script */

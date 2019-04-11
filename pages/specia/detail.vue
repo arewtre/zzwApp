@@ -23,7 +23,7 @@
 			        key:'urlSpecia',
 			        success: (res) => {
 					   this.ssrc=res.data;
-					   console.log( this.ssrc);
+					   //console.log( this.ssrc);
 			        }
 			    })
 			//},200)

@@ -1,4 +1,5 @@
 {
+  "usingComponents": {},
   "navigationBarTitleText": "分类",
   "navigationStyle": "custom",
   "bounce": "none",

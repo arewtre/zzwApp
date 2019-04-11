@@ -1,9 +1,8 @@
 {
+  "usingComponents": {},
   "backgroundColor": "#f5f6f8",
   "navigationBarTitleText": "登录",
   "bounce": "none",
   "scrollIndicator": "none",
-  "titleNView": {
-    "type": "transparent"
-  }
+  "titleNView": false
 }

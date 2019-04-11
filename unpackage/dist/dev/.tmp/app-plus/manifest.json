@@ -5,7 +5,7 @@
     "iPad"
   ],
   "id": "__UNI__7B045F9",
-  "name": "中纸资讯",
+  "name": "中纸网",
   "version": {
     "name": "1.0.0",
     "code": "100"
@@ -20,6 +20,7 @@
   "permissions": {
     "Share": {},
     "Payment": {},
+    "Push": {},
     "UniNView": {
       "description": "UniNView原生渲染"
     }
@@ -86,11 +87,11 @@
         },
         "ios": {
           "iphone": {
-            "iphonex": "F:/Desktop/iosX.png",
-            "retina55": "F:/Desktop/ios6P.png"
+            "iphonex": "static/qdt/iosX.png",
+            "retina55": "static/qdt/ios6P.png"
           },
           "ipad": {
-            "portrait7": "F:/Desktop/timg480.png"
+            "portrait7": "static/qdt/timg480.png"
           }
         }
       },
@@ -126,12 +127,19 @@
       },
       "apple": {},
       "plugins": {
-        "push": {},
+        "push": {
+          "igexin": {
+            "appid": "vtYiqS62HR8xhYVwS7rADA",
+            "appkey": "vEYZyS9oJU8PHazZlSQ227",
+            "appsecret": "ISEeb8dzMLAUw9eRmtYNF2"
+          }
+        },
         "payment": {
           "alipay": {
             "scheme": ""
           }
         },
+        "maps": {},
         "audio": {
           "mp3": {
             "description": "Android平台录音支持MP3格式文件"
@@ -148,7 +156,8 @@
       }
     },
     "uni-app": {
-      "compilerVersion": "1.7.0"
+      "compilerVersion": "1.8.2",
+      "control": "webview"
     }
   }
 }

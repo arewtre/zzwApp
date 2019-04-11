@@ -66,7 +66,7 @@
             },
             "icons" : {
                 "ios" : {
-                    "appstore" : "F:/Desktop/6c9d2021e5daa1debc6e0d5778a821e.png",
+                    "appstore" : "static/img/logoo.png",
                     "ipad" : {
                         "app" : "unpackage/res/icons/76x76.png",
                         "app@2x" : "unpackage/res/icons/152x152.png",

@@ -8,13 +8,13 @@
 	z-index: 160;
 	border-bottom: solid 1px #ddd;
 	/* background: linear-gradient(to left, #FA4DBE 0, #FBAA58 100%); */
-	background:#fc2c5d;
+	/* background:#fc2c5d; */
 	/* background: rgba(255,255,255,.9); */
 	border-bottom-color: transparent;
 	-webkit-transition: all .4s ease 0s;
 	transform-origin: center;
 	/* #ifdef APP-PLUS */
-	padding-top: var(--status-bar-height);
+	/* padding-top: var(--status-bar-height); */
 	/* #endif */
 	width: 100%;
 }
@@ -90,10 +90,10 @@
 	margin-top:15upx;
 }
 .index-content .index-banner {
-	padding-top: 92upx;
+	/* padding-top: 92upx; */
 	/* #ifdef APP-PLUS */
-	width: 480upx;
-	height:480upx;
+	width: 370upx;
+	height:370upx;
 	/* #endif */
 	width: 100%;
 }
@@ -101,7 +101,7 @@ uni-swiper{
 	
 	height:370upx;
 	/* #ifdef APP-PLUS */
-	height:480upx;
+	/* height:420upx; */
 	/* #endif */
 }
 /* #ifdef APP-PLUS */
@@ -112,7 +112,7 @@ uni-swiper{
 .index-content .index-banner swiper-item {
 	height: 480upx;
 	/* #ifdef APP-PLUS */
-	height:380upx;
+	/* height:380upx; */
 	/* #endif */
 	
 }
@@ -129,6 +129,7 @@ uni-swiper{
 .index-content .index-navlist image {
 	width: 64px;
 	height: 64px;
+	/* box-shadow: 2px 2px 11px rgba(250, 67, 106, 0.3); */
 }
 
 .index-content .home_ant_juhuasuan {
@@ -152,8 +153,8 @@ uni-swiper{
 .index-content .home_ant_juhuasuan .fl-jutext:before {
     content: "";
     float: left;
-    margin-top: 32rpx;
-    width: 3px;
+    margin-top: 28rpx; 
+    width: 4px;
     height: 18px;
     border-radius: 3px;
     -moz-border-radius: 3px;
@@ -255,8 +256,8 @@ uni-swiper{
 .index-content .index-coupon .coupon-tab .fl-jutext:before {
 	content: "";
 	float: left;
-	margin-top: 16rpx;
-	width: 3px;
+	margin-top: 10rpx;
+	width: 4px;
 	height: 18px;
 	border-radius: 3px;
 	-moz-border-radius: 3px;

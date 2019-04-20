@@ -46,6 +46,7 @@
 				tabIndex: 0,
 				tabBars: [],
 				moduleid:"",
+				cateid:"",
 				keywords:"",
 				name:""
 			}
@@ -97,7 +98,15 @@
 					   this.loadNavList(res.data);
                     }
                 })
+				uni.getStorage({
+					key: 'newscateid',
+					success: (res) => {
+						var OldKeys = JSON.parse(res.data);
+						this.cateid = OldKeys;
+					}
+				});
             },200)
+			
 			
 		},
 		methods: {
@@ -117,7 +126,11 @@
 						uni.setNavigationBarTitle({
 							title: this.name
 						});
-						this.tabBars.forEach((tabBar) => {
+						this.tabBars.forEach((tabBar,index) => {
+							if(this.cateid==tabBar.catid){
+								this.tabIndex = index;
+								// this.tapTab(index);
+							}
 							this.newsList.push({
 								data: [],
 								cateid: tabBar.catid,
@@ -132,13 +145,26 @@
 					}
 				})	
 			},
+			html_decode(str) {
+				var s = ''
+				if (str.length === 0) return ''
+				// s = str.replace(/&amp;/g, '&')
+				s = str.replace('“', '')
+				s = s.replace('”', '')
+				return s
+			},
+			html_decode2(str) {
+				var s = ''
+				if (str.length === 0) return ''
+				s = str.replace(this.keywords, "<a style='color:red'>"+this.keywords+"</a>")
+				return s
+			},
 			getList(action = 1) {
 				let activeTab = this.newsList[this.tabIndex];
-				//activeTab.requestParams.time = new Date().getTime() + '';
 				if (action === 1) {
 					activeTab.page = 0;
 				}
-				//console.log(JSON.stringify(activeTab.page));
+				activeTab.page==0?activeTab.page=1:activeTab.page=activeTab.page;
 				uni.request({
 					url: 'http://47.100.48.1/api/member/getData.php?ac=newsmoduledata',
 					data: {keywords:this.keywords,moduleid:this.moduleid,cateid:activeTab.cateid,page:activeTab.page},
@@ -146,16 +172,30 @@
 					success: (res) => {
 						var result = res.data;
 						if (result.code == "0000") {							
-							const data = result.data.map((news) => {
+							const data = result.data.map((news,index) => {
+								var type = "";
+								if(news.imgList.length>2){
+									type = 3;
+								}else{
+									if(news.thumb!=""){
+										index % 4==0? type = 2:type=1;
+									}else{
+										type = 0;
+									}
+								}
 								return {
 									id: news.itemid,
-									article_type: 1,
+									article_type: type,
 									datetime: friendlyDate(news.addtime),
 									title: news.title,
 									titles: news.titles,
+									// titles: this.html_decode(news.titles),
+									titles2: this.html_decode(news.titles),
 									image_url: news.thumb,
+									image_list: news.imgList,  
 									source: news.editor,
 									comment_count: news.hits,
+									introduce: news.introduce,
 									post_id: news.catid,
 									catname: news.catname,
 									istoday: news.istoday,
@@ -163,7 +203,7 @@
 								};
 								
 							});
-							// console.log(JSON.stringify(data)); 
+							// console.log(JSON.stringify(data));   
 							if (action === 1) {
 								activeTab.data = data;
 								this.refreshing = false;
@@ -178,6 +218,12 @@
 							}
 							uni.removeStorage({
 								key: 'cateKeywords',
+								success: function (res) {
+									//console.log('success');
+								}
+							});
+							uni.removeStorage({
+								key: 'newscateid',
 								success: function (res) {
 									//console.log('success');
 								}

@@ -13,20 +13,20 @@
 					<!-- <wxParse :content="data.titles" @preview="preview" @navigate="navigate" /> -->
 					<!-- <richtext>{{data.title}}</richtext> -->
 					<richtext :class="['media-title',isImgRight||isImgLeft?'media-title2':'']">
-						{{data.titles}}
-						  <!-- <span v-html="data.titles"></span> -->
-						<!-- <rich-text :nodes="data.titles"></rich-text>  -->
+						{{data.title}}
+						<view class="intro" v-if="data.post_id==566">{{data.introduce}}</view>
 					</richtext>
+					<!-- <div v-html="data.titles2"></div> -->
                     <div v-if="showImg" :class="['image-section',isImgRight?'image-section-right':'',isImgLeft?'image-section-left':'']">
-                        <image :class="['image-list1',isImgRight||isImgLeft?'image-list2':'']" v-if="data.image_url"
-                            :src="data.image_url"></image>
-                        <image class="image-list3" v-if="data.image_list" :src="source.url" v-for="(source, i) in data.image_list"
-                            :key="i" />
+                        <image :class="['image-list1',isImgRight||isImgLeft?'image-list2':'']" v-if="data.article_type!=3 && data.image_url "
+                            :src="data.image_url" model="widthFix"></image>
+                        <image class="image-list3" v-if="data.article_type==3 && i<3" :src="source" v-for="(source, i) in data.image_list"
+                            :key="i" model="widthFix" />
                     </div>
                 </div>
                 <div class="media-foot">
                     <div class="media-info">   
-						<text class="info-text">{{data.catname}}</text>
+						<text class="info-text info-text1">{{data.catname}}</text>
                         <text class="info-text">{{data.source}}</text>
                         <text class="info-text">{{data.comment_count}}次浏览</text>
                         <text :class="[data.istoday==1?'info-textt':'info-text']">{{data.datetime}}</text>	
@@ -61,7 +61,11 @@
             showImg() {
                 return this.data.image_list || this.data.image_url
             }
+			
         },
+		onLoad(){
+			console.log(this.data);
+		},
 		components: { 
 			wxParse
 		},
@@ -176,6 +180,12 @@
         color: #999999;
         font-size: 24px;
     }
+	.info-text1{
+		max-width:340upx;
+		overflow:hidden;
+		lines: 1;
+		text-overflow: ellipsis;
+	}
 	.info-textt{
 		margin-right: 20upx;
 		color: rgb(252, 44, 93);
@@ -218,4 +228,14 @@
 		-webkit-line-clamp: 1;
 		
 	}
+	.intro{
+		font-size:26upx;
+		color:#999999;
+		lines: 2;
+		overflow:hidden;
+		line-height:40upx;
+		max-height:80upx;
+		text-overflow: ellipsis;
+		margin-top:10upx;
+		}
 </style>

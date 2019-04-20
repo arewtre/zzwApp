@@ -4,6 +4,7 @@
   "navigationStyle": "custom",
   "bounce": "none",
   "titleNView": {
+    "type": "transparent",
     "searchInput": {
       "borderRadius": "10px",
       "placeholder": "请输入关键字搜索",

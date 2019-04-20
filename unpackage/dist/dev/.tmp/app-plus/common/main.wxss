@@ -1,57 +1,10 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
 /*每个页面公共css */
 @font-face {font-family: "iconfont";
   src: url('http://at.alicdn.com/t/font_1044281_p16f7wd686.eot?t=1550815807589'); /* IE9 */
@@ -3897,14 +3850,6 @@ swiper.round-dot .wx-swiper-dot.wx-swiper-dot-active {
 .icon-mjiantou-copy:before {
   content: "\E600";
 }
-
-@charset "UTF-8";
-/* 页面左右间距 */
-/* 文字尺寸 */
-/*文字颜色*/
-/* 边框颜色 */
-/* 图片加载中颜色 */
-/* 行为相关颜色 */
 /*
 	以下公用样式为简易替代版,不建议使用
 */

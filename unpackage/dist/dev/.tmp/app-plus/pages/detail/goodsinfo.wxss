@@ -7,7 +7,7 @@
 	z-index: 160;
 	border-bottom: solid 1px #ddd;
 	/* background: linear-gradient(to left, #FA4DBE 0, #FBAA58 100%); */
-	background:#fc2c5d;
+	/* background:#fc2c5d; */
 	/* background: rgba(255,255,255,.9); */
 	border-bottom-color: transparent;
 	-webkit-transition: all .4s ease 0s;
@@ -15,7 +15,7 @@
 	    -ms-transform-origin: center;
 	        transform-origin: center;
 	
-	padding-top: var(--status-bar-height);
+	/* padding-top: var(--status-bar-height); */
 	
 	width: 100%;
 }
@@ -87,10 +87,10 @@
 	margin-top:15rpx;
 }
 .index-content .index-banner {
-	padding-top: 92rpx;
+	/* padding-top: 92upx; */
 	
-	width: 480rpx;
-	height:480rpx;
+	width: 370rpx;
+	height:370rpx;
 	
 	width: 100%;
 }
@@ -98,7 +98,7 @@ uni-swiper{
 	
 	height:370rpx;
 	
-	height:480rpx;
+	/* height:420upx; */
 	
 }
 
@@ -111,7 +111,7 @@ uni-swiper{
 .index-content .index-banner swiper-item {
 	height: 480rpx;
 	
-	height:380rpx;
+	/* height:380upx; */
 	
 }
 .index-content .index-banner .swiper .swiper-container image {
@@ -124,6 +124,7 @@ uni-swiper{
 .index-content .index-navlist image {
 	width: 64px;
 	height: 64px;
+	/* box-shadow: 2px 2px 11px rgba(250, 67, 106, 0.3); */
 }
 .index-content .home_ant_juhuasuan {
 	padding: 0px 26rpx;
@@ -143,8 +144,8 @@ uni-swiper{
 .index-content .home_ant_juhuasuan .fl-jutext:before {
     content: "";
     float: left;
-    margin-top: 32rpx;
-    width: 3px;
+    margin-top: 28rpx; 
+    width: 4px;
     height: 18px;
     border-radius: 3px;
     -moz-border-radius: 3px;
@@ -233,8 +234,8 @@ uni-swiper{
 .index-content .index-coupon .coupon-tab .fl-jutext:before {
 	content: "";
 	float: left;
-	margin-top: 16rpx;
-	width: 3px;
+	margin-top: 10rpx;
+	width: 4px;
 	height: 18px;
 	border-radius: 3px;
 	-moz-border-radius: 3px;

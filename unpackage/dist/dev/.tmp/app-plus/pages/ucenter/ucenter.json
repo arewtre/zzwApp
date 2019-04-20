@@ -9,7 +9,7 @@
         "fontSrc": "/static/yticon.ttf",
         "text": "",
         "fontSize": "24",
-        "color": "#303133",
+        "color": "#ffffff",
         "width": "46px",
         "background": "rgba(0,0,0,0)"
       },
@@ -17,7 +17,7 @@
         "fontSrc": "/static/yticon.ttf",
         "text": "",
         "fontSize": "28",
-        "color": "#303133",
+        "color": "#ffffff",
         "background": "rgba(0,0,0,0)",
         "redDot": true
       }

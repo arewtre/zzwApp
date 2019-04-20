@@ -11,7 +11,7 @@
 						<uni-media-list :data="newsItem" @close="dislike(tabIndex, newsIndex)" @click="goDetail(newsItem)"></uni-media-list>
 					</block>
 					<view class="uni-tab-bar-loading">
-						<uni-load-more :loadingType="tabItem.loadingText" :contentText="loadingText"></uni-load-more>
+						<uni-load-more :status="tabItem.loadingText" :contentText="loadingText"></uni-load-more>
 					</view>
 				</scroll-view>
 			</swiper-item>
@@ -60,13 +60,25 @@
 				let activeTab = this.newsList[this.tabIndex];
 				if (action === 1) {
 					activeTab.page = 0;
-				}				
+				}	
+				activeTab.page==0?activeTab.page=1:activeTab.page=activeTab.page;
 				this.$Request.post(this.$api.home.newsmoduledata,{moduleid:this.moduleid,cateid:activeTab.cateid,minId:activeTab.minId,page:activeTab.page,isSpecia:1,forom:"H5"}).then(res => {				
 					if (res.code == "0000") {
-						const data = res.data.map((news) => {
+						const data = res.data.map((news,index) => {
+							var type = "";
+							if(news.imgList.length>2){
+								type = 3;
+							}else{
+								if(news.thumb!=""){
+									index % 4==0? type = 2:type=1;
+									if(index % 5==0)type =0;
+								}else{
+									type = 0;
+								}
+							}
 							return {
 								id: news.itemid,
-								article_type: 1,
+								article_type: type,
 								datetime: friendlyDate(news.addtime),
 								title: news.title,
 								image_url: news.thumb,
@@ -87,7 +99,9 @@
 							});
 						}
 						activeTab.page = activeTab.page+1;
-			
+						if(data.length<10){
+							this.activeTab.loadingText  =  'noMore';								
+						}
 					}
 				})	
 				
@@ -106,7 +120,7 @@
 								cateid: tabBar.catid,
 								page: 0,
 								pageSize: 10,
-								loadingText: '加载中...'
+								loadingText: 'loading'
 							});
 						});
 						console.log(this.newsList);

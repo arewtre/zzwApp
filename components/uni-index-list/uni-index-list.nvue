@@ -3,30 +3,24 @@
         <div class="list-cell" @click="bindClick">
             <div class="media-list">
                 <div :class="[isImgRight?'media-image-right':'',isImgLeft?'media-image-left':'']">
-                    <text v-if="!data.type" :class="['media-title',isImgRight||isImgLeft?'media-title2':'']">{{data.title}}</text>
-					<!-- <rich-text v-if="data.type" :nodes="data.title" :class="['media-title',isImgRight||isImgLeft?'media-title2':'']"></rich-text> -->
-					
-					<!-- <span v-if="data.type" >{{data.title}}</span> -->
-					<div  v-if="data.type" :class="['media-title',isImgRight||isImgLeft?'media-title2':'']" v-html="data.title"></div>
-					<!-- <rich-text v-if="data.type"  :nodes="data.title"></rich-text> -->
-					<!-- <wxParse v-if="data.type" :content="data.title" @preview="preview" @navigate="navigate" /> -->
+					<richtext :class="['media-title',isImgRight||isImgLeft?'media-title2':'']">
+						{{data.titles2}}
+					</richtext>
+					<div v-html="data.titles2"></div>
                     <div v-if="showImg" :class="['image-section',isImgRight?'image-section-right':'',isImgLeft?'image-section-left':'']">
-                        <image :class="['image-list1',isImgRight||isImgLeft?'image-list2':'']" v-if="data.image_url"
+                        <image :class="['image-list1',isImgRight||isImgLeft?'image-list2':'']" v-if="data.article_type!=3 && data.image_url "
                             :src="data.image_url"></image>
-                        <image class="image-list3" v-if="data.image_list" :src="source.url" v-for="(source, i) in data.image_list"
+                        <image class="image-list3" v-if="data.article_type==3 && i<3" :src="source" v-for="(source, i) in data.image_list"
                             :key="i" />
                     </div>
                 </div>
                 <div class="media-foot">
-                    <div class="media-info">
+                    <div class="media-info">   
 						<text class="info-text">{{data.catname}}</text>
                         <text class="info-text">{{data.source}}</text>
-                        <text class="info-text">{{data.comment_count}}次浏览</text>
-                        <text class="info-text">{{data.datetime}}</text>
+                        <text class="info-text">{{data.comment_count}}次浏览1111</text>
+                        <text :class="[data.istoday==1?'info-textt':'info-text']">{{data.datetime}}</text>	
                     </div>
-                   <!-- <div class="max-close-view" @click="close">
-                        <div class="close-view"><text class="close">×</text></div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -34,7 +28,6 @@
 </template>
 
 <script>
-	import wxParse from '@/components/wxParse/wxParse';
     export default {
         props: {
             data: {
@@ -54,7 +47,11 @@
             showImg() {
                 return this.data.image_list || this.data.image_url
             }
+			
         },
+		onLoad(){
+			console.log(this.data);
+		},
 		components: { 
 			wxParse
 		},
@@ -65,20 +62,31 @@
             },
             bindClick() {
                 this.$emit('click');
-            }
+            },
+			preview(src, e) {
+			  // do something
+			},
+			navigate(href, e) {
+			  // do something
+			}
         }
     }
 </script>
-
+<!-- <style src="@/components/wxParse/wxParse.css"></style> -->
 <style>
-	@import url("../../components/wxParse/wxParse.css");
+	/* @import url("../../components/wxParse/wxParse.css"); */
+	 view {
+	    display: flex;
+	    flex-direction: column;
+	    box-sizing: border-box;
+	}
 	.sou{
 		font-weight:600;
 		color:red;
 	}
     .list-cell {
-        /* width: 750px;
-        padding: 0 30upx 0 0 ; */
+        width: 750px;
+        padding: 0 30px;
     }
 
     .list-cell:active {
@@ -163,7 +171,11 @@
         color: #999999;
         font-size: 24px;
     }
-
+	.info-textt{
+		margin-right: 20upx;
+		color: rgb(252, 44, 93);
+		font-size: 24upx;
+	}  
     .media-foot {
         margin-top: 20px;
         flex-direction: row;

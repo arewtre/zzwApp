@@ -238,6 +238,7 @@
 						break;
 				}
 				if (strProvider!="") { //点击了0-3序号的这4个按钮
+					// console.log(JSON.stringify(this.content.thumb));
 					uni.share({
 						provider: strProvider,
 						scene:strScene,
@@ -245,7 +246,8 @@
 						href: this.content.linkurl,
 						title: this.content.title,
 						summary: this.content.introduce,
-						imageUrl: this.content.thumb,
+						// imageUrl: this.content.thumb?this.content.thumb:this.content.imgList[0],
+						imageUrl:"http://www.chinapaper.net/file/upload/201903/26/16332371359150.png",
 						success: function(res) {
 							console.log("success:" + JSON.stringify(res));
 						},

@@ -21,12 +21,25 @@ module.exports = {
 		update:"config/update", // 检测更新 
 	},
 	user:{
-		checkLogin:"getData.php?ac=checkLogin"//登录
+		checkLogin:"getData.php?ac=checkLogin",//登录
+		bdAppOpenid:"member.php?ac=bdAppOpenid",//绑定
+		checkbd:"member.php?ac=checkbd",//绑定
+		register:"member.php?ac=register",//注册
+		updateUserInfo:"member.php?ac=updateUserInfo"//绑定
 	},
 	company:{
 		getCompanyList:"company.php"//获取公司数据
 	},
 	goods:{
 		iteminfo:"items/goodsinfo", // 商品详情 加载 
+	},
+	pay:{
+		getOrderInfoByAlipay:"rechargeAlipay.php",//获取充值订单
+		getOrderInfoByWechat:"rechargeWechat.php"//获取微信充值订单
+	},
+	data:{
+		getCategory:"data.php?ac=getCategory",//获取分类
+		getDataList:"data.php?ac=getDataList",//获取分类
 	}
+	
 }

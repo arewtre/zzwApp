@@ -265,7 +265,7 @@ export default {
 	.titleft{
 		height: 60upx;
 		line-height:60upx;
-		color:#fff;
+		color:#999999;
 		width:20%;
 		text-align:center;
 	}
@@ -278,9 +278,9 @@ export default {
 		padding: 0 30upx;
 		//HM修改 按钮背景色
 		//background:linear-gradient(to right,#fd4a5f,#fd4a5f);
-		background: #fc2c5d;
+		// background: #fc2c5d;
 		line-height: 60upx;
-		color: #fff;
+		color: #999999;
 		//border-left: 1px #ccc solid; //HM修改 去掉边框
 		transition: all 0.3s;
 	}

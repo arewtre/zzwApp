@@ -29,7 +29,7 @@ page {
 /* 边框颜色 */
 /* 图片加载中颜色 */
 /* 行为相关颜色 */
-.page_reg.data-v-179ccdba {
+.page_reg.data-v-0143caca {
   width: 90%;
   height: 100%;
   display: -webkit-box;
@@ -50,22 +50,22 @@ page {
       -ms-flex-pack: center;
           justify-content: center;
 }
-.phone.data-v-179ccdba {
+.phone.data-v-0143caca {
   width: 100%;
   border-bottom: 1px solid #d6d6d6;
 }
-.submit.data-v-179ccdba {
+.submit.data-v-0143caca {
   width: 100%;
   margin-top: 30px;
   color: white;
   background-color: #fc2c5d;
   -webkit-tap-highlight-color: #fc2c5d;
 }
-.submit.data-v-179ccdba:active {
+.submit.data-v-0143caca:active {
     color: #B6B6B6;
     background-color: rgba(252, 44, 93, 0.8);
 }
-.tip.data-v-179ccdba {
+.tip.data-v-0143caca {
   margin-top: 30px;
   font-size: 13px;
   color: #B6B6B6;

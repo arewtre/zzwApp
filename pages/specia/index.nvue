@@ -75,7 +75,7 @@
 								data: [],
 								cateid: tabBar.catid,
 								page: 0,
-								loadingText: '加载中...'
+								loadingText: 'loading'
 							});
 						});
 						console.log(this.newsList);
@@ -90,6 +90,7 @@
 				if (action === 1) {
 					activeTab.page = 0;
 				}
+				activeTab.page==0?activeTab.page=1:activeTab.page=activeTab.page;
 				uni.request({
 					url: 'http://47.100.48.1/api/member/getData.php?ac=newsmoduledata',
 					data: {cateid:activeTab.cateid,page:activeTab.page,isSpecia:1},
@@ -97,8 +98,18 @@
 					success: (res) => {
 						var result = res.data;
 						if (result.code == "0000") {
-							
-							const data = result.data.map((news) => {
+							const data = result.data.map((news,index) => {
+								var type = "";
+								if(news.imgList.length>2){
+									type = 3;
+								}else{
+									if(news.thumb!=""){
+										index % 4==0? type = 2:type=1;
+										index % 5==0? type = 0:type=type;
+									}else{
+										type = 0;
+									}
+								}
 								return {
 									id: news.itemid,
 									article_type: 1,
@@ -107,6 +118,7 @@
 									titles: news.titles,
 									istoday: news.istoday,
 									image_url: news.thumb,
+									image_list: news.imgList,
 									source: news.editor,
 									comment_count: news.hits,
 									post_id: news.catid,
@@ -125,7 +137,7 @@
 							}
 							activeTab.page = activeTab.page+1;
 							if(data.length<10){
-								this.newsList.loadingText  =  '没有更多数据了';								
+								this.activeTab.loadingText  =  'noMore';								
 							}
 						}
 					}

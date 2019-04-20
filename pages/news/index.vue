@@ -70,6 +70,7 @@
 				tabIndex: 0,
 				tabBars: [],
 				moduleid:"",
+				cateid:"",
 				keywords:"",
 				scrollTop:false,
 				navBarButton:false,
@@ -79,6 +80,9 @@
 			this.moduleid = event.moduleid;
 			if(event.keywords!= undefined){
 				this.keywords = decodeURIComponent(event.keywords);
+			}
+			if(event.cateid!= undefined){
+				this.cateid = decodeURIComponent(event.cateid);
 			}
 			this.loadNavList();
 			// 初始化列表信息
@@ -120,18 +124,32 @@
 				let activeTab = this.newsList[this.tabIndex];
 				if (action === 1) {
 					activeTab.page = 0;
-				}				
+				}	
+				activeTab.page==0?activeTab.page=1:activeTab.page=activeTab.page;
 				this.$Request.post(this.$api.home.newsmoduledata,{keywords:this.keywords,moduleid:this.moduleid,cateid:activeTab.cateid,minId:activeTab.minId,page:activeTab.page,forom:"H5"}).then(res => {				
-					//console.log(res.data);
+					console.log(res.data);
 					if (res.code == "0000") {
-						const data = res.data.map((news) => {
+						const data = res.data.map((news,index) => {
+							var type = "";
+							if(news.imgList.length>2){
+								type = 3;
+							}else{
+								if(news.thumb!=""){
+									index % 4==0? type = 2:type=1;
+								}else{
+									type = 0;
+								}
+							}
+							
 							return {
 								id: news.itemid,
-								article_type: 1,
+								article_type: type,
 								datetime: friendlyDate(news.addtime),
 								title: news.title,
 								image_url: news.thumb,
+								image_list: news.imgList,
 								source: news.editor,
+								introduce: news.introduce,
 								comment_count: news.hits,
 								post_id: news.catid,
 								catname: news.catname,
@@ -148,10 +166,16 @@
 							});
 						}
 						activeTab.page = activeTab.page+1;
-						//console.log(data.length);
+						console.log(data.length);
 						if(data.length<10){
-							this.newsList.loadingText="noMore";
+							activeTab.loadingText="noMore"
 						}
+						uni.removeStorage({
+							key: 'newscateid',
+							success: function (res) {
+								//console.log('success');
+							}
+						});
 					}
 				})	
 				
@@ -163,13 +187,24 @@
 // 						uni.setNavigationBarTitle({
 // 							title: res.data[0].name
 // 						});
-						this.tabBars.forEach((tabBar) => {
+						uni.getStorage({
+							key: 'newscateid',
+							success: (res) => {
+								var OldKeys = JSON.parse(res.data);
+								this.cateid = OldKeys;
+							}
+						});
+						this.tabBars.forEach((tabBar,index) => {
+							if(this.cateid==tabBar.catid){
+								this.tabIndex = index;
+								this.tapTab(this.tabIndex);
+							}
 							this.newsList.push({
 								data: [],
 								cateid: tabBar.catid,
 								page: 0,
 								pageSize: 10,
-								loadingText: '加载中...'
+								loadingText: 'loading'
 							});
 							tabBar.ref = "ref_"+tabBar.catid;
 						});
@@ -275,7 +310,7 @@
 		}
 	}
 </script>
-<style>
+<style lang='scss'>
 	@import '../../static/css/index.css';
 	@import "../../static/css/icon.css";
 	page {

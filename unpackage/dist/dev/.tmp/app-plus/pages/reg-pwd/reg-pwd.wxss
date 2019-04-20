@@ -10,7 +10,7 @@ page {
 /* 边框颜色 */
 /* 图片加载中颜色 */
 /* 行为相关颜色 */
-.page_reg.data-v-9d15f3cc {
+.page_reg.data-v-2d603c0a {
   height: 100%;
   margin: 30px;
   display: -webkit-box;
@@ -31,12 +31,12 @@ page {
       -ms-flex-pack: center;
           justify-content: center;
 }
-.tip.data-v-9d15f3cc {
+.tip.data-v-2d603c0a {
   margin-top: 30px;
   font-size: 13px;
   color: #B6B6B6;
 }
-.code.data-v-9d15f3cc {
+.code.data-v-2d603c0a {
   width: 100%;
   min-height: 65px;
   margin-top: 30px;
@@ -59,16 +59,16 @@ page {
           justify-content: space-between;
   border-bottom: 1px solid #d6d6d6;
 }
-.code .submit.data-v-9d15f3cc {
+.code .submit.data-v-2d603c0a {
     color: white;
     background-color: #fc2c5d;
     -webkit-tap-highlight-color: #fc2c5d;
 }
-.code .submit.data-v-9d15f3cc:active {
+.code .submit.data-v-2d603c0a:active {
       color: #B6B6B6;
       background-color: rgba(252, 44, 93, 0.8);
 }
-.pwd.data-v-9d15f3cc {
+.pwd.data-v-2d603c0a {
   width: 100%;
   margin-top: 10px;
   min-height: 65px;
@@ -87,11 +87,11 @@ page {
           align-items: center;
   border-bottom: 1px solid #d6d6d6;
 }
-.protocol_tip.data-v-9d15f3cc {
+.protocol_tip.data-v-2d603c0a {
   font-size: 16px;
   color: #B6B6B6;
 }
-.link.data-v-9d15f3cc {
+.link.data-v-2d603c0a {
   color: #3a8de8;
 }
 

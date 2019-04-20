@@ -51,13 +51,11 @@
 	}
 </script>
 
-<style>
+<style lang='scss'>
 	/*每个页面公共css */
 	@import "./static/css/common.css";
 	@import "./static/css/simplepro.css";
 	@import "./static/css/iconfont.css";
-</style>
-<style lang='scss'>
 	/*
 		以下公用样式为简易替代版,不建议使用
 	*/

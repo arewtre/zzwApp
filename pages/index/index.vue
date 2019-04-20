@@ -1,8 +1,22 @@
 <template>
 	<view class="index-content">
-
+		<!-- 头部轮播 -->
+		<!-- <view class="carousel-section">
+			<view class="titleNview-placing"></view>
+			<view class="titleNview-background" :style="{backgroundColor:titleNViewBackground}"></view>
+			<swiper class="carousel" circular @change="swiperChange">
+				<swiper-item v-for="(item, index) in banner" :key="index" class="carousel-item" @click="gpToDetail(item)">
+					<image :src="item.thumb" />
+				</swiper-item>
+			</swiper>
+			<view class="swiper-dots">
+				<text class="num">{{swiperCurrent+1}}</text>
+				<text class="sign">/</text>
+				<text class="num">{{banner.length}}</text>
+			</view>
+		</view> -->
 		<!-- 搜索板块 -->
-		<view class="index-header">
+		<!-- <view class="index-header">
 			<view class="icon_header">
 				<view class="logo"><image src="/static/img/logo.jpg" mode="widthFix" lazy-load="true"></image></view>
 				<view class="index-search" @tap="toSearchIndex">
@@ -15,18 +29,18 @@
 					<text class="iconfont icon-profile"></text> 
 				</view>
 			</view>
-		</view>
+		</view> -->
 		<!-- 搜索板块 -->
 
 		<!-- banner板块 -->
 		<view class="index-banner">
 			<view class="swiper" v-if="banner.length > 0">
-				<swiper class="swiper-container" :autoplay="true" :interval="4000" :circular="true">
+				<swiper class="swiper-container" :autoplay="true" :interval="4000" :circular="true" >
 					<block v-for="(item,index) in banner" :key="index">
 						<swiper-item class="swiper-wrapper swi"  @click="gpToDetail(item)">
-							<image :src="item.thumb" mode="widthFix" lazy-load="true"></image>
-							{{item.title}}
-							<view class="tit">{{item.title}}</view>
+							<image :src="item.thumb" mode="widthFix" lazy-load="true" :class="[swiperCurrent==index?'big':'']"></image>
+							<!-- {{item.title}} -->
+							<text class="tittt">{{item.title}}</text>
 						</swiper-item>
 					</block>
 				</swiper>
@@ -56,37 +70,46 @@
 				<view class="has-pdtb-5">
 					<image :src="nav.thumb" mode="widthFix"></image>
 					<view class="is-size-14">{{nav['title']}}</view>
-				</view>
+				</view> 
 			</view>
 		</view>
-		<!-- 导航栏板块 -->
-
+		<!-- 导航栏板块 -->  
+ 
 		<!-- 专题板块 -->
 		<view class="home_ant_juhuasuan has-bg-white" v-if="zhuantidatalist.length > 0">
 			<view class="juhuasuan-tab s-row">
 				<text class="fl-jutext">热点专题</text>
-				<text class="fr-jutext">更多热点</text>
+				<text class="fr-jutext">更多热点</text>           
 			</view>
-			<swiper class="imageContainer" previous-margin="60rpx" next-margin="60rpx" circular  autoplay>
+			<!-- <swiper class="imageContainer" previous-margin="60rpx" next-margin="60rpx" circular  autoplay @change="swiperChange">
 				<block v-for="(item,index) in zhuantidatalist" :key="index">
 					<swiper-item class="swiperitem" @click="goToSpecia(item)">
-						<image class="itemImg" :src="item.thumb" lazy-load mode="scaleToFill"></image>
+						<image :src="item.thumb" lazy-load mode="scaleToFill" :class="[swiperCurrent==index?'big itemImg':'itemImg']"></image>
 					</swiper-item>
 				</block>
-			</swiper>
+			</swiper> --> 
+			<!-- <swiper class="card-swiper" :class="dotStyle?'square-dot':'round-dot'" :indicator-dots="false" :circular="true"
+			 :autoplay="true" interval="5000" duration="500" @change="cardSwiper" indicator-color="#8799a3"
+			 indicator-active-color="#0081ff">
+				<swiper-item v-for="(item,index) in zhuantidatalist" :key="index" :class="cardCur==index?'cur':''">
+					<view class="swiper-item">
+						<image :src="item.thumb" mode="widthFix"></image>
+						<image :src="item.thumb" mode="aspectFill" v-if="item.type=='image'"></image>
+						<video :src="item.thumb" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
+					</view>
+				</swiper-item>  
+			</swiper> -->
 		</view>
 		<!-- 专题板块 -->
-
+		
 		<!-- 热门资讯 -->
 		<view class="index-coupon has-bg-white has-pd-10">
 			<view class="coupon-tab s-row">
 				<text class="fl-jutext">热门资讯</text>
-				<text class="fr-jutext">更多热门</text>
+				<text class="fr-jutext" @click="toNews(21,'')">更多热门</text>
 			</view>
-			<!-- <uniMediaList :data="zixundatalist"></uniMediaList> -->
-			<block v-for="(newsItem, newsIndex) in zixundatalist" :key="newsIndex">
-				<uni-index-list :data="newsItem" @close="dislike(tabIndex, newsIndex)" @click="goDetail(newsItem)"></uni-index-list>
-			</block>
+			<view class="bbb">
+			<news-list :data="dataList.zixundatalist"></news-list></view>
 		</view>
 		<!-- 热门资讯 -->
 		
@@ -94,43 +117,60 @@
 		<view class="index-coupon has-bg-white has-pd-10">
 			<view class="coupon-tab s-row">
 				<text class="fl-jutext">视点</text>
-				<text class="fr-jutext">更多视点</text>
+				<text class="fr-jutext"@click="toNews(21,12)">更多视点</text>
 			</view>
-			<block v-for="(newsItem, newsIndex) in shidiantidatalist" :key="newsIndex">
-				<uni-index-list :data="newsItem" @close="dislike(tabIndex, newsIndex)" @click="goDetail(newsItem)"></uni-index-list>
-			</block>
-			<!-- <news-list :data="shidiantidatalist"></news-list> -->
+			<news-list :data="dataList.shidiantidatalist"></news-list>
 		</view>
 		<!-- 视点 -->
+		<!-- 聚焦 -->
+		<view class="index-coupon has-bg-white has-pd-10">
+			<view class="coupon-tab s-row">
+				<text class="fl-jutext">聚焦</text>
+				<text class="fr-jutext" @click="toNews(30,566)">更多聚焦</text>
+			</view>
+			<news-list :data="dataList.jujiaodatalist"></news-list>
+		</view>
+		<!-- 聚焦 -->
+		<!-- 访谈 -->
+		<view class="index-coupon has-bg-white has-pd-10">
+			<view class="coupon-tab s-row">
+				<text class="fl-jutext">访谈</text>
+				<text class="fr-jutext" @click="toNews(21,11)">更多访谈</text>
+			</view>
+			<news-list :data="dataList.fangtandatalist"></news-list>
+		</view>
+		<!-- 访谈 -->
+		<!-- 展会 -->
+		<view class="index-coupon has-bg-white has-pd-10">
+			<view class="coupon-tab s-row">
+				<text class="fl-jutext">展会</text>
+				<text class="fr-jutext" @click="toNews(26,'')">更多展会</text>
+			</view>
+			<news-list :data="dataList.zhanhuidatalist"></news-list>
+		</view>
+		<!-- 展会 -->
 		
-		<!-- 加载更多提示 -->
-		<!-- <view class="s-col is-col-24" v-if="couponlist.length > 0">
-			<load-more :loadingType="loadingType" :contentText="contentText"></load-more>
-		</view> -->
-		<!-- 加载更多提示 -->
 		
 	</view>
 </template>
 
 <script>
-	// import cmdIcon from "@/components/cmd-icon/cmd-icon.vue";
 	import newsList from '@/components/newslist/newslist.vue';
 	import uniNoticeBar from "@/components/uni-notice-bar/uni-notice-bar.vue";
-	import uniIndexList from '@/components/uni-index-list/uni-index-list.vue';
 	import {
 		friendlyDate
 	} from '@/common/util.js';
+	var bitmap = null;
 	export default {
-		components: {
-			// cmdIcon,
+		components: {   
 			newsList,
 			uniNoticeBar,
-			uniIndexList
-		},
+		}, 
 		data() {
 			return {
 				banner: [],
 				navlist: [],
+				dataList:[],
 				zixundatalist: [],
 				zhuantidatalist:[],
 				shidiantidatalist:[],
@@ -142,18 +182,70 @@
 					contentdown: "上拉显示更多",
 					contentrefresh: "正在加载...",
 					contentnomore: "没有更多数据了"
-				}
+				},
+				swiperCurrent:0,
+				cardCur:0,
+				dotStyle:false
+				
 			}
+		},
+		onNavigationBarSearchInputClicked: async function(e) {
+			this.toSearchIndex();
+		},
+		computed:{
+
+		},
+		onReady:function(){
+			if(!uni.getStorageSync('ifLaunch')) 
+				uni.navigateTo({
+				url: '../guide/guide'
+			})
+			uni.hideLoading();
+		},
+		onShow:function() {
+			var icon = plus.nativeObj.View.getViewById("icon");
+			if (icon) {
+				setTimeout(function(){
+					icon.show();
+				},100)
+			}
+		},
+		onLoad: function(Refresh) {
+			uni.showLoading({
+				title: '玩命加载中..'
+			});
+			this.loadBanner(Refresh);
+			this.loadNavList(Refresh);
+			this.zixunlist(Refresh);
+			this.zhuantilist(Refresh);
+			this.jujiaolist(Refresh);
+			this.shidianlist(Refresh);
+			this.fangtanlist(Refresh);
+			this.zhanhuilist(Refresh);
+			this.gonggaolist(Refresh);
+			
+		},
+		onReachBottom: function() {
+			this.page = this.page + 1;
+			//this.loadCouponList();
+		},
+		onPullDownRefresh: function(Refresh) {
+			this.page = 1;
+			this.loadBanner(Refresh); 
+			this.zixunlist(Refresh);
+			this.zhuantilist(Refresh);
+			this.shidianlist(Refresh);
+			setTimeout(function () {
+				uni.stopPullDownRefresh(Refresh);  //停止下拉刷新动画
+			}, 1000);
 		},
 		methods: {
 			loadBanner: function(Refresh) {
 				var indexBanner = this.$SysCache.get("app_index_banner");
-				//console.log(JSON.stringify(indexBanner));
 				if(indexBanner && Refresh == undefined ){ 
 					this.banner  = indexBanner;
 				}else{
 					this.$Request.post(this.$api.home.banner).then(res => {
-						
 						if (res.code == "0000") {
 							this.banner = res.data;
 							this.$SysCache.put("app_index_banner",res.data,300);
@@ -163,12 +255,10 @@
 			},
 			loadNavList: function(Refresh) {
 				var indexNav = this.$SysCache.get("app_index_navlist");
-				//console.log(indexNav);
 				if(indexNav){
 					this.navlist = indexNav;
 				}else{
 					this.$Request.post(this.$api.home.navlist).then(res => {
-						//console.log(res.data);
 						if (res.code == "0000") {
 							this.navlist = res.data;
 							this.$SysCache.put("app_index_navlist",res.data,86400);
@@ -176,44 +266,12 @@
 					})	
 				}
 			},
-			zixunlist: function(Refresh) {
-				var indexzixundatalist = this.$SysCache.get("app_index_zixundatalist");
-				//console.log(indexBanner);
-				if(indexzixundatalist && Refresh == undefined ){
-					this.zixundatalist  = indexzixundatalist;
-				}else{
-					this.$Request.post(this.$api.home.sydata,{thumb:1}).then(res => {
-						//console.log(res.data);
-						if (res.code == "0000") {
-							const datas = res.data.map((news) => {
-								return {
-									id: news.itemid,
-									article_type: 1,
-									datetime: friendlyDate(news.addtime),
-									title: news.title,
-									image_url: news.thumb,
-									source: news.editor,
-									comment_count: news.hits,
-									post_id: news.catid,
-									catname: news.catname
-								};
-							});
-							this.zixundatalist =  datas;
-							this.$SysCache.put("app_index_zixundatalist",datas,300);
-						}
-						 
-					})
-				}
-				
-			},
 			zhuantilist: function(Refresh) {
 				var indexzhuantidatalist = this.$SysCache.get("app_index_zhuantidatalist");
-				//console.log(indexzhuantidatalist);
 				if(indexzhuantidatalist && Refresh == undefined ){
 					this.zhuantidatalist  = indexzhuantidatalist;
 				}else{
 					this.$Request.post(this.$api.home.sydata,{moduleid:21,catid:14,pagesize:4,thumb:1}).then(res => {
-						//console.log(res.data);
 						if (res.code == "0000") {
 							this.zhuantidatalist = res.data;
 							this.$SysCache.put("app_index_zhuantidatalist",res.data,300);
@@ -221,61 +279,45 @@
 					})	
 				}
 			},
+			zixunlist: function(Refresh) {
+				var indexzixundatalist = this.$SysCache.get("app_index_zixundatalist");
+				if(indexzixundatalist && Refresh == undefined ){
+					this.dataList.zixundatalist  = indexzixundatalist;
+				}else{
+					this.getNewsData("21",'',"zixundatalist",3);
+				}	
+			},
 			shidianlist: function(Refresh) {
 				var indexshidiantidatalist = this.$SysCache.get("app_index_shidiantidatalist");
-				//console.log(indexshidiantidatalist);
 				if(indexshidiantidatalist && Refresh == undefined ){
-					this.shidiantidatalist  = indexshidiantidatalist;
+					this.dataList.shidiantidatalist  = indexshidiantidatalist;
 				}else{
-					this.$Request.post(this.$api.home.sydata,{moduleid:21,catid:12,pagesize:4}).then(res => {
-						// console.log(res.data);
-						if (res.code == "0000") {
-							const datas = res.data.map((news) => {
-								return {
-									id: news.itemid,
-									article_type: 1,
-									datetime: friendlyDate(news.addtime),
-									title: news.title,
-									image_url: news.thumb,
-									source: news.editor,
-									comment_count: news.hits,
-									post_id: news.catid,
-									catname: news.catname
-								};
-							});
-							this.shidiantidatalist = datas;
-							this.$SysCache.put("app_index_shidiantidatalist",datas,300);
-						}
-						 
-					})	
+					this.getNewsData("21",'12',"shidiantidatalist",3);	
 				}
 			},
-			loadCouponList: function(type) {
-				this.loadingType = 1; 
-				this.$Request.post(this.$api.common.couponlist, {
-					page: this.page
-				}).then(res => {
-					this.loadingType = 0; 
-					if (res.code == 200) {
-						if (this.page == 1) {
-							this.couponlist = [];
-						}
-						res.data.forEach(d => {
-							this.couponlist.push(d);
-						})
-					}else{
-						this.loadingType = 2; 
-					}
-					if (type == "Refresh") {
-						uni.stopPullDownRefresh(); // 停止刷新
-					}
-					setTimeout(t=>{
-						this.loadBanner("Refresh"); // 当首页数据加载完毕后 刷新banner
-					},1000); 
-				}).catch(err=>{
-// 					this.loadingType = 2; 
-// 					this.contentText.contentnomore = "网络繁忙，请稍后再试"
-				})
+			jujiaolist: function(Refresh) {
+				var indexjujiaodatalist = this.$SysCache.get("app_index_jujiaodatalist");
+				if(indexjujiaodatalist && Refresh == undefined ){
+					this.dataList.jujiaodatalist  = indexjujiaodatalist;
+				}else{
+					this.getNewsData("30",'566',"jujiaodatalist",3);	
+				}
+			},
+			fangtanlist: function(Refresh) {
+				var indexfangtandatalist = this.$SysCache.get("app_index_fangtandatalist");
+				if(indexfangtandatalist && Refresh == undefined ){
+					this.dataList.fangtandatalist  = indexfangtandatalist;
+				}else{
+					this.getNewsData("21",'11',"fangtandatalist",2);	
+				}
+			},
+			zhanhuilist: function(Refresh) {
+				var indexzhanhuidatalist = this.$SysCache.get("app_index_zhanhuidatalist");
+				if(indexzhanhuidatalist && Refresh == undefined ){
+					this.dataList.zhanhuidatalist  = indexzhanhuidatalist;
+				}else{
+					this.getNewsData("26",'',"zhanhuidatalist",3);	
+				}
 			},
 			toNavList: function(url, title) {
 				uni.showToast({
@@ -346,6 +388,20 @@
 					})
 				}
 			},
+			toNews(moduleid,cateid) {
+				//console.log(e);
+				uni.setStorageSync('newsmoduleid',  moduleid);
+				uni.setStorageSync('newscateid',  cateid);
+				if(moduleid==4){
+					uni.navigateTo({
+						url: '/pages/company/index?moduleid=' + moduleid,
+					})
+				}else{
+					uni.navigateTo({
+						url: '/pages/news/index?moduleid=' + moduleid,
+					})
+				}
+			},
 			goToSpecia(e) {
 				//console.log(e);
 				uni.setStorageSync('urlSpecia',  e.linkurl);
@@ -355,39 +411,58 @@
 			    })
 				
 			},
+			//轮播图切换修改背景色
+			swiperChange(e) {
+				const index = e.detail.current;
+				this.swiperCurrent = index;
+				this.titleNViewBackground = this.banner[index].background;
+			},		
+			cardSwiper(e) {
+				this.cardCur = e.detail.current
+			},
+			getNewsData(moduleid,cateid,dataname,pagesize){
+				this.$Request.post(this.$api.home.newsmoduledata,{moduleid:moduleid,cateid:cateid,pagesize:pagesize}).then(res => {
+					console.log(res.data);
+					if (res.code == "0000") {
+						const datas = res.data.map((news,index) => {
+							var type = "";
+							if(news.imgList.length>2){
+								type = 3;
+							}else{
+								if(news.thumb!=""){
+									index % 4==0? type = 2:type=1;
+								}else{
+									type = 0;
+								}
+							} 
+							 if(cateid==11){
+							 	type = 0;
+							 }
+							return {
+								id: news.itemid,
+								article_type: type,
+								datetime: friendlyDate(news.addtime),
+								title: news.title,
+								image_url: news.thumb,
+								image_list: news.imgList,
+								source: news.editor,
+								introduce: news.introduce,
+								comment_count: news.hits,
+								post_id: news.catid,
+								catname: news.catname
+							};
+						});
+						this.dataList[dataname] =  datas;
+						this.$SysCache.put("app_index_"+dataname,datas,300);
+					}
+					 
+				})
+			}
 		},
-		onReady:function(){
-			uni.hideLoading();
-		},
-		onLoad: function(Refresh) {
-			uni.showLoading({
-				title: '玩命加载中..'
-			});
-			this.loadBanner(Refresh);
-			this.loadNavList(Refresh);
-			this.zixunlist(Refresh);
-			this.zhuantilist(Refresh);
-			this.shidianlist(Refresh);
-			this.gonggaolist(Refresh);
-		},
-		onReachBottom: function() {
-			this.page = this.page + 1;
-			//this.loadCouponList();
-		},
-		onPullDownRefresh: function(Refresh) {
-			this.page = 1;
-			this.loadBanner(Refresh); 
-			this.zixunlist(Refresh);
-			this.zhuantilist(Refresh);
-			this.shidianlist(Refresh);
-			setTimeout(function () {
-				uni.stopPullDownRefresh(Refresh);  //停止下拉刷新动画
-			}, 1000);
-		}
 	}
 </script>
 
-<style>
+<style lang='scss'>
 	
 	@import "../../static/css/index.css";
 	@import "../../static/css/uni.css";
@@ -409,7 +484,7 @@
 	.swi{
 		position:relative;
 	}
-	.tit{
+	.tittt{
 		position:absolute;
 		height:48rpx;
 		line-height:48rpx;
@@ -519,12 +594,27 @@
 		padding-left:20upx;
 		padding-right:20upx;
 	}
-	.has-pdtb-10 {
+	/* .has-pdtb-10 {
 		padding-left:4upx;
 		padding-right:4upx;
-	}
+	} */
 	.has-pd-10{
 		padding-left:26upx !important;
 		padding-right:26upx !important;
 	}
+	/* .index-navlist,.uni-swiper-msg{display:block !important} */
+	
+	.index-navlist {
+	    /* padding-left:35upx */
+	}
+	.bbb{
+	   display: flex;
+	   flex-direction: column;
+	   box-sizing: border-box; 
+	}
+	/* #ifdef H5 */
+	.index-navlist {
+	    /* padding-left:0upx */
+	}
+	/* #endif */
 </style>

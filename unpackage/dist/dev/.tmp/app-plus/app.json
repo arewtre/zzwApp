@@ -3,10 +3,13 @@
     "pages/index/index",
     "pages/cate/index",
     "pages/set/set",
+    "pages/guide/guide",
     "pages/ucenter/ucenter",
     "pages/ucenter/record",
     "pages/ucenter/point",
     "pages/ucenter/info",
+    "pages/ucenter/about",
+    "pages/ucenter/wallet",
     "pages/detail/detail",
     "pages/search/index",
     "pages/specia/detail",
@@ -17,7 +20,9 @@
     "pages/company/detail",
     "pages/company/introduce",
     "pages/company/news",
-    "pages/detail/goodsinfo"
+    "pages/detail/goodsinfo",
+    "pages/msg/msg",
+    "pages/msg/chat/chat"
   ],
   "subPackages": [],
   "window": {
@@ -46,10 +51,10 @@
         "text": "专题"
       },
       {
-        "pagePath": "pages/cate/index",
-        "iconPath": "static/img/foot/cate.png",
-        "selectedIconPath": "static/img/foot/cate-act.png",
-        "text": "分类"
+        "pagePath": "pages/ucenter/info",
+        "iconPath": "static/img/foot/push_1.png",
+        "selectedIconPath": "static/img/foot/push_1.png",
+        "text": "发布"
       },
       {
         "pagePath": "pages/datas/index",
@@ -151,5 +156,5 @@
     "autoclose": false
   },
   "appname": "中纸网",
-  "compilerVersion": "1.8.2"
+  "compilerVersion": "1.9.2"
 }

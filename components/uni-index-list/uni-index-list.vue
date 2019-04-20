@@ -1,27 +1,21 @@
 <template>
-    <view class="con">
-        <view class="con list-cell" hover-class="uni-list-cell-hover" @click="bindClick">
-            <view class="con media-list" v-if="data.title">
-                <view :class="[isImgRight?'con media-image-right':'',isImgLeft?'con media-image-left':'']">
-                    <!-- <text :class="['media-title',isImgRight||isImgLeft?'media-title2':'']">{{data.title}}</text> -->
-					<rich-text :nodes="data.title" :class="['media-title',isImgRight||isImgLeft?'media-title2':'']"></rich-text>
+    <view>
+        <view class="list-cell" hover-class="uni-list-cell-hover" @click="bindClick">
+            <view class="media-list" v-if="data.title">
+                <view :class="[isImgRight?'media-image-right':'',isImgLeft?'media-image-left':'']">
+					<view :class="['media-title',isImgRight||isImgLeft?'media-title2':'']">{{data.title}}</view>
                     <view v-if="showImg" :class="['image-section',isImgRight?'image-section-right':'',isImgLeft?'image-section-left':'']">
-                        <image :class="['image-list1',isImgRight||isImgLeft?'image-list2':'']" v-if="data.image_url"
+                        <image :class="['image-list1',isImgRight||isImgLeft?'image-list2':'']" 
                             :src="data.image_url"></image>
-                        <image class="image-list3" v-if="data.image_list" :src="source.url" v-for="(source, i) in data.image_list"
-                            :key="i" />
                     </view>
                 </view>
-                <view class="media-foot con">
+                <view class="media-foot">
                     <view class="media-info">
-						<text class="info-text">{{data.catname}}</text>
+						<text class="info-text info-text1">{{data.catname}}</text>
                         <text class="info-text">{{data.source}}</text>
                         <text class="info-text">{{data.comment_count}}次浏览</text>
-                        <text class="info-text">{{data.datetime}}</text>	
+                        <!-- <text :class="[data.istoday==1?'info-textt':'info-text']">{{data.datetime}}</text>	 -->
                     </view>
-                   <!-- <view class="max-close-view" @click.stop="close">
-                        <view class="close-view"><text class="close">×</text></view>
-                    </view> -->
                 </view>
             </view>
         </view>
@@ -31,7 +25,7 @@
 <script>
 	import cmdIcon from "@/components/cmd-icon/cmd-icon.vue";
     export default {
-		name: 'uni-media-list',
+		name: 'uni-index-list',
         props: {
             data: {
                 type: Object,
@@ -51,7 +45,7 @@
                 return this.data.article_type === 1
             },
             showImg() {
-                return this.data.image_list || this.data.image_url
+                return this.data.image_url
             }
         },
         methods: {
@@ -65,8 +59,8 @@
     }
 </script>
 
-<style>
-    .con{
+<style lang='scss'>
+    view {
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
@@ -75,8 +69,8 @@
 		margin-top:10upx
 	}
     .list-cell {
-        /* width: 750upx;
-        padding: 0 30upx 0 0 ; */
+        width: 710upx;
+        padding: 0 20upx;
     }
 
     .uni-list-cell-hover {
@@ -159,9 +153,21 @@
     .info-text {
         margin-right: 20upx;
         color: #999999;
-        font-size: 24upx;
+        font-size: 18upx;
+		height:30upx;
+		line-height:30upx;
     }
-
+	.info-textt{
+		margin-right: 20upx;
+		color: rgb(252, 44, 93);
+		font-size: 18upx;
+	}
+	.info-text1{
+		max-width:340upx;
+		overflow:hidden;
+		lines: 1;
+		text-overflow: ellipsis;
+	}
     .media-foot {
         margin-top: 20upx;
         flex-direction: row;

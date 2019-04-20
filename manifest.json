@@ -10,7 +10,10 @@
         "modules" : {
             "Share" : {},
             "Payment" : {},
-            "Push" : {}
+            "Push" : {},
+            "Maps" : {},
+            "OAuth" : {},
+            "VideoPlayer" : {}
         },
         /* 模块配置 */
         "distribute" : {
@@ -60,9 +63,40 @@
                     "alipay" : {
                         "scheme" : "chinapaperchinapaper"
                     },
-                    "appleiap" : {}
+                    "appleiap" : {},
+                    "weixin" : {
+                        "appid" : "wx3998c7adb53e6628"
+                    }
                 },
-                "maps" : {}
+                "maps" : {
+                    "amap" : {
+                        "appkey_ios" : "7bc71ce8005ff3a223cb8861a11753e6",
+                        "appkey_android" : "2c70903dd95a46803e00db748fbcee23"
+                    }
+                },
+                "share" : {
+                    "weixin" : {
+                        "appid" : "wx3998c7adb53e6628",
+                        "appsecret" : "a8747ce8f97bb854638d16017cb91089"
+                    },
+                    "qq" : {
+                        "appid" : "101566943"
+                    },
+                    "sina" : {
+                        "appkey" : "2276819267",
+                        "appsecret" : "7fa7f3bf0ff3c93f1f54b3a5338d7778",
+                        "redirect_uri" : "http://open.weibo.com/apps/2276819267/privilege/oauth"
+                    }
+                },
+                "oauth" : {
+                    "weixin" : {
+                        "appid" : "wx3998c7adb53e6628",
+                        "appsecret" : "a8747ce8f97bb854638d16017cb91089"
+                    },
+                    "qq" : {
+                        "appid" : "101566943"
+                    }
+                }
             },
             "icons" : {
                 "ios" : {

@@ -3,9 +3,52 @@
   "navigationBarTitleText": "中纸网",
   "navigationBarTextStyle": "white",
   "enablePullDownRefresh": true,
-  "navigationStyle": "custom",
-  "titleNView": false,
-  "bounce": "none",
+  "titleNView": {
+    "searchInput": {
+      "backgroundColor": "rgba(231, 231, 231,.7)",
+      "borderRadius": "16px",
+      "placeholder": "请输入关键字 如：造纸",
+      "disabled": true,
+      "placeholderColor": "#ffffff"
+    },
+    "buttons": [
+      {
+        "fontSrc": "/static/font/iconfont.ttf",
+        "text": "",
+        "fontSize": "24",
+        "width": "auto",
+        "color": "#ffffff",
+        "float": "left",
+        "background": "rgba(0,0,0,0)"
+      },
+      {
+        "text": "南京",
+        "fontSize": "14",
+        "width": "auto",
+        "color": "#ffffff",
+        "float": "left",
+        "select": true,
+        "background": "rgba(0,0,0,0)"
+      },
+      {
+        "fontSrc": "/static/font/iconfont.ttf",
+        "text": "",
+        "fontSize": "26",
+        "width": "auto",
+        "color": "#ffffff",
+        "background": "rgba(0,0,0,0)"
+      },
+      {
+        "fontSrc": "/static/yticon.ttf",
+        "text": "",
+        "fontSize": "26",
+        "width": "auto",
+        "color": "#ffffff",
+        "background": "rgba(0,0,0,0)",
+        "redDot": true
+      }
+    ]
+  },
   "pullToRefresh": {
     "style": "circle",
     "color": "#FD575C",

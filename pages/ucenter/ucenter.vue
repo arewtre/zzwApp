@@ -8,7 +8,7 @@
 					<image class="portrait" :src="userInfo.avatarUrl || '/static/missing-face.png'"></image>
 				</view>
 				<view class="info-box">
-					<text class="username">{{hasLogin?userInfo.username:'游客'}}</text>
+					<text class="username">{{hasLogin?userInfo.truename:'游客'}}</text>
 				</view>
 			</view>
 			<view class="vip-card-box">
@@ -84,14 +84,15 @@
 					<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553105443324&di=8141bf13f3f208c61524d67f9bb83942&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01ac9a5548d29b0000019ae98e6d98.jpg" mode="aspectFill"></image>
 					<image src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=191678693,2701202375&fm=26&gp=0.jpg" mode="aspectFill"></image>
 				</scroll-view> 
-				<list-cell @eventClick="navTo('/pages/ucenter/record')" icon="icon-iconfontweixin" iconColor="#e07472" title="我的钱包" tips="充值送好礼"></list-cell>
+				<list-cell @eventClick="navTo('/pages/ucenter/wallet')" icon="icon-iconfontweixin" iconColor="#e07472" title="我的钱包" tips="充值送好礼"></list-cell>
 				<list-cell @eventClick="navTo('/pages/ucenter/account')" icon="icon-dizhi" iconColor="#5fcda2" title="我的账户"></list-cell>
 				<list-cell @eventClick="navTo('/pages/ucenter/share')" icon="icon-share" iconColor="#9789f7" title="分享" tips="邀请好友赢大礼"></list-cell>
 				<list-cell @eventClick="navTo('/pages/ucenter/webmsg')" icon="icon-pinglun-copy" iconColor="#ee883b" title="消息" tips="站内消息"></list-cell>
 				<list-cell @eventClick="navTo('/pages/ucenter/collect')" icon="icon-shoucang_xuanzhongzhuangtai" iconColor="#54b4ef" title="我的收藏"></list-cell>
 				<list-cell @eventClick="navTo('/pages/set/set')" icon="icon-shezhi1" iconColor="#e07472" title="设置" border=""></list-cell>
+				<!-- <list-cell @eventClick="navTo('/pages/ucenter/about')" icon="icon-bangzhu" iconColor="#fc2c5d" title="关于" border=""></list-cell> -->
 			</view> 
-		</view>
+		</view>  
 			
 		
     </view>  
@@ -125,6 +126,9 @@
 			const index = e.index;
 			if (index === 0) {
 				this.navTo('/pages/set/set');
+			}
+			if (index === 1) {
+				this.navTo('/pages/msg/msg');
 			}
 		},
 		// #endif

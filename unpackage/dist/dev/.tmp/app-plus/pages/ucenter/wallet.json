@@ -1,0 +1,9 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "我的钱包",
+  "bounce": "none",
+  "titleNView": {
+    "type": "transparent",
+    "buttons": []
+  }
+}

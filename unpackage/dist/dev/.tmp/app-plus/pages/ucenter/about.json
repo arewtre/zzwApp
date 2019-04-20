@@ -1,0 +1,12 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "关于",
+  "bounce": "none",
+  "titleNView": {
+    "buttons": [
+      {
+        "type": "share"
+      }
+    ]
+  }
+}

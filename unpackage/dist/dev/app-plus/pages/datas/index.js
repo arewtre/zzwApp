@@ -4284,8 +4284,8 @@ var _util = __webpack_require__(/*! @/common/util.js */ "F:\\helloUniapp\\news\\
 
 
 
-var dom = weex.requireModule('dom');var _default =
-
+var dom = weex.requireModule('dom');
+var picker = weex.requireModule('picker');var _default =
 {
   data: function data() {
     return {

@@ -1,0 +1,379 @@
+<template>
+	<div class="connnt">
+		<div class="texts" @click="pickShow">{{defaultCate}}</div>
+		<uni-tabs @change="changeTab" :index="tabIndex" class="tabcont">
+			<uni-tab-bar class="tabbar">
+				<div class="tab-bar-item" v-for="(tabBar, index) in tabBars" :key="index" :ref="tabBar.id + index">
+					<text class="tab-bar-title" :class="[tabIndex === index ? 'active' : '']">{{tabBar.name}}</text>
+				</div> 
+			</uni-tab-bar>  
+			<uni-tab-content>
+				<list class="list" v-for="(tabItem, tabIndex) in newsList" :key="tabIndex" @loadmore="loadMore(tabIndex)"
+				 loadmoreoffset="10">
+					<refresh class="refresh" @refresh="onRefresh" @pullingdown="onPullingDown" :display="refreshing ? 'show' : 'hide'">
+						<text class="refresh-text">{{refreshText}}</text>
+					</refresh>
+					<cell v-for="(newsItem, newsIndex) in tabItem.data" :key="newsIndex">
+						<uni-media-list :data="newsItem" @close="dislike(tabIndex, newsIndex)" @click="goDetail(newsItem)"></uni-media-list>
+					</cell>
+					<cell class="loadmore">
+						<text class="loadmore-text">{{tabItem.loadingText}}</text>
+						<!-- <uni-load-more :status="tabItem.loadingText" :contentText="loadingText"></uni-load-more> -->
+					</cell>
+				</list>
+			</uni-tab-content> 
+		</uni-tabs>
+		<mpvue-picker
+			:themeColor="themeColor"
+			ref="mpvuePicker"
+			:mode="modes"
+			:deepLength="deepLength"
+			:pickerValueDefault="pickerValueDefault"
+			@onConfirm="onConfirm"
+			@onCancel="onCancel"
+			:pickerValueArray="pickerValueArray"
+		></mpvue-picker>
+	</div>
+</template>
+
+<script>
+	import uniTabContent from '@/components/uni-tab-content/uni-tab-content.nvue';
+	import uniTabBar from '@/components/uni-tab-bar/uni-tab-bar.nvue';
+	import uniTabs from '@/components/uni-tabs/uni-tabs.nvue';
+	import uniMediaList from '@/components/uni-media-list/uni-media-list.nvue';
+	import mpvuePicker from '@/components/mpvue-picker/mpvuePicker.vue';
+	import {
+		friendlyDate
+	} from '@/common/util.js'; 
+
+	const dom = weex.requireModule('dom');
+	const picker = weex.requireModule('picker');
+	export default {
+		data() {
+			return {
+				refreshing: false,
+				refreshText: '下拉可以刷新',
+				newsList: [],
+				tabIndex: 0,
+				tabBars: [],
+				array: ['中国', '美国', '巴西', '日本'],
+				defaultCate:"文化用纸",
+				parent_id:"16",
+				keywords:"",
+				pickerValueArray:[],
+				themeColor: '#007AFF',
+				modes: '',
+				deepLength: 1,
+				pickerValueDefault: [0],
+				pickerArr:[],
+				pickerArrId:[]
+			}
+		},
+		components: {
+			uniTabContent,
+			uniTabBar,
+			uniTabs,
+			uniMediaList,
+			mpvuePicker
+		},
+		created() {
+			uni.onNavigationBarButtonTap((e) =>{
+				if(e.index==1){
+					 this.pickShow();
+					// this.showSinglePicker();
+				}
+			})
+			uni.setTabBarItem({
+			  index: 0,
+			  text: this.defaultCate
+			})
+			this.loadNavList();
+			this.loadCatesList();
+		},
+		methods: {
+			bindPickerChange: function(e) {
+				console.log('picker发送选择改变，携带值为：' + e.target.value)
+				this.index = e.target.value
+			},
+			loadNavList: function(Refresh) {
+				//this.moduleid = moduledid;
+				uni.showLoading({
+					title: '玩命加载中..'
+				});
+				this.tabBars = "";
+				if (Refresh) {
+					this.tabIndex = 0;
+					this.newsList =[];
+				}
+				uni.request({
+					url: 'http://47.100.48.1/api/member/data.php?ac=getCategory',
+					data: {parent_id:this.parent_id},
+					method:"POST",
+					success: (res) => {
+						//console.log(JSON.stringify(res));
+						if (res.data.code == "1") {
+							this.tabBars = res.data.result;
+							this.tabBars.forEach((tabBar) => {
+								tabBar.name = tabBar.name.substr(tabBar.name.length-2,2);
+								this.newsList.push({
+									data: [],
+									cateid: tabBar.id,
+									name: tabBar.name, 
+									page: 1,
+									pageSize: 20,
+									loadingText: '加载中..'
+								});
+							});
+							//console.log(this.newsList);
+							this.getList();
+						}
+					},error: (res)=>{
+						console.log(JSON.stringify(res));
+					}
+				})	
+			},
+			loadCatesList: function(Refresh) {				
+				uni.request({
+					url: 'http://47.100.48.1/api/member/data.php?ac=getCategory',
+					data: {parent_id:0},
+					method:"POST",
+					success: (res) => {
+						if (res.data.code == "1") {
+							this.pickerValueArray = res.data.result;
+							this.pickerValueArray.forEach((cate,index) => {
+								this.pickerArr.push(cate.name);
+							});
+						}
+					},error: (res)=>{
+						console.log(JSON.stringify(res));
+					}
+				})	
+			},
+			getList(action = 1) {
+				let activeTab = this.newsList[this.tabIndex];
+				if (action === 1) {
+					activeTab.page = 0;
+				}
+				activeTab.page==0?activeTab.page=1:activeTab.page=activeTab.page;
+				uni.request({
+					url: 'http://47.100.48.1/api/member/data.php?ac=getDataList',
+					data: {keywords:this.keywords,cid:activeTab.cateid,page:activeTab.page},
+					method:"POST",
+					success: (res) => {
+						//console.log(JSON.stringify(res));
+						if (res.data.code == "1") {
+							const data = res.data.result.map((news) => {
+								return {
+									id: news.id,
+									article_type: 0,
+									datetime: friendlyDate(news.published_time),
+									title: news.post_title,
+									source: news.username,
+									comment_count: news.post_hits,
+									post_id: news.category_id,
+									catname: news.tag
+								};
+							});
+							if (action === 1) {
+								activeTab.data = data;
+								this.refreshing = false;
+							}else {
+								data.forEach((news) => {
+									activeTab.data.push(news);
+								});
+							}
+							activeTab.page = activeTab.page+1;
+							if(data.length<30){
+								//console.log(data.length);
+								activeTab.loadingText="没有更多数据了"
+							}
+									
+						}
+						uni.hideLoading();
+					}
+				});
+			},
+			html_decode(str) {
+				var s = ''
+				if (str.length === 0) return ''
+				// s = str.replace(/&amp;/g, '&')
+				s = str.replace('“', '')
+				s = s.replace('”', '')
+				return s
+			},
+			html_decode2(str) {
+				var s = ''
+				if (str.length === 0) return ''
+				s = str.replace(this.keywords, "<a style='color:red'>"+this.keywords+"</a>")
+				return s
+			},
+			goDetail(e) {
+				uni.navigateTo({
+					//url: '/pages/detail/detail?query=' + encodeURIComponent(JSON.stringify(detail))
+					url: '/pages/detail/detail?catid=' + e.post_id +'&itemid='+e.id
+				});
+			},
+			dislike(tabIndex, newsIndex) {
+				uni.showModal({
+					content: '不感兴趣？',
+					success: (res) => {
+						if (res.confirm) {
+							this.newsList[tabIndex].data.splice(newsIndex, 1);
+						}
+					}
+				})
+			},
+			loadMore() {
+				this.getList(2);
+			},
+			async changeTab(event) {
+				this.tabIndex = event.index;
+				const activeNode = this.$refs[this.tabBars[event.index].id + event.index][0];
+				let nodeSize = await this.getNodeSize(activeNode);
+				if (nodeSize.left + nodeSize.width > 750) {
+					let index = event.index - 4;
+					let targetNode = this.$refs[this.tabBars[index].id + index][0];
+					dom.scrollToElement(targetNode, {});
+				} else if (nodeSize.left < 0) {
+					dom.scrollToElement(activeNode, {});
+				}
+				// 首次切换后加载数据
+				const activeTab = this.newsList[this.tabIndex];
+				if (activeTab.data.length === 0) {
+					this.getList();
+				}
+			},
+			getNodeSize(node) {
+				return new Promise((resolve, reject) => {
+					dom.getComponentRect(node, (result) => {
+						resolve(result.size);
+					});
+				});
+			},
+			onRefresh(event) {
+				this.refreshText = '正在刷新...';
+				this.refreshing = true;
+				this.getList();
+			},
+			onPullingDown(event) {
+				if (this.refreshing) {
+					return;
+				}
+				if (Math.abs(event.pullingDistance) > Math.abs(event.viewHeight)) {
+					this.refreshText = "释放立即刷新";
+				} else {
+					this.refreshText = "下拉可以刷新";
+				}
+			},
+			onCancel(e) {
+					console.log(e);
+			},
+			// 单列
+			showSinglePicker() {
+				//this.pickerValueArray = this.navlist;
+				this.modes = "selector";
+				this.deepLength = 1;
+				this.pickerValueDefault = [0];
+				this.$refs.mpvuePicker.show();
+				console.log(JSON.stringify(1111));
+			},
+			onConfirm(e) {
+				this.defaultCate = e.label;
+				this.parent_id =  e.value[0];
+				this.loadNavList(1);
+			},
+			pickShow () {
+				picker.pick({
+				  items: this.pickerArr
+				}, event => {
+				  if (event.result === 'success') {
+					  console.log(JSON.stringify(event));
+					//this.value = event.data
+					//plus.ui.alert(JSON.stringify(event)); 
+						this.defaultCate = this.pickerValueArray[event.data].name;
+						this.parent_id =  this.pickerValueArray[event.data].id;
+						uni.setTabBarItem({
+						  index: 1,
+						  text: this.defaultCate
+						})
+						this.loadNavList(1);
+				  }
+				})
+			  },
+		}
+	}
+</script>
+
+<style>
+	.tab-bar-item {
+		width: 150px;
+		height: 100px;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.tab-bar-title {
+		height: 100px;
+		line-height: 100px;
+		font-size: 30px;
+		color: #555;
+	}
+
+	.active {
+		color: #fc2c5d;
+	}
+
+	.loadmore {
+		height: 70px;
+		width: 750px;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.loadmore-text {
+		font-size: 30px;
+		text-align: center;
+		color: #999999;
+	}
+
+	.refresh {
+		width: 750px;
+		height: 70px;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.refresh-text {
+		text-align: center;
+		font-size: 28px;
+		color: #999999;
+	}
+	.texts{
+		/* margin:15upx 10upx; */
+		width:220upx;
+		padding: 0 20upx;
+		/* background-color: #ebebeb; */
+		height: 100px;
+		line-height:100px;
+		text-align: center;
+		color: #555;
+		font-size: 30upx;
+		/* float:left; */
+		/* display:flex; */
+		position:absolute;
+		left:10upx;
+		top:30upx;
+		z-index:9999;
+	}
+	.icon-xia{font-size:38upx;margin-top:6upx;margin-left:4upx}
+	.tabcont {
+		display: flex;
+		flex-direction: row;
+		/* margin-bottom:24upx; */
+		border-bottom: 1px solid #c8c7cc;
+	}
+	.tabbar{width:530upx;margin-left:220upx;} 
+	.connnt{padding-bottom:240upx}
+</style>

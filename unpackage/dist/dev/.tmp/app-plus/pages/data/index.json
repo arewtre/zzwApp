@@ -1,0 +1,25 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "数据",
+  "titleNView": {
+    "buttons": [
+      {
+        "text": "",
+        "fontSize": "14",
+        "width": "20",
+        "color": "#ffffff",
+        "float": "left",
+        "background": "rgba(0,0,0,0)"
+      },
+      {
+        "text": "文化用纸",
+        "fontSize": "14",
+        "width": "auto",
+        "color": "#ffffff",
+        "float": "left",
+        "select": true,
+        "background": "rgba(0,0,0,0)"
+      }
+    ]
+  }
+}

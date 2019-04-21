@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/cate/index",
+    "pages/data/index",
     "pages/set/set",
     "pages/guide/guide",
     "pages/ucenter/ucenter",
@@ -57,7 +58,7 @@
         "text": "发布"
       },
       {
-        "pagePath": "pages/datas/index",
+        "pagePath": "pages/data/index",
         "iconPath": "static/img/foot/data2.png",
         "selectedIconPath": "static/img/foot/data2-act.png",
         "text": "数据"
@@ -146,7 +147,27 @@
         "window": {
           "usingComponents": {},
           "navigationBarTitleText": "数据",
-          "bounce": "none"
+          "titleNView": {
+            "buttons": [
+              {
+                "text": "",
+                "fontSize": "14",
+                "width": "20",
+                "color": "#ffffff",
+                "float": "left",
+                "background": "rgba(0,0,0,0)"
+              },
+              {
+                "text": "分类",
+                "fontSize": "14",
+                "width": "auto",
+                "color": "#ffffff",
+                "float": "left",
+                "select": true,
+                "background": "rgba(0,0,0,0)"
+              }
+            ]
+          }
         }
       }
     }

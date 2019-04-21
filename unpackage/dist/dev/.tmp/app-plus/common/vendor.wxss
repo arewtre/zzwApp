@@ -1,62 +1,3 @@
-@charset "UTF-8";
-/* 页面左右间距 */
-/* 文字尺寸 */
-/*文字颜色*/
-/* 边框颜色 */
-/* 图片加载中颜色 */
-/* 行为相关颜色 */
-.icon .mix-list-cell.b-b:after {
-  left: 90rpx;
-}
-.mix-list-cell {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: baseline;
-  -webkit-align-items: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
-  padding: 20rpx 30rpx;
-  line-height: 60rpx;
-  position: relative;
-}
-.mix-list-cell.cell-hover {
-    background: #fafafa;
-}
-.mix-list-cell.b-b:after {
-    left: 30rpx;
-}
-.mix-list-cell .cell-icon {
-    -webkit-align-self: center;
-        -ms-flex-item-align: center;
-            align-self: center;
-    width: 56rpx;
-    max-height: 60rpx;
-    font-size: 38rpx;
-}
-.mix-list-cell .cell-more {
-    -webkit-align-self: center;
-        -ms-flex-item-align: center;
-            align-self: center;
-    font-size: 30rpx;
-    color: #606266;
-    margin-left: 10px;
-}
-.mix-list-cell .cell-tit {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-    font-size: 28rpx;
-    color: #303133;
-    margin-right: 10rpx;
-}
-.mix-list-cell .cell-tip {
-    font-size: 26rpx;
-    color: #909399;
-}
-
 
 @font-face {
   font-family: cmdicons;
@@ -374,5 +315,148 @@
 }
 .cmd-icon-alert-circle::before {
   content: "\E964";
+}
+
+
+.pickerMask {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+.mpvue-picker-content {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    -webkit-transform: translateY(100%);
+        -ms-transform: translateY(100%);
+            transform: translateY(100%);
+    z-index: 3000;
+}
+.mpvue-picker-view-show {
+    -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+            transform: translateY(0);
+}
+.mpvue-picker__hd {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 9px 15px;
+    background-color: #fff;
+    position: relative;
+    text-align: center;
+    font-size: 17px;
+}
+.mpvue-picker__hd:after {
+    content: ' ';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #e5e5e5;
+    -webkit-transform-origin: 0 100%;
+        -ms-transform-origin: 0 100%;
+            transform-origin: 0 100%;
+    -webkit-transform: scaleY(0.5);
+        -ms-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+}
+.mpvue-picker__action {
+    display: block;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    color: #1aad19;
+}
+.mpvue-picker__action:first-child {
+    text-align: left;
+    color: #888;
+}
+.mpvue-picker__action:last-child {
+    text-align: right;
+}
+.picker-item {
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+}
+.mpvue-picker-view {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 238px;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.icon .mix-list-cell.b-b:after {
+  left: 90rpx;
+}
+.mix-list-cell {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  padding: 20rpx 30rpx;
+  line-height: 60rpx;
+  position: relative;
+}
+.mix-list-cell.cell-hover {
+    background: #fafafa;
+}
+.mix-list-cell.b-b:after {
+    left: 30rpx;
+}
+.mix-list-cell .cell-icon {
+    -webkit-align-self: center;
+        -ms-flex-item-align: center;
+            align-self: center;
+    width: 56rpx;
+    max-height: 60rpx;
+    font-size: 38rpx;
+}
+.mix-list-cell .cell-more {
+    -webkit-align-self: center;
+        -ms-flex-item-align: center;
+            align-self: center;
+    font-size: 30rpx;
+    color: #606266;
+    margin-left: 10px;
+}
+.mix-list-cell .cell-tit {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    font-size: 28rpx;
+    color: #303133;
+    margin-right: 10rpx;
+}
+.mix-list-cell .cell-tip {
+    font-size: 26rpx;
+    color: #909399;
 }
 

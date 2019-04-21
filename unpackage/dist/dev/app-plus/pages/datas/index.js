@@ -1505,399 +1505,6 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\mpvue-picker\\mpvuePicker.vue":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/mpvue-picker/mpvuePicker.vue ***!
-  \**************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default2 =
-{
-  data: function data() {
-    return {
-      pickerChangeValue: [],
-      pickerValue: [],
-      pickerValueArrayChange: true,
-      modeChange: false,
-      pickerValueSingleArray: [],
-      pickerValueHour: [],
-      pickerValueMinute: [],
-      pickerValueMulArray: [],
-      pickerValueMulTwoOne: [],
-      pickerValueMulTwoTwo: [],
-      pickerValueMulThreeOne: [],
-      pickerValueMulThreeTwo: [],
-      pickerValueMulThreeThree: [],
-      /* 是否显示控件 */
-      showPicker: false };
-
-  },
-  props: {
-    /* mode */
-    mode: {
-      type: String,
-      default: 'selector' },
-
-    /* picker 数值 */
-    pickerValueArray: {
-      type: Array,
-      default: function _default() {
-        return [];
-      } },
-
-    /* 默认值 */
-    pickerValueDefault: {
-      type: Array,
-      default: function _default() {
-        return [];
-      } },
-
-    /* 几级联动 */
-    deepLength: {
-      type: Number,
-      default: 2 },
-
-    /* 主题色 */
-    themeColor: String },
-
-  watch: _defineProperty({
-    pickerValueArray: function pickerValueArray(oldVal, newVal) {
-      this.pickerValueArrayChange = true;
-    },
-    mode: function mode(oldVal, newVal) {
-      this.modeChange = true;
-    } }, "pickerValueArray", function pickerValueArray(
-  val) {
-    this.initPicker(val);
-  }),
-
-  methods: {
-    initPicker: function initPicker(valueArray) {
-      var pickerValueArray = valueArray;
-      this.pickerValue = this.pickerValueDefault;
-      // 初始化多级联动
-      if (this.mode === 'selector') {
-        this.pickerValueSingleArray = valueArray;
-      } else if (this.mode === 'timeSelector') {
-        this.modeChange = false;
-        var hourArray = [];
-        var minuteArray = [];
-        for (var i = 0; i < 24; i++) {
-          hourArray.push({
-            value: i,
-            label: i > 9 ? "".concat(i, " \u65F6") : "0".concat(i, " \u65F6") });
-
-        }
-        for (var _i = 0; _i < 60; _i++) {
-          minuteArray.push({
-            value: _i,
-            label: _i > 9 ? "".concat(_i, " \u5206") : "0".concat(_i, " \u5206") });
-
-        }
-        this.pickerValueHour = hourArray;
-        this.pickerValueMinute = minuteArray;
-      } else if (this.mode === 'multiSelector') {
-        this.pickerValueMulArray = valueArray;
-      } else if (this.mode === 'multiLinkageSelector' && this.deepLength === 2) {
-        // 两级联动
-        var pickerValueMulTwoOne = [];
-        var pickerValueMulTwoTwo = [];
-        // 第一列
-        for (var _i2 = 0, length = pickerValueArray.length; _i2 < length; _i2++) {
-          pickerValueMulTwoOne.push(pickerValueArray[_i2]);
-        }
-        // 渲染第二列
-        // 如果有设定的默认值
-        if (this.pickerValueDefault.length === 2) {
-          var num = this.pickerValueDefault[0];
-          for (
-          var _i3 = 0, _length = pickerValueArray[num].children.length; _i3 < _length; _i3++)
-          {
-            pickerValueMulTwoTwo.push(pickerValueArray[num].children[_i3]);
-          }
-        } else {
-          for (
-          var _i4 = 0, _length2 = pickerValueArray[0].children.length; _i4 < _length2; _i4++)
-          {
-            pickerValueMulTwoTwo.push(pickerValueArray[0].children[_i4]);
-          }
-        }
-        this.pickerValueMulTwoOne = pickerValueMulTwoOne;
-        this.pickerValueMulTwoTwo = pickerValueMulTwoTwo;
-      } else if (
-      this.mode === 'multiLinkageSelector' &&
-      this.deepLength === 3)
-      {
-        var pickerValueMulThreeOne = [];
-        var pickerValueMulThreeTwo = [];
-        var pickerValueMulThreeThree = [];
-        // 第一列
-        for (var _i5 = 0, _length3 = pickerValueArray.length; _i5 < _length3; _i5++) {
-          pickerValueMulThreeOne.push(pickerValueArray[_i5]);
-        }
-        // 渲染第二列
-        this.pickerValueDefault =
-        this.pickerValueDefault.length === 3 ?
-        this.pickerValueDefault :
-        [0, 0, 0];
-        if (this.pickerValueDefault.length === 3) {
-          var _num = this.pickerValueDefault[0];
-          for (
-          var _i6 = 0, _length4 = pickerValueArray[_num].children.length; _i6 < _length4; _i6++)
-          {
-            pickerValueMulThreeTwo.push(pickerValueArray[_num].children[_i6]);
-          }
-          // 第三列
-          var numSecond = this.pickerValueDefault[1];
-          for (var _i7 = 0, _length5 = pickerValueArray[_num].children[numSecond].children.length; _i7 < _length5; _i7++) {
-            pickerValueMulThreeThree.push(
-            pickerValueArray[_num].children[numSecond].children[_i7]);
-
-          }
-        }
-        this.pickerValueMulThreeOne = pickerValueMulThreeOne;
-        this.pickerValueMulThreeTwo = pickerValueMulThreeTwo;
-        this.pickerValueMulThreeThree = pickerValueMulThreeThree;
-      }
-    },
-    show: function show() {var _this = this;
-      setTimeout(function () {
-        if (_this.pickerValueArrayChange || _this.modeChange) {
-          _this.initPicker(_this.pickerValueArray);
-          _this.showPicker = true;
-          _this.pickerValueArrayChange = false;
-          _this.modeChange = false;
-        } else {
-          _this.showPicker = true;
-        }
-      }, 0);
-    },
-    maskClick: function maskClick() {
-      this.pickerCancel();
-    },
-    pickerCancel: function pickerCancel() {
-      this.showPicker = false;
-      this._initPickerVale();
-      var pickObj = {
-        index: this.pickerValue,
-        value: this._getPickerLabelAndValue(this.pickerValue, this.mode).value,
-        label: this._getPickerLabelAndValue(this.pickerValue, this.mode).label };
-
-      this.$emit('onCancel', pickObj);
-    },
-    pickerConfirm: function pickerConfirm(e) {
-      this.showPicker = false;
-      this._initPickerVale();
-      var pickObj = {
-        index: this.pickerValue,
-        value: this._getPickerLabelAndValue(this.pickerValue, this.mode).value,
-        label: this._getPickerLabelAndValue(this.pickerValue, this.mode).label };
-
-      this.$emit('onConfirm', pickObj);
-    },
-    showPickerView: function showPickerView() {
-      this.showPicker = true;
-    },
-    pickerChange: function pickerChange(e) {
-      this.pickerValue = e.mp.detail.value;
-      var pickObj = {
-        index: this.pickerValue,
-        value: this._getPickerLabelAndValue(this.pickerValue, this.mode).value,
-        label: this._getPickerLabelAndValue(this.pickerValue, this.mode).label };
-
-      this.$emit('onChange', pickObj);
-    },
-    pickerChangeMul: function pickerChangeMul(e) {
-      if (this.deepLength === 2) {
-        var pickerValueArray = this.pickerValueArray;
-        var changeValue = e.mp.detail.value;
-        // 处理第一列滚动
-        if (changeValue[0] !== this.pickerValue[0]) {
-          var pickerValueMulTwoTwo = [];
-          // 第一列滚动第二列数据更新
-          for (var i = 0, length = pickerValueArray[changeValue[0]].children.length; i < length; i++) {
-            pickerValueMulTwoTwo.push(pickerValueArray[changeValue[0]].children[i]);
-          }
-          this.pickerValueMulTwoTwo = pickerValueMulTwoTwo;
-          // 第二列初始化为 0
-          changeValue[1] = 0;
-        }
-        this.pickerValue = changeValue;
-      } else if (this.deepLength === 3) {
-        var _pickerValueArray = this.pickerValueArray;
-        var _changeValue = e.mp.detail.value;
-        var pickerValueMulThreeTwo = [];
-        var pickerValueMulThreeThree = [];
-        // 重新渲染第二列
-        // 如果是第一列滚动
-        if (_changeValue[0] !== this.pickerValue[0]) {
-          this.pickerValueMulThreeTwo = [];
-          for (var _i8 = 0, _length6 = _pickerValueArray[_changeValue[0]].children.length; _i8 < _length6; _i8++) {
-            pickerValueMulThreeTwo.push(_pickerValueArray[_changeValue[0]].children[_i8]);
-          }
-          // 重新渲染第三列
-          for (var _i9 = 0, _length7 = _pickerValueArray[_changeValue[0]].children[0].children.length; _i9 <
-          _length7; _i9++) {
-            pickerValueMulThreeThree.push(_pickerValueArray[_changeValue[0]].children[0].children[_i9]);
-          }
-          _changeValue[1] = 0;
-          _changeValue[2] = 0;
-          this.pickerValueMulThreeTwo = pickerValueMulThreeTwo;
-          this.pickerValueMulThreeThree = pickerValueMulThreeThree;
-        } else if (_changeValue[1] !== this.pickerValue[1]) {
-          // 第二列滚动
-          // 重新渲染第三列
-          this.pickerValueMulThreeThree = [];
-          pickerValueMulThreeTwo = this.pickerValueMulThreeTwo;
-          for (var _i10 = 0, _length8 = _pickerValueArray[_changeValue[0]].children[_changeValue[1]].children.length; _i10 <
-          _length8; _i10++) {
-            pickerValueMulThreeThree.push(_pickerValueArray[_changeValue[0]].children[_changeValue[1]].children[
-            _i10]);
-          }
-          _changeValue[2] = 0;
-          this.pickerValueMulThreeThree = pickerValueMulThreeThree;
-        }
-        this.pickerValue = _changeValue;
-      }
-      var pickObj = {
-        index: this.pickerValue,
-        value: this._getPickerLabelAndValue(this.pickerValue, this.mode).value,
-        label: this._getPickerLabelAndValue(this.pickerValue, this.mode).label };
-
-      this.$emit('onChange', pickObj);
-    },
-    // 获取 pxikerLabel
-    _getPickerLabelAndValue: function _getPickerLabelAndValue(value, mode) {
-      var pickerLable;
-      var pickerGetValue = [];
-      // selector
-      if (mode === 'selector') {
-        pickerLable = this.pickerValueSingleArray[value].label;
-        pickerGetValue.push(this.pickerValueSingleArray[value].value);
-      } else if (mode === 'timeSelector') {
-        pickerLable = "".concat(this.pickerValueHour[value[0]].label, "-").concat(this.pickerValueMinute[value[1]].label);
-        pickerGetValue.push(this.pickerValueHour[value[0]].value);
-        pickerGetValue.push(this.pickerValueHour[value[1]].value);
-      } else if (mode === 'multiSelector') {
-        for (var i = 0; i < value.length; i++) {
-          if (i > 0) {
-            pickerLable += this.pickerValueMulArray[i][value[i]].label + (i === value.length - 1 ? '' :
-            '-');
-          } else {
-            pickerLable = this.pickerValueMulArray[i][value[i]].label + '-';
-          }
-          pickerGetValue.push(this.pickerValueMulArray[i][value[i]].value);
-        }
-      } else if (mode === 'multiLinkageSelector') {
-        /* eslint-disable indent */
-        pickerLable =
-        this.deepLength === 2 ? "".concat(
-        this.pickerValueMulTwoOne[value[0]].label, "-").concat(this.pickerValueMulTwoTwo[value[1]].label) : "".concat(
-        this.pickerValueMulThreeOne[value[0]].label, "-").concat(this.pickerValueMulThreeTwo[value[1]].label, "-").concat(this.pickerValueMulThreeThree[value[2]].label);
-        if (this.deepLength === 2) {
-          pickerGetValue.push(this.pickerValueMulTwoOne[value[0]].value);
-          pickerGetValue.push(this.pickerValueMulTwoTwo[value[1]].value);
-        } else {
-          pickerGetValue.push(this.pickerValueMulThreeOne[value[0]].value);
-          pickerGetValue.push(this.pickerValueMulThreeTwo[value[1]].value);
-          pickerGetValue.push(this.pickerValueMulThreeThree[value[2]].value);
-        }
-        /* eslint-enable indent */
-      }
-      return {
-        label: pickerLable,
-        value: pickerGetValue };
-
-    },
-    // 初始化 pickerValue 默认值
-    _initPickerVale: function _initPickerVale() {
-      if (this.pickerValue.length === 0) {
-        if (this.mode === 'selector') {
-          this.pickerValue = [0];
-        } else if (this.mode === 'multiSelector') {
-          this.pickerValue = new Int8Array(this.pickerValueArray.length);
-        } else if (
-        this.mode === 'multiLinkageSelector' &&
-        this.deepLength === 2)
-        {
-          this.pickerValue = [0, 0];
-        } else if (
-        this.mode === 'multiLinkageSelector' &&
-        this.deepLength === 3)
-        {
-          this.pickerValue = [0, 0, 0];
-        }
-      }
-    } } };exports.default = _default2;
-
-/***/ }),
-
 /***/ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\uni-media-list\\uni-media-list.nvue":
 /*!********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:/helloUniapp/news/components/uni-media-list/uni-media-list.nvue ***!
@@ -4266,20 +3873,11 @@ var _default2 = { name: 'wxParse', props: { loading: { type: Boolean, default: f
 
 
 
-
-
-
-
-
-
-
-
-
 var _uniTabContent = _interopRequireDefault(__webpack_require__(/*! @/components/uni-tab-content/uni-tab-content.nvue */ "F:\\helloUniapp\\news\\components\\uni-tab-content\\uni-tab-content.nvue"));
 var _uniTabBar = _interopRequireDefault(__webpack_require__(/*! @/components/uni-tab-bar/uni-tab-bar.nvue */ "F:\\helloUniapp\\news\\components\\uni-tab-bar\\uni-tab-bar.nvue"));
 var _uniTabs = _interopRequireDefault(__webpack_require__(/*! @/components/uni-tabs/uni-tabs.nvue */ "F:\\helloUniapp\\news\\components\\uni-tabs\\uni-tabs.nvue"));
 var _uniMediaList = _interopRequireDefault(__webpack_require__(/*! @/components/uni-media-list/uni-media-list.nvue */ "F:\\helloUniapp\\news\\components\\uni-media-list\\uni-media-list.nvue"));
-var _mpvuePicker = _interopRequireDefault(__webpack_require__(/*! @/components/mpvue-picker/mpvuePicker.vue */ "F:\\helloUniapp\\news\\components\\mpvue-picker\\mpvuePicker.vue"));
+
 var _util = __webpack_require__(/*! @/common/util.js */ "F:\\helloUniapp\\news\\common\\util.js");function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
 
 
@@ -4302,17 +3900,26 @@ var picker = weex.requireModule('picker');var _default =
       themeColor: '#007AFF',
       modes: '',
       deepLength: 1,
-      pickerValueDefault: [0] };
+      pickerValueDefault: [0],
+      pickerArr: [],
+      pickerArrId: [] };
 
   },
   components: {
     uniTabContent: _uniTabContent.default,
     uniTabBar: _uniTabBar.default,
     uniTabs: _uniTabs.default,
-    uniMediaList: _uniMediaList.default,
-    mpvuePicker: _mpvuePicker.default },
+    uniMediaList: _uniMediaList.default
+    // mpvuePicker
+  },
+  created: function created() {var _this = this;
+    uni.onNavigationBarButtonTap(function (e) {
+      if (e.index == 1) {
+        _this.pickShow();
+        // this.showSinglePicker();
+      }
+    });
 
-  created: function created() {
     this.loadNavList();
     this.loadCatesList();
   },
@@ -4321,11 +3928,16 @@ var picker = weex.requireModule('picker');var _default =
       console.log('picker发送选择改变，携带值为：' + e.target.value);
       this.index = e.target.value;
     },
-    loadNavList: function loadNavList() {var _this = this;
+    loadNavList: function loadNavList(Refresh) {var _this2 = this;
       //this.moduleid = moduledid;
       uni.showLoading({
         title: '玩命加载中..' });
 
+      this.tabBars = "";
+      if (Refresh) {
+        this.tabIndex = 0;
+        this.newsList = [];
+      }
       uni.request({
         url: 'http://47.100.48.1/api/member/data.php?ac=getCategory',
         data: { parent_id: this.parent_id },
@@ -4333,41 +3945,36 @@ var picker = weex.requireModule('picker');var _default =
         success: function success(res) {
           //console.log(JSON.stringify(res));
           if (res.data.code == "1") {
-            _this.tabBars = res.data.result;
-            _this.tabBars.forEach(function (tabBar) {
-              //tabBar.name = tabBar.name.substr(tabBar.name.length-2,2);
-              _this.newsList.push({
+            _this2.tabBars = res.data.result;
+            _this2.tabBars.forEach(function (tabBar) {
+              tabBar.name = tabBar.name.substr(tabBar.name.length - 2, 2);
+              _this2.newsList.push({
                 data: [],
                 cateid: tabBar.id,
                 name: tabBar.name,
                 page: 1,
                 pageSize: 20,
-                loadingText: 'loading' });
+                loadingText: '加载中..' });
 
             });
             //console.log(this.newsList);
-            _this.getList();
+            _this2.getList();
           }
         }, error: function error(res) {
           console.log(JSON.stringify(res));
         } });
 
     },
-    loadCatesList: function loadCatesList(Refresh) {var _this2 = this;
+    loadCatesList: function loadCatesList(Refresh) {var _this3 = this;
       uni.request({
-        url: 'http://47.100.48.1/api/member/data.php?ac=getDataList',
-        data: { parent_id: this.parent_id },
+        url: 'http://47.100.48.1/api/member/data.php?ac=getCategory',
+        data: { parent_id: 0 },
         method: "POST",
         success: function success(res) {
           if (res.data.code == "1") {
-            _this2.pickerValueArray = res.data.result;
-            _this2.pickerValueArray.forEach(function (cate, index) {
-              cate.label = cate.name;
-              cate.value = cate.id;
-              if (cate.id == _this2.parent_id) {
-                _this2.defaultCate = cate.name;
-                _this2.pickerValueDefault = [index];
-              }
+            _this3.pickerValueArray = res.data.result;
+            _this3.pickerValueArray.forEach(function (cate, index) {
+              _this3.pickerArr.push(cate.name);
             });
           }
         }, error: function error(res) {
@@ -4375,7 +3982,7 @@ var picker = weex.requireModule('picker');var _default =
         } });
 
     },
-    getList: function getList() {var _this3 = this;var action = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+    getList: function getList() {var _this4 = this;var action = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       var activeTab = this.newsList[this.tabIndex];
       if (action === 1) {
         activeTab.page = 0;
@@ -4402,7 +4009,7 @@ var picker = weex.requireModule('picker');var _default =
             });
             if (action === 1) {
               activeTab.data = data;
-              _this3.refreshing = false;
+              _this4.refreshing = false;
             } else {
               data.forEach(function (news) {
                 activeTab.data.push(news);
@@ -4411,7 +4018,7 @@ var picker = weex.requireModule('picker');var _default =
             activeTab.page = activeTab.page + 1;
             if (data.length < 30) {
               //console.log(data.length);
-              activeTab.loadingText = "noMore";
+              activeTab.loadingText = "没有更多数据了";
             }
 
           }
@@ -4439,12 +4046,12 @@ var picker = weex.requireModule('picker');var _default =
         url: '/pages/detail/detail?catid=' + e.post_id + '&itemid=' + e.id });
 
     },
-    dislike: function dislike(tabIndex, newsIndex) {var _this4 = this;
+    dislike: function dislike(tabIndex, newsIndex) {var _this5 = this;
       uni.showModal({
         content: '不感兴趣？',
         success: function success(res) {
           if (res.confirm) {
-            _this4.newsList[tabIndex].data.splice(newsIndex, 1);
+            _this5.newsList[tabIndex].data.splice(newsIndex, 1);
           }
         } });
 
@@ -4501,12 +4108,30 @@ var picker = weex.requireModule('picker');var _default =
       this.deepLength = 1;
       this.pickerValueDefault = [0];
       this.$refs.mpvuePicker.show();
-      //console.log(JSON.stringify(1111));
+      console.log(JSON.stringify(1111));
     },
     onConfirm: function onConfirm(e) {
       this.defaultCate = e.label;
       this.parent_id = e.value[0];
       this.loadNavList(1);
+    },
+    pickShow: function pickShow() {var _this6 = this;
+      picker.pick({
+        items: this.pickerArr },
+      function (event) {
+        if (event.result === 'success') {
+          console.log(JSON.stringify(event));
+          //this.value = event.data
+          //plus.ui.alert(JSON.stringify(event)); 
+          _this6.defaultCate = _this6.pickerValueArray[event.data].name;
+          _this6.parent_id = _this6.pickerValueArray[event.data].id;
+          uni.setTabBarItem({
+            index: 1,
+            text: _this6.defaultCate });
+
+          _this6.loadNavList(1);
+        }
+      });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-hbuilderx/packages/uni-app-plus-nvue/dist/index.js */ "./node_modules/@dcloudio/vue-cli-plugin-hbuilderx/packages/uni-app-plus-nvue/dist/index.js")["default"]))
 
@@ -4674,88 +4299,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-3d75824d!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:\\helloUniapp\\news\\components\\mpvue-picker\\mpvuePicker.vue":
-/*!*****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-3d75824d!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:/helloUniapp/news/components/mpvue-picker/mpvuePicker.vue ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = {
-  "pickerMask": {
-    "position": "fixed",
-    "zIndex": 1000,
-    "top": 0,
-    "right": 0,
-    "left": 0,
-    "bottom": 0,
-    "background": "rgba(0, 0, 0, 0.6)"
-  },
-  "mpvue-picker-content": {
-    "position": "fixed",
-    "bottom": 0,
-    "left": 0,
-    "width": 100,
-    "transitionDuration": 300,
-    "transitionTimingFunction": "ease",
-    "transform": "translateY(100%)",
-    "zIndex": 3000
-  },
-  "@TRANSITION": {
-    "mpvue-picker-content": {
-      "duration": 300,
-      "timingFunction": "ease"
-    }
-  },
-  "mpvue-picker-view-show": {
-    "transform": "translateY(0)"
-  },
-  "mpvue-picker__hd": {
-    "display": "flex",
-    "paddingTop": "9",
-    "paddingRight": "15",
-    "paddingBottom": "9",
-    "paddingLeft": "15",
-    "backgroundColor": "#ffffff",
-    "position": "relative",
-    "textAlign": "center",
-    "fontSize": "17",
-    "content:after": "' '",
-    "position:after": "absolute",
-    "left:after": 0,
-    "bottom:after": 0,
-    "right:after": 0,
-    "height:after": "1",
-    "borderBottom:after": "1px solid #e5e5e5",
-    "color:after": "#e5e5e5",
-    "transformOrigin:after": "0 100%",
-    "transform:after": "scaleY(0.5)"
-  },
-  "mpvue-picker__action": {
-    "display": "block",
-    "flex": 1,
-    "color": "#1aad19",
-    "textAlign:first-child": "left",
-    "color:first-child": "#888888",
-    "textAlign:last-child": "right"
-  },
-  "picker-item": {
-    "textAlign": "center",
-    "lineHeight": "40",
-    "fontSize": "16"
-  },
-  "mpvue-picker-view": {
-    "position": "relative",
-    "bottom": 0,
-    "left": 0,
-    "width": 100,
-    "height": "238",
-    "backgroundColor": "rgba(255,255,255,1)"
-  }
-}
-
-/***/ }),
-
 /***/ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-67a24d06!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:\\helloUniapp\\news\\pages\\datas\\index.nvue":
 /*!************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-67a24d06!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:/helloUniapp/news/pages/datas/index.nvue ***!
@@ -4764,11 +4307,6 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-  "uni-flex": {
-    "display": "flex",
-    "flexDirection": "row",
-    "borderBottom": "1px solid #c8c7cc"
-  },
   "tab-bar-item": {
     "width": "150",
     "height": "100",
@@ -4822,16 +4360,24 @@ module.exports = {
     "position": "absolute",
     "left": 10,
     "top": 30,
-    "zIndex": 999
+    "zIndex": 9999
   },
   "icon-xia": {
     "fontSize": 38,
     "marginTop": 6,
     "marginLeft": 4
   },
+  "tabcont": {
+    "display": "flex",
+    "flexDirection": "row",
+    "borderBottom": "1px solid #c8c7cc"
+  },
   "tabbar": {
-    "width": 690,
-    "marginLeft": 30
+    "width": 530,
+    "marginLeft": 220
+  },
+  "connnt": {
+    "paddingBottom": 240
   }
 }
 
@@ -5711,149 +5257,6 @@ module.exports.render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-3d75824d!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\mpvue-picker\\mpvuePicker.vue":
-/*!*******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-3d75824d!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/mpvue-picker/mpvuePicker.vue ***!
-  \*******************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('view', {
-    staticClass: ["mpvue-picker"]
-  }, [_c('view', {
-    class: {
-      'pickerMask': _vm.showPicker
-    },
-    attrs: {
-      "catchtouchmove": "true"
-    },
-    on: {
-      "click": _vm.maskClick
-    }
-  }), _c('view', {
-    staticClass: ["mpvue-picker-content"],
-    class: {
-      'mpvue-picker-view-show': _vm.showPicker
-    }
-  }, [_c('view', {
-    staticClass: ["mpvue-picker__hd"],
-    attrs: {
-      "catchtouchmove": "true"
-    }
-  }, [_c('view', {
-    staticClass: ["mpvue-picker__action"],
-    on: {
-      "click": _vm.pickerCancel
-    }
-  }, [_vm._v("取消")]), _c('view', {
-    staticClass: ["mpvue-picker__action"],
-    style: {
-      color: _vm.themeColor
-    },
-    on: {
-      "click": _vm.pickerConfirm
-    }
-  }, [_vm._v("确定")])]), (_vm.mode === 'selector' && _vm.pickerValueSingleArray.length > 0) ? _c('picker-view', {
-    staticClass: ["mpvue-picker-view"],
-    attrs: {
-      "indicatorStyle": "height: 40px;",
-      "value": _vm.pickerValue
-    },
-    on: {
-      "change": _vm.pickerChange
-    }
-  }, [_c('block', [_c('picker-view-column', _vm._l((_vm.pickerValueSingleArray), function(item, index) {
-    return _c('view', {
-      key: index,
-      staticClass: ["picker-item"]
-    }, [_vm._v(_vm._s(item.label))])
-  }))], 1)], 1) : _vm._e(), (_vm.mode === 'timeSelector') ? _c('picker-view', {
-    staticClass: ["mpvue-picker-view"],
-    attrs: {
-      "indicatorStyle": "height: 40px;",
-      "value": _vm.pickerValue
-    },
-    on: {
-      "change": _vm.pickerChange
-    }
-  }, [_c('block', [_c('picker-view-column', _vm._l((_vm.pickerValueHour), function(item, index) {
-    return _c('view', {
-      key: index,
-      staticClass: ["picker-item"]
-    }, [_vm._v(_vm._s(item.label))])
-  })), _c('picker-view-column', _vm._l((_vm.pickerValueMinute), function(item, index) {
-    return _c('view', {
-      key: index,
-      staticClass: ["picker-item"]
-    }, [_vm._v(_vm._s(item.label))])
-  }))], 1)], 1) : _vm._e(), (_vm.mode === 'multiSelector') ? _c('picker-view', {
-    staticClass: ["mpvue-picker-view"],
-    attrs: {
-      "indicatorStyle": "height: 40px;",
-      "value": _vm.pickerValue
-    },
-    on: {
-      "change": _vm.pickerChange
-    }
-  }, _vm._l((_vm.pickerValueMulArray.length), function(n, index) {
-    return _c('block', {
-      key: index
-    }, [_c('picker-view-column', _vm._l((_vm.pickerValueMulArray[n]), function(item, index1) {
-      return _c('view', {
-        key: index1,
-        staticClass: ["picker-item"]
-      }, [_vm._v(_vm._s(item.label))])
-    }))], 1)
-  })) : _vm._e(), (_vm.mode === 'multiLinkageSelector' && _vm.deepLength === 2) ? _c('picker-view', {
-    staticClass: ["mpvue-picker-view"],
-    attrs: {
-      "indicatorStyle": "height: 40px;",
-      "value": _vm.pickerValue
-    },
-    on: {
-      "change": _vm.pickerChangeMul
-    }
-  }, [_c('block', [_c('picker-view-column', _vm._l((_vm.pickerValueMulTwoOne), function(item, index) {
-    return _c('view', {
-      key: index,
-      staticClass: ["picker-item"]
-    }, [_vm._v(_vm._s(item.label))])
-  })), _c('picker-view-column', _vm._l((_vm.pickerValueMulTwoTwo), function(item, index) {
-    return _c('view', {
-      key: index,
-      staticClass: ["picker-item"]
-    }, [_vm._v(_vm._s(item.label))])
-  }))], 1)], 1) : _vm._e(), (_vm.mode === 'multiLinkageSelector' && _vm.deepLength === 3) ? _c('picker-view', {
-    staticClass: ["mpvue-picker-view"],
-    attrs: {
-      "indicatorStyle": "height: 40px;",
-      "value": _vm.pickerValue
-    },
-    on: {
-      "change": _vm.pickerChangeMul
-    }
-  }, [_c('block', [_c('picker-view-column', _vm._l((_vm.pickerValueMulThreeOne), function(item, index) {
-    return _c('view', {
-      key: index,
-      staticClass: ["picker-item"]
-    }, [_vm._v(_vm._s(item.label))])
-  })), _c('picker-view-column', _vm._l((_vm.pickerValueMulThreeTwo), function(item, index) {
-    return _c('view', {
-      key: index,
-      staticClass: ["picker-item"]
-    }, [_vm._v(_vm._s(item.label))])
-  })), _c('picker-view-column', _vm._l((_vm.pickerValueMulThreeThree), function(item, index) {
-    return _c('view', {
-      key: index,
-      staticClass: ["picker-item"]
-    }, [_vm._v(_vm._s(item.label))])
-  }))], 1)], 1) : _vm._e()], 1)])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-
-/***/ }),
-
 /***/ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-5ad81bd5!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\wxParse\\components\\wxParseVideo.vue":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-5ad81bd5!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:/helloUniapp/news/components/wxParse/components/wxParseVideo.vue ***!
@@ -5885,18 +5288,15 @@ module.exports.render._withStripped = true
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('picker', {
+  return _c('div', {
+    staticClass: ["connnt"]
+  }, [_c('div', {
     staticClass: ["texts"],
-    attrs: {
-      "value": _vm.index,
-      "range": _vm.array
-    },
     on: {
-      "change": _vm.bindPickerChange
+      "click": _vm.pickShow
     }
-  }, [_c('view', {
-    staticClass: ["uni-input"]
-  }, [_vm._v(_vm._s(_vm.array[_vm.index]))])]), _c('uni-tabs', {
+  }, [_vm._v(_vm._s(_vm.defaultCate))]), _c('uni-tabs', {
+    staticClass: ["tabcont"],
     attrs: {
       "index": _vm.tabIndex
     },
@@ -5967,20 +5367,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('text', {
       staticClass: ["loadmore-text"]
     }, [_vm._v(_vm._s(tabItem.loadingText))])])], 2)
-  }))], 1), _c('mpvue-picker', {
-    ref: "mpvuePicker",
-    attrs: {
-      "themeColor": _vm.themeColor,
-      "mode": _vm.modes,
-      "deepLength": _vm.deepLength,
-      "pickerValueDefault": _vm.pickerValueDefault,
-      "pickerValueArray": _vm.pickerValueArray
-    },
-    on: {
-      "onConfirm": _vm.onConfirm,
-      "onCancel": _vm.onCancel
-    }
-  })], 1)
+  }))], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 
@@ -6220,55 +5607,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.friendlyDa
   }
   return formats[diffType].replace('%n%', diffValue);
 }
-
-/***/ }),
-
-/***/ "F:\\helloUniapp\\news\\components\\mpvue-picker\\mpvuePicker.vue":
-/*!*******************************************************************!*\
-  !*** F:/helloUniapp/news/components/mpvue-picker/mpvuePicker.vue ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __vue_exports__, __vue_options__
-var __vue_styles__ = []
-
-/* styles */
-__vue_styles__.push(__webpack_require__(/*! !./node_modules/weex-vue-loader/lib/style-loader!./node_modules/weex-vue-loader/lib/style-rewriter?id=data-v-3d75824d!./node_modules/weex-vue-loader/lib/selector?type=styles&index=0!./mpvuePicker.vue */ "./node_modules/weex-vue-loader/lib/style-loader.js!./node_modules/weex-vue-loader/lib/style-rewriter.js?id=data-v-3d75824d!./node_modules/weex-vue-loader/lib/selector.js?type=styles&index=0!F:\\helloUniapp\\news\\components\\mpvue-picker\\mpvuePicker.vue")
-)
-
-/* script */
-__vue_exports__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/script-loader!babel-loader!./node_modules/weex-vue-loader/lib/selector?type=script&index=0!./mpvuePicker.vue */ "./node_modules/weex-vue-loader/lib/script-loader.js!./node_modules/babel-loader/lib/index.js!./node_modules/weex-vue-loader/lib/selector.js?type=script&index=0!F:\\helloUniapp\\news\\components\\mpvue-picker\\mpvuePicker.vue")
-
-/* template */
-var __vue_template__ = __webpack_require__(/*! !./node_modules/weex-vue-loader/lib/template-compiler?id=data-v-3d75824d!./node_modules/weex-vue-loader/lib/selector?type=template&index=0!./mpvuePicker.vue */ "./node_modules/weex-vue-loader/lib/template-compiler.js?id=data-v-3d75824d!./node_modules/weex-vue-loader/lib/selector.js?type=template&index=0!F:\\helloUniapp\\news\\components\\mpvue-picker\\mpvuePicker.vue")
-__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-if (
-  typeof __vue_exports__.default === "object" ||
-  typeof __vue_exports__.default === "function"
-) {
-if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-__vue_options__ = __vue_exports__ = __vue_exports__.default
-}
-if (typeof __vue_options__ === "function") {
-  __vue_options__ = __vue_options__.options
-}
-__vue_options__.__file = "F:\\helloUniapp\\news\\components\\mpvue-picker\\mpvuePicker.vue"
-__vue_options__.render = __vue_template__.render
-__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-3d75824d"
-__vue_options__.style = __vue_options__.style || {}
-__vue_styles__.forEach(function (module) {
-  for (var name in module) {
-    __vue_options__.style[name] = module[name]
-  }
-})
-if (typeof __register_static_styles__ === "function") {
-  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
-}
-
-module.exports = __vue_exports__
-
 
 /***/ }),
 

@@ -6,7 +6,7 @@
 				<scroll-view id="tab-bar" class="uni-swiper-tab" scroll-x :scroll-left="scrollLeft">
 					<view v-for="(tab, index) in tabBars" :key="tab.ref" :class="['swiper-tab-list',tabIndex==index ? 'active' : '']"
 					 :id="tab.ref" :data-current="index" @click="tapTab(index)">{{tab.name}}</view>
-				</scroll-view>
+				</scroll-view>  
 			<!-- </view> -->
 		<!-- </view> -->
 		

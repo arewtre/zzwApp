@@ -15,7 +15,7 @@
       {
         "fontSrc": "/static/font/iconfont.ttf",
         "text": "",
-        "fontSize": "24",
+        "fontSize": "20",
         "width": "auto",
         "color": "#ffffff",
         "float": "left",
@@ -41,7 +41,7 @@
       {
         "fontSrc": "/static/yticon.ttf",
         "text": "",
-        "fontSize": "26",
+        "fontSize": "24",
         "width": "auto",
         "color": "#ffffff",
         "background": "rgba(0,0,0,0)",

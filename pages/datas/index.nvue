@@ -1,18 +1,12 @@
 <template>
-	<div>
-		<picker class="texts" @change="bindPickerChange" :value="index" :range="array">
-			<view class="uni-input">{{array[index]}}</view>
-		</picker>
-		<!-- <div class="texts" @click="showSinglePicker">{{defaultCate}}</div> -->
-		<uni-tabs @change="changeTab" :index="tabIndex">
-			<!-- <div class="uni-flex uni-row"> -->
-				
-			<!-- </div> -->
+	<div class="connnt">
+		<div class="texts" @click="pickShow">{{defaultCate}}</div>
+		<uni-tabs @change="changeTab" :index="tabIndex" class="tabcont">
 			<uni-tab-bar class="tabbar">
 				<div class="tab-bar-item" v-for="(tabBar, index) in tabBars" :key="index" :ref="tabBar.id + index">
 					<text class="tab-bar-title" :class="[tabIndex === index ? 'active' : '']">{{tabBar.name}}</text>
-				</div>
-			</uni-tab-bar>
+				</div> 
+			</uni-tab-bar>  
 			<uni-tab-content>
 				<list class="list" v-for="(tabItem, tabIndex) in newsList" :key="tabIndex" @loadmore="loadMore(tabIndex)"
 				 loadmoreoffset="10">
@@ -29,7 +23,7 @@
 				</list>
 			</uni-tab-content> 
 		</uni-tabs>
-		<mpvue-picker
+<!-- 		<mpvue-picker
 			:themeColor="themeColor"
 			ref="mpvuePicker"
 			:mode="modes"
@@ -38,25 +32,22 @@
 			@onConfirm="onConfirm"
 			@onCancel="onCancel"
 			:pickerValueArray="pickerValueArray"
-		></mpvue-picker>
-		<!-- <picker @change="bindPickerChange" :value="index" :range="pickerValueArray">
-			<view class="uni-input">{{pickerValueArray[index]}}</view>
-		</picker> -->
+		></mpvue-picker> -->
 	</div>
-</template>
+</template>  
 
 <script>
 	import uniTabContent from '@/components/uni-tab-content/uni-tab-content.nvue';
 	import uniTabBar from '@/components/uni-tab-bar/uni-tab-bar.nvue';
 	import uniTabs from '@/components/uni-tabs/uni-tabs.nvue';
 	import uniMediaList from '@/components/uni-media-list/uni-media-list.nvue';
-	import mpvuePicker from '@/components/mpvue-picker/mpvuePicker.vue';
+	// import mpvuePicker from '@/components/mpvue-picker/mpvuePicker.vue';
 	import {
 		friendlyDate
 	} from '@/common/util.js'; 
 
 	const dom = weex.requireModule('dom');
-
+	const picker = weex.requireModule('picker');
 	export default {
 		data() {
 			return {
@@ -74,6 +65,8 @@
 				modes: '',
 				deepLength: 1,
 				pickerValueDefault: [0],
+				pickerArr:[],
+				pickerArrId:[]
 			}
 		},
 		components: {
@@ -81,9 +74,16 @@
 			uniTabBar,
 			uniTabs,
 			uniMediaList,
-			mpvuePicker
+			// mpvuePicker
 		},
 		created() {
+			uni.onNavigationBarButtonTap((e) =>{
+				if(e.index==1){
+					 this.pickShow();
+					// this.showSinglePicker();
+				}
+			})
+			
 			this.loadNavList();
 			this.loadCatesList();
 		},
@@ -92,11 +92,16 @@
 				console.log('picker发送选择改变，携带值为：' + e.target.value)
 				this.index = e.target.value
 			},
-			loadNavList: function() {
+			loadNavList: function(Refresh) {
 				//this.moduleid = moduledid;
 				uni.showLoading({
 					title: '玩命加载中..'
 				});
+				this.tabBars = "";
+				if (Refresh) {
+					this.tabIndex = 0;
+					this.newsList =[];
+				}
 				uni.request({
 					url: 'http://47.100.48.1/api/member/data.php?ac=getCategory',
 					data: {parent_id:this.parent_id},
@@ -106,14 +111,14 @@
 						if (res.data.code == "1") {
 							this.tabBars = res.data.result;
 							this.tabBars.forEach((tabBar) => {
-								//tabBar.name = tabBar.name.substr(tabBar.name.length-2,2);
+								tabBar.name = tabBar.name.substr(tabBar.name.length-2,2);
 								this.newsList.push({
 									data: [],
 									cateid: tabBar.id,
 									name: tabBar.name, 
 									page: 1,
 									pageSize: 20,
-									loadingText: 'loading'
+									loadingText: '加载中..'
 								});
 							});
 							//console.log(this.newsList);
@@ -126,19 +131,14 @@
 			},
 			loadCatesList: function(Refresh) {				
 				uni.request({
-					url: 'http://47.100.48.1/api/member/data.php?ac=getDataList',
-					data: {parent_id:this.parent_id},
+					url: 'http://47.100.48.1/api/member/data.php?ac=getCategory',
+					data: {parent_id:0},
 					method:"POST",
 					success: (res) => {
 						if (res.data.code == "1") {
 							this.pickerValueArray = res.data.result;
 							this.pickerValueArray.forEach((cate,index) => {
-								cate.label = cate.name;
-								cate.value = cate.id; 
-								if(cate.id==this.parent_id ){
-									this.defaultCate = cate.name;
-									this.pickerValueDefault = [index];
-								}
+								this.pickerArr.push(cate.name);
 							});
 						}
 					},error: (res)=>{
@@ -182,7 +182,7 @@
 							activeTab.page = activeTab.page+1;
 							if(data.length<30){
 								//console.log(data.length);
-								activeTab.loadingText="noMore"
+								activeTab.loadingText="没有更多数据了"
 							}
 									
 						}
@@ -272,24 +272,36 @@
 				this.deepLength = 1;
 				this.pickerValueDefault = [0];
 				this.$refs.mpvuePicker.show();
-				//console.log(JSON.stringify(1111));
+				console.log(JSON.stringify(1111));
 			},
 			onConfirm(e) {
 				this.defaultCate = e.label;
 				this.parent_id =  e.value[0];
 				this.loadNavList(1);
 			},
+			pickShow () {
+				picker.pick({
+				  items: this.pickerArr
+				}, event => {
+				  if (event.result === 'success') {
+					  console.log(JSON.stringify(event));
+					//this.value = event.data
+					//plus.ui.alert(JSON.stringify(event)); 
+						this.defaultCate = this.pickerValueArray[event.data].name;
+						this.parent_id =  this.pickerValueArray[event.data].id;
+						uni.setTabBarItem({
+						  index: 1,
+						  text: this.defaultCate
+						})
+						this.loadNavList(1);
+				  }
+				})
+			  },
 		}
 	}
 </script>
 
 <style>
-	.uni-flex {
-		display: flex;
-		flex-direction: row;
-		/* margin-bottom:24upx; */
-		border-bottom: 1px solid #c8c7cc;
-	}
 	.tab-bar-item {
 		width: 150px;
 		height: 100px;
@@ -345,11 +357,20 @@
 		text-align: center;
 		color: #555;
 		font-size: 30upx;
+		/* float:left; */
+		/* display:flex; */
 		position:absolute;
 		left:10upx;
 		top:30upx;
-		z-index:999;
+		z-index:9999;
 	}
 	.icon-xia{font-size:38upx;margin-top:6upx;margin-left:4upx}
-	.tabbar{width:690upx;margin-left:30upx}
+	.tabcont {
+		display: flex;
+		flex-direction: row;
+		/* margin-bottom:24upx; */
+		border-bottom: 1px solid #c8c7cc;
+	}
+	.tabbar{width:530upx;margin-left:220upx;} 
+	.connnt{padding-bottom:240upx}
 </style>

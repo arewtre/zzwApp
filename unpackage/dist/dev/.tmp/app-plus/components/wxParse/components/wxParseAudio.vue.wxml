@@ -1,1 +1,1 @@
-<template name="7dce4c56"><audio id="{{node.attr.id}}" src="{{node.attr.src}}" loop="{{node.attr.loop}}" poster="{{node.attr.poster}}" name="{{node.attr.name}}" author="{{node.attr.author}}" controls class="_audio 7dce4c56 {{node.classStr}}" style=" {{node.styleStr}}"></audio></template>
+<template name="6af59ef4"><audio id="{{node.attr.id}}" src="{{node.attr.src}}" loop="{{node.attr.loop}}" poster="{{node.attr.poster}}" name="{{node.attr.name}}" author="{{node.attr.author}}" controls class="_audio 6af59ef4 {{node.classStr}}" style=" {{node.styleStr}}"></audio></template>

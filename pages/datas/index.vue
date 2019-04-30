@@ -114,11 +114,10 @@
 							});
 						}
 						activeTab.page = activeTab.page+1;
-						if(data.length<30){
-							console.log(data.length);
-							activeTab.loadingText="noMore"
-						}
-			
+					}
+					if(res.result.length<20){
+						console.log(res.result.length);
+						activeTab.loadingText="noMore"
 					}
 					uni.hideLoading();
 				})	
@@ -173,7 +172,7 @@
 				console.log();
 				uni.navigateTo({
 					// url: '/pages/detail/detail?query=' + encodeURIComponent(JSON.stringify(detail))
-					url: '/pages/detail/detail?catid=' + e.post_id +'&itemid='+e.id
+					url: '/pages/datas/detail?catid=' + e.post_id +'&itemid='+e.id
 				});
 			},
 			dislike(tabIndex, newsIndex) {

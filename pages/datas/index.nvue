@@ -1,11 +1,11 @@
 <template>
 	<div class="connnt">
-		<div class="texts" @click="pickShow">{{defaultCate}}</div>
-		<uni-tabs @change="changeTab" :index="tabIndex" class="tabcont">
-			<uni-tab-bar class="tabbar">
+		<!-- <div class="texts" @click="pickShow">{{defaultCate}}</div> -->
+		<uni-tabs @change="changeTab" :index="tabIndex">
+			<uni-tab-bar>
 				<div class="tab-bar-item" v-for="(tabBar, index) in tabBars" :key="index" :ref="tabBar.id + index">
 					<text class="tab-bar-title" :class="[tabIndex === index ? 'active' : '']">{{tabBar.name}}</text>
-				</div> 
+				</div>
 			</uni-tab-bar>  
 			<uni-tab-content>
 				<list class="list" v-for="(tabItem, tabIndex) in newsList" :key="tabIndex" @loadmore="loadMore(tabIndex)"
@@ -41,7 +41,6 @@
 	import uniTabBar from '@/components/uni-tab-bar/uni-tab-bar.nvue';
 	import uniTabs from '@/components/uni-tabs/uni-tabs.nvue';
 	import uniMediaList from '@/components/uni-media-list/uni-media-list.nvue';
-	// import mpvuePicker from '@/components/mpvue-picker/mpvuePicker.vue';
 	import {
 		friendlyDate
 	} from '@/common/util.js'; 
@@ -74,24 +73,22 @@
 			uniTabBar,
 			uniTabs,
 			uniMediaList,
-			// mpvuePicker
 		},
 		created() {
+// 			var vm = this;
+// 			 vm.$on('tabBar.onClick',function(e){
+// 			   var detail= e.detail;
+// 			   console.log('tabBar.onClick ' + detail.index);
+// 			 });
 			uni.onNavigationBarButtonTap((e) =>{
 				if(e.index==1){
 					 this.pickShow();
-					// this.showSinglePicker();
 				}
 			})
-			
 			this.loadNavList();
 			this.loadCatesList();
 		},
 		methods: {
-			bindPickerChange: function(e) {
-				console.log('picker发送选择改变，携带值为：' + e.target.value)
-				this.index = e.target.value
-			},
 			loadNavList: function(Refresh) {
 				//this.moduleid = moduledid;
 				uni.showLoading({
@@ -180,11 +177,11 @@
 								});
 							}
 							activeTab.page = activeTab.page+1;
-							if(data.length<30){
-								//console.log(data.length);
-								activeTab.loadingText="没有更多数据了"
-							}
 									
+						}
+						if(res.result.length<20){
+							console.log(res.result.length);
+							activeTab.loadingText="没有更多数据了"
 						}
 						uni.hideLoading();
 					}
@@ -207,7 +204,7 @@
 			goDetail(e) {
 				uni.navigateTo({
 					//url: '/pages/detail/detail?query=' + encodeURIComponent(JSON.stringify(detail))
-					url: '/pages/detail/detail?catid=' + e.post_id +'&itemid='+e.id
+					url: '/pages/datas/detail?catid=' + e.post_id +'&itemid='+e.id
 				});
 			},
 			dislike(tabIndex, newsIndex) {
@@ -262,41 +259,44 @@
 					this.refreshText = "下拉可以刷新";
 				}
 			},
-			onCancel(e) {
-					console.log(e);
-			},
-			// 单列
-			showSinglePicker() {
-				//this.pickerValueArray = this.navlist;
-				this.modes = "selector";
-				this.deepLength = 1;
-				this.pickerValueDefault = [0];
-				this.$refs.mpvuePicker.show();
-				console.log(JSON.stringify(1111));
-			},
-			onConfirm(e) {
-				this.defaultCate = e.label;
-				this.parent_id =  e.value[0];
-				this.loadNavList(1);
-			},
 			pickShow () {
 				picker.pick({
 				  items: this.pickerArr
 				}, event => {
 				  if (event.result === 'success') {
-					  console.log(JSON.stringify(event));
+					  //console.log(JSON.stringify(event));
 					//this.value = event.data
 					//plus.ui.alert(JSON.stringify(event)); 
 						this.defaultCate = this.pickerValueArray[event.data].name;
 						this.parent_id =  this.pickerValueArray[event.data].id;
-						uni.setTabBarItem({
-						  index: 1,
-						  text: this.defaultCate
-						})
+// 						uni.setTabBarItem({
+// 						  index: 1,
+// 						  text: this.defaultCate
+// 						})
+						//this.changeBtn();
+						this.pickerValueDefault = [event.data];
+						uni.setNavigationBarTitle({
+							title: this.defaultCate
+						});
 						this.loadNavList(1);
 				  }
 				})
 			  },
+			  changeBtn:function(){
+				  let pages = getCurrentPages();
+				  let page = pages[pages.length - 1];
+				  // #ifdef APP-PLUS
+				  let currentWebview = page.$getAppWebview();
+				  let titleObj = currentWebview.getStyle().titleNView;
+				  if (!titleObj.buttons) {
+				  	return;
+				  }
+				  titleObj.buttons[1].text = this.defaultCate;
+				  currentWebview.setStyle({
+				  	titleNView: titleObj
+				  });
+				  // #endif
+			  }
 		}
 	}
 </script>
@@ -319,6 +319,7 @@
 
 	.active {
 		color: #fc2c5d;
+		border-bottom:5upx solid  #fc2c5d;
 	}
 
 	.loadmore {
@@ -371,6 +372,6 @@
 		/* margin-bottom:24upx; */
 		border-bottom: 1px solid #c8c7cc;
 	}
-	.tabbar{width:530upx;margin-left:220upx;} 
+	.tabbar{width:730upx;margin-left:10upx;} 
 	.connnt{padding-bottom:240upx}
 </style>

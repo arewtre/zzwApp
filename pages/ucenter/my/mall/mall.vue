@@ -2,9 +2,15 @@
 	<view>
 		<!-- 顶部导航 -->
 		<view class="topTabBar" :style="{position:headerPosition,top:headerTop}">
-			<view class="grid" v-for="(grid,tbIndex) in navType" :key="tbIndex" @tap="showType(tbIndex)">
-				<view class="text" :class="[tbIndex==tabbarIndex?'on':'']">{{grid}}</view>
-			</view>
+			<scroll-view id="tab-bar" class="uni-swiper-tab" scroll-x :scroll-left="scrollLeft">
+				<view v-for="(grid,index) in orderType" :key="index" :class="['swiper-tab-list',tabIndex==index ? 'active' : '']"
+				 :data-current="index" @click="showType(index,grid.status)">{{grid.name}}</view>
+			</scroll-view>
+			<picker @change="bindPickerChange" :value="index" :range="cate">
+				<view class="grids">
+					<view class="text"  style="color:#5eba8f;"><text class="cell-icon yticon icon-lishijilu" style="font-size:50upx"></text>分类</view>
+				</view>
+			</picker>
 		</view>
 		<!-- 考虑非APP端长列表和复杂的DOM使用scroll-view会卡顿，所以漂浮顶部选项卡使用page本身的滑动 -->
 		<view class="order-list">
@@ -18,7 +24,7 @@
 				<!-- 订单列表 -->
 				<view v-for="(item,index) in list" :key="index" class="order-item">
 					<view class="i-top b-b">
-						<text class="time">{{item.catid}}</text> 
+						<text class="time">{{item.catname}}</text> 
 						<text class="state">发表于: {{item.editdate}}</text>
 					</view>
 					<view 
@@ -57,27 +63,21 @@
 				},
 				headerPosition:"fixed",
 				headerTop:"0px",
-				orderType: ['已发布','审核中','未通过','已过期'],
-				type_21:[
-					{name:"已发布",status:"3"},
-					{name:"审核中",status:"2"},
-					{name:"未通过",status:"1"}
+				orderType: [
+					{name:'已发布',status:3},
+					{name:'审核中',status:2},
+					{name:'未通过',status:1},					
 				],
-				type_8:[
-					{name:"已发布",status:"3"},
-					{name:"审核中",status:"2"},
-					{name:"未通过",status:"1"},
-					{name:"报名管理",action:"sign"}
-				],
-				type: 0,
 				//订单列表 演示数据
 				orderList:[],
 				loadingType:0,
 				list:[],
-				tabbarIndex:0,
+				tabIndex:0,
+				scrollLeft:0,
 				page:0,
 				cate:[],
 				isshow:false,
+				cateList:"",
 				//start_time:"",
 				// date: getDate({
 				// 	format: true
@@ -130,17 +130,21 @@
 				this.$Request.post(this.$api.home.newscatedata,{moduleid:this.mid}).then(res => {
 					if (res.code == "0000") {
 						//console.log(res.data);
+						this.cateList = res.data;
 						 res.data.forEach((tabBar,index) => {
 							this.cate.push(tabBar.catname)
 						})
-						//console.log(this.cate);
+						console.log(this.cate);
 					}
 				})
 			},
 			
-			bindDateChange: function(e) {
-				this.start_time = e.target.value;
+			bindPickerChange: function(e) {
+				console.log(e.target.value);
+				this.catid = this.cateList[e.target.value].catid;
 				this.list = [];
+				this.status = 3;
+				this.tabIndex = 0;
 				this.loadingType = 0;
 				this.page = 0;
 				this.getData();
@@ -148,9 +152,10 @@
 			choose(){
 				this.isshow = !this.isshow;
 			},
-			showType(tbIndex){
-				this.tabbarIndex = tbIndex;
-				this.type = tbIndex;
+			showType(index,status){
+				this.tabIndex = index;
+				console.log(this.tabIndex);
+				this.status = status;
 				this.list = [];
 				this.loadingType = 0;
 				this.page = 0;
@@ -164,7 +169,7 @@
 				});
 				var pageindex = this.page +1;
 				this.loadingType = 1;
-				this.$Request.post(this.$api.user.getMyPushList,{userid:this.userInfo.userid,username:this.userInfo.username,mid:this.mid,status:this.status,page:pageindex}).then(res => {
+				this.$Request.post(this.$api.user.getMyPushList,{userid:this.userInfo.userid,username:this.userInfo.username,catid:this.catid,mid:this.mid,status:this.status,page:pageindex}).then(res => {
 					console.log(res);
 					if (res.data.length == 0) {
 						this.loadingType = 2;
@@ -229,6 +234,10 @@ page{
 		justify-content: center;
 		align-items: center;
 		color: #444;
+		background:#ffffff;
+		position:fixed;
+		top:80upx;
+		right:0;
 		font-size: 28upx;
 		.text{
 			height: 76upx;
@@ -396,5 +405,49 @@ page{
 	}
 	.order-list{
 		margin-top:100upx;
+	}
+	.uni-tab-bar {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		overflow: hidden;
+		height: 100%;
+	}
+	
+	.uni-tab-bar .list {
+		width: 750upx;
+		height: 100%;
+	}
+	
+	.uni-swiper-tab {
+		width: 100%;
+		white-space: nowrap;
+		line-height: 80upx;
+		height: 80upx;
+		// border-bottom: 1px solid #c8c7cc;
+	}
+	
+	.swiper-tab-list {
+		font-size: 30upx;
+		width: 150upx;
+		line-height: 80upx;
+		display: inline-block;
+		text-align: center;
+		color: #555;
+	}
+	
+	.topTabBar .active {
+		color: #fc2c5d;
+		
+	}
+	
+	.uni-tab-bar .swiper-box {
+		flex: 1;
+		width: 100%;
+		height: calc(100% - 100upx);
+	}
+	
+	.uni-tab-bar-loading {
+		padding: 20upx 0;
 	}
 </style>

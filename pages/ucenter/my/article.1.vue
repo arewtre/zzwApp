@@ -5,6 +5,18 @@
 			<view class="grid" v-for="(grid,tbIndex) in navType" :key="tbIndex" @tap="showType(tbIndex)">
 				<view class="text" :class="[tbIndex==tabbarIndex?'on':'']">{{grid}}</view>
 			</view>
+			<!-- <view class="grid">
+				<view class="text on">全部</view>
+			</view> -->
+			<!-- <picker @change="bindPickerChange" :value="index" :range="cate">
+				<view class="grids" style="width:100%">
+					<view class="text"  style="color:#5eba8f;"><text class="cell-icon yticon icon-lishijilu" style="font-size:50upx"></text>分类</view>
+				</view>
+			</picker> -->
+			<!-- <scroll-view id="tab-bar" class="uni-swiper-tab" scroll-x :scroll-left="scrollLeft">
+				<view v-for="(grid,tbIndex) in navType" :key="tab.ref" :class="['swiper-tab-list',tabIndex==index ? 'active' : '']"
+				 :id="tab.ref" :data-current="index" @click="tapTab(index)">{{tab.catname}}</view>
+			</scroll-view> -->
 		</view>
 		<!-- 考虑非APP端长列表和复杂的DOM使用scroll-view会卡顿，所以漂浮顶部选项卡使用page本身的滑动 -->
 		<view class="order-list">

@@ -22,16 +22,18 @@
 			@touchmove="coverTouchmove"
 			@touchend="coverTouchend"
 		>
-			<image class="arc" src="/static/arc.png"></image>
+			<image class="arc" src="/static/arc.png"></image> 
 			<!-- 浏览历史 -->
 			<view class="history-section icon"> 
-				<list-cell @eventClick="navTo('/pages/ucenter/my?mid=16')" icon="icon-iconfontweixin" iconColor="#e07472" title="纸业交易中心管理"></list-cell>
-				<list-cell @eventClick="navTo('/pages/ucenter/my?mid=16')" icon="icon-dizhi" iconColor="#5fcda2" title="纸业求购信息管理"></list-cell>
+				<block v-for="(row,index) in mymodule" :key="index" >
+						<list-cell @eventClick="navTo(row.module,row.moduleid)" :icon="icon[index]" :iconColor="color[index]" :title="row.name"></list-cell>
+				</block>
+				<!-- <list-cell @eventClick="navTo('/pages/ucenter/my?mid=16')" icon="icon-dizhi" iconColor="#5fcda2" title="纸业求购信息管理"></list-cell>
 				<list-cell @eventClick="navTo('/pages/ucenter/my?mid=16')" icon="icon-share" iconColor="#9789f7" title="纸业供应信息管理" tips=""></list-cell>
 				<list-cell @eventClick="navTo('/pages/ucenter/my?mid=16')" icon="icon-pinglun-copy" iconColor="#ee883b" title="纸业展会预告管理" tips=""></list-cell>
 				<list-cell @eventClick="navTo('/pages/ucenter/my?mid=16')" icon="icon-shoucang_xuanzhongzhuangtai" iconColor="#54b4ef" title="纸业资讯管理"></list-cell>
 				<list-cell @eventClick="navTo('/pages/ucenter/my?mid=16')" icon="icon-shoucang_xuanzhongzhuangtai" iconColor="#54b4ef" title="招标公告管理"></list-cell>
-				<list-cell @eventClick="navTo('/pages/ucenter/my?mid=16')" icon="icon-shezhi1" iconColor="#e07472" title="纸业人才管理" border=""></list-cell>
+				<list-cell @eventClick="navTo('/pages/ucenter/my?mid=16')" icon="icon-shezhi1" iconColor="#e07472" title="纸业人才管理" border=""></list-cell> -->
 			</view> 
 		</view>
     </view>  
@@ -52,13 +54,25 @@
 				coverTransition: '0s',
 				moving: false,
 				avatarUrl: '/static/logo.png',
+				mymodule:"",
+				color:["#e07472","#5fcda2","#9789f7","#ee883b","#54b4ef","#5eba8f","#e07472","#9789f7","#e07472","#54b4ef"],
+				icon:["icon-iconfontweixin","icon-dizhi","icon-share","icon-pinglun-copy","icon-shoucang_xuanzhongzhuangtai","icon-yishouhuo","icon-shezhi1","icon-shezhi1","icon-shezhi1","icon-shezhi1"]
 			}
 		},
 		onLoad(){
-
+			if(!this.hasLogin){
+				uni.navigateTo({
+					url: '/pages/login/login'
+				});
+			}
+			this.getMode();
 		},
 		onShow(){
-
+			if(!this.hasLogin){
+				uni.navigateTo({
+					url: '/pages/login/login'
+				});
+			}
 		},
 		// #ifndef MP
 		onNavigationBarButtonTap(e) {
@@ -73,28 +87,31 @@
 			
 		},
         methods: {
-// 			getUsers(){
-// 				var user = service.getUsers();
-// 				if(user!=""){
-// 					console.log(user);			    
-// 					this.userInfo = user;
-// 					this.login = true;
-// 				}else{
-// 					this.login = false;
-// 				}
-// 			},
-
+			getMode(){
+				uni.showLoading({
+					title: '正在查询授权模块..',
+					mask:true
+				});
+				this.$Request.post(this.$api.user.getModule,{userid:this.userInfo.userid}).then(res => {
+					if (res.code == "0000") {
+						this.mymodule = res.data;
+						console.log(this.mymodule);
+					}
+					uni.hideLoading();
+				})
+			},
 			/**
 			 * 统一跳转接口,拦截未登录路由
 			 * navigator标签现在默认没有转场动画，所以用view
 			 */
-			navTo(url){
-				console.log(url);
+			navTo(module,mid){
+				console.log(module);
 				if(!this.hasLogin){
 					url = '/pages/login/login';
 				}
-				uni.navigateTo({  
-					url
+				uni.navigateTo({  					
+					url:"/pages/ucenter/my/"+module+"/"+module+"?mid="+mid,
+					// url:"/pages/ucenter/my?mid="+mid
 				})  
 			}, 
 			/**
@@ -241,7 +258,7 @@
 		padding: 0 30upx;
 		position:relative;
 		background: #f5f5f5;
-		padding-bottom: 20upx;
+		padding-bottom: 150upx;
 		.arc{
 			position:absolute;
 			left: 0;

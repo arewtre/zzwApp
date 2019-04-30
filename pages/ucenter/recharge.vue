@@ -2,16 +2,16 @@
 	<view>
 		<!-- 顶部导航 -->
 		<view class="topTabBar" :style="{position:headerPosition,top:headerTop}">
-			<view class="grid" v-for="(grid,tbIndex) in orderType" :key="tbIndex" @tap="showType(tbIndex)">
+			<!-- <view class="grid" v-for="(grid,tbIndex) in orderType" :key="tbIndex" @tap="showType(tbIndex)">
 				<view class="text" :class="[tbIndex==tabbarIndex?'on':'']">{{grid}}</view>
-			</view>
-			<!-- <view class="grid">
-				<view class="text on">全部</view>
 			</view> -->
+			<view class="grid">
+				<view class="text on">全部</view>
+			</view>
 			
 			<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
 				<!-- <view class="uni-input">{{date}}</view> -->
-				<view class="grids" style="width:100%">
+				<view class="grid" style="width:100%">
 					<view class="text"  style="color:#5eba8f;"><text class="cell-icon yticon icon-lishijilu" style="font-size:50upx"></text>按时间查询</view>
 				</view>
 			</picker>
@@ -19,7 +19,7 @@
 		<!-- 考虑非APP端长列表和复杂的DOM使用scroll-view会卡顿，所以漂浮顶部选项卡使用page本身的滑动 -->
 		<view class="order-list">
 			<view class="list">
-				<view class="onorder" v-if="list.length==0 && loadingType==0">
+				<view class="onorder" v-if="list.length==0 && loadingType==0">  
 					<image src="../../../static/img/noorder.png"></image>
 					<view class="text">
 						没有相关数据
@@ -29,18 +29,21 @@
 					<view class="type">流水号: {{row.out_trade_no}}</view>
 					<view class="order-info">
 						<view class="right">
-							
-							<view class="spec">更变积分：</view>
+							<view class="spec">充值状态：</view>
 							<view class="price-number">
-								<view class="price" :class="[row.score>0?'jia':'jian']"><text v-if="row.score>0">+</text>{{row.score}}</view>
+								<view class="price" :class="[row.pay_status==1?'jia':'jian']">{{row.pay_status}}</view>
 							</view>
-							<view class="spec">发生时间：</view>
+							<view class="spec">充值金额：</view>
+							<view class="price-number">
+								<view class="price jia">￥{{row.amount}}</view>
+							</view>
+							<view class="spec">充值方式：</view>
+							<view class="price-number">
+								<view class="price">{{row.method=="alipay"?"支付宝":"微信"}}</view>
+							</view>
+							<view class="spec">充值时间：</view>
 							<view class="price-number">
 								<view class="price">{{row.add_time}}</view>
-							</view>
-							<view class="spec">发生事由：</view>
-							<view class="price-number">
-								<view class="price price2">{{row.remark}}</view>
 							</view>
 							<!-- <view class="spec">剩余积分：</view>
 							<view class="price-number">
@@ -50,6 +53,10 @@
 							<view class="price-number">
 								<view class="price">127.0.0.1</view>
 							</view> -->
+							<view class="action-box b-t" v-if="row.payable==1">
+								<!-- <button class="action-btn">取消订单</button> -->
+								<button class="action-btn recom" @click="toPay(row.out_trade_no)">立即支付</button>
+							</view>
 						</view>
 						
 					</view>
@@ -96,8 +103,7 @@
 				},
 				headerPosition:"fixed",
 				headerTop:"0px",
-				orderType: ['全部','收入','支出'],
-				type: 0,
+				orderType: ['全部'],
 				//订单列表 演示数据
 				orderList:[],
 				loadingType:0,
@@ -160,12 +166,7 @@
 			},
 			showType(tbIndex){
 				this.tabbarIndex = tbIndex;
-				this.type = tbIndex;
-				this.list = [];
-				this.loadingType = 0;
-				this.page = 0;
-				this.getData();
-				//this.list = this.orderList[tbIndex];
+				this.list = this.orderList[tbIndex];
 			},
 			getData(){
 				uni.showLoading({
@@ -175,16 +176,17 @@
 				var pageindex = this.page +1;
 				this.loadingType = 1;
 				uni.request({
-				 	url: 'http://data.chinapaper.net/Api/funds/getaccountlog',
-				 	data: {ukeys:this.userInfo.uKeys,log:"score",page:pageindex,start_time:this.start_time,type:this.type},
+				 	url: 'http://data.chinapaper.net/Api/funds/getrecharge',
+				 	data: {ukeys:this.userInfo.uKeys,page:pageindex,start_time:this.start_time},
 					// data: {ukeys:"9060001",catid:this.catid,id:this.itemid},
 				 	method:"POST",
 				 	success: (result) => {
 				 		console.log(result);
 						var res = result.data;
-						if (res.result.length == 0) {
+						if (res.result.length == 0 || res.result.length < 30) {
 							this.loadingType = 2;
 						}
+						
 				 		if (res.code == "1") {
 							let list= res.result;
 							this.list = this.list.concat(list);
@@ -193,6 +195,11 @@
 						uni.hideLoading(); 
 				 	}
 				 });
+			},
+			toPay(out_trade_no){
+				uni.navigateTo({
+					url: '/pages/datas/pay?order_sn='+out_trade_no
+				});
 			}
 		}
 	}
@@ -206,7 +213,7 @@ page{
 	color:#DF5000;
 }
 .jian{
-	color:greenyellow;
+	color:#54b4ef;
 }
 .topTabBar{
 	width: 100%;
@@ -219,25 +226,6 @@ page{
 	display: flex;
 	justify-content: space-around;
 	.grid{
-		width: 10%;
-		height: 80upx;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		color: #444;
-		font-size: 28upx;
-		.text{
-			height: 76upx;
-			display: flex;
-			align-items: center;
-			&.on{
-				color: #f06c7a;
-				border-bottom: solid 4upx #f06c7a;
-			}
-		}
-		
-	}
-	.grids{
 		width: 20%;
 		height: 80upx;
 		display: flex;
@@ -404,4 +392,35 @@ page{
 	}
 }
 .tit{width:80upx}
+.action-box{
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			height: 100upx;
+			position: relative;
+			padding-right: 30upx;
+		}
+		.action-btn{
+			width: 160upx;
+			height: 60upx;
+			margin: 0;
+			margin-left: 24upx;
+			padding: 0;
+			text-align: center;
+			line-height: 60upx;
+			font-size: $font-sm + 2upx;
+			color: $font-color-dark;
+			background: #fff;
+			border-radius: 100px;
+			&:after{
+				border-radius: 100px;
+			}
+			&.recom{
+				background: #fff9f9;
+				color: $base-color;
+				&:after{
+					border-color: #f7bcc8;
+				}
+			}
+		}
 </style>

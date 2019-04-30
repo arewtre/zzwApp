@@ -29,18 +29,21 @@
 					<view class="type">流水号: {{row.out_trade_no}}</view>
 					<view class="order-info">
 						<view class="right">
-							
-							<view class="spec">更变积分：</view>
+							<view class="spec">充值状态：</view>
 							<view class="price-number">
-								<view class="price" :class="[row.score>0?'jia':'jian']"><text v-if="row.score>0">+</text>{{row.score}}</view>
+								<view class="price" :class="[row.is_pay==0?'jia':'jian']">{{row.pay_status}}</view>
 							</view>
-							<view class="spec">发生时间：</view>
+							<view class="spec">支付金额：</view>
+							<view class="price-number">
+								<view class="price jia">￥{{row.amount}}</view>
+							</view>
+							<view class="spec">支付方式：</view>
+							<view class="price-number">
+								<view class="price">{{row.payType}}</view>
+							</view>
+							<view class="spec">充值时间：</view>
 							<view class="price-number">
 								<view class="price">{{row.add_time}}</view>
-							</view>
-							<view class="spec">发生事由：</view>
-							<view class="price-number">
-								<view class="price price2">{{row.remark}}</view>
 							</view>
 							<!-- <view class="spec">剩余积分：</view>
 							<view class="price-number">
@@ -50,6 +53,10 @@
 							<view class="price-number">
 								<view class="price">127.0.0.1</view>
 							</view> -->
+							<view class="action-box b-t" v-if="row.payable==1">
+								<!-- <button class="action-btn">取消订单</button> -->
+								<button class="action-btn recom" @click="toPay(row.out_trade_no)">立即支付</button>
+							</view>
 						</view>
 						
 					</view>
@@ -96,7 +103,7 @@
 				},
 				headerPosition:"fixed",
 				headerTop:"0px",
-				orderType: ['全部','收入','支出'],
+				orderType: ['全部','普通','套餐'],
 				type: 0,
 				//订单列表 演示数据
 				orderList:[],
@@ -175,24 +182,43 @@
 				var pageindex = this.page +1;
 				this.loadingType = 1;
 				uni.request({
-				 	url: 'http://data.chinapaper.net/Api/funds/getaccountlog',
-				 	data: {ukeys:this.userInfo.uKeys,log:"score",page:pageindex,start_time:this.start_time,type:this.type},
+				 	url: 'http://data.chinapaper.net/Api/order/getmall',
+				 	data: {ukeys:this.userInfo.uKeys,page:pageindex,type:this.type},
 					// data: {ukeys:"9060001",catid:this.catid,id:this.itemid},
 				 	method:"POST",
 				 	success: (result) => {
 				 		console.log(result);
 						var res = result.data;
-						if (res.result.length == 0) {
+						if (res.result.length == 0 || res.result.length<10) {
 							this.loadingType = 2;
 						}
 				 		if (res.code == "1") {
 							let list= res.result;
+							list.forEach((tabBar,index) => {
+								if(tabBar.method=="balance"){
+									tabBar.payType = "余额支付";
+								}else if(tabBar.method=="score"){
+									tabBar.payType = "积分支付";
+								}else if(tabBar.method=="wechat"){
+									tabBar.payType = "微信支付";
+								}else if(tabBar.method=="alipay"){
+									tabBar.payType = "支付宝支付";
+								}else{
+									tabBar.payType = "暂未支付";
+								}	
+							})
 							this.list = this.list.concat(list);
 							this.page = pageindex;								
 				 		}
+						
 						uni.hideLoading(); 
 				 	}
 				 });
+			},
+			toPay(out_trade_no){
+				uni.navigateTo({
+					url: '/pages/datas/pay?order_sn='+out_trade_no
+				});
 			}
 		}
 	}
@@ -203,10 +229,10 @@ page{
 	background-color: #f3f3f3;
 }
 .jia{
-	color:#DF5000;
+	color:#f37b1d;
 }
 .jian{
-	color:greenyellow;
+	color:#39b54a;
 }
 .topTabBar{
 	width: 100%;
@@ -404,4 +430,36 @@ page{
 	}
 }
 .tit{width:80upx}
+.action-box{
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			height: 80upx;
+			position: relative;
+			padding-right: 2upx;
+			margin-top:6upx;
+		}
+		.action-btn{
+			width: 160upx;
+			height: 60upx;
+			margin: 0;
+			margin-left: 24upx;
+			padding: 0;
+			text-align: center;
+			line-height: 60upx;
+			font-size: $font-sm + 2upx;
+			color: $font-color-dark;
+			background: #fff;
+			border-radius: 100px;
+			&:after{
+				border-radius: 100px;
+			}
+			&.recom{
+				background: #fff9f9;
+				color: $base-color;
+				&:after{
+					border-color: #f7bcc8;
+				}
+			}
+		}
 </style>

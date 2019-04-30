@@ -13,7 +13,7 @@
 			</view>
 			<view class="vip-card-box">
 				<image class="card-bg" src="/static/vip-card-bg.png" mode=""></image>
-				<view class="b-btn">
+				<view class="b-btn" @click="test">
 					立即开通
 				</view>
 				<view class="tit">
@@ -39,7 +39,7 @@
 			
 			<view class="tj-sction">
 				<view class="tj-item">
-					<text class="num">{{hasLogin?userInfo.money:0}}</text>
+					<text class="num">￥{{hasLogin?user.balance:0}}</text>
 					<text>余额</text>
 				</view>
 				<view class="tj-item">
@@ -47,15 +47,15 @@
 					<text>保证金</text>
 				</view>
 				<view class="tj-item">
-					<text class="num">{{hasLogin?userInfo.credit:0}}</text>
+					<text class="num">{{hasLogin?user.score:0}}</text>
 					<text>积分</text>
 				</view>
 			</view>
 			<!-- 订单 -->
 			<view class="order-section">
-				<view class="order-item" @click="navTo('/pages/ucenter/info')" hover-class="common-hover"  :hover-stay-time="50">
+				<view class="order-item" @click="navTo('/pages/ucenter/order')" hover-class="common-hover"  :hover-stay-time="50">
 					<text class="yticon icon-shouye"></text>
-					<text>信息管理</text>
+					<text>我的订单</text>
 				</view>
 				<view class="order-item" @click="navTo('/pages/ucenter/record')"  hover-class="common-hover" :hover-stay-time="50">
 					<text class="yticon icon-daifukuan"></text>
@@ -65,7 +65,7 @@
 					<text class="yticon icon-yishouhuo"></text>
 					<text>积分管理</text>
 				</view>
-				<view class="order-item" @click="navTo('/pages/ucenter/record?tbIndex=2')" hover-class="common-hover"  :hover-stay-time="50">
+				<view class="order-item" @click="navTo('/pages/ucenter/recharge')" hover-class="common-hover"  :hover-stay-time="50">
 					<text class="yticon icon-shouhoutuikuan"></text>
 					<text>充值记录</text>
 				</view>
@@ -85,7 +85,7 @@
 					<image src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=191678693,2701202375&fm=26&gp=0.jpg" mode="aspectFill"></image>
 				</scroll-view> 
 				<list-cell @eventClick="navTo('/pages/ucenter/wallet')" icon="icon-iconfontweixin" iconColor="#e07472" title="我的钱包" tips="充值送好礼"></list-cell>
-				<list-cell @eventClick="navTo('/pages/ucenter/account')" icon="icon-dizhi" iconColor="#5fcda2" title="我的账户"></list-cell>
+				<list-cell @eventClick="navTo('/pages/ucenter/info')" icon="icon-dizhi" iconColor="#5fcda2" title="信息发布"></list-cell>
 				<list-cell @eventClick="navTo('/pages/ucenter/share')" icon="icon-share" iconColor="#9789f7" title="分享" tips="邀请好友赢大礼"></list-cell>
 				<list-cell @eventClick="navTo('/pages/ucenter/webmsg')" icon="icon-pinglun-copy" iconColor="#ee883b" title="消息" tips="站内消息"></list-cell>
 				<list-cell @eventClick="navTo('/pages/ucenter/collect')" icon="icon-shoucang_xuanzhongzhuangtai" iconColor="#54b4ef" title="我的收藏"></list-cell>
@@ -113,13 +113,14 @@
 				coverTransition: '0s',
 				moving: false,
 				avatarUrl: '/static/logo.png',
+				user:""
 			}
 		},
 		onLoad(){
-
+			this.getUsers();
 		},
 		onShow(){
-
+			this.getUsers();
 		},
 		// #ifndef MP
 		onNavigationBarButtonTap(e) {
@@ -137,16 +138,17 @@
 			
 		},
         methods: {
-// 			getUsers(){
-// 				var user = service.getUsers();
-// 				if(user!=""){
-// 					console.log(user);			    
-// 					this.userInfo = user;
-// 					this.login = true;
-// 				}else{
-// 					this.login = false;
-// 				}
-// 			},
+			getUsers(){
+				uni.request({
+				 	url: 'http://data.chinapaper.net/Api/User/all',
+				 	data: {ukeys:this.userInfo.uKeys},
+				 	method:"POST",
+				 	success: (result) => {
+				 		console.log(result);
+						this.user = result.data.result;
+				 	}
+				 });
+			},
 
 			/**
 			 * 统一跳转接口,拦截未登录路由
@@ -156,6 +158,11 @@
 				console.log(url);
 				if(!this.hasLogin){
 					url = '/pages/login/login';
+				}
+				if(url=="/pages/ucenter/info"){
+					uni.switchTab({
+						url
+					})
 				}
 				uni.navigateTo({  
 					url
@@ -198,6 +205,11 @@
 				this.moving = false;
 				this.coverTransition = 'transform 0.3s cubic-bezier(.21,1.93,.53,.64)';
 				this.coverTransform = 'translateY(0px)';
+			},
+			test(){
+				uni.navigateTo({
+					url:"/pages/ucenter/editor"
+				})
 			}
         }  
     }  

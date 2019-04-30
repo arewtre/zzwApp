@@ -13,13 +13,20 @@
 		</view>
 		 <view class="cover-container"> 
 			<image class="arc" src="/static/arc.png"></image>
-			<view class="tj-sction">
+			<!-- <view class="tj-sction">
 				<view class="tj-item">
 					<text class="num">{{hasLogin?userInfo.money:0}}</text>
 					<text>余额</text>
 				</view>
-			</view>
-			<view class="history-section icon"> 
+			</view> -->
+			<view class="history-section icon">
+				<view class="mix-list-cell b-b" hover-class="cell-hover">
+					<text class="cell-icon yticon icon-share" style="color:#9789f7"></text>
+					<text class="cell-tit clamp">当前余额</text> 
+					<view class="cell-tip">
+						￥{{hasLogin?userInfo.money:0}}
+					</view>
+				</view>
 				<view class="mix-list-cell b-b" hover-class="cell-hover">
 					<text class="cell-icon yticon icon-iconfontweixin" style="color:#e07472"></text>
 					<text class="cell-tit clamp">充值金额</text>
@@ -27,11 +34,8 @@
 						<input @input="inputAmount" :value="money" name="money" class="uni-input money" type="digit" placeholder="请填写充值金额" />
 					</view>
 				</view>
-				<view class="mix-list-cell b-b" hover-class="cell-hover">
-					<text class="cell-icon yticon icon-share" style="color:#9789f7"></text>
-					<text class="cell-tit clamp">充值方式</text> 
-				</view>
-				<radio-group @change="radioChange">
+				
+				<!-- <radio-group @change="radioChange">
 					<view class="mix-list-cell b-b" hover-class="cell-hover">
 						<image class="yticon2"  src="/static/img/wpay.png"></image>
 						<text class="cell-tit clamp2">微信支付</text>
@@ -45,7 +49,10 @@
 					<view class="mix-list-cell2 b-b" hover-class="cell-hover" style="text-align:right">
 						<button type="primary" class="recharge" @click="toRecharge">{{btvalue}}</button>
 					</view>
-				</radio-group>
+				</radio-group> -->
+				<view class="mix-list-cell2 b-b" hover-class="cell-hover" style="text-align:right">
+					<button type="primary" class="recharge" @click="toRecharge">{{btvalue}}</button>
+				</view>
 			</view>
 		</view>
     </view>  
@@ -63,7 +70,7 @@
 				moving: false,
 				avatarUrl: '/static/logo.png',
 				payType:'wechat',
-				money:1,
+				money:"",
 				btvalue:"立即充值"
 			}
 		},
@@ -106,6 +113,10 @@
 			},  
 			toRecharge(){
 				let money = this.money;
+				uni.showLoading({
+					title: '加载中',
+					mask:true
+				});
 				if(money==0 || money==""){
 					uni.showToast({
 						icon: 'none',
@@ -113,106 +124,38 @@
 					});
 					return;
 				}
-				if(this.payType=="alipay"){
-					this.$Request.post(this.$api.pay.getOrderInfoByAlipay,{userid:this.userInfo.userid,oid:1}).then(res => {
-						if(res.code=="0000"){
-							var orderinfo = res.data;    
-							if(orderinfo){
-								uni.requestPayment({
-									provider:"alipay",
-									orderInfo:orderinfo,
-									success:function(res){
-										uni.showToast({
-											title:"支付成功",  
-											icon:"success",
-											duration:2000,
-											complete:function(){
-// 												uni.reLaunch({
-// 													url:"showresult?paytype=1"
-// 												});
-											}
-										});
-									},
-									fail:function(res){
-										uni.showToast({
-											title: '支付失败，请到订单中心重新支付',
-											icon: "none",
-											duration: 2000,
-											complete: function () {
-// 												wx.reLaunch({
-// 													url: 'showresult?paytype=3',
-// 												});
-											}
-										});
-									}
-								});
-							}else{
-								
-							}
+				uni.request({
+					url: 'http://data.chinapaper.net/Api/funds/rechargePost',
+					data: {ukeys:this.userInfo.uKeys,account:money},
+					method:"POST",
+					success: (result) => {
+						uni.hideLoading();
+						console.log(result);
+						var res = result.data;
+						this.out_trade_no = res.result.out_trade_no;
+						var msgg = res.msg;
+						if (res.code == "1") {							
+							uni.navigateTo({
+								url: '/pages/datas/pay?order_sn='+this.out_trade_no
+							});							
 						}else{
-							
+							console.log(msgg);	
+							uni.showToast({
+								title: msgg,
+								icon: "none",
+								duration: 2000,
+								complete: function () {
+									// uni.navigateBack({
+									// 	delta: 1
+									// });
+									
+								}
+							});
+							 
 						}
-					},function(){},function(){});
-				}
-				if(this.payType=="wechat"){
-					this.$Request.post(this.$api.pay.getOrderInfoByWechat,{userid:this.userInfo.userid,oid:1}).then(res => {
-						var jsondata = res.data;
-						console.log(res); 
-						plus.ui.alert((JSON.stringify(res)));
-						if(res.code=="0000"){
-							var orderinfo = res.data.app_response; 
-							if(orderinfo){
-								uni.requestPayment({
-									provider:"wxpay",
-									timeStamp:orderinfo.timestamp,
-									nonceStr:orderinfo.noncestr,
-									package:orderinfo.package,
-									signType:"MD5",
-									paySign:orderinfo.paySign,
-									orderInfo:{
-										appid:orderinfo.appid,
-										noncestr:orderinfo.noncestr,
-										package:"Sign=WXPay",
-										partnerid:orderinfo.partnerid,
-										prepayid:orderinfo.prepayid,
-										timestamp:orderinfo.timestamp,
-										sign:orderinfo.paySign,
-									},
-									success:function(res){
-										uni.showToast({
-											title:"支付成功",
-											icon:"success",
-											duration:2000,
-											complete:function(){
-// 												uni.reLaunch({
-// 													url:"showresult?paytype=1"
-// 												});
-											}
-										});
-									},
-									fail:function(res){
-										// console.log(JSON.stringify(res));
-										// plus.ui.alert((JSON.stringify(res)));
-										uni.showToast({
-											title: '支付失败，请到订单中心重新支付',
-											icon: "none",
-											duration: 2000,
-											complete: function () {
-// 												wx.reLaunch({
-// 													url: 'showresult?paytype=3',
-// 												});
-											}
-										});
-									}
-								});
-							}else{
-								
-							}
-						}else{
-							
-						}
-					},function(){},function(){});
-				}
+						
+					}
+				});
 			},
 			inputAmount(event){
 				this.money = event.target.value;
@@ -325,11 +268,11 @@
 		}
 	}
 	.cover-container{
-		background: $page-color-base;
+		/* background: $page-color-base; */
 		margin-top: -150upx;
 		padding: 0 30upx;
 		position:relative;
-		background: #f5f5f5;
+		/* background: #f5f5f5; */
 		padding-bottom: 20upx;
 		.arc{
 			position:absolute;
@@ -448,7 +391,7 @@
 			color: $font-color-light;
 		}
 	}
-	.money{border-bottom:1px solid #969896;text-align:right}
+	.money{border-bottom:0px solid #969896;text-align:right}
 	.yticon2{
 		color: #f6e5a3;
 		margin-right: 16upx;
@@ -464,7 +407,8 @@
 		/* position:absolute;
 		right:10upx;
 		top:25upx; */
-		background: linear-gradient(to left, #FA4DBE 0, #FBAA58 100%);
+		/* background: linear-gradient(to left, #FA4DBE 0, #FBAA58 100%); */
+		background-color: #fc2c5d;
 	}
 	.clamp2{
 		margin-left:100upx;

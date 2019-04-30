@@ -2,46 +2,54 @@
 	<view>
 		<!-- 顶部导航 -->
 		<view class="topTabBar" :style="{position:headerPosition,top:headerTop}">
-			<view class="grid" v-for="(grid,tbIndex) in orderType" :key="tbIndex" @tap="showType(tbIndex)">
+			<!-- <view class="grid" v-for="(grid,tbIndex) in orderType" :key="tbIndex" @tap="showType(tbIndex)">
 				<view class="text" :class="[tbIndex==tabbarIndex?'on':'']">{{grid}}</view>
+			</view> -->
+			<view class="grid">
+				<view class="text on">全部</view>
 			</view>
+			
+			<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
+				<!-- <view class="uni-input">{{date}}</view> -->
+				<view class="grid" style="width:100%">
+					<view class="text"  style="color:#5eba8f;"><text class="cell-icon yticon icon-lishijilu" style="font-size:50upx"></text>按时间查询</view>
+				</view>
+			</picker>
 		</view>
 		<!-- 考虑非APP端长列表和复杂的DOM使用scroll-view会卡顿，所以漂浮顶部选项卡使用page本身的滑动 -->
 		<view class="order-list">
 			<view class="list">
-				<view class="onorder" v-if="list.length==0">
+				<view class="onorder" v-if="list.length==0 && loadingType==0">  
 					<image src="../../../static/img/noorder.png"></image>
 					<view class="text">
 						没有相关数据
 					</view>
 				</view>
 				<view class="row" v-for="(row,index) in list" :key="index">
-					<view class="type">流水号: 1234567890</view>
+					<view class="type">流水号: {{row.out_trade_no}}</view>
 					<view class="order-info">
-						<!-- <view class="left"> -->
-							<!-- <image :src="row.img"></image> -->
-						<!-- </view> -->
 						<view class="right">
-							<view class="spec">发生事由：</view>
+							
+							<view class="spec">消费金额：</view>
 							<view class="price-number">
-								<view class="price">信息查看</view>
+								<view class="price jia">￥{{row.balance}}</view>
 							</view>
-							<view class="spec">更变金额：</view>
+							<view class="spec">消费时间：</view>
 							<view class="price-number">
-								<view class="price">-20￥</view>
+								<view class="price">{{row.add_time}}</view>
 							</view>
-							<view class="spec">发生时间：</view>
+							<view class="spec">消费事由：</view>
 							<view class="price-number">
-								<view class="price">2019-04-10 10:18:65</view>
+								<view class="price price2">{{row.remark}}</view>
 							</view>
-							<view class="spec">支付方式：</view>
+							<!-- <view class="spec">剩余积分：</view>
 							<view class="price-number">
-								<view class="price">手机微信支付</view>
+								<view class="price">200</view>
 							</view>
 							<view class="spec">备注：</view>
 							<view class="price-number">
-								<view class="price">数据/18965</view>
-							</view>
+								<view class="price">127.0.0.1</view>
+							</view> -->
 						</view>
 						
 					</view>
@@ -51,56 +59,73 @@
 				</view>
 			</view>
 		</view>
+		<view class="uni-tab-bar-loading"> 
+			<uni-load-more :loadingType="loadingType" :contentText="loadingText"></uni-load-more>
+		</view>
 	</view>
 </template>
 <script>
+	import uniLoadMore from '@/components/uni-load-more.vue';
+	import {  
+	    mapState 
+	} from 'vuex';
+	function getDate(type) {
+		const date = new Date();
+	
+		let year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		let day = date.getDate();
+	
+		if (type === 'start') {
+			year = year - 60;
+		} else if (type === 'end') {
+			year = year + 2;
+		}
+		month = month > 9 ? month : '0' + month;;
+		day = day > 9 ? day : '0' + day;
+	
+		return `${year}-${month}-${day}`;
+	}
 	export default {
 		data() {
 			return {
+				loadingText: {
+					contentdown: "上拉显示更多",
+					contentrefresh: "正在加载...",
+					contentnomore: "没有更多数据了"
+				},
 				headerPosition:"fixed",
 				headerTop:"0px",
-				typeText:{
-					unpaid:'等待付款',
-					back:'等待商家发货',
-					unreceived:'商家已发货',
-					received:'等待用户评价',
-					completed:'交易已完成',
-					refunds:'商品退货处理中'
-				},
-				orderType: ['全部','信息付费','充值记录'],
+				orderType: ['全部'],
 				//订单列表 演示数据
-				orderList:[
-					[
-						{ type:"unpaid",ordersn:0,goods_id: 0, img: '/static/img/goods/p1.jpg', name: '信息查看', price: '168.00',payment:168.00,freight:12.00,spec:'规格:S码',numner:1 },
-						{ type:"unpaid",ordersn:1,goods_id: 1, img: '/static/img/goods/p2.jpg', name: '信息查看', price: '168.00',payment:168.00,freight:12.00,spec:'规格:S码',numner:1 },
-						{ type:"back",ordersn:1,goods_id: 1, img: '/static/img/goods/p3.jpg', name: '信息查看', price: '168.00',payment:168.00,freight:12.00,spec:'规格:S码',numner:1 },
-						{ type:"unreceived",ordersn:1,goods_id: 1, img: '/static/img/goods/p4.jpg', name: '信息查看', price: '168.00',payment:168.00,freight:12.00,spec:'规格:S码',numner:1 },
-						{ type:"received",ordersn:1,goods_id: 1, img: '/static/img/goods/p5.jpg', name: '信息查看', price: '168.00',payment:168.00,freight:12.00,spec:'规格:S码',numner:1 },
-						{ type:"completed",ordersn:1,goods_id: 1, img: '/static/img/goods/p6.jpg', name: '信息查看', price: '168.00',payment:168.00,freight:12.00,spec:'规格:S码',numner:1 },
-						{ type:"refunds",ordersn:1,goods_id: 1, img: '/static/img/goods/p5.jpg', name: '信息查看', price: '￥168',payment:168.00,freight:12.00,spec:'规格:S码',numner:1 }
-					],
-					[
-						{ type:"unpaid",ordersn:0,goods_id: 0, img: '/static/img/goods/p1.jpg', name: '商品名称商品名称商品名称商品名称商品名称', price: '￥168',payment:168.00,freight:12.00,spec:'规格:S码',numner:1 },
-						{ type:"unpaid",ordersn:1,goods_id: 1, img: '/static/img/goods/p2.jpg', name: '商品名称商品名称商品名称商品名称商品名称', price: '￥168',payment:168.00,freight:12.00,spec:'规格:S码',numner:1 }
-					],
-					[
-						
-					]
-					
-				],
+				orderList:[],
+				loadingType:0,
 				list:[],
-				tabbarIndex:0
+				tabbarIndex:0,
+				page:0,
+				isshow:false,
+				start_time:"",
+				date: getDate({
+					format: true
+				}),
+				startDate:getDate('start'),
+				endDate:getDate('end'),
 			};
+		},
+		components: {
+			uniLoadMore,
 		},
 		onLoad(option) {
 			//option为object类型，会序列化上个页面传递的参数
-			console.log("option: " + JSON.stringify(option));
-			let tbIndex = this.tabbarIndex;
-			if(option.tbIndex){
-				let tbIndex = parseInt(option.tbIndex)+1;
-			}
-			this.list = this.orderList[tbIndex];
-			this.tabbarIndex = tbIndex;
+			//console.log("option: " + JSON.stringify(option));
+			// let tbIndex = this.tabbarIndex;
+			// if(option.tbIndex){
+			// 	let tbIndex = parseInt(option.tbIndex)+1;
+			// }
+			// this.list = this.orderList[tbIndex];
+			// this.tabbarIndex = tbIndex;
+			this.getData();
+			///this.headerTop = document.getElementsByTagName('uni-page-head')[0].offsetHeight+'px';
 			//兼容H5下排序栏位置
 			// #ifdef H5
 				this.headerTop = document.getElementsByTagName('uni-page-head')[0].offsetHeight+'px';
@@ -111,10 +136,57 @@
 			//兼容iOS端下拉时顶部漂移
 			this.headerPosition = e.scrollTop>=0?"fixed":"absolute";
 		},
+		computed: {
+			 ...mapState(['hasLogin','userInfo'])
+			
+		},
+		// 加载更多
+		onReachBottom : function(){
+			if(this.loadingType!=2){
+				this.getData();
+			}
+		},
 		methods: {
+			bindDateChange: function(e) {
+				this.start_time = e.target.value;
+				this.list = [];
+				this.loadingType = 0;
+				this.page = 0;
+				this.getData();
+			},
+			choose(){
+				this.isshow = !this.isshow;
+			},
 			showType(tbIndex){
 				this.tabbarIndex = tbIndex;
 				this.list = this.orderList[tbIndex];
+			},
+			getData(){
+				uni.showLoading({
+					title: '加载中',
+					mask:true
+				});
+				var pageindex = this.page +1;
+				this.loadingType = 1;
+				uni.request({
+				 	url: 'http://data.chinapaper.net/Api/funds/getaccountlog',
+				 	data: {ukeys:this.userInfo.uKeys,log:"balance",page:pageindex,start_time:this.start_time},
+					// data: {ukeys:"9060001",catid:this.catid,id:this.itemid},
+				 	method:"POST",
+				 	success: (result) => {
+				 		console.log(result);
+						var res = result.data;
+						if (res.result.length == 0) {
+							this.loadingType = 2;
+						}
+				 		if (res.code == "1") {
+							let list= res.result;
+							this.list = this.list.concat(list);
+							this.page = pageindex;								
+				 		}
+						uni.hideLoading(); 
+				 	}
+				 });
 			}
 		}
 	}
@@ -124,12 +196,19 @@
 page{
 	background-color: #f3f3f3;
 }
+.jia{
+	color:#DF5000;
+}
+.jian{
+	color:greenyellow;
+}
 .topTabBar{
 	width: 100%;
 	position: fixed;
 	top: 0;
 	z-index: 10;
-	background-color: #f8f8f8;
+	// background-color: #f8f8f8;
+	background-color: #ffffff;
 	height: 80upx;
 	display: flex;
 	justify-content: space-around;
@@ -223,17 +302,21 @@ page{
 					.spec{
 						color: #a7a7a7;
 						font-size: 28upx;
-						width: 50%;
+						width: 25%;
+						height:40upx;
+						line-height:40upx;
 						float:left;
 
 					}
 					.price-number{
 						// position: absolute;
 						// bottom: 0;
-						width: 50%;
+						width: 75%;
 						display: flex;
 						justify-content: flex-end;
 						font-size: 28upx;
+						height:40upx;
+						line-height:40upx;
 						color: #a7a7a7;
 						display: flex;
 						align-items: flex-end;
@@ -241,6 +324,11 @@ page{
 						.price{
 							font-size: 28upx;
 							margin-right: 5upx;
+						}
+						.price2{
+							font-size: 26upx;
+							margin-right: 5upx;
+							// color:forestgreen
 						}
 						
 					}

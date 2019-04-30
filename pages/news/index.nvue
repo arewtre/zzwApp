@@ -1,12 +1,12 @@
 <template>
-	<div>
+	<div class="coonnt">
 		<uni-tabs @change="changeTab" :index="tabIndex">
 			<uni-tab-bar>
 				<div class="tab-bar-item" v-for="(tabBar, index) in tabBars" :key="index" :ref="tabBar.id + index">
 					<text class="tab-bar-title" :class="[tabIndex === index ? 'active' : '']">{{tabBar.catname}}</text>
 				</div>
 			</uni-tab-bar>
-			<uni-tab-content>
+			<uni-tab-content> 
 				<list class="list" v-for="(tabItem, tabIndex) in newsList" :key="tabIndex" @loadmore="loadMore(tabIndex)"
 				 loadmoreoffset="10">
 					<refresh class="refresh" @refresh="onRefresh" @pullingdown="onPullingDown" :display="refreshing ? 'show' : 'hide'">
@@ -339,5 +339,8 @@
 		text-align: center;
 		font-size: 28px;
 		color: #999999;
+	}
+	.coonnt{
+		padding-bottom:150upx
 	}
 </style>
